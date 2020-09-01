@@ -41,6 +41,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole('prodi');
         });
 
+        Gate::define('manage-calon-mhs', function($user){
+            return $user->hasRole('calon-mhs');
+        });
+
 
     }
 }

@@ -93,6 +93,15 @@
           </ul>
         </li>
         @endcan
+        @can('manage-calon-mhs')
+        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Formulir</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Pembayaran</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Biodata</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Cetak Formulir</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Upload File</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Pengunguman</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Bayar Registrasi Awal</a></li>
+        @endcan
       </ul>
     </div>
   </div>
