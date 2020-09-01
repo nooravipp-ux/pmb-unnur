@@ -6,7 +6,7 @@
         <div class="row" style="display: inline-block;" >
         <div class="tile_count">
           <div class="col-md-2 col-sm-4  tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+            <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
             <div class="count">2500</div>
             <span class="count_bottom"><i class="green">4% </i> From last Week</span>
           </div>
@@ -45,7 +45,7 @@
 
               <div class="row x_title">
                 <div class="col-md-6">
-                  <h3>Network Activities <small>Graph title sub-title</small></h3>
+                  <h3>Statistik PMB <small>Graph title sub-title</small></h3>
                 </div>
                 <div class="col-md-6">
                   <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">

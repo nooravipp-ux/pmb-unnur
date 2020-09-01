@@ -24,36 +24,36 @@
         </li>
         @endcan
         @can('manage-prodi')
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Dashboard dan Lap PMB<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-dashboard"></i>Dashboard dan Lap PMB<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="#">Dashboard </a></li>
             <li class="@yield('tchild_admin')"><a href="#">Laporan Kelulusan Ujian Online</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Pendaftaran Online<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i>Pendaftaran Online<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="{{url('operator/pendaftaran/aktivasi-mhs')}}">Aktivasi Calon Mahasiswa</a></li>
             <li class="@yield('tchild_admin')"><a href="{{url('operator/pendaftaran/info-registrasi')}}">Info Registrasi</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Data Calon Mahasiswa<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-users"></i>Data Calon Mahasiswa<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="{{url('operator/calon-mhs')}}">Cari Calon Mahasiswa</a></li>
             <li class="@yield('tchild_admin')"><a href="#">Impor Photo</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Nilai Ujian<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i>Nilai Ujian<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="#">Entry Nilai Ujian</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Proses Kelulusan<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-mortar-board"></i>Proses Kelulusan<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="#">Jalur Seleksi Ujian</a></li>
             <li class="@yield('tchild_admin')"><a href="#">Jalur Seleksi Non Ujian</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Biaya Mahasiswa Baru<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-money"></i>Biaya Mahasiswa Baru<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="#">Data Dasar</a></li>
             <li class="@yield('tchild_admin')"><a href="#">Penerimaan Beasiswa</a></li>
@@ -64,12 +64,12 @@
             <li class="@yield('tchild_admin')"><a href="#">Laporan Pembayaran</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Registrasi<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-edit"></i>Registrasi<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="#">Registrasi Mahasiswa Baru</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Pengaturan<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-cogs"></i>Pengaturan<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="#">Jadwal Pendaftaran dan Biaya</a></li>
             <li class="@yield('tchild_admin')"><a href="#">Jurusan Asal</a></li>
@@ -82,7 +82,7 @@
             <li class="@yield('tchild_admin')"><a href="#">Metode Penilaian</a></li>
           </ul>
         </li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Konfigurasi<span class="fa fa-chevron-down"></span></a>
+        <li class="@yield('title_admin')"><a><i class="fa fa-wrench"></i>Konfigurasi<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Portal PMB</a></li>
             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Mail/SMTP</a></li>
@@ -94,12 +94,12 @@
         </li>
         @endcan
         @can('manage-calon-mhs')
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Formulir</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Pembayaran</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Biodata</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Cetak Formulir</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Upload File</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Pengunguman</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i> Formulir</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-money"></i> Pembayaran</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-book"></i> Biodata</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-print"></i> Cetak Formulir</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-cloud-upload"></i> Upload File</a></li>
+        <li class="@yield('title_admin')"><a><i class="fa fa-bullhorn"></i> Pengunguman</a></li>
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Bayar Registrasi Awal</a></li>
         @endcan
       </ul>
