@@ -26,19 +26,19 @@
         @can('manage-prodi')
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Dashboard dan Lap PMB<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li class="@yield('tchild_admin')"><a href="#">Aktivasi Akun PMB</a></li>
+            <li class="@yield('tchild_admin')"><a href="#">Dashboard </a></li>
             <li class="@yield('tchild_admin')"><a href="#">Laporan Kelulusan Ujian Online</a></li>
           </ul>
         </li>
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Pendaftaran Online<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li class="@yield('tchild_admin')"><a href="#">Aktivasi Calon Mahasiswa</a></li>
-            <li class="@yield('tchild_admin')"><a href="#">Info Registrasi</a></li>
+            <li class="@yield('tchild_admin')"><a href="{{url('operator/pendaftaran/aktivasi-mhs')}}">Aktivasi Calon Mahasiswa</a></li>
+            <li class="@yield('tchild_admin')"><a href="{{url('operator/pendaftaran/info-registrasi')}}">Info Registrasi</a></li>
           </ul>
         </li>
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i>Data Calon Mahasiswa<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li class="@yield('tchild_admin')"><a href="#">Cari Calon Mahasiswa</a></li>
+            <li class="@yield('tchild_admin')"><a href="{{url('operator/calon-mhs')}}">Cari Calon Mahasiswa</a></li>
             <li class="@yield('tchild_admin')"><a href="#">Impor Photo</a></li>
           </ul>
         </li>

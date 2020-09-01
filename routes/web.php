@@ -25,3 +25,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+//Pendaftaran Online
+Route::get('operator/pendaftaran/aktivasi-mhs','PendaftaranOnlineController@aktivasi_calon_mhs');
+Route::get('operator/pendaftaran/info-registrasi','PendaftaranOnlineController@info_registrasi');
+
+//Calon Mhasiswa
+Route::get('operator/calon-mhs','CalonMhsController@calon_mhs');
