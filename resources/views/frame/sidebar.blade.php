@@ -6,6 +6,13 @@
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Administrator <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Users</a></li>
+            <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Master Data <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Data Fakultas</a></li>
+                <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Data Prodi</a></li>
+                <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Data PMB</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         @endcan
