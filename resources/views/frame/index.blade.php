@@ -18,7 +18,7 @@
     <link href="{{ asset('template/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ asset('template/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-	
+
     <!-- bootstrap-progressbar -->
     <link href="{{ asset('template/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- JQVMap -->
@@ -26,7 +26,7 @@
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('template/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
         <!-- Datatables -->
-    
+
         <link href="{{ asset('template/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
@@ -35,7 +35,12 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('template/build/css/custom.min.css') }}" rel="stylesheet">
+<<<<<<< Updated upstream
     @yield('style')
+=======
+    <link href="{{ asset('template/build/css/toastr.css') }}" rel="stylesheet">
+    @yield('css')
+>>>>>>> Stashed changes
   </head>
 
   <body class="nav-md">
@@ -138,8 +143,19 @@
         <script src="{{ asset('template/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
+    @stack('js')
     <script src="{{ asset('template/build/js/custom.min.js') }}"></script>
+<<<<<<< Updated upstream
     @yield('script')
 	
+=======
+    <script src="{{ asset('template/build/js/toastr.js') }}"></script>
+    <script>
+        @if (Session::has('sukses'))
+            toastr.success("{{Session::get('sukses')}}","sukses")
+        @endif
+    </script>
+
+>>>>>>> Stashed changes
   </body>
 </html>
