@@ -35,6 +35,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('template/build/css/custom.min.css') }}" rel="stylesheet">
+    @yield('style')
   </head>
 
   <body class="nav-md">
@@ -138,6 +139,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('template/build/js/custom.min.js') }}"></script>
+    @yield('script')
 	
   </body>
 </html>
