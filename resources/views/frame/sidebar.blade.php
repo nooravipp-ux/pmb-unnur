@@ -6,11 +6,22 @@
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Administrator <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Users</a></li>
-            <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Master Data <span class="fa fa-chevron-down"></span></a>
+
+            {{-- pmb modul --}}
+            <li class="@yield('title_pmb')"><a><i class="fa fa-home"></i> Setting PMB <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Data Fakultas</a></li>
-                <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Data Prodi</a></li>
-                <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Data PMB</a></li>
+                <li class="@yield('tchild_pmb')"><a href="{{route('PMB.index')}}">Setting PMB</a></li>
+                <li class="@yield('tchild_pmb')"><a href="#">Data Prodi</a></li>
+                <li class="@yield('tchild_pmb')"><a href="#">Data PMB</a></li>
+              </ul>
+            </li>
+            {{-- end pmb modul --}}
+
+            <li class="@yield('title_data')"><a><i class="fa fa-home"></i> Master Data <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu">
+                <li class="@yield('tchild_data')"><a href="{{route('fakultas.fakultas')}}">Data Fakultas</a></li>
+                <li class="@yield('tchild_data')"><a href="{{ route('fakultas.prodi') }}">Data Prodi</a></li>
+                <li class="@yield('tchild_data')"><a href="{{ route('users.index') }}">Data PMB</a></li>
               </ul>
             </li>
           </ul>

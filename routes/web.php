@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,19 @@ Route::get('/', function () {
 Route::resource('/frame','FrameController')->middleware('auth');
 Route::resource('/users','UsersController')->middleware('can:manage-users');
 Route::resource('/dash','DashboardController')->middleware('auth');
+
+/**
+ * Route data
+ */
+Route::get('/fakultas/fakultas','FakultasController@fakultas')->name('fakultas.fakultas');
+Route::get('/fakultas/destroy/{pmb_fakultas}','FakultasController@fakultas_destroy')->name('fakultas.destroy');
+Route::post('/fakultas/store','FakultasController@fakultas_store')->name('fakultas.store');
+Route::get('/fakultas/prodi','FakultasController@prodi')->name('fakultas.prodi');
+
+/**
+ * Route PMB
+ */
+Route::resource('/PMB', 'PmbController');
 
 Auth::routes();
 
