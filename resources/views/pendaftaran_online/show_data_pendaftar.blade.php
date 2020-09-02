@@ -1,4 +1,5 @@
 @extends('frame.index')
+@section('title', 'PMB | UNNUR')
 @section('style')
 <style>
 #myImg {
@@ -151,7 +152,7 @@
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Fakultas <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="fakultas" class="form-control " value="">
+                            <input type="text" name="fakultas" class="form-control " value="{{$detail_pendaftar->nama_fakultas}}">
                           </div>
                         </div>
                         <div class="item form-group">
@@ -176,7 +177,7 @@
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Bukti Pembayaran</label>
                           <div class="col-md-6 col-sm-6 ">
-                              <img class="img-fluid" id="myImg" alt="Responsive image" src="{{url('template/production/images/pembayaran.jpg')}}">
+                              <img class="img-fluid" id="myImg" alt="Bukti Pembayaran" src="{{url('template/production/images/pembayaran.jpg')}}">
                           </div>
                           <!-- The Modal -->
                           <div id="myModal" class="modal">

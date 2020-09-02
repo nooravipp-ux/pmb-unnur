@@ -26,7 +26,7 @@
         @can('manage-prodi')
         <li class="@yield('title_admin')"><a><i class="fa fa-dashboard"></i>Dashboard dan Lap PMB<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li class="@yield('tchild_admin')"><a href="#">Dashboard </a></li>
+            <li class="@yield('tchild_admin')"><a href="{{url('/dash')}}">Dashboard </a></li>
             <li class="@yield('tchild_admin')"><a href="#">Laporan Kelulusan Ujian Online</a></li>
           </ul>
         </li>

@@ -1,4 +1,5 @@
 @extends('frame.index')
+@section('title','Portal PMB SistemInformasi Akademik')
 @section('content')
     <!-- page content -->
     <div class="right_col" role="main">
@@ -45,7 +46,7 @@
 
               <div class="row x_title">
                 <div class="col-md-6">
-                  <h3>Statistik PMB <small>Graph title sub-title</small></h3>
+                  <h3>Statistik PMB </h3>
                 </div>
                 <div class="col-md-6">
                   <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
