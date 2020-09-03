@@ -5,19 +5,20 @@
         @can('manage-users')
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Administrator <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Users</a></li>
+            <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}"><i class="fa fa-user"></i>Users</a></li>
 
             {{-- pmb modul --}}
-            <li class="@yield('title_pmb')"><a><i class="fa fa-home"></i> Pengaturan PMB <span class="fa fa-chevron-down"></span></a>
+            <li class="@yield('title_pmb')"><a><i class="fa fa-gear"></i> Pengaturan PMB <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb')}}">Pendaftaran PMB</a></li>
+                <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb/biaya-registrasi')}}">Pengaturan Biaya Registrasi</a></li>
                 <li class="@yield('tchild_pmb')"><a href="#">Pengaturan ID PMB Otomatis</a></li>
-                <li class="@yield('tchild_pmb')"><a href="#">Setting NIM Otomatis</a></li>
+                <li class="@yield('tchild_pmb')"><a href="#">Pengaturan NIM Otomatis</a></li>
               </ul>
             </li>
             {{-- end pmb modul --}}
 
-            <li class="@yield('title_data')"><a><i class="fa fa-home"></i> Master Data <span class="fa fa-chevron-down"></span></a>
+            <li class="@yield('title_data')"><a><i class="fa fa-database"></i> Master Data <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li class="@yield('tchild_data')"><a href="{{route('fakultas.fakultas')}}">Data Fakultas</a></li>
                 <li class="@yield('tchild_data')"><a href="{{ route('prodi.prodi') }}">Data Prodi</a></li>

@@ -28,6 +28,7 @@ Route::resource('/dash','DashboardController')->middleware('auth');
 Route::get('/fakultas/fakultas','FakultasController@fakultas')->name('fakultas.fakultas');
 Route::post('/fakultas/store','FakultasController@fakultas_store')->name('fakultas.store');
 Route::get('/fakultas/destroy/{fakultas}','FakultasController@fakultas_destroy')->name('fakultas.destroy');
+Route::get('/fakultas/get-data-fakultas','FakultasController@get_data_fakultas');
 
 Route::get('/prodi/prodi','FakultasController@prodi')->name('prodi.prodi');
 Route::post('/prodi/store','FakultasController@prodi_store')->name('prodi.store');
@@ -47,6 +48,11 @@ Route::get('/kelas/destroy/{kelas}','FakultasController@kelas_destroy')->name('k
  */
 Route::get('/pengaturan/pendaftaran-pmb','PmbController@pendaftaran_pmb');
 Route::post('/pengaturan/pendaftaran-pmb/simpan-data-pmb','PmbController@simpan_data_pmb');
+Route::post('/pengaturan/pendaftaran-pmb/delete-data/{id}','PmbController@destroy')->name('pmb.delete','{id}');
+Route::get('/pengaturan/pendaftaran-pmb/biaya-registrasi','PmbController@biaya_registrasi');
+Route::post('/pengaturan/pendaftaran-pmb/simpan-biaya-registrasi','PmbController@simpan_biaya_registrasi');
+Route::post('/pengaturan/pendaftaran-pmb/delete-biaya-registrasi/{id}','PmbController@delete_biaya_registrasi')->name('biaya.delete','{id}');
+Route::get('/pengaturan/pendaftaran-pmb/get-data-pmb','PmbController@get_data_pmb');
 
 Auth::routes();
 

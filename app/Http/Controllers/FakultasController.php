@@ -5,6 +5,7 @@ use App\fakultas;
 use App\prodi;
 use App\strata;
 use App\kelas;
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -128,4 +129,15 @@ class FakultasController extends Controller
     /**
      * end function strata
      */
+    public function get_data_fakultas(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data_fakultas = DB::table('fakultas')->select('id_fakultas','nama_fakultas')->where('id_fakultas', 'LIKE', '%'.$cari.'%')->orWhere('nama_fakultas', 'LIKE', '%'.$cari.'%')->get();
+
+            return response()->json($data_fakultas);
+        }
+        $data_fakultas= DB::table('fakultas')->select('id_fakultas','nama_fakultas')->get();
+
+        return response()->json($data_fakultas);
+    }
 }

@@ -1,4 +1,7 @@
 @extends('frame.index')
+@section('style')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('content')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -9,7 +12,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Jadwal Pendaftaran PMB Pertahun Gelombang dan Jalur Masuk</h2>
+                    <h2>Biaya Registrasi PMB</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -27,33 +30,50 @@
                   </div>
                   <div class="x_content">
                       <br />
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="{{url('/pengaturan/pendaftaran-pmb/simpan-data-pmb')}}">
+                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="{{url('/pengaturan/pendaftaran-pmb/simpan-biaya-registrasi')}}">
                         {{csrf_field()}}
                         <div class="item form-group">
-                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tahun Masuk<span class="required">*</span>
+                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">ID PMB<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="number" name="tahun_masuk" class="form-control " value="<?php echo date("y"); ?>">
+                                <select name="id_pmb" id="id_pmb" class="form-control "></select>
                           </div>
                         </div>
                         <div class="item form-group">
-                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Gelombang<span class="required">*</span>
+                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Fakultas<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="number" name="gelombang" class="form-control">
+                            <select name="id_fakultas" id="id_fakultas" class="form-control "></select>
                           </div>
                         </div>
                         <div class="item form-group">
-                          <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Mulai</label>
+                          <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenjang Prodi</label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="date" name="start_date" class="form-control">
+                                <select name="jenjang_prodi" class="form-control ">
+                                    <option value="MASTER">Master</option>
+                                    <option value="S1">S1</option>
+                                    <option value="S2">S2</option>
+                                    <option value="D3">D3</option>
+                                    <option value="D1">D1</option>
+                                </select>
                           </div>
                         </div>
                         <div class="item form-group">
-                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tanggal Selesai<span class="required">*</span>
+                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kelas<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="date" type="text" name="finish_date" class="form-control ">
+                                <select name="kelas" class="form-control ">
+                                    <option value="PAGI">Pagi</option>
+                                    <option value="SORE">Sore</option>
+                                    <option value="EXTENSION">Extension</option>
+                                </select>
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Biaya Regitrasi (Rp)<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 ">
+                            <input type="number" type="text" name="biaya_registrasi" class="form-control ">
                           </div>
                         </div>
         
@@ -74,7 +94,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Jadwal Pendaftaran PMB</h2>
+                    <h2>Data Biaya Registrasi PMB</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -99,23 +119,23 @@
                                   <thead>
                                     <tr>
                                       <th>ID PMB</th>
-                                      <th>Tahun Masuk</th>
-                                      <th>Gelombang</th>
-                                      <th>Mulai</th>
-                                      <th>Selesai</th>
+                                      <th>Fakultas</th>
+                                      <th>Jenjang Prodi</th>
+                                      <th>Kelas</th>
+                                      <th>Biaya Registrasi</th>
                                       <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    @foreach($data_pmb as $data)
+                                    @foreach($data_biaya_registrasi as $data)
                                     <tr>
                                         <td>{{$data->id_pmb}}</td>
-                                        <td>{{$data->tahun}}</td>
-                                        <td>{{$data->gelombang}}</td>
-                                        <td>{{$data->start_date}}</td>
-                                        <td>{{$data->finish_date}}</td>
+                                        <td>{{$data->nama_fakultas}}</td>
+                                        <td>{{$data->strata}}</td>
+                                        <td>{{$data->kelas}}</td>
+                                        <td>{{$data->biaya_registrasi}}</td>
                                         <td class="text-center">
-                                            <form method="POST" action="{{route('pmb.delete', $data->id_pmb)}}">
+                                            <form method="POST" action="{{route('biaya.delete', $data->id_pmb_biaya_registrasi)}}">
                                                 {{ csrf_field() }}
                                                 <div class="form-group">
                                                     <button type="submit" data-toggle="tooltip" data-placement="top" title="Hapus Data" class="btn btn-danger btn-sm delete-pmb"><i class="fa fa-trash"></i></button>
@@ -139,7 +159,49 @@
 @endsection
 
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
+    $(document).ready(function() {
+        $('#id_pmb').select2({
+    		placeholder: '- Pilih ID PMB -',
+            ajax: {
+                url:  '{{url('/pengaturan/pendaftaran-pmb/get-data-pmb')}}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (pmb) {
+                            return {
+                                id: pmb.id_pmb,
+                                text: pmb.id_pmb            
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('#id_fakultas').select2({
+    		placeholder: '- Pilih ID Fakultas -',
+            ajax: {
+                url:  '{{url('/fakultas/get-data-fakultas')}}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (fakultas) {
+                            return {
+                                id: fakultas.id_fakultas,
+                                text: fakultas.id_fakultas+' - '+fakultas.nama_fakultas            
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    });
     $('.delete-pmb').click(function(e){
         e.preventDefault() // Don't post the form, unless confirmed
         if (confirm('Are you sure?')) {
