@@ -152,20 +152,26 @@
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Fakultas <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="fakultas" class="form-control " value="{{$detail_pendaftar->nama_fakultas}}">
+                            <input type="text" name="fakultas" class="form-control " value="">
                           </div>
                         </div>
                         <div class="item form-group">
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Prodi <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="prodi" class="form-control" value="">
+                            <input type="text" name="prodi" class="form-control" value="{{$detail_pendaftar->nama_prodi}}">
                           </div>
                         </div>
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenjang Pendidikan</label>
                           <div class="col-md-6 col-sm-6 ">
                             <input name="jenjang" class="form-control" type="text">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Biaya Pendaftaran</label>
+                          <div class="col-md-6 col-sm-6 ">
+                            <input name="status_pembayaran" class="form-control" type="text">
                           </div>
                         </div>
                         <div class="item form-group">

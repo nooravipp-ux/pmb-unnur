@@ -33,7 +33,7 @@ Route::get('/fakultas/prodi','FakultasController@prodi')->name('fakultas.prodi')
 /**
  * Route PMB
  */
-Route::resource('/PMB', 'PmbController');
+Route::get('/pengaturan/pendaftaran-pmb','PmbController@pendaftaran_pmb');
 
 Auth::routes();
 

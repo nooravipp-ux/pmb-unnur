@@ -9,10 +9,10 @@ use DB;
 class PendaftaranOnlineController extends Controller
 {
     public function aktivasi_calon_mhs(){
-        $id_fakultas = Auth::user()->id_fakultas;
+        $id_prodi = Auth::user()->id_prodi;
         $data_pendaftar = DB::table('pmb_pendaftar')
-                        ->join('fakultas', 'fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
-                        ->where('pmb_pendaftar.id_fakultas', $id_fakultas)
+                        ->join('prodi', 'prodi.id_prodi','=','pmb_pendaftar.id_prodi')
+                        ->where('pmb_pendaftar.id_prodi', $id_prodi)
                         ->get();
         // dd($data_pendaftar);
         return view('pendaftaran_online.aktivasi_calon_mhs', compact('data_pendaftar'));
@@ -20,7 +20,7 @@ class PendaftaranOnlineController extends Controller
 
     public function show_data_pendaftar($id){
         $detail_pendaftar = DB::table('pmb_pendaftar')
-                            ->join('fakultas', 'fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                            ->join('prodi', 'prodi.id_prodi','=','pmb_pendaftar.id_prodi')
                             ->where('id_pendaftar', $id)
                             ->first();
         return view('pendaftaran_online.show_data_pendaftar', compact('detail_pendaftar'));
