@@ -11,16 +11,16 @@
                 <!-- fakultas Field -->
                 <div class="form-group col-sm-6">
                     <label for="">ID Fakultas</label><br>
-                    <input type="text" name="id_fakultas" id="id_fakultas" class="form-control" placeholder="Tentukan Id Fakultas">
+                    <input type="text" name="id_fakultas" id="id_fakultas" class="form-control {{ $errors->has('id_fakultas') ? 'is-invalid':'' }}" placeholder="Tentukan Id Fakultas" required>
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="">Nama Fakultas</label><br>
-                    <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control" placeholder="Masukan Nama fakultas">
+                    <input type="text" name="nama_fakultas" id="nama_fakultas" class="form-control {{ $errors->has('nama_fakultas') ? 'is-invalid':'' }}" placeholder="Masukan Nama fakultas" required>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
             </div>
         </div>
     </div>

@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\pmb_fakultas;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/fakultas/edit/{id_fakultas}','ApiController@editnamafakultas')->name('fakultas.edit');
+Route::post('/prodi/edit/{id_prodi}','ApiController@editnamaprodi')->name('prodi.edit');

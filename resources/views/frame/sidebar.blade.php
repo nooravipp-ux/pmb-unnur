@@ -20,8 +20,9 @@
             <li class="@yield('title_data')"><a><i class="fa fa-home"></i> Master Data <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li class="@yield('tchild_data')"><a href="{{route('fakultas.fakultas')}}">Data Fakultas</a></li>
-                <li class="@yield('tchild_data')"><a href="{{ route('fakultas.prodi') }}">Data Prodi</a></li>
-                <li class="@yield('tchild_data')"><a href="{{ route('users.index') }}">Data PMB</a></li>
+                <li class="@yield('tchild_data')"><a href="{{ route('prodi.prodi') }}">Data Prodi</a></li>
+                <li class="@yield('tchild_data')"><a href="{{ route('strata.strata') }}">Jenjang Pendidikan</a></li>
+                <li class="@yield('tchild_data')"><a href="{{ route('kelas.kelas') }}">Kelas</a></li>
               </ul>
             </li>
           </ul>

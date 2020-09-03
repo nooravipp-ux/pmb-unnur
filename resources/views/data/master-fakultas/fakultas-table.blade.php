@@ -16,7 +16,7 @@
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $fakultas->id_fakultas }}</td>
-                    <td><a href="#" class="edit" data-type="text" data-name="nama_fakultas" data-pk="{{ $fakultas->id_fakultas }}" data-url="{{route('fakultas.edit',$fakultas->id_fakultas)}}" data-title="Edit nama fakultas">{{ $fakultas->nama_fakultas }}</a></td>
+                    <td><a href="#" class="edit-fakultas" data-type="text" data-name="nama_fakultas" data-pk="{{ $fakultas->id_fakultas }}" data-url="{{route('fakultas.edit',$fakultas->id_fakultas)}}" data-title="Edit nama fakultas">{{ $fakultas->nama_fakultas }}</a></td>
                     <td>
                         <a href="{{route('fakultas.destroy',$fakultas->id_fakultas)}}" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> delete</a>
                     </td>

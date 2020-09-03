@@ -147,7 +147,7 @@
     <script src="{{ asset('template/build/js/custom.min.js') }}"></script>
 <<<<<<< Updated upstream
     @yield('script')
-	
+
 =======
     <script src="{{ asset('template/build/js/toastr.js') }}"></script>
     <script>
