@@ -8,9 +8,9 @@
             <li class="@yield('tchild_admin')"><a href="{{ route('users.index') }}">Users</a></li>
 
             {{-- pmb modul --}}
-            <li class="@yield('title_pmb')"><a><i class="fa fa-home"></i> Setting PMB <span class="fa fa-chevron-down"></span></a>
+            <li class="@yield('title_pmb')"><a><i class="fa fa-home"></i> Pengaturan PMB <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li class="@yield('tchild_pmb')"><a href="{{route('PMB.index')}}">Setting PMB</a></li>
+                <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb')}}">Pendaftaran PMB</a></li>
                 <li class="@yield('tchild_pmb')"><a href="#">Data Prodi</a></li>
                 <li class="@yield('tchild_pmb')"><a href="#">Data PMB</a></li>
               </ul>

@@ -35,12 +35,9 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('template/build/css/custom.min.css') }}" rel="stylesheet">
-<<<<<<< Updated upstream
     @yield('style')
-=======
     <link href="{{ asset('template/build/css/toastr.css') }}" rel="stylesheet">
     @yield('css')
->>>>>>> Stashed changes
   </head>
 
   <body class="nav-md">
@@ -145,10 +142,6 @@
     <!-- Custom Theme Scripts -->
     @stack('js')
     <script src="{{ asset('template/build/js/custom.min.js') }}"></script>
-<<<<<<< Updated upstream
-    @yield('script')
-
-=======
     <script src="{{ asset('template/build/js/toastr.js') }}"></script>
     <script>
         @if (Session::has('sukses'))
@@ -156,6 +149,7 @@
         @endif
     </script>
 
->>>>>>> Stashed changes
+    @yield('script')
+
   </body>
 </html>

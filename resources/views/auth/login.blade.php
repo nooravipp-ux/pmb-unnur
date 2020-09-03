@@ -59,7 +59,7 @@
                 <br />
 
                 <div>
-                  <h1>PMB Sistem Informasi Unnur</h1>
+                  <h1>PMB Sistem Informasi Akademik Unnur</h1>
                 </div>
               </div>
             </form>

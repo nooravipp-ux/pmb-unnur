@@ -45,7 +45,7 @@ Route::get('/kelas/destroy/{kelas}','FakultasController@kelas_destroy')->name('k
 /**
  * Route PMB
  */
-Route::resource('/PMB', 'PmbController');
+Route::get('/pengaturan/pendaftaran-pmb','PmbController@pendaftaran_pmb');
 
 Auth::routes();
 

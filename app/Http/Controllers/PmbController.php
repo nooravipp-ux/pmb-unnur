@@ -11,9 +11,9 @@ class PmbController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function pendaftaran_pmb()
     {
-        return view('pmb.index');
+        return view('setting_pmb.pendaftaran_pmb');
     }
 
     /**
