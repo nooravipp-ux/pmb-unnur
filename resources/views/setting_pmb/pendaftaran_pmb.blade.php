@@ -27,32 +27,32 @@
                   </div>
                   <div class="x_content">
                       <br />
-                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="{{url('operator/pendaftaran/confirm-pembayaran-pmb')}}">
+                      <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="{{url('/pengaturan/pendaftaran-pmb/simpan-data-pmb')}}">
                         {{csrf_field()}}
                         <div class="item form-group">
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Jalur Masuk <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <select name="no_pendaftaran" class="form-control">
-                                <option value="">Pasca Sarjana</option>
-                                <option value="">Fakultas Ilmu Sosial dan Ilmu Politik</option>
-                                <option value="">Fakultas Teknik</option>
-                                <option value="">Fakultas Ekonomi</option>
-                                <option value="">Fakultas Ilmu Komputer dan Informatika</option>
-                                <option value="">Fakultas Teknik Sore / Extension</option>
-                                <option value="">UAMTC</option>
-                                <option value="">KIP Kuliah</option>
-                                <option value="">Undangan</option>
-                                <option value="">Pindah FT Reguler</option>
-                                <option value="">Pindah FT Sore</option>
-                                <option value="">Alih Jenjang</option>
-                                <option value="">Alih Jenjang FT Reguler</option>
-                                <option value="">Alih Jenjang FT Sore</option>
-                                <option value="">Beasiswa</option>
-                                <option value="">Kelas Weekend</option>
-                                <option value="">Seleksi Mandiri</option>
-                                <option value="">Fakultas Teknik Sore</option>
-                                <option value="">Pindahan</option>
+                            <select name="jalur_masuk" class="form-control">
+                                <option value="PASCA SARJANA">Pasca Sarjana</option>
+                                <option value="FAKULTAS ILMU SOSIAL DAN ILMU POLITIK">Fakultas Ilmu Sosial dan Ilmu Politik</option>
+                                <option value="FAKULTAS TEKNIK">Fakultas Teknik</option>
+                                <option value="FAKULTAS EKONOMI">Fakultas Ekonomi</option>
+                                <option value="FAKULTAS ILMU KOMPUTER DAN INFORMATIKA">Fakultas Ilmu Komputer dan Informatika</option>
+                                <option value="FAKULTAS TEKNIK SORE">Fakultas Teknik Sore / Extension</option>
+                                <option value="UAMTC">UAMTC</option>
+                                <option value="KIP KULIAH">KIP Kuliah</option>
+                                <option value="UNDANGAN">Undangan</option>
+                                <option value="PINDAH FT REGULER">Pindah FT Reguler</option>
+                                <option value="PINDAH FT SORE">Pindah FT Sore</option>
+                                <option value="ALIH JENJANG">Alih Jenjang</option>
+                                <option value="ALIH JENJANG FT REGULER">Alih Jenjang FT Reguler</option>
+                                <option value="ALIH JENJANG FT SORE">Alih Jenjang FT Sore</option>
+                                <option value="BEASISWA">Beasiswa</option>
+                                <option value="KELAS WEEKEND">Kelas Weekend</option>
+                                <option value="SELEKSI MANDIRI">Seleksi Mandiri</option>
+                                <option value="FAKULTAS TEKNIK SORE">Fakultas Teknik Sore</option>
+                                <option value="PINDAHAN">Pindahan</option>
                             </select>
                           </div>
                         </div>
@@ -60,7 +60,7 @@
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tahun Masuk<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="nama_lengkap" class="form-control " value="">
+                            <input type="number" name="tahun_masuk" class="form-control " value="">
                           </div>
                         </div>
                         <div class="item form-group">
@@ -87,7 +87,7 @@
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Biaya Pendaftaran<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="prodi" class="form-control" value="">
+                            <input type="text" name="biaya_pendaftaran" class="form-control">
                           </div>
                         </div>
         
@@ -146,11 +146,17 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    
+                                    @foreach($data_pmb as $data)
                                     <tr>
-                                      
+                                        <td>{{$data->jalur_masuk}}</td>
+                                        <td>{{$data->tahun}}</td>
+                                        <td>{{$data->gelombang}}</td>
+                                        <td>{{$data->start_date}}</td>
+                                        <td>{{$data->finish_date}}</td>
+                                        <td></td>
+                                        <td class="text-center"><a href="" data-toggle="tooltip" data-placement="top" title="Hapus Data"><i class="fa fa-remove"></i></a></td>
                                     </tr>
-                                    
+                                    @endforeach
                                   </tbody>
                                 </table>
                             </div>

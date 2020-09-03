@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class PmbController extends Controller
 {
@@ -13,7 +14,9 @@ class PmbController extends Controller
      */
     public function pendaftaran_pmb()
     {
-        return view('setting_pmb.pendaftaran_pmb');
+        $data_pmb = DB::table('pmb')->get();
+        
+        return view('setting_pmb.pendaftaran_pmb', compact('data_pmb'));
     }
 
     /**
@@ -32,9 +35,14 @@ class PmbController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function simpan_data_pmb(Request $request)
+    {   
+        DB::table('pmb')->insert([
+            ['jalur_masuk' => $request->jalur_masuk, 'tahun' => $request->tahun_masuk, 'gelombang' => $request->gelombang, 'start_date' => $request->start_date,'finish_date' => $request->finish_date]
+        ]);
+
+        return redirect('pengaturan/pendaftaran-pmb')->with('sukses','data berhasil di simpan');
+        
     }
 
     /**

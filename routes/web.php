@@ -46,6 +46,7 @@ Route::get('/kelas/destroy/{kelas}','FakultasController@kelas_destroy')->name('k
  * Route PMB
  */
 Route::get('/pengaturan/pendaftaran-pmb','PmbController@pendaftaran_pmb');
+Route::post('/pengaturan/pendaftaran-pmb/simpan-data-pmb','PmbController@simpan_data_pmb');
 
 Auth::routes();
 

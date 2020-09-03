@@ -11,8 +11,8 @@
             <li class="@yield('title_pmb')"><a><i class="fa fa-home"></i> Pengaturan PMB <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb')}}">Pendaftaran PMB</a></li>
-                <li class="@yield('tchild_pmb')"><a href="#">Data Prodi</a></li>
-                <li class="@yield('tchild_pmb')"><a href="#">Data PMB</a></li>
+                <li class="@yield('tchild_pmb')"><a href="#">Pengaturan ID PMB Otomatis</a></li>
+                <li class="@yield('tchild_pmb')"><a href="#">Setting NIM Otomatis</a></li>
               </ul>
             </li>
             {{-- end pmb modul --}}
