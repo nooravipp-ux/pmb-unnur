@@ -42,4 +42,8 @@ class PendaftaranOnlineController extends Controller
     public function info_registrasi(){
         return view('pendaftaran_online.info_registrasi');
     }
+
+    public function daftar_awal(){
+        return view('pendaftaran_online.daftar_awal');
+    }
 }

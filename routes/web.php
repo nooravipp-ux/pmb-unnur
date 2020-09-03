@@ -57,6 +57,7 @@ Route::get('operator/pendaftaran/aktivasi-mhs','PendaftaranOnlineController@akti
 Route::get('operator/pendaftaran/tampil-pendaftar/{id}','PendaftaranOnlineController@show_data_pendaftar')->name('pendaftar.tampil','{id}');
 Route::post('operator/pendaftaran/confirm-pembayaran-pmb','PendaftaranOnlineController@confirm_pembayaran_pmb');
 Route::get('operator/pendaftaran/info-registrasi','PendaftaranOnlineController@info_registrasi');
+Route::get('/daftar_awal','PendaftaranOnlineController@daftar_awal');
 
 //Calon Mhasiswa
 Route::get('operator/calon-mhs','CalonMhsController@calon_mhs');
