@@ -31,6 +31,11 @@ class PendaftaranOnlineController extends Controller
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)
         ->update(['status' => 'LUNAS']);
 
+         \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
+            $message->to('noor.avipp11@gmail.com', 'sandi');
+            $message->subject('Subject');
+        });
+
         return redirect('/operator/pendaftaran/aktivasi-mhs')->with('status', 'Data Customer Berhasil Di Update');
     }
 

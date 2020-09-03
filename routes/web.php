@@ -23,12 +23,24 @@ Route::resource('/users','UsersController')->middleware('can:manage-users');
 Route::resource('/dash','DashboardController')->middleware('auth');
 
 /**
- * Route data
+ * Route data master
  */
 Route::get('/fakultas/fakultas','FakultasController@fakultas')->name('fakultas.fakultas');
-Route::get('/fakultas/destroy/{pmb_fakultas}','FakultasController@fakultas_destroy')->name('fakultas.destroy');
 Route::post('/fakultas/store','FakultasController@fakultas_store')->name('fakultas.store');
-Route::get('/fakultas/prodi','FakultasController@prodi')->name('fakultas.prodi');
+Route::get('/fakultas/destroy/{fakultas}','FakultasController@fakultas_destroy')->name('fakultas.destroy');
+
+Route::get('/prodi/prodi','FakultasController@prodi')->name('prodi.prodi');
+Route::post('/prodi/store','FakultasController@prodi_store')->name('prodi.store');
+Route::get('/prodi/destroy/{prodi}','FakultasController@prodi_destroy')->name('prodi.destroy');
+
+Route::get('/strata/strata','FakultasController@strata')->name('strata.strata');
+Route::post('/strata/store','FakultasController@strata_store')->name('strata.store');
+Route::get('/strata/destroy/{id_strara}','FakultasController@strata_destroy')->name('strata.destroy');
+Route::get('/strata/edit/{id_stara}','FakultasController@strata_edit')->name('strata.edit');
+
+Route::get('/kelas/kelas','FakultasController@kelas')->name('kelas.kelas');
+Route::post('/kelas/store','FakultasController@kelas_store')->name('kelas.store');
+Route::get('/kelas/destroy/{kelas}','FakultasController@kelas_destroy')->name('kelas.destroy');
 
 /**
  * Route PMB
