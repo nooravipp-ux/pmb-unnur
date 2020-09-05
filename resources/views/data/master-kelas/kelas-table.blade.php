@@ -16,11 +16,10 @@
             @foreach($kelas as $kelas)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $kelas->id_kelas }}</td>
                     <td>{{ $kelas->id_strata }}</td>
-                    <td>{{ $kelas->nama_kelas }}</td>
+                    <td><a href="#" class="edit-kelas" data-type="text" data-name="id_kelas" data-pk="{{ $kelas->id_kelas }}" data-url="{{route('kelas.id',$kelas->id_kelas)}}" data-title="Edit ID kelas">{{ $kelas->id_kelas }}</a></td>
+                    <td><a href="#" class="edit-kelas-select" data-type="select" data-name="nama_kelas" data-pk="{{ $kelas->id_kelas }}" data-url="{{route('kelas.jenis',$kelas->id_kelas)}}" data-title="Edit jenis kelas">{{ $kelas->nama_kelas }}</a></td>
                     <td>
-                         {{-- <a href="{{route('kelas.edit',$kelas->id_kelas)}}" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-pencil"></i> edit</a> --}}
                         <a href="{{route('kelas.destroy',$kelas->id_kelas)}}" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> delete</a>
                     </td>
                 </tr>

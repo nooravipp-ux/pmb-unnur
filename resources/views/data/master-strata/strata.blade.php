@@ -10,6 +10,9 @@
     #jenis_strata{
         border-radius: 25px;
     }
+    #id_strata{
+        border-radius: 25px;
+    }
 </style>
 @endsection
 @section('content')
@@ -55,11 +58,21 @@
 <!-- /page content -->
 @endsection
 @push('js')
-    {{-- <script src="{{ asset('template/build/js/xedit.js') }}"></script>
+    <script src="{{ asset('template/build/js/xedit.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('.edit-prodi').editable();
+            $('.edit-strata').editable();
         });
 
-    </script> --}}
+        $(document).ready(function(){
+            $('.edit-strata-select').editable({
+                source: [
+                    {value: 'D3', text: 'D3'},
+                    {value: 'S1', text: 'S1'},
+                    {value: 'S2', text: 'S2'}
+                ]
+            });
+        });
+
+    </script>
 @endpush

@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <!-- fakultas Field -->
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-12">
                     <label for="">ID prodi</label><br>
                     <select name="id_prodi" id="id_prodi" class="form-control {{ $errors->has('id_fakultas') ? 'is-invalid':'' }}" required>
                         <option disabled selected>- Pilih ID prodi -</option>
@@ -20,6 +20,11 @@
                             </option>
                         @endforeach
                     </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="">ID Strata</label><br>
+                    <input type="text" name="id_strata" id="id_strata" class="form-control {{ $errors->has('id_strata') ? 'is-invalid':'' }}"
+                        placeholder="Tentukan Id strata" required>
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="">Strata</label><br>

@@ -13,7 +13,10 @@
                 <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb')}}">Pendaftaran PMB</a></li>
                 <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb/biaya-registrasi')}}">Pengaturan Biaya Registrasi</a></li>
                 <li class="@yield('tchild_pmb')"><a href="#">Pengaturan ID PMB Otomatis</a></li>
-                <li class="@yield('tchild_pmb')"><a href="#">Pengaturan NIM Otomatis</a></li>
+                <li class="@yield('tchild_pmb')"><a href="{{url('/pmb/nim')}}">Pengaturan NIM Otomatis</a></li>
+                <li class="@yield('tchild_pmb')"><a href="#">Setting Jadwal PMB</a></li>
+                <li class="@yield('tchild_pmb')"><a href="#">Data PMB</a></li>
+                <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb')}}">Pendaftaran PMB</a></li>
               </ul>
             </li>
             {{-- end pmb modul --}}

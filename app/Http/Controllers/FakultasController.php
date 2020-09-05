@@ -58,7 +58,7 @@ class FakultasController extends Controller
         ]);
         try{
             prodi::create($request->all());
-            return redirect()->back()->with('sukses','BErhasil menambahkan data prodi'.$request->nama_prodi);
+            return redirect()->back()->with('sukses','Berhasil menambahkan data prodi '.$request->nama_prodi);
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>$e->getMessage()]);
         }
@@ -75,21 +75,21 @@ class FakultasController extends Controller
      * function kelas
      */
     public function kelas(){
-        $strata = strata::get()->pluck('id_strata','jenis_strata');
+        $strata = strata::get()->pluck('id_strata');
         $kelas = kelas::all();
         return view('data.master-kelas.kelas',compact('kelas','strata'));
     }
 
     public function kelas_store(Request $request){
-        $this->validate($request,[
-            'id_prodi' => 'required|unique:prodi',
-            'id_fakultas' => 'required|string',
-            'nama_prodi' => 'required|string'
-        ]);
+        // $this->validate($request,[
+        //     'id_kelas' => 'required|unique:kelas',
+        //     'id_strata' => 'required|string',
+        //     'nama_kelas' => 'required|string'
+        // ]);
         try{
             kelas::create($request->all());
-            return redirect()->back()->with('sukses','BErhasil menambahkan data prodi'.$request->nama_prodi);
-        }catch(\Excetion $e){
+            return redirect()->back()->with('sukses','Berhasil menambahkan data prodi '.$request->id_kelas.' '.$request->nama_kelas);
+        }catch(\Exceton $e){
             return redirect()->back()->with(['error'=>$e->getMessage()]);
         }
     }
@@ -98,7 +98,7 @@ class FakultasController extends Controller
         return redirect()->back()->with('sukses','data berhasil di hapus');
     }
     /**
-     * end function prodi
+     * end function kelas
      */
 
     /**
@@ -112,18 +112,18 @@ class FakultasController extends Controller
     public function strata_store(Request $request){
         $this->validate($request,[
             'id_prodi' => 'required|string',
-            'jenis_strata' => 'required|string'
+            'jenis_strata' => 'required|string',
+            'id_strata' => 'required|unique:strata'
         ]);
         try{
             strata::create($request->all());
-            return redirect()->back()->with('sukses','Data Strata '.$request->jenis_strata.' berhasil di tambahkan');
+            return redirect()->back()->with('sukses','Data Jenjang Pendidikan '.$request->jenis_strata.' berhasil di tambahkan');
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>$e->getMessage()]);
         }
     }
-    public function strata_destroy($id){
-        $pmb_strata = strata::findOrfail($id);
-        $pmb_strata->delete($id);
+    public function strata_destroy(Strata $strata){
+        $strata->delete($strata);
         return redirect()->back()->with('sukses','data berhasil di hapus');
     }
     /**

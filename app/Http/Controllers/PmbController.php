@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use DB;
+use App\NIM;
+use App\prodi;
+use App\strata;
+use App\fakultas;
+use Illuminate\Http\Request;
 
 class PmbController extends Controller
 {
@@ -41,8 +45,31 @@ class PmbController extends Controller
         return redirect('/pengaturan/pendaftaran-pmb/biaya-registrasi')->with('sukses','data berhasil di simpan');
     }
 
+    public function nim_index()
+    {
+        $prodi = prodi::get()->pluck('id_prodi');
+        $strata = strata::get()->pluck('id_strata');
+        $nim = NIM::all();
+
+        // dd($fakultas);
+        return view('setting_pmb.set_nim_pmb',compact('nim','prodi','strata'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function nim_store(Request $request)
+    {
+        // dd($request->all());
+        NIM::create($request->all());
+        return redirect()->back()->with('sukses','data berhasil di tambahkan');
+    }
+
     public function simpan_data_pmb(Request $request)
-    {   
+    {
         $id_pmb = $this->nomor_pmb($request->tahun_masuk, $request->gelombang);
         // dd($id_pmb);
         DB::table('pmb')->insert([
@@ -50,7 +77,7 @@ class PmbController extends Controller
         ]);
 
         return redirect('pengaturan/pendaftaran-pmb')->with('sukses','data berhasil di simpan');
-        
+
     }
 
     public function destroy($id)
@@ -75,7 +102,7 @@ class PmbController extends Controller
             }else{
                 return $no_urut = $tahun.$gelombang.sprintf("%04s", $no);
             }
-        } 
+        }
     }
     public function get_data_pmb(Request $request){
         if ($request->has('q')) {
