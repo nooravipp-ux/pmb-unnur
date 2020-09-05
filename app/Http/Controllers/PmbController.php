@@ -65,7 +65,13 @@ class PmbController extends Controller
     {
         // dd($request->all());
         NIM::create($request->all());
-        return redirect()->back()->with('sukses','data berhasil di tambahkan');
+        return redirect()->back()->with('sukses','data NIM '.$request->id_NIM. 'berhasil di tambahkan');
+    }
+
+    public function nim_destroy(Nim $nim)
+    {
+        $nim->delete($nim);
+        return redirect()->back()->with('sukses','data berhasil di hapus');
     }
 
     public function simpan_data_pmb(Request $request)

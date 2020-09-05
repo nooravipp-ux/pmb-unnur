@@ -47,6 +47,7 @@ Route::get('/kelas/destroy/{kelas}','FakultasController@kelas_destroy')->name('k
  */
 // nim
 Route::get('/pmb/nim','PmbController@nim_index')->name('nim.pmb');
+Route::get('/pmb/nim/destroy/{nim}','PmbController@nim_destroy')->name('nim.destroy');
 Route::post('/pmb/jadwal/store','PmbController@nim_store')->name('nim.pmb.store');
 // end nim
 Route::get('/pengaturan/pendaftaran-pmb','PmbController@pendaftaran_pmb');

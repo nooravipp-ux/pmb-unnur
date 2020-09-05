@@ -70,12 +70,10 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <select name="id_strata" class="form-control input" id="strata" required>
-                                        <option disabled selected>- Kode strata -</option>
-                                        @foreach($strata as $strata)
-                                            <option>
-                                                {{ $strata }}
-                                            </option>
-                                        @endforeach
+                                        <option disabled selected>- Strata -</option>
+                                        <option value="D3">D3</option>
+                                        <option value="S1">S1</option>
+                                        <option value="S2">S2</option>
                                     </select>
                                 </div>
                             </div>
@@ -88,6 +86,12 @@
                                         <option value="00">Mahasiswa Baru</option>
                                         <option value="11">Mahasiswa pindahan</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align"></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <small style="color: red">Pengurutan NIM berdasarkan NO URUT,STRATA,STATUS,TAHUN dan PRODI</small>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
@@ -130,6 +134,7 @@
                                                 <th>Prodi</th>
                                                 <th>Jenjang Pendidikan</th>
                                                 <th>Status</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -148,6 +153,7 @@
                                                     @else
                                                         <td>Mahasiswa Pindahan</td>
                                                     @endif
+                                                    <td><a style="color: red" href="{{route('nim.destroy',$nim->id_NIM)}}">Hapus</a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
