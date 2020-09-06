@@ -29,7 +29,7 @@
                 <div class="card-header">Pendaftaran Calon Mahasiswa</div>
 
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('simpan.calonmhs') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -63,15 +63,18 @@
                         <div class="form-group row">
                             <label for="tahun" class="col-md-4 col-form-label text-md-right">Tahun Masuk</label>
                             <div class="col-md-6">
-                                <input id="tahun" type="text" class="form-control" name="tahun" value="" disabled>
+                                <input id="tahun" type="text" class="form-control" name="tahun" value="" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="fakultas" class="col-md-4 col-form-label text-md-right">Fakultas</label>
+                            <label for="" class="col-md-4 col-form-label text-md-right">Fakultas</label>
                             <div class="col-md-6">
                                 <select name="fakultas" id="fakultas" class="form-control col-md-12">
                                     <option value=""selected disabled>Pilih Fakultas</option>
+                                    @foreach($list_fakultas as $value)
+                                    <option value="{{$value->id_fakultas}}">{{$value->nama_fakultas}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -106,10 +109,10 @@
                         <div class="form-group row">
                             <label for="biaya_regis" class="col-md-4 col-form-label text-md-right">Biaya Registrasi</label>
                             <div class="col-md-6">
-                                <input id="biaya_regis" type="text" class="form-control" name="biaya_regis" value="" disabled>
+                                <input id="biaya_regis" type="text" class="form-control" name="biaya_regis" value="" readonly>
+                                <input id="id_pmb" type="hidden" class="form-control" name="id_pmb" value="">
                             </div>
                         </div>
-
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -126,6 +129,139 @@
 </div>
 </main>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+    var d = new Date();
+    var n = d.getFullYear();
+    // var d = new Date();
+    // var strDate = d.getFullYear().toString() + "-" + ( '0' + (d.getMonth()+1) ).slice(-2).toString() + "-" + ( '0' + d.getDate() ).slice(-2).toString();
+    $('#tahun').val(n);
+
+    $('#fakultas').change(function(e){
+            console.log(e);
+            var id_fakultas = $(this).val();
+            console.log(id_fakultas);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });  
+            
+        $.ajax({
+				type : "GET",
+				url:'{{route('get.prodi')}}',
+				data:{'id_fakultas':id_fakultas},
+				success:function(data){
+                    console.log(data);
+                    $('#prodi').empty();
+                        $('#prodi').append('<option value=""selected disabled>Pilih Jurusan / Program Studi</option>');
+
+                        $('#jenjangp').empty();
+                        $('#jenjangp').append('<option value=""selected disabled>Pilih Jenjang Pendidikan</option>');
+
+                        $('#kelas').empty();
+                        $('#kelas').append('<option value=""selected disabled>Pilih Kelas</option>');
+                        $('#biaya_regis').val("");
+                        $('#id_pmb').val("");
+                    for(var i = 0; i < data.length; i++) {
+                        var opt = '<option value="'+ data[i].id_prodi +'">'+ data[i].nama_prodi +'</option>';
+                        $('#prodi').append(opt);
+                    }
+                                       
+				}
+			});
+
+			});
+
+            $('#prodi').on('change', function(e){
+            console.log(e);
+            var id_prodi = $(this).val();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });  
+                
+            $.ajax({
+                    type : "GET",
+                    url:'{{route('get.strata')}}',
+                    data:{'id_prodi':id_prodi},
+                    success:function(data){
+                        console.log(data);
+                        $('#jenjangp').empty();
+                        $('#jenjangp').append('<option value=""selected disabled>Pilih Jenjang Pendidikan</option>');
+                        $('#kelas').empty();
+                        $('#kelas').append('<option value=""selected disabled>Pilih Kelas</option>');
+                        $('#biaya_regis').val("");
+                        $('#id_pmb').val("");
+                        for(var i = 0; i < data.length; i++) {
+                            var opt = '<option value="'+ data[i].id_strata +'">'+ data[i].jenis_strata +'</option>';
+                            $('#jenjangp').append(opt);
+                        }
+                                        
+                    }
+                });
+            });
+
+            $('#jenjangp').on('change', function(e){
+            console.log(e);
+            var id_strata = $(this).val();
+            $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });  
+                
+            $.ajax({
+                    type : "GET",
+                    url:'{{route('get.kelas')}}',
+                    data:{'id_strata':id_strata},
+                    success:function(data){
+                        console.log(data);
+                        $('#kelas').empty();
+                        $('#kelas').append('<option value=""selected disabled>Pilih Kelas</option>');
+                        $('#biaya_regis').val("");
+                        $('#id_pmb').val("");
+                        for(var i = 0; i < data.length; i++) {
+                            var opt = '<option value="'+ data[i].id_kelas +'">'+ data[i].nama_kelas +'</option>';
+                            $('#kelas').append(opt);
+                        }
+                                        
+                    }
+                });
+        });
+
+        $('#kelas').on('change', function(e){
+            var id_fakultas = $('#fakultas').val();
+            var id_strata = $('#jenjangp').val();
+            var id_kelas = $('#kelas').val();
+
+            $.ajax({
+            method : "GET",
+            url:'{{route('get.biaya')}}',
+            data:{'id_fakultas':id_fakultas,'id_strata':id_strata,'id_kelas':id_kelas},
+            success:function(data){
+                console.log("biaya");
+                console.log(data.biaya_registrasi);
+
+                $('#biaya_regis').val(data.biaya_registrasi);
+                $('#id_pmb').val(data.id_pmb);
+
+            }
+            });
+
+           
+        });
+
+});
+
+
+</script>
 
 </body>
 </html>

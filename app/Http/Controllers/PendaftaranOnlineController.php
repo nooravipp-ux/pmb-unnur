@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\fakultas;
+use App\prodi;
+use App\strata;
+use App\kelas;
 use DB;
 
 class PendaftaranOnlineController extends Controller
@@ -43,7 +47,87 @@ class PendaftaranOnlineController extends Controller
         return view('pendaftaran_online.info_registrasi');
     }
 
+    //pendaftaran awal
     public function daftar_awal(){
-        return view('pendaftaran_online.daftar_awal');
+        //$list_fakultas = DB::select("SELECT * FROM pmb INNER JOIN pmb_biaya_registrasi ON pmb.id_pmb = pmb_biaya_registrasi.id_pmb
+        //INNER JOIN fakultas ON pmb_biaya_registrasi.id_fakultas = fakultas.id_fakultas");
+
+        $list_fakultas = DB::select("select * from fakultas");
+        //dd($list_fakultas);
+
+        return view('pendaftaran_online.daftar_awal',['list_fakultas' => $list_fakultas]);
     }
+
+    public function get_prodi(Request $request){
+        $list_prodi = prodi::where('id_fakultas',$request->id_fakultas)->get();
+
+        return response()->json($list_prodi);
+    }
+
+    public function get_strata(Request $request){
+        $list_strata = strata::where('id_prodi',$request->id_prodi)->get();
+
+        return response()->json($list_strata);
+    }
+
+    public function get_kelas(Request $request){
+        $list_kelas = kelas::where('id_strata',$request->id_strata)->get();
+
+        return response()->json($list_kelas);
+    }
+
+    public function get_biaya(Request $request){
+        $list_biaya = DB::table('pmb_biaya_registrasi')->where([
+            ['id_fakultas','=', $request->id_fakultas],
+            ['strata','=', $request->id_strata],
+            ['kelas','=', $request->id_kelas]
+        ])->first();
+
+        return response()->json($list_biaya);
+    }
+
+    public function simpan_calonmhs(Request $request){
+        DB::table('pmb_pendaftar')->insert([
+            ['id_pmb' => $request->id_pmb,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'tahun' => $request->tahun,
+            'id_jenjang_pend' => $request->jenjangp,
+            'no_telepon' => $request->telp,
+            'id_prodi' => $request->prodi,]
+        ]);
+
+        return redirect('/daftar_awal')->with('sukses','data berhasil di simpan');
+    }
+
+    public function daftar_awal_upload(Request $request){
+        return view('pendaftaran_online.daftar_awal_upload');
+    }
+
+    public function get_data_calonmhs(Request $request){
+        // $list_data = DB::select("SELECT * FROM pmb_pendaftar  INNER JOIN pmb ON pmb_pendaftar.`id_pmb` = pmb.`id_pmb`
+        // INNER JOIN pmb_biaya_registrasi ON pmb.`id_pmb` = pmb_biaya_registrasi.`id_pmb`
+        // INNER JOIN fakultas ON pmb_biaya_registrasi.`id_fakultas` = fakultas.`id_fakultas`
+        // INNER JOIN prodi ON fakultas.`id_fakultas` = prodi.`id_fakultas`
+        // INNER JOIN strata ON prodi.`id_prodi` = strata.`id_prodi`
+        // INNER JOIN kelas ON strata.`id_strata` = kelas.`id_strata`
+        // WHERE pmb_pendaftar.`id_pendaftar`='" + $request->id_pendaftar + "'");
+
+        $list_calonmhs = DB::table('pmb_pendaftar')
+        ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+        ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
+        ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+        ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+        ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+        ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+        ->where('pmb_pendaftar.id_pendaftar', $request->id_pendaftar)
+        ->first();
+
+        //$list_calonmhs = head($list_data);
+
+        return response()->json($list_calonmhs);
+    }
+    //pendaftaran awal end
+
+
 }
