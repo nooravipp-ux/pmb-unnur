@@ -73,4 +73,6 @@ Route::get('operator/pendaftaran/info-registrasi','PendaftaranOnlineController@i
 Route::get('/daftar_awal','PendaftaranOnlineController@daftar_awal');
 
 //Calon Mhasiswa
-Route::get('operator/calon-mhs','CalonMhsController@calon_mhs');
+Route::get('/calon-mahasiswa/formulir','CalonMhsController@formulir');
+Route::get('/calon-mahasiswa/form-biodata','CalonMhsController@form_biodata');
+Route::get('/calon-mahasiswa/form-upload','CalonMhsController@form_upload');

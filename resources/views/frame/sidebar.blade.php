@@ -110,11 +110,11 @@
         </li>
         @endcan
         @can('manage-calon-mhs')
-        <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i> Formulir</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-money"></i> Pembayaran</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-book"></i> Biodata</a></li>
+        <li class="@yield('title_admin')"><a a href="{{url('/calon-mahasiswa/formulir')}}"><i class="fa fa-file-text"></i> Formulir</a></li>
+        <li class="@yield('title_admin')"><a ><i class="fa fa-money"></i> Pembayaran</a></li>
+        <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-biodata')}}"><i class="fa fa-book"></i> Biodata</a></li>
         <li class="@yield('title_admin')"><a><i class="fa fa-print"></i> Cetak Formulir</a></li>
-        <li class="@yield('title_admin')"><a><i class="fa fa-cloud-upload"></i> Upload File</a></li>
+        <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-upload')}}"><i class="fa fa-cloud-upload"></i> Upload File</a></li>
         <li class="@yield('title_admin')"><a><i class="fa fa-bullhorn"></i> Pengunguman</a></li>
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Bayar Registrasi Awal</a></li>
         @endcan

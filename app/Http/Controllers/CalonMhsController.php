@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 
 class CalonMhsController extends Controller
 {
-    public function calon_mhs(){
-        return view('calon_mahasiswa.calon_mhs');
+    public function formulir(){
+        return view('calon_mahasiswa.formulir');
+    }
+
+    public function form_biodata(){
+        return view('calon_mahasiswa.form_biodata');
+    }
+    public function form_upload(){
+        return view('calon_mahasiswa.form_upload');
     }
 }
