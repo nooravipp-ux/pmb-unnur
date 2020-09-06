@@ -33,7 +33,7 @@
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tahun Masuk<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="number" name="tahun_masuk" class="form-control " value="<?php echo date("y"); ?>">
+                            <input type="number" name="tahun_masuk" class="form-control " value="<?php echo date("Y"); ?>">
                           </div>
                         </div>
                         <div class="item form-group">

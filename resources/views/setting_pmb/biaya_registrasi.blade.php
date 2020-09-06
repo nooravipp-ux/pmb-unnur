@@ -49,12 +49,8 @@
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenjang Prodi</label>
                           <div class="col-md-6 col-sm-6 ">
-                                <select name="jenjang_prodi" class="form-control ">
-                                    <option value="MASTER">Master</option>
-                                    <option value="S1">S1</option>
-                                    <option value="S2">S2</option>
-                                    <option value="D3">D3</option>
-                                    <option value="D1">D1</option>
+                                <select name="jenjang_prodi" class="form-control" id="id_jenjang_prodi">
+                                    
                                 </select>
                           </div>
                         </div>
@@ -62,10 +58,8 @@
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Kelas<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                                <select name="kelas" class="form-control ">
-                                    <option value="PAGI">Pagi</option>
-                                    <option value="SORE">Sore</option>
-                                    <option value="EXTENSION">Extension</option>
+                                <select name="kelas" class="form-control " id="id_kelas">
+                                    
                                 </select>
                           </div>
                         </div>
@@ -183,7 +177,7 @@
         });
 
         $('#id_fakultas').select2({
-    		placeholder: '- Pilih ID Fakultas -',
+    		placeholder: '- Pilih Fakultas -',
             ajax: {
                 url:  '{{url('/fakultas/get-data-fakultas')}}',
                 dataType: 'json',
@@ -194,6 +188,46 @@
                             return {
                                 id: fakultas.id_fakultas,
                                 text: fakultas.id_fakultas+' - '+fakultas.nama_fakultas            
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('#id_jenjang_prodi').select2({
+    		placeholder: '- Pilih Jenjang Podi -',
+            ajax: {
+                url:  '{{url('/prodi/get_data_jenjang_prodi')}}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (jenjang_prodi) {
+                            return {
+                                id: jenjang_prodi.id,
+                                text: jenjang_prodi.id_prodi+' - '+jenjang_prodi.strata           
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('#id_kelas').select2({
+    		placeholder: '- Pilih Kelas -',
+            ajax: {
+                url:  '{{url('/kelas/get-data-kelas')}}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (kelas) {
+                            return {
+                                id: kelas.id_kelas,
+                                text: kelas.id_kelas+' - '+kelas.nama_kelas            
                             }
                         })
                     };

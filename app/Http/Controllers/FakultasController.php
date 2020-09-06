@@ -140,4 +140,26 @@ class FakultasController extends Controller
 
         return response()->json($data_fakultas);
     }
+    public function get_data_jenjang_prodi(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data_jenjang_prodi = DB::table('pmb_jenjang_pendidikan')->select('id','id_prodi','strata')->where('id_prodi', 'LIKE', '%'.$cari.'%')->orWhere('strata', 'LIKE', '%'.$cari.'%')->get();
+
+            return response()->json($data_jenjang_prodi);
+        }
+        $data_jenjang_prodi= DB::table('pmb_jenjang_pendidikan')->select('id','id_prodi','strata')->get();
+
+        return response()->json($data_jenjang_prodi);
+    }
+    public function get_data_kelas(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data_kelas = DB::table('kelas')->select('id_kelas','nama_kelas')->where('id_kelas', 'LIKE', '%'.$cari.'%')->orWhere('nama_kelas', 'LIKE', '%'.$cari.'%')->get();
+
+            return response()->json($data_kelas);
+        }
+        $data_kelas= DB::table('kelas')->select('id_kelas','nama_kelas')->get();
+
+        return response()->json($data_kelas);
+    }
 }

@@ -28,6 +28,7 @@ class PmbController extends Controller
     {
         $data_biaya_registrasi = DB::table('pmb_biaya_registrasi')
                                 ->join('fakultas','fakultas.id_fakultas','=','pmb_biaya_registrasi.id_fakultas')
+                                // ->join('kelas','kelas.id_kelas','=','pmb_biaya_registrasi.kelas')
                                 ->get();
         return view('setting_pmb.biaya_registrasi', compact('data_biaya_registrasi'));
     }
@@ -68,7 +69,9 @@ class PmbController extends Controller
     public function nomor_pmb($tahun, $gelombang){
         $no = 1;
         $no_urut = "";
-        $no_urut = DB::select("SELECT '$tahun' AS tahun_masuk, '$gelombang' AS gelombang, LPAD((RIGHT(COUNT(ID_PMB),4)+1),4,'0') AS no_urut_pmb FROM pmb WHERE LEFT(ID_PMB,2)= '$tahun'");
+        $tahun_masuk = substr($tahun, -2);
+        // dd($tahun_masuk);
+        $no_urut = DB::select("SELECT '$tahun_masuk' AS tahun_masuk, '$gelombang' AS gelombang, LPAD((RIGHT(COUNT(ID_PMB),4)+1),4,'0') AS no_urut_pmb FROM pmb WHERE LEFT(ID_PMB,2)= '$tahun_masuk'");
         foreach($no_urut as $pmb){
             if($pmb->no_urut_pmb != NULL){
                 return $no_urut = $pmb->tahun_masuk.$pmb->gelombang.$pmb->no_urut_pmb;

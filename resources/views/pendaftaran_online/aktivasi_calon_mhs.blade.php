@@ -42,7 +42,6 @@
                                       <th>Email</th>
                                       <th>No Telepon</th>
                                       <th>Tahun Daftar</th>
-                                      <th>Fakultas</th>
                                       <th>Prodi</th>
                                       <th>Kelas (Pagi/Sore)</th>
                                       <th>Status Pembayaran</th>
@@ -57,7 +56,6 @@
                                       <td>{{$dt->email}}</td>
                                       <td>{{$dt->no_telepon}}</td>
                                       <td>{{$dt->tahun}}</td>
-                                      <td></td>
                                       <td>{{$dt->nama_prodi}}</td>
                                       <td></td>
                                       <td class="status">{{$dt->status}}</td>
