@@ -10,6 +10,9 @@
     #nama_kelas{
         border-radius: 25px;
     }
+    #id_kelas{
+        border-radius: 25px;
+    }
 </style>
 @endsection
 @section('content')
@@ -55,11 +58,21 @@
 <!-- /page content -->
 @endsection
 @push('js')
-    {{-- <script src="{{ asset('template/build/js/xedit.js') }}"></script>
+    <script src="{{ asset('template/build/js/xedit.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('.edit-fakultas').editable();
+            $('.edit-kelas').editable();
         });
 
-    </script> --}}
+        $(document).ready(function(){
+            $('.edit-kelas-select').editable({
+                source: [
+                    {value: 'Reguler pagi', text: 'Reguler pagi'},
+                    {value: 'Reguler Sore', text: 'Reguler Sore'},
+                    {value: 'Week End', text: 'Week End'}
+                ]
+            });
+        });
+
+    </script>
 @endpush

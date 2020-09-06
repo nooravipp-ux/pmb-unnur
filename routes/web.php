@@ -37,8 +37,7 @@ Route::get('/prodi/get_data_jenjang_prodi','FakultasController@get_data_jenjang_
 
 Route::get('/strata/strata','FakultasController@strata')->name('strata.strata');
 Route::post('/strata/store','FakultasController@strata_store')->name('strata.store');
-Route::get('/strata/destroy/{id_strara}','FakultasController@strata_destroy')->name('strata.destroy');
-Route::get('/strata/edit/{id_stara}','FakultasController@strata_edit')->name('strata.edit');
+Route::get('/strata/destroy/{strata}','FakultasController@strata_destroy')->name('strata.destroy');
 
 Route::get('/kelas/kelas','FakultasController@kelas')->name('kelas.kelas');
 Route::post('/kelas/store','FakultasController@kelas_store')->name('kelas.store');
@@ -48,6 +47,11 @@ Route::get('/kelas/get-data-kelas','FakultasController@get_data_kelas');
 /**
  * Route PMB
  */
+// nim
+Route::get('/pmb/nim','PmbController@nim_index')->name('nim.pmb');
+Route::get('/pmb/nim/destroy/{nim}','PmbController@nim_destroy')->name('nim.destroy');
+Route::post('/pmb/jadwal/store','PmbController@nim_store')->name('nim.pmb.store');
+// end nim
 Route::get('/pengaturan/pendaftaran-pmb','PmbController@pendaftaran_pmb');
 Route::post('/pengaturan/pendaftaran-pmb/simpan-data-pmb','PmbController@simpan_data_pmb');
 Route::post('/pengaturan/pendaftaran-pmb/delete-data/{id}','PmbController@destroy')->name('pmb.delete','{id}');

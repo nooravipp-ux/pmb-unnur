@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class kelas extends Model
+class NIM extends Model
 {
-    protected $guarded = [];
-    protected $table = "kelas";
-    protected $primaryKey = 'id_kelas';
+    protected $guarded =[];
+    protected $primaryKey = 'id_NIM';
+    protected $table = 'nim';
     public $incrementing = false;
     public $timestamps = false;
 }
