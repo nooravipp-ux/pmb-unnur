@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
-use App\Role;
 use Gate;
+use App\Role;
+use App\User;
 
+use App\prodi;
+use App\role_user;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -23,7 +25,8 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index')->with('users', $users );
+        $prodi = prodi::get()->pluck('id_prodi');
+        return view('users.index',compact('prodi'))->with('users', $users );
     }
 
     /**
@@ -44,7 +47,18 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new user;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->id_prodi = $request->id_prodi;
+        $user->save();
+
+        $role = new role_user;
+        $role->role_id = $request->role;
+        $role->user_id = $user->id;
+        $role->save();
+        return redirect()->back()->with('sukses','dara berhasil di buat');
     }
 
     /**

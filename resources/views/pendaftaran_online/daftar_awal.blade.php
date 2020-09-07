@@ -54,6 +54,13 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" value="" required  autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="telp" class="col-md-4 col-form-label text-md-right">No Handphone</label>
                             <div class="col-md-6">
                                 <input id="telp" type="text" class="form-control" name="telp" value="" maxlength="13" required  autofocus>

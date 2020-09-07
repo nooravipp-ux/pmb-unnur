@@ -70,7 +70,7 @@
                             <input type="number" type="text" name="biaya_registrasi" class="form-control ">
                           </div>
                         </div>
-        
+
                         <div class="ln_solid"></div>
                         <div class="item form-group">
                           <div class="col-md-6 col-sm-6 offset-md-3">
@@ -142,7 +142,7 @@
                                 </table>
                             </div>
                           </div>
-                      </div>   
+                      </div>
 				   </div>
                 </div>
               </div>
@@ -167,7 +167,7 @@
                         results:  $.map(data, function (pmb) {
                             return {
                                 id: pmb.id_pmb,
-                                text: pmb.id_pmb            
+                                text: pmb.id_pmb
                             }
                         })
                     };
@@ -187,7 +187,7 @@
                         results:  $.map(data, function (fakultas) {
                             return {
                                 id: fakultas.id_fakultas,
-                                text: fakultas.id_fakultas+' - '+fakultas.nama_fakultas            
+                                text: fakultas.id_fakultas+' - '+fakultas.nama_fakultas
                             }
                         })
                     };
