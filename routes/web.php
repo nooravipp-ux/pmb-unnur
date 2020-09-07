@@ -78,9 +78,11 @@ Route::get('/get_kelas','PendaftaranOnlineController@get_kelas')->name('get.kela
 Route::get('/get_biaya','PendaftaranOnlineController@get_biaya')->name('get.biaya');
 Route::post('/daftar_awal/simpan_calonmhs','PendaftaranOnlineController@simpan_calonmhs')->name('simpan.calonmhs');
 Route::get('/daftar_awal/upload','PendaftaranOnlineController@daftar_awal_upload');
-Route::get('/daftar_awal/upload/get_data','PendaftaranOnlineController@get_data_calonmhs')->name('get.datacalonmhs');
+//Route::get('/daftar_awal/upload/get_data','PendaftaranOnlineController@get_data_calonmhs')->name('get.datacalonmhs');
+Route::get('/daftar_awal/upload/get_data','CalonMhsController@get_data_calonmhs')->name('get.datacalonmhs');
 
 //Calon Mhasiswa
 Route::get('/calon-mahasiswa/formulir','CalonMhsController@formulir');
 Route::get('/calon-mahasiswa/form-biodata','CalonMhsController@form_biodata');
 Route::get('/calon-mahasiswa/form-upload','CalonMhsController@form_upload');
+Route::post('/calon-mahasiswa/form-upload/upload_bukti','CalonMhsController@update_bukti_pembayaran')->name('upload.bukti');

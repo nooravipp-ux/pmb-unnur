@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\fakultas;
 use App\prodi;
 use App\strata;
 use App\kelas;
+use App\User;
 use DB;
 
 class PendaftaranOnlineController extends Controller
@@ -77,6 +79,10 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function get_biaya(Request $request){
+
+
+
+
         $list_biaya = DB::table('pmb_biaya_registrasi')->where([
             ['id_fakultas','=', $request->id_fakultas],
             ['strata','=', $request->id_strata],
@@ -87,6 +93,9 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function simpan_calonmhs(Request $request){
+
+  
+
         DB::table('pmb_pendaftar')->insert([
             ['id_pmb' => $request->id_pmb,
             'nama' => $request->nama,
@@ -95,6 +104,31 @@ class PendaftaranOnlineController extends Controller
             'id_jenjang_pend' => $request->jenjangp,
             'no_telepon' => $request->telp,
             'id_prodi' => $request->prodi,]
+        ]);
+
+        $cari_id = DB::table('users')
+        ->select('id')
+        ->where('email', $request->email )->first();
+        //dd($cari_id);  
+
+        DB::table('users')->insert([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request['password']),
+            'id_prodi' => 'IF-301',
+        ]);
+
+        $cari_id = User::select('id')
+        ->where('email', $request->email )->get()->toArray();
+
+        $id = Arr::get($cari_id,0);
+        $id_user = Arr::get($id,"id");
+
+        //dd($tes);
+
+        DB::table('role_user')->insert([
+            'role_id' => '4',
+            'user_id' => $id_user
         ]);
 
         return redirect('/daftar_awal')->with('sukses','data berhasil di simpan');
