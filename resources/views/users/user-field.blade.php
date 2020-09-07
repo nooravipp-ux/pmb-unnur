@@ -34,7 +34,7 @@
                     <select name="role" id="role"
                         class="form-control input {{ $errors->has('role') ? 'is-invalid':'' }}"
                         required>
-                        <option disabled selected>- Pilih ID Prodi -</option>
+                        <option disabled selected>- Pilih ID Role -</option>
                         <option value="1">Admin</option>
                         <option value="2">Keuangan</option>
                         <option value="3">Prodi</option>
