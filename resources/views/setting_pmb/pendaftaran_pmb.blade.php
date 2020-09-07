@@ -112,8 +112,8 @@
                                         <td>{{$data->id_pmb}}</td>
                                         <td>{{$data->tahun}}</td>
                                         <td>{{$data->gelombang}}</td>
-                                        <td>{{$data->start_date}}</td>
-                                        <td>{{$data->finish_date}}</td>
+                                        <td>{{date('d M Y', strtotime($data->start_date))}}</td>
+                                        <td>{{date('d M Y', strtotime($data->finish_date))}}</td>
                                         <td class="text-center">
                                             <form method="POST" action="{{route('pmb.delete', $data->id_pmb)}}">
                                                 {{ csrf_field() }}
