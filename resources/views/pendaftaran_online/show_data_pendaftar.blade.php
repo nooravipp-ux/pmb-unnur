@@ -169,7 +169,7 @@
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Bukti Pembayaran</label>
                           <div class="col-md-6 col-sm-6 ">
-                              <img class="img-fluid" id="myImg" alt="Bukti Pembayaran" src="{{url('template/production/images/pembayaran.jpg')}}">
+                              <img class="img-fluid" id="myImg" alt="Bukti Pembayaran" src="data:image/png;base64, {{$detail_pendaftar->bukti_pem}}">
                           </div>
                           <!-- The Modal -->
                           <div id="myModal" class="modal">

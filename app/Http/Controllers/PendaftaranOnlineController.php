@@ -36,10 +36,10 @@ class PendaftaranOnlineController extends Controller
         // dd($request->all());
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status' => 'LUNAS']);
 
-         \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
-            $message->to('noor.avipp11@gmail.com', 'sandi');
-            $message->subject('Subject');
-        });
+        //  \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
+        //     $message->to('noor.avipp11@gmail.com', 'sandi');
+        //     $message->subject('Subject');
+        // });
 
         return redirect('/operator/pendaftaran/aktivasi-mhs')->with('status', 'Data Customer Berhasil Di Update');
     }
@@ -134,7 +134,7 @@ class PendaftaranOnlineController extends Controller
             'user_id' => $id_user
         ]);
 
-        return redirect('/daftar_awal')->with('sukses','data berhasil di simpan');
+        return redirect('/login')->with('sukses','data berhasil di simpan');
     }
 
     public function daftar_awal_upload(Request $request){
