@@ -1,11 +1,12 @@
 @extends('frame.index')
-@section('title_pmb','active')
-@section('tchild_pmb','current-page')
+{{-- @section('title_pmb','active')
+@section('tchild_pmb','current-page') --}}
 @section('css')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
     .input {
         border-radius: 10px;
+        font-size: small;
     }
 
     .ui-datepicker-calendar {
@@ -24,7 +25,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Setting Jadwal Penerimaan Siswa Baru</h2>
+                        <h2>Setting NIM Penerimaan Siswa Baru</h2>
                         <ul class="nav navbar-right panel_toolbox">
                         </ul>
                         <div class="clearfix"></div>
@@ -39,7 +40,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="tahun">Tahun
                                     Masuk:</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="text" class="form-control input" name="tahun" id="tahun" readonly
+                                    <input type="text" class="form-control input" name="tahun" id="tahun" placeholder="- Input Tahun Masuk Mahasiswa -" readonly
                                         required>
                                 </div>
                             </div>
@@ -61,7 +62,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">No Urut
                                     prodi:</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" name="no_prodi" id="urut" class="form-control input" required>
+                                    <input type="text" name="no_prodi" id="urut" class="form-control input" placeholder="- Masukan No Urut Prodi -" required>
                                 </div>
                             </div>
                             <div class="item form-group">
