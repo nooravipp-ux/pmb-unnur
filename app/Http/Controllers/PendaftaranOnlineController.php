@@ -32,8 +32,7 @@ class PendaftaranOnlineController extends Controller
 
     public function confirm_pembayaran_pmb(Request $request){
         // dd($request->all());
-        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)
-        ->update(['status' => 'LUNAS']);
+        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status' => 'LUNAS']);
 
          \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
             $message->to('noor.avipp11@gmail.com', 'sandi');
@@ -56,6 +55,10 @@ class PendaftaranOnlineController extends Controller
         //dd($list_fakultas);
 
         return view('pendaftaran_online.daftar_awal',['list_fakultas' => $list_fakultas]);
+    }
+
+    public function update_data_informasi_pendaftaran(){
+        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status' => 'LUNAS']);
     }
 
     public function get_prodi(Request $request){

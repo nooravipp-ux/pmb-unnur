@@ -45,7 +45,7 @@
                             <span class="step_no">2</span>
                             <span class="step_descr">
                                 Step 2<br />
-                                <small>Orang Tua/Wali</small>
+                                <small>Data Orang Tua/Wali (Ayah)</small>
                             </span>
                           </a>
                         </li>
@@ -54,7 +54,7 @@
                             <span class="step_no">3</span>
                             <span class="step_descr">
                                 Step 3<br />
-                                <small>Data Pendidikan</small>
+                                <small>Data Orang Tua/Wali (Ibu)</small>
                             </span>
                           </a>
                         </li>
@@ -63,7 +63,7 @@
                             <span class="step_no">4</span>
                             <span class="step_descr">
                                 Step 4<br />
-                                <small>Selesai</small>
+                                <small>Data Riwayat Pendidikan</small>
                             </span>
                           </a>
                         </li>
@@ -72,27 +72,28 @@
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Lengkap <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                               <input type="text" id="first-name" required="required" class="form-control  ">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                              <input type="text" id="first-name" required="required" class="form-control  ">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Middle Name / Initial</label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir <span class="required">*</span>
+                            </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="middle-name" class="form-control col" type="text" name="middle-name">
+                              <input id="birthday" class="date-picker form-control" required="required" type="text">
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Jenis Kelamin</label>
                             <div class="col-md-6 col-sm-6 ">
                               <div id="gender" class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
@@ -105,10 +106,69 @@
                             </div>
                           </div>
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Agama<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="birthday" class="date-picker form-control" required="required" type="text">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kewargnegaraan<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Alamat<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kelurahan / Desa<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kode Pos<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kecamatan<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Kota</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="middle-name" class="form-control col" type="text" name="middle-name">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Provinsi</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="middle-name" class="form-control col" type="text" name="middle-name">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Email</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="middle-name" class="form-control col" type="text" name="middle-name">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">No Telepon</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="middle-name" class="form-control col" type="text" name="middle-name">
                             </div>
                           </div>
 
@@ -116,26 +176,108 @@
 
                       </div>
                       <div id="step-2">
-                        <h2 class="StepTitle">Step 2 Content</h2>
-                        <p>
-                          do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                          fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK Ayah
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="first-name" required="required" class="form-control  ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Ayah
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="first-name" required="required" class="form-control  ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir Ayah
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="birthday" class="date-picker form-control" required="required" type="date">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Pendidikan Ayah
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="birthday" class="date-picker form-control" required="required" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Pekerjaan Ayah
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Penghasilan Ayah
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <br>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Penghasilan Ayah
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
                       </div>
                       <div id="step-3">
-                        <h2 class="StepTitle">Step 3 Content</h2>
-                        <p>
-                          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                          eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
+                      <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="first-name" required="required" class="form-control  ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="first-name" required="required" class="form-control  ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="birthday" class="date-picker form-control" required="required" type="date">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align">Pendidikan Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="birthday" class="date-picker form-control" required="required" type="text">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Pekerjaan Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Penghasilan Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+                          <br>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Penghasilan Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
                       </div>
                       <div id="step-4">
                         <h2 class="StepTitle">Step 4 Content</h2>
