@@ -31,33 +31,33 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">ID Test<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="id_test" required="required" readonly />
+                                    <input class="form-control" name="id_test" value="" readonly />
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" class='optional' name="email" type="email" readonly/></div>
+                                    <input class="form-control" class='optional' name="email" value="{{$data_pendaftar->email}}" readonly/></div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Tahun <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" name="tahun" required="required" type="number" readonly/></div>
+                                    <input class="form-control" name="tahun" value="{{$data_pendaftar->tahun}}" readonly/></div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Gelombang<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="number" name="gelombang" required='required' readonly/></div>
+                                    <input class="form-control" type="number" name="gelombang" value="{{$data_pendaftar->gelombang}}" readonly/></div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Nama Lengkap<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="nama" required='required'></div>
+                                    <input class="form-control" type="text" name="nama" value="{{$data_pendaftar->nama}}"></div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">No HP<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="no_hp" required='required'></div>
+                                    <input class="form-control" type="text" name="no_telepon" value="{{$data_pendaftar->no_telepon}}"></div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">No HP Orang Tua<span class="required">*</span></label>
@@ -68,7 +68,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Fakultas<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="fakultas"  required /><br>
+                                    <input class="form-control" type="text" name="fakultas"  value="{{$data_pendaftar->nama_fakultas}}"> /><br>
                                     <input class="form-control" type="text" name="Kode Voucher" placeholder="Kode Voucher (Kosongkan jika tidak ada)" />
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Jenjang Prodi<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="jenjang"  required />
+                                    <input class="form-control" type="text" name="jenjang" value="{{$data_pendaftar->jenis_strata}}"  required />
                                 </div>
                             </div>
                             <div class="field item form-group">
@@ -104,7 +104,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Program Studi<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="prodi"  required />
+                                    <input class="form-control" type="text" name="prodi" value="{{$data_pendaftar->nama_prodi}}" />
                                 </div>
                             </div>           
                             <div class="ln_solid">

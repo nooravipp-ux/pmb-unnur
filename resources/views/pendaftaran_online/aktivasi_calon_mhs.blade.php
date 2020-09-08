@@ -58,7 +58,7 @@
                                       <td>{{$dt->tahun}}</td>
                                       <td>{{$dt->nama_prodi}}</td>
                                       <td></td>
-                                      <td class="status">{{$dt->status}}</td>
+                                      <td class="status">{{$dt->status_pembayaran_registrasi}}</td>
                                       <td class="text-center"><a href="{{route('pendaftar.tampil',$dt->id_pendaftar)}}" data-toggle="tooltip" data-placement="top" title="View Detail"><i class="fa fa-eye"></i></a></td>
                                     </tr>
                                     @endforeach

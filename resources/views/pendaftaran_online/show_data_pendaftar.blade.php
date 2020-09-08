@@ -163,7 +163,7 @@
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Status Pembayaran</label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input name="status_pembayaran" class="form-control" type="text" value="{{$detail_pendaftar->status}}" readonly>
+                            <input name="status_pembayaran" class="form-control" type="text" value="{{$detail_pendaftar->status_pembayaran_registrasi}}" readonly>
                           </div>
                         </div>
                         <div class="item form-group">

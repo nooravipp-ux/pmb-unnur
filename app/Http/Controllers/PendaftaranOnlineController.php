@@ -35,7 +35,7 @@ class PendaftaranOnlineController extends Controller
 
     public function confirm_pembayaran_pmb(Request $request){
         // dd($request->all());
-        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status' => 'LUNAS']);
+        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status_pembayaran_registrasi' => 'LUNAS']);
 
         //  \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
         //     $message->to('noor.avipp11@gmail.com', 'sandi');
