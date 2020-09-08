@@ -33,9 +33,28 @@
                         @csrf
 
                         <div class="form-group row">
+                            <label for="nik" class="col-md-4 col-form-label text-md-right">NIK</label>
+                            <div class="col-md-6">
+                                <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="" required autocomplete="nik"  autofocus>
+                                
+                                @error('nik')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="nama" class="col-md-4 col-form-label text-md-right">Nama Lengkap</label>
                             <div class="col-md-6">
-                                <input id="nama" type="text" class="form-control" name="nama" value="" required  autofocus>
+                                <input id="nama" type="text" class="form-control  @error('nama') is-invalid @enderror" name="nama" value="" required  autofocus>
+                            
+                                @error('nama')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -75,7 +94,13 @@
                         <div class="form-group row">
                             <label for="telp" class="col-md-4 col-form-label text-md-right">No Handphone</label>
                             <div class="col-md-6">
-                                <input id="telp" type="number" class="form-control" name="telp" value="" maxlength="13" required  autofocus>
+                                <input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value=""  required  autofocus>
+                            
+                                @error('telp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -128,8 +153,7 @@
                         <div class="form-group row">
                             <label for="biaya_regis" class="col-md-4 col-form-label text-md-right">Biaya Registrasi</label>
                             <div class="col-md-6">
-                                <input id="biaya_regis" type="text" class="form-control" name="biaya_regis" value="" readonly>
-                                <input id="id_pmb" type="hidden" class="form-control" name="id_pmb" value="">
+                                <input id="biaya_regis" type="text" class="form-control" name="biaya_regis" value="" readonly>                              
                             </div>
                         </div>
 
@@ -269,12 +293,11 @@ $( document ).ready(function() {
                 console.log(data.biaya_registrasi);
 
                 $('#biaya_regis').val(data.biaya_registrasi);
-                $('#id_pmb').val(data.id_pmb);
+                //$('#id_pmb').val(data.id_pmb);
 
             }
             });
 
-           
         });
 
 });

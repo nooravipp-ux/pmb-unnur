@@ -65,7 +65,7 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function get_prodi(Request $request){
-        $list_prodi = prodi::where('id_fakultas',$request->id_fakultas)->get();
+        $list_prodi = prodi::where('id_fakultas','IF-2012')->get();
 
         return response()->json($list_prodi);
     }
@@ -84,9 +84,6 @@ class PendaftaranOnlineController extends Controller
 
     public function get_biaya(Request $request){
 
-
-
-
         $list_biaya = DB::table('pmb_biaya_registrasi')->where([
             ['id_fakultas','=', $request->id_fakultas],
             ['strata','=', $request->id_strata],
@@ -96,22 +93,36 @@ class PendaftaranOnlineController extends Controller
         return response()->json($list_biaya);
     }
 
+
     public function simpan_calonmhs(Request $request){
 
         $this->validate($request, [
+            'nik' =>['required','numeric','unique:pmb_pendaftar'],
+            'telp' =>['required','numeric','max:20'],
+            'nama' =>['required','string','max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-  
+
+        $tgl = date("Y-m-d");
+        $list_pmb = DB::select("SELECT id_pmb FROM pmb WHERE start_date <= CAST('".$tgl."' AS DATE) AND finish_date >= CAST('".$tgl."' AS DATE)");
+    
+        $sorted = Arr::get($list_pmb,0);
+        $sortedd = Arr::flatten($sorted);
+        $id_pmb = Arr::get($sortedd,0);    
+           
+        //dd($sorteddd);  
 
         DB::table('pmb_pendaftar')->insert([
-            ['id_pmb' => $request->id_pmb,
+            ['id_pmb' => $id_pmb,
+            'nik' => $request->nik,
             'nama' => $request->nama,
             'email' => $request->email,
             'tahun' => $request->tahun,
             'id_jenjang_pend' => $request->jenjangp,
             'no_telepon' => $request->telp,
-            'id_prodi' => $request->prodi,]
+            'id_prodi' => $request->prodi,
+            'id_fakultas' => $request->fakultas]
         ]);
 
         $cari_id = DB::table('users')
@@ -123,7 +134,7 @@ class PendaftaranOnlineController extends Controller
             'name' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request['password']),
-            'id_prodi' => 'IF-301',
+            'id_prodi' => $request->prodi,
         ]);
 
         $cari_id = User::select('id')
