@@ -197,6 +197,7 @@ $( document ).ready(function() {
                 $("#kelas").text(": " +data.nama_kelas);
                 $("#biaya").text(": " +data.biaya_registrasi);
                 $("#id_pendaftar").val(data.id_pendaftar);
+                $("#atas_nama").val(data.atas_nama);
 
                 var metode = data.metode_pembayaran;
                 if(metode == "transfer"){
@@ -204,6 +205,8 @@ $( document ).ready(function() {
                   $('#metode').append('<option value=""disabled>Pilih Metode Pembayaran</option>');
                   $('#metode').append('<option value="cash">Cash</option>');
                   $('#metode').append('<option value="transfer"selected>Transfer</option>');
+                  $('#d_file').show();
+                  $('#d_atas_nama').show();
                 }else if(metode == "cash"){
                   $('#metode').empty();
                   $('#metode').append('<option value=""disabled>Pilih Metode Pembayaran</option>');
