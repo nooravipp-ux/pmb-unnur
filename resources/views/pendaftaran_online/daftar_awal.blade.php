@@ -94,7 +94,13 @@
                         <div class="form-group row">
                             <label for="telp" class="col-md-4 col-form-label text-md-right">No Handphone</label>
                             <div class="col-md-6">
-                                <input id="telp" type="number" class="form-control" name="telp" value="" maxlength="13" required  autofocus>
+                                <input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value=""  required  autofocus>
+                            
+                                @error('telp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
