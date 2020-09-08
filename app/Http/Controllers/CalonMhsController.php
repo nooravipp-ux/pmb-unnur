@@ -26,7 +26,9 @@ class CalonMhsController extends Controller
         return view('calon_mahasiswa.form_biodata', compact('status_pembayaran'));
     }
     public function form_upload(){
-        return view('calon_mahasiswa.form_upload');
+        $email = Auth::user()->email;
+        $status_pembayaran = $this->cek_status_pembayaran($email);
+        return view('calon_mahasiswa.form_upload', compact('status_pembayaran'));
     }
 
     public function get_data_calonmhs(Request $request){
@@ -59,7 +61,8 @@ class CalonMhsController extends Controller
 
             if($request->metode == "transfer"){
                 $this->validate($request, [
-                    'file' => 'required|file|image|mimes:jpeg,png,jpg|max:1048'
+                    'file' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
+                    'atas_nama' => 'required|string'
                 ]);
 
                 $path = $request->file('file')->getRealPath();
@@ -68,6 +71,7 @@ class CalonMhsController extends Controller
                 DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
                 ->update([
                     'metode_pembayaran' => $request->metode,
+                    'atas_nama' => $request->atas_nama,
                     'bukti_pem' => $base64,
                 ]);
             }else if($request->metode == "cash"){

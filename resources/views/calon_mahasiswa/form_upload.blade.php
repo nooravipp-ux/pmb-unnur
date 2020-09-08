@@ -18,9 +18,9 @@
                 </div>
               </div>
             </div>
-
+            
             <div class="clearfix"></div>
-
+            @if($status_pembayaran == false)
             <div class="row">
               <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
@@ -125,6 +125,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group row" id="d_atas_nama" >
+                      <label for="metode" class="col-md-4 col-form-label text-md-right">Atas Nama</label>
+                      <div class="col-md-6">
+                          <input type="text" name="atas_nama" id="atas_nama" class="form-control @error('atas_nama') is-invalid @enderror" placeholder="Atas Nama Pengirim">
+                          @error('atas_nama')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                      </div>
+                  </div>
+
                     <span class="section"></span>
 
                     <div class="form-group row mb-0" id="btn-submit" >
@@ -139,6 +151,13 @@
                 </div>
               </div>
             </div>
+            @else
+            <div class="row">
+              <div class="col-md-12 text-center">
+                  <span style="background-color: lightblue;"><h2>Sudah melakukan pembayaran registrasi</h2></span>
+              </div>
+          </div>
+            @endif
           </div>
         </div>
 @endsection
@@ -200,14 +219,17 @@ $( document ).ready(function() {
             });
 
             $('#d_file').hide();
+            $('#d_atas_nama').hide();
             $('#metode').change(function(e){
 
               var metode = $(this).val();
 
               if(metode == "transfer"){
                 $('#d_file').show();
+                $('#d_atas_nama').show();
               }else{
                 $('#d_file').hide();
+                $('#d_atas_nama').hide();
               }
               
             });

@@ -98,7 +98,7 @@ class PendaftaranOnlineController extends Controller
 
         $this->validate($request, [
             'nik' =>['required','numeric','unique:pmb_pendaftar'],
-            'telp' =>['required','numeric','max:20'],
+            'telp' =>['required','numeric'],
             'nama' =>['required','string','max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -158,13 +158,7 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function get_data_calonmhs(Request $request){
-        // $list_data = DB::select("SELECT * FROM pmb_pendaftar  INNER JOIN pmb ON pmb_pendaftar.`id_pmb` = pmb.`id_pmb`
-        // INNER JOIN pmb_biaya_registrasi ON pmb.`id_pmb` = pmb_biaya_registrasi.`id_pmb`
-        // INNER JOIN fakultas ON pmb_biaya_registrasi.`id_fakultas` = fakultas.`id_fakultas`
-        // INNER JOIN prodi ON fakultas.`id_fakultas` = prodi.`id_fakultas`
-        // INNER JOIN strata ON prodi.`id_prodi` = strata.`id_prodi`
-        // INNER JOIN kelas ON strata.`id_strata` = kelas.`id_strata`
-        // WHERE pmb_pendaftar.`id_pendaftar`='" + $request->id_pendaftar + "'");
+
 
         $list_calonmhs = DB::table('pmb_pendaftar')
         ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
