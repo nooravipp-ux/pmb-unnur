@@ -55,20 +55,31 @@ class CalonMhsController extends Controller
     }
 
     public function update_bukti_pembayaran(Request $request){
-        $this->validate($request, [
-            'file' => 'required|file|image|mimes:jpeg,png,jpg|max:1048'
-        ]);
         
-            $path = $request->file('file')->getRealPath();
-            $bukti = file_get_contents($path);
-            $base64 = base64_encode($bukti);
 
-            DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
-                ->update([
-                'bukti_pem' => $base64,
+            if($request->metode == "transfer"){
+                $this->validate($request, [
+                    'file' => 'required|file|image|mimes:jpeg,png,jpg|max:1048'
                 ]);
 
-                //return response('success');
+                $path = $request->file('file')->getRealPath();
+                $bukti = file_get_contents($path);
+                $base64 = base64_encode($bukti);
+                DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
+                ->update([
+                    'metode_pembayaran' => $request->metode,
+                    'bukti_pem' => $base64,
+                ]);
+            }else if($request->metode == "cash"){
+                DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
+                ->update([
+                    'metode_pembayaran' => $request->metode,
+                ]);
+            }else{
+                return redirect('/calon-mahasiswa/form-upload')->with('error','Data tidak lengkap'); 
+            }
+
+
             return redirect('/calon-mahasiswa/form-upload')->with('sukses','data berhasil di simpan');    
     }
 

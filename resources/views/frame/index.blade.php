@@ -147,6 +147,9 @@
         @if (Session::has('sukses'))
             toastr.success("{{Session::get('sukses')}}","sukses")
         @endif
+        @if (Session::has('error'))
+            toastr.error("{{Session::get('error')}}","Gagal !")
+        @endif
     </script>
 
     @yield('script')
