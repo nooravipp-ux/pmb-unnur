@@ -45,7 +45,7 @@ class CalonMhsController extends Controller
 
     public function update_bukti_pembayaran(Request $request){
         $this->validate($request, [
-            'file' => 'required|file|image|mimes:jpeg,png,jpg|max:3048'
+            'file' => 'required|file|image|mimes:jpeg,png,jpg|max:1048'
         ]);
         
             $path = $request->file('file')->getRealPath();
