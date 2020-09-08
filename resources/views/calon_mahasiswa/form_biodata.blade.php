@@ -63,7 +63,7 @@
                             <span class="step_no">4</span>
                             <span class="step_descr">
                                 Step 4<br />
-                                <small>Data Riwayat Pendidikan</small>
+                                <small>Selesai</small>
                             </span>
                           </a>
                         </li>
@@ -71,7 +71,7 @@
                       @if($status_pembayaran == false)
                       <div class="row">
                           <div class="col-md-12 text-center">
-                              <h2>LUNASI DULU PEMBAYARAN REGISTRASI UYYY KALO PNGEN NGSISI BIODATA MAH</h2>
+                              <span style="background-color: lightblue;"><h2>Silahkan lakukan pembayaran terlebih dahulu</h2></span>
                           </div>
                       </div>
                       @else

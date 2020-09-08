@@ -13,10 +13,10 @@ class CalonMhsController extends Controller
                         ->join('pmb','pmb.id_pmb','=','pmb_pendaftar.id_pmb')
                         ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
                         ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
-                        ->join('pmb_biaya_registrasi','pmb_biaya_registrasi.id_pmb','=','pmb_pendaftar.id_pmb')
+                        // ->join('pmb_biaya_registrasi','pmb_biaya_registrasi.id_pmb','=','pmb_pendaftar.id_pmb')
                         ->where('email', $email)
                         ->first();
-        dd($data_pendaftar);
+        // dd($data_pendaftar);
         return view('calon_mahasiswa.formulir', compact('data_pendaftar'));
     }
 

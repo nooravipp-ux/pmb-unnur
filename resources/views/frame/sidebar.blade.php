@@ -11,7 +11,6 @@
             <li class="@yield('title_pmb')"><a><i class="fa fa-gear"></i> Pengaturan PMB <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb')}}">Pendaftaran PMB</a></li>
-                <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb/biaya-registrasi')}}">Pengaturan Biaya Registrasi</a></li>
                 <li class="@yield('tchild_pmb')"><a href="#">Pengaturan ID PMB Otomatis</a></li>
                 <li class="@yield('tchild_pmb')"><a href="{{url('/pmb/nim')}}">Pengaturan NIM Otomatis</a></li>
                 <li class="@yield('tchild_pmb')"><a href="#">Setting Jadwal PMB</a></li>
@@ -31,11 +30,9 @@
         </li>
         @endcan
         @can('manage-keuangan')
-        <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Menu Keuangan <span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li class="@yield('tchild_admin')"><a href="#">Biaya Registrasi</a></li>
-          </ul>
-        </li>
+        <li class="@yield('title_admin')"><a ><i class="fa fa-money"></i> Activasi Pembayaran</a></li>
+        <li class="@yield('title_admin')"><a href="{{url('/pengaturan/pendaftaran-pmb/biaya-registrasi')}}"><i class="fa fa-gear"></i>Pengaturan Biaya Registrasi</a></li>
+        <li class="@yield('title_admin')"><a ><i class="fa fa-money"></i> Cetak Kwitansi</a></li>
         @endcan
         @can('manage-prodi')
         <li class="@yield('title_admin')"><a><i class="fa fa-dashboard"></i>Dashboard dan Lap PMB<span class="fa fa-chevron-down"></span></a>
@@ -113,9 +110,11 @@
         <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-biodata')}}"><i class="fa fa-book"></i> Biodata</a></li>
         <li class="@yield('title_admin')"><a><i class="fa fa-print"></i> Cetak Formulir</a></li>
         <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-upload')}}"><i class="fa fa-cloud-upload"></i> Pembayaran Registrasi</a></li>
+        <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-upload')}}"><i class="fa fa-cloud-upload"></i> Upload Document</a></li>
         <li class="@yield('title_admin')"><a><i class="fa fa-bullhorn"></i> Pengumuman</a></li>
         <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Bayar Registrasi Awal</a></li>
         @endcan
+       
       </ul>
     </div>
   </div>

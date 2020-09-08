@@ -68,7 +68,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Fakultas<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="fakultas"  value="{{$data_pendaftar->nama_fakultas}}"> /><br>
+                                    <input class="form-control" type="text" name="fakultas"  value="{{$data_pendaftar->nama_fakultas}}"><br>
                                     <input class="form-control" type="text" name="Kode Voucher" placeholder="Kode Voucher (Kosongkan jika tidak ada)" />
                                 </div>
                             </div>
@@ -76,13 +76,13 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Biaya Registrasi<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="biaya_registrasi"  required />
+                                    <input class="form-control" type="text" name="biaya_registrasi" value="" required />
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Jenjang Prodi<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="jenjang" value="{{$data_pendaftar->jenis_strata}}"  required />
+                                    <input class="form-control" type="text" name="jenjang" value=""  required />
                                 </div>
                             </div>
                             <div class="field item form-group">
