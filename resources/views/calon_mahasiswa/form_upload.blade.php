@@ -46,6 +46,10 @@
                     <form action="{{ route('upload.bukti') }}" method="POST" enctype="multipart/form-data">
                       @csrf
                       <span class="section"><h5>Data Calon Mahasiswa</h5></span>
+                      <div class="form-group row mb-0" id="d_nik" >
+                        <label for="" class="col-md-4 col-form-label text-md-right">NIK</label>
+                        <label for="nik" id="nik" class="col-md-4 col-form-label text-md-left"></label>
+                    </div>
                       <div class="form-group row mb-0" id="d_nama">
                         <input type="hidden" name="hidden_email" id="hidden_email" value="{{ Auth::user()->email }}">
                         <input type="hidden" name="id_pendaftar" id="id_pendaftar" value="">
@@ -57,6 +61,11 @@
                         <label for="" class="col-md-4 col-form-label text-md-right">Alamat Email</label>
                         <label for="email" id="email" class="col-md-4 col-form-label text-md-left"></label>
                     </div>
+
+                    <div class="form-group row mb-0" id="d_telp" >
+                      <label for="" class="col-md-4 col-form-label text-md-right">No Telephone</label>
+                      <label for="telp" id="telp" class="col-md-4 col-form-label text-md-left"></label>
+                  </div>
 
                     <div class="form-group row mb-0" id="d_tahun" >
                         <label for="" class="col-md-4 col-form-label text-md-right">Tahun Pendaftaran</label>
@@ -98,7 +107,8 @@
                         <div class="col-md-6">
                             <select name="metode" id="metode" class="form-control col-md-12">
                                 <option value=""selected disabled>Pilih Metode Pembayaran</option>
-                                <option value="">Cash</option>
+                                <option value="cash">Cash</option>
+                                <option value="transfer">Transfer</option>
                             </select>
                         </div>
                     </div>
@@ -106,12 +116,12 @@
                     <div class="form-group row" id="d_file" >
                         <label for="metode" class="col-md-4 col-form-label text-md-right">Upload Bukti Pembayaran</label>
                         <div class="col-md-6">
-                            <input type="file" name="file" id="file" class="form-control-file error">
-                            <ul>
-                              @foreach($errors->all() as $error)
-                                  <li>{{$error}}</li>
-                              @endforeach
-                            </ul>
+                            <input type="file" name="file" id="file" class="form-control-file @error('file') is-invalid @enderror">
+                            @error('file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
@@ -154,7 +164,10 @@ $( document ).ready(function() {
             data:{'email':email},
             success:function(data){
                 console.log(data.nama);
+                console.log(data.metode_pembayaran);
 
+                $("#telp").text(": " +data.no_telepon);
+                $("#nik").text(": " +data.nik);
                 $("#nama").text(": " +data.nama);
                 $("#email").text(": " +data.email);
                 $("#tahun").text(": " +data.tahun);
@@ -165,8 +178,40 @@ $( document ).ready(function() {
                 $("#kelas").text(": " +data.nama_kelas);
                 $("#biaya").text(": " +data.biaya_registrasi);
                 $("#id_pendaftar").val(data.id_pendaftar);
+
+                var metode = data.metode_pembayaran;
+                if(metode == "transfer"){
+                  $('#metode').empty();
+                  $('#metode').append('<option value=""disabled>Pilih Metode Pembayaran</option>');
+                  $('#metode').append('<option value="cash">Cash</option>');
+                  $('#metode').append('<option value="transfer"selected>Transfer</option>');
+                }else if(metode == "cash"){
+                  $('#metode').empty();
+                  $('#metode').append('<option value=""disabled>Pilih Metode Pembayaran</option>');
+                  $('#metode').append('<option value="cash"selected>Cash</option>');
+                  $('#metode').append('<option value="transfer">Transfer</option>');
+                }else{
+                  $('#metode').empty();
+                  $('#metode').append('<option value=""selected disabled>Pilih Metode Pembayaran</option>');
+                  $('#metode').append('<option value="cash">Cash</option>');
+                  $('#metode').append('<option value="transfer">Transfer</option>');
+                }
             }
             });
+
+            $('#d_file').hide();
+            $('#metode').change(function(e){
+
+              var metode = $(this).val();
+
+              if(metode == "transfer"){
+                $('#d_file').show();
+              }else{
+                $('#d_file').hide();
+              }
+              
+            });
+
 });
 </script>
 @endsection
