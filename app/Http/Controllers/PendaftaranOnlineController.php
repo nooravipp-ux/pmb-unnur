@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use App\User;
 use App\fakultas;
 use App\prodi;
 use App\strata;
 use App\kelas;
-use App\User;
 use DB;
 
 class PendaftaranOnlineController extends Controller
@@ -97,6 +98,10 @@ class PendaftaranOnlineController extends Controller
 
     public function simpan_calonmhs(Request $request){
 
+        $this->validate($request, [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
   
 
         DB::table('pmb_pendaftar')->insert([
