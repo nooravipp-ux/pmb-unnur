@@ -23,7 +23,44 @@ class CalonMhsController extends Controller
     public function form_biodata(Request $request){
         $email = Auth::user()->email;
         $status_pembayaran = $this->cek_status_pembayaran($email);
-        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran'));
+        $data_pendaftar = DB::table('pmb_pendaftar')
+                        ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
+                        ->where('.pmb_pendaftar.email', $email)->first();
+        // dd($data_pendaftar);
+        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar'));
+    }
+
+    public function simpan_form_biodata(Request $request){
+        // dd($request->all());
+        DB::table('biodata')->insert([
+            ['id_pendaftar' => $request->id_pendaftar,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'warganegara' => $request->warganegara,
+             'agama' => $request->agama, 
+             'alamat' => $request->alamat,
+             'kelurahan' => $request->kelurahan_desa,
+             'kode_pos' => $request->kode_pos,
+             'kecamatan' => $request->kecamatan, 
+             'kota_kab' => $request->kota,
+             'provinsi' => $request->provinsi,
+             'email' => $request->email,
+             'no_telephone' => $request->no_telepon,
+             'nik_ayah' => $request->nik_ayah,
+             'nama_ayah' => $request->nama_ayah,
+             'tgl_lahir_ayah' => $request->tgl_lahir_ayah,
+             'pendidikan_ayah' => $request->pendidikan_ayah, 
+             'pekerjaan_ayah' => $request->pekerjaan_ayah,
+             'penghasilan_ayah' => $request->penghasilan_ayah,
+             'nik_ibu' => $request->nik_ibu,
+             'nama_ibu' => $request->nama_ibu,
+             'tgl_lahir_ibu' => $request->tgl_lahir_ibu, 
+             'pendidikan_ibu' => $request->pendidikan_ibu,
+             'pekerjaan_ibu' => $request->pekerjaan_ibu,
+             'penghasilan_ibu' => $request->penghasilan_ibu
+             ]
+        ]);
+        return view('calon_mahasiswa.form_biodata');
     }
     public function form_upload(){
         $email = Auth::user()->email;
@@ -89,7 +126,7 @@ class CalonMhsController extends Controller
 
     public function cek_status_pembayaran($email){
         $user_mhs = DB::table('pmb_pendaftar')->select('status_pembayaran_registrasi')->where('email', $email)->first();
-        if($user_mhs->status_pembayaran_registrasi == "LUNAS"){
+        if($user_mhs->status_pembayaran_registrasi == "SUDAH DI KONFIRMASI"){
             return true;
         }else{
             return false;
