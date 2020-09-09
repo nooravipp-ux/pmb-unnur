@@ -5,6 +5,8 @@
 #myImg {
     border-radius: 5px;
     cursor: pointer;
+    width: 200px;
+    height: 300px;
     transition: 0.3s;
 }
 

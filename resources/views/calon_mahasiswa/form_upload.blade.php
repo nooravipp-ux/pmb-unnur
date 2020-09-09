@@ -25,7 +25,7 @@
               <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2></h2>
+                    <h2>Data Calon Mahasiswa</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -45,7 +45,7 @@
                    
                     <form action="{{ route('upload.bukti') }}" method="POST" enctype="multipart/form-data">
                       @csrf
-                      <span class="section"><h5>Data Calon Mahasiswa</h5></span>
+                      <br>
                       <div class="form-group row mb-0" id="d_nik" >
                         <label for="" class="col-md-4 col-form-label text-md-right">NIK</label>
                         <label for="nik" id="nik" class="col-md-4 col-form-label text-md-left"></label>

@@ -129,6 +129,68 @@ class CalonMhsController extends Controller
             return redirect('/calon-mahasiswa/form-upload')->with('sukses','data berhasil di simpan');    
     }
 
+    public function form_up_doc(){
+
+        return view('calon_mahasiswa.form_document');
+    }
+
+    public function update_form_document(Request $request){
+        $this->validate($request, [
+            'file_ktp' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
+            'file_foto' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
+            'file_kk' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
+            'file_akta' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
+            'file_ijazah' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
+            'file_ket_sehat' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
+        ]);
+
+                $path_ktp = $request->file('file_ktp')->getRealPath();
+                $ktp = file_get_contents($path_ktp);
+                $base64_ktp = base64_encode($ktp);
+
+                $path_foto = $request->file('file_foto')->getRealPath();
+                $foto = file_get_contents($path_foto);
+                $base64_foto = base64_encode($foto);
+
+                $path_kk = $request->file('file_kk')->getRealPath();
+                $kk = file_get_contents($path_kk);
+                $base64_kk = base64_encode($kk);
+
+                $path_akta = $request->file('file_akta')->getRealPath();
+                $akta = file_get_contents($path_akta);
+                $base64_akta = base64_encode($akta);
+
+                $path_ijazah = $request->file('file_ijazah')->getRealPath();
+                $ijazah = file_get_contents($path_ijazah);
+                $base64_ijazah = base64_encode($ijazah);
+
+                $path_ket_sehat = $request->file('file_ket_sehat')->getRealPath();
+                $ket_sehat = file_get_contents($path_ket_sehat);
+                $base64_ket_sehat = base64_encode($ket_sehat);
+
+                DB::table('biodata')->where('id_pendaftar',$request->id_pendaftar)
+                ->update([
+                    'file_ktp' => $base64_ktp,
+                    'file_foto' => $base64_foto,
+                    'file_kk' => $base64_kk,
+                    'file_akta' => $base64_akta,
+                    'file_ijazah' => $base64_ijazah,
+                    'file_ket_sehat' => $base64_ket_sehat,
+                ]);
+
+                return redirect('/calon-mahasiswa/form-document')->with('sukses','data berhasil di simpan');
+    }
+
+    public function get_document(Request $request){
+        $list_document = DB::table('users')
+        ->join('pmb_pendaftar' ,'users.email','=','pmb_pendaftar.email')
+        ->join('biodata','pmb_pendaftar.id_pendaftar','=','biodata.id_pendaftar')
+        ->where('users.email', $request->email)
+        ->first();
+        
+        return response()->json($list_document);
+    }
+
     public function cek_status_pembayaran($email){
         $user_mhs = DB::table('pmb_pendaftar')->select('status_pembayaran_registrasi')->where('email', $email)->first();
         if($user_mhs->status_pembayaran_registrasi == "SUDAH DI KONFIRMASI"){
