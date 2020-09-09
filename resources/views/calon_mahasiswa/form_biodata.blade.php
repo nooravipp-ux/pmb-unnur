@@ -182,12 +182,7 @@
                                   <input class="form-control col" type="text" name="provinsi" value="{{$data_pendaftar->provinsi}}">
                                 </div>
                               </div>
-                              <div class="form-group row">
-                                <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Email</label>
-                                <div class="col-md-6 col-sm-6 ">
-                                  <input class="form-control col" type="text" name="email" value="{{$data_pendaftar->email}}">
-                                </div>
-                              </div>
+                              
                               <div class="form-group row">
                                 <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">No Telepon</label>
                                 <div class="col-md-6 col-sm-6 ">
@@ -207,7 +202,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Ayah
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                  <input type="text" name="nama_ayah" class="form-control  " value="{{$data_pendaftar->no_telepon}}">
+                                  <input type="text" name="nama_ayah" class="form-control  " value="{{$data_pendaftar->nama_ayah}}">
                                 </div>
                               </div>
                               <div class="form-group row">

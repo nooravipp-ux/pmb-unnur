@@ -34,7 +34,6 @@ class CalonMhsController extends Controller
     public function update_form_biodata(Request $request){
         // dd($request->all());
         DB::table('biodata')->where('id_pendaftar', $request->id_pendaftar)->update([
-            ['id_pendaftar' => $request->id_pendaftar,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'warganegara' => $request->warganegara,
@@ -59,9 +58,14 @@ class CalonMhsController extends Controller
              'pendidikan_ibu' => $request->pendidikan_ibu,
              'pekerjaan_ibu' => $request->pekerjaan_ibu,
              'penghasilan_ibu' => $request->penghasilan_ibu
-             ]
+             
         ]);
-        return view('calon_mahasiswa.form_biodata');
+        $email = Auth::user()->email;
+        $status_pembayaran = $this->cek_status_pembayaran($email);
+        $data_pendaftar = DB::table('pmb_pendaftar')
+                        ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
+                        ->where('.pmb_pendaftar.email', $email)->first();
+        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar'));
     }
     public function form_upload(){
         $email = Auth::user()->email;
