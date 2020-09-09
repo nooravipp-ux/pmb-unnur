@@ -24,7 +24,7 @@ class PendaftaranOnlineController extends Controller
                         ->select('pmb_pendaftar.*','fakultas.*','prodi.*','strata.*','kelas.*')                 
                         ->get();
                         $data_pendaftar = $data_pendaftar->unique('nik');
-                        $data_pendaftar = array_slice($data_pendaftar->values()->all(), 0, 5, true);
+                        $data_pendaftar = $data_pendaftar->values()->all();
 
         //dd($data_pendaftar);
         return view('pendaftaran_online.aktivasi_calon_mhs', compact('data_pendaftar'));
