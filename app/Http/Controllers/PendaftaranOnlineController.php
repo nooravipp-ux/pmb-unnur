@@ -32,8 +32,13 @@ class PendaftaranOnlineController extends Controller
 
     public function show_data_pendaftar($id){
         $detail_pendaftar = DB::table('pmb_pendaftar')
-                            ->join('prodi', 'prodi.id_prodi','=','pmb_pendaftar.id_prodi')
-                            ->where('id_pendaftar', $id)
+                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                            ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
+                            ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+                            ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+                            ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+                            ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                            ->where('pmb_pendaftar.id_pendaftar', $id)
                             ->first();
         return view('pendaftaran_online.show_data_pendaftar', compact('detail_pendaftar'));
     }
