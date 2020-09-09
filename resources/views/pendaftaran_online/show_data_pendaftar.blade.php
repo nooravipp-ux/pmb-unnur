@@ -132,7 +132,7 @@
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="no_pendaftaran" class="form-control" value="{{$detail_pendaftar->nik}}" readonly>
+                            <input type="text" name="nik" class="form-control" value="{{$detail_pendaftar->nik}}" readonly>
                           </div>
                         </div>
                         <div class="item form-group">
