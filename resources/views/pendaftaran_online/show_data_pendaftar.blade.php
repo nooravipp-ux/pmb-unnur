@@ -129,35 +129,60 @@
                           </div>
                         </div>
                         <div class="item form-group">
+                          <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 ">
+                            <input type="text" name="no_pendaftaran" class="form-control" value="{{$detail_pendaftar->nik}}" readonly>
+                          </div>
+                        </div>
+                        <div class="item form-group">
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Nama Lengkap <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="nama_lengkap" class="form-control " value="{{$detail_pendaftar->nama}}">
+                            <input type="text" name="nama_lengkap" class="form-control " value="{{$detail_pendaftar->nama}}" readonly>
                           </div>
                         </div>
                         <div class="item form-group">
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Email <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input type="text" name="email" class="form-control" value="{{$detail_pendaftar->email}}">
+                            <input type="text" name="email" class="form-control" value="{{$detail_pendaftar->email}}" readonly>
                           </div>
                         </div>
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">No Telepon</label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input name="no_telepon" class="form-control" type="text" value="{{$detail_pendaftar->no_telepon}}">
+                            <input name="no_telepon" class="form-control" type="text" value="{{$detail_pendaftar->no_telepon}}" readonly>
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Fakultas</label>
+                          <div class="col-md-6 col-sm-6 ">
+                            <input name="jenjang" class="form-control" type="text" readonly value="{{$detail_pendaftar->nama_fakultas}}">
                           </div>
                         </div>
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenjang Pendidikan</label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input name="jenjang" class="form-control" type="text">
+                            <input name="jenjang" class="form-control" type="text" readonly value="{{$detail_pendaftar->jenis_strata}}">
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Kelas</label>
+                          <div class="col-md-6 col-sm-6 ">
+                            <input name="jenjang" class="form-control" type="text" readonly value="{{$detail_pendaftar->nama_kelas}}">
                           </div>
                         </div>
                         <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Biaya Pendaftaran</label>
                           <div class="col-md-6 col-sm-6 ">
-                            <input name="status_pembayaran" class="form-control" type="text">
+                            <input name="status_pembayaran" class="form-control" type="text" value="{{$detail_pendaftar->biaya_registrasi}}" readonly>
+                          </div>
+                        </div>
+                        <div class="item form-group">
+                          <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Metode Pembayaran</label>
+                          <div class="col-md-6 col-sm-6 ">
+                            <input name="metode_pembayaran" id="metode_pembayaran" class="form-control" type="text" value="{{$detail_pendaftar->metode_pembayaran}}" readonly>
                           </div>
                         </div>
                         <div class="item form-group">
@@ -166,7 +191,8 @@
                             <input name="status_pembayaran" class="form-control" type="text" value="{{$detail_pendaftar->status_pembayaran_registrasi}}" readonly>
                           </div>
                         </div>
-                        <div class="item form-group">
+
+                        <div class="item form-group" id="d_gambar">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Bukti Pembayaran</label>
                           <div class="col-md-6 col-sm-6 ">
                               <img class="img-fluid" id="myImg" alt="Bukti Pembayaran" src="data:image/png;base64, {{$detail_pendaftar->bukti_pem}}">
@@ -178,6 +204,7 @@
                             <div id="caption"></div>
                           </div>
                         </div>
+
                         <div class="ln_solid"></div>
                         <div class="item form-group">
                           <div class="col-md-6 col-sm-6 offset-md-3">
@@ -198,6 +225,17 @@
 @endsection
 
 @section('script')
+<script>
+  $( document ).ready(function() {
+    $('#d_gambar').hide();
+    var metode = $('#metode_pembayaran').val();
+    if(metode == "transfer"){
+      $('#d_gambar').show();
+    }else{
+      $('#d_gambar').hide();
+    }
+  });
+</script>
 <script>
     // Get the modal
     var modal = document.getElementById("myModal");
