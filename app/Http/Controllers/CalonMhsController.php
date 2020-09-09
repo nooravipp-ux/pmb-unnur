@@ -27,12 +27,13 @@ class CalonMhsController extends Controller
                         ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
                         ->where('.pmb_pendaftar.email', $email)->first();
         // dd($data_pendaftar);
+        
         return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar'));
     }
 
-    public function simpan_form_biodata(Request $request){
+    public function update_form_biodata(Request $request){
         // dd($request->all());
-        DB::table('biodata')->insert([
+        DB::table('biodata')->where('id_pendaftar', $request->id_pendaftar)->update([
             ['id_pendaftar' => $request->id_pendaftar,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
