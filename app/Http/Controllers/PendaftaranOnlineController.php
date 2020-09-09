@@ -16,12 +16,17 @@ use DB;
 class PendaftaranOnlineController extends Controller
 {
     public function aktivasi_calon_mhs(){
-        $id_prodi = Auth::user()->id_prodi;
         $data_pendaftar = DB::table('pmb_pendaftar')
-                        ->join('prodi', 'prodi.id_prodi','=','pmb_pendaftar.id_prodi')
-                        ->where('pmb_pendaftar.id_prodi', $id_prodi)
+                        ->join('fakultas', 'pmb_pendaftar.id_fakultas','=','fakultas.id_fakultas')
+                        ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+                        ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+                        ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                        ->select('pmb_pendaftar.*','fakultas.*','prodi.*','strata.*','kelas.*')                 
                         ->get();
-        // dd($data_pendaftar);
+                        $data_pendaftar = $data_pendaftar->unique('nik');
+                        $data_pendaftar = array_slice($data_pendaftar->values()->all(), 0, 5, true);
+
+        //dd($data_pendaftar);
         return view('pendaftaran_online.aktivasi_calon_mhs', compact('data_pendaftar'));
     }
 
@@ -35,7 +40,7 @@ class PendaftaranOnlineController extends Controller
 
     public function confirm_pembayaran_pmb(Request $request){
         // dd($request->all());
-        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status_pembayaran_registrasi' => 'LUNAS']);
+        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status_pembayaran_registrasi' => 'SUDAH DI KONFIRMASI']);
 
         //  \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
         //     $message->to('noor.avipp11@gmail.com', 'sandi');
@@ -61,11 +66,11 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function update_data_informasi_pendaftaran(){
-        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status' => 'LUNAS']);
+        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status' => 'SUDAH DI KONFIRMASI']);
     }
 
     public function get_prodi(Request $request){
-        $list_prodi = prodi::where('id_fakultas','IF-2012')->get();
+        $list_prodi = prodi::where('id_fakultas',$request->id_fakultas)->get();
 
         return response()->json($list_prodi);
     }

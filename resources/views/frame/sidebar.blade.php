@@ -30,7 +30,7 @@
         </li>
         @endcan
         @can('manage-keuangan')
-        <li class="@yield('title_admin')"><a ><i class="fa fa-money"></i> Activasi Pembayaran</a></li>
+        <li class="@yield('title_admin')"><a href="{{url('operator/pendaftaran/aktivasi-mhs')}}"><i class="fa fa-money"></i> Aktivasi Pembayaran</a></li>
         <li class="@yield('title_admin')"><a href="{{url('/pengaturan/pendaftaran-pmb/biaya-registrasi')}}"><i class="fa fa-gear"></i>Pengaturan Biaya Registrasi</a></li>
         <li class="@yield('title_admin')"><a ><i class="fa fa-money"></i> Cetak Kwitansi</a></li>
         @endcan
@@ -43,7 +43,7 @@
         </li>
         <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i>Pendaftaran Online<span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li class="@yield('tchild_admin')"><a href="{{url('operator/pendaftaran/aktivasi-mhs')}}">Aktivasi Calon Mahasiswa</a></li>
+
             <li class="@yield('tchild_admin')"><a href="{{url('operator/pendaftaran/info-registrasi')}}">Info Registrasi</a></li>
           </ul>
         </li>
