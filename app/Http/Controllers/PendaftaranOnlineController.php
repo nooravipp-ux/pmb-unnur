@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
+use App\User;
+use App\kelas;
+use App\prodi;
+use App\strata;
+use App\fakultas;
+use App\Mail\Pendaftaran;
+use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
-use App\User;
-use App\fakultas;
-use App\prodi;
-use App\strata;
-use App\kelas;
-use DB;
 
 class PendaftaranOnlineController extends Controller
 {
@@ -21,7 +22,7 @@ class PendaftaranOnlineController extends Controller
                         ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
                         ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
                         ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
-                        ->select('pmb_pendaftar.*','fakultas.*','prodi.*','strata.*','kelas.*')                 
+                        ->select('pmb_pendaftar.*','fakultas.*','prodi.*','strata.*','kelas.*')
                         ->get();
                         $data_pendaftar = $data_pendaftar->unique('nik');
                         $data_pendaftar = $data_pendaftar->values()->all();
@@ -116,12 +117,12 @@ class PendaftaranOnlineController extends Controller
 
         $tgl = date("Y-m-d");
         $list_pmb = DB::select("SELECT id_pmb FROM pmb WHERE start_date <= CAST('".$tgl."' AS DATE) AND finish_date >= CAST('".$tgl."' AS DATE)");
-    
+
         $sorted = Arr::get($list_pmb,0);
         $sortedd = Arr::flatten($sorted);
-        $id_pmb = Arr::get($sortedd,0);    
-           
-        //dd($sorteddd);  
+        $id_pmb = Arr::get($sortedd,0);
+
+        //dd($sorteddd);
 
         DB::table('pmb_pendaftar')->insert([
             ['id_pmb' => $id_pmb,
@@ -135,6 +136,7 @@ class PendaftaranOnlineController extends Controller
             'id_fakultas' => $request->fakultas]
         ]);
 
+<<<<<<< Updated upstream
         $list_pendaftar = DB::select("SELECT id_pendaftar from pmb_pendaftar where nik='".$request->nik."'");
     
         $convert = Arr::get($list_pendaftar,0);
@@ -145,6 +147,12 @@ class PendaftaranOnlineController extends Controller
             'id_pendaftar' => $id_pendaftar
         ]);
 
+=======
+        $cari_id = DB::table('users')
+        ->select('id')
+        ->where('email', $request->email )->first();
+        //dd($cari_id);
+>>>>>>> Stashed changes
 
         DB::table('users')->insert([
             'name' => $request->nama,
@@ -166,7 +174,19 @@ class PendaftaranOnlineController extends Controller
             'user_id' => $id_user
         ]);
 
-        return redirect('/login')->with('sukses','data berhasil di simpan');
+        /**
+         * mailable
+         */
+        $get = DB::table('users')->where('id',$id_user)->select('users.*')->first();
+        $fak = DB::table('fakultas')->where('id_fakultas',$request->fakultas)->select('nama_fakultas')->first();
+        $pro = DB::table('prodi')->where('id_prodi',$request->prodi)->select('prodi.*')->first();
+        // dd($pro);
+
+        \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro));
+        /**
+         * end mailable
+         */
+        return redirect('/home')->with('sukses','data berhasil di simpan');
     }
 
     public function daftar_awal_upload(Request $request){
