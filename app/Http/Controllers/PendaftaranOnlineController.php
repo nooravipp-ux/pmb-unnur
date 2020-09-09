@@ -135,10 +135,16 @@ class PendaftaranOnlineController extends Controller
             'id_fakultas' => $request->fakultas]
         ]);
 
-        $cari_id = DB::table('users')
-        ->select('id')
-        ->where('email', $request->email )->first();
-        //dd($cari_id);  
+        $list_pendaftar = DB::select("SELECT id_pendaftar from pmb_pendaftar where nik='".$request->nik."'");
+    
+        $convert = Arr::get($list_pendaftar,0);
+        $convertt = Arr::flatten($convert);
+        $id_pendaftar = Arr::get($convertt,0);
+        
+        DB::table('biodata')->insert([
+            'id_pendaftar' => $id_pendaftar
+        ]);
+
 
         DB::table('users')->insert([
             'name' => $request->nama,
