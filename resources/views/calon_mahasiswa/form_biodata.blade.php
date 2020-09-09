@@ -8,8 +8,7 @@
 
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <strong><h2>NO PENDFTARAN : {{$data_pendaftar->id_pendaftar}}</h2></strong>
+                  <div class="x_title"></h2></strong>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
