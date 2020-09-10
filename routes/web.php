@@ -83,6 +83,7 @@ Route::get('/daftar_awal/upload/get_data','CalonMhsController@get_data_calonmhs'
 
 //Calon Mhasiswa
 Route::get('/calon-mahasiswa/formulir','CalonMhsController@formulir');
+Route::post('/calon-mahasiswa/formulir/update-formulir','CalonMhsController@update_formulir')->name('update.formulir');
 Route::get('/calon-mahasiswa/form-biodata','CalonMhsController@form_biodata');
 Route::get('/calon-mahasiswa/form-document','CalonMhsController@form_up_doc');
 Route::post('/calon-mahasiswa/form-biodata/simpan-data-biodata','CalonMhsController@update_form_biodata');
