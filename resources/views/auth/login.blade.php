@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -20,94 +21,57 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('template/build/css/custom.min.css') }}" rel="stylesheet">
-  </head>
+    <link rel="stylesheet" href="{{asset('template/build/css/login.css')}}">
+</head>
 
-  <body class="login">
-    <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-              <h1>Login Form</h1>
-              <div>
-                <input id="email" name="email" type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <input id="password" name="password" type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <button type="submit" class="btn btn-light">
-                    {{ __('Log in') }}
-                </button>
-                @if (Route::has('password.request'))
-                    <a class="reset_pass" href="{{ route('password.request') }}">Lost your password?</a>
-                @endif
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1>PMB Sistem Informasi Akademik Unnur</h1>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form method="POST" action="{{ route('register') }}">
-                @csrf
-              <h1>Create Account</h1>
-              <div>
-                <input id="name" name="name" type="text" class="form-control" placeholder="Name" required="" />
-              </div>
-              <div>
-                <input id="email" name="email" type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <input id="password" name="password" type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Confirm Password" required="" />
-              </div>
-              <div>
-                <button type="submit" class="btn btn-light">
-                    {{ __('Register') }}
-                </button>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-      </div>
+<body>
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+        <div>PMB<span>Nurtanio</span></div>
     </div>
-  </body>
+    <br>
+    <div class="login">
+        <form action="{{route('login')}}" method="POST">
+            {{ csrf_field() }}
+            <input type="email" placeholder="input Email" name="email" required><br>
+            <input type="password" placeholder="password" name="password" required><br>
+            <input type="submit" class="button" value="{{ __('Log in') }}">
+        </form>
+    </div>
+    {{-- <div class="container" style="margin-top: 151px;">
+        <div class="row">
+            <div class="col">
+                <div class="login-wrap">
+                    <div class="login-html">
+                        <form action="{{route('login')}}" method="POST" style="margin-top: 100px;">
+    {{ csrf_field() }}
+    <input type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
+        In</label>
+    <input type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+    <div class="login-form">
+        <div class="sign-in-htm">
+            <div class="group">
+                <label for="email" class="label">Email</label>
+                <input class="input" id="email" name="email" type="email" class="form-control" placeholder="Email"
+                    required="" />
+            </div>
+            <div class="group">
+                <label for="pass" class="label">Password</label>
+                <input class="input" id="password" name="password" type="password" class="form-control"
+                    placeholder="Password" required="" />
+            </div>
+            <div class="group">
+                <input type="submit" class="button" value="{{ __('Log in') }}">
+            </div>
+        </div>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> --}}
+</body>
+
 </html>

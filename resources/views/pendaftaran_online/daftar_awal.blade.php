@@ -36,7 +36,7 @@
                             <label for="nik" class="col-md-4 col-form-label text-md-right">NIK</label>
                             <div class="col-md-6">
                                 <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="" required autocomplete="nik"  autofocus>
-                                
+
                                 @error('nik')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                             <label for="nama" class="col-md-4 col-form-label text-md-right">Nama Lengkap</label>
                             <div class="col-md-6">
                                 <input id="nama" type="text" class="form-control  @error('nama') is-invalid @enderror" name="nama" value="" required  autofocus>
-                            
+
                                 @error('nama')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@
                             <label for="telp" class="col-md-4 col-form-label text-md-right">No Handphone</label>
                             <div class="col-md-6">
                                 <input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value=""  required  autofocus>
-                            
+
                                 @error('telp')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -153,7 +153,7 @@
                         <div class="form-group row">
                             <label for="biaya_regis" class="col-md-4 col-form-label text-md-right">Biaya Registrasi</label>
                             <div class="col-md-6">
-                                <input id="biaya_regis" type="text" class="form-control" name="biaya_regis" value="" readonly>                              
+                                <input id="biaya_regis" type="text" class="form-control" name="biaya_regis" value="" readonly>
                             </div>
                         </div>
 
@@ -192,8 +192,8 @@ $( document ).ready(function() {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });  
-            
+            });
+
         $.ajax({
 				type : "GET",
 				url:'{{route('get.prodi')}}',
@@ -214,7 +214,7 @@ $( document ).ready(function() {
                         var opt = '<option value="'+ data[i].id_prodi +'">'+ data[i].nama_prodi +'</option>';
                         $('#prodi').append(opt);
                     }
-                                       
+
 				}
 			});
 
@@ -228,8 +228,8 @@ $( document ).ready(function() {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                });  
-                
+                });
+
             $.ajax({
                     type : "GET",
                     url:'{{route('get.strata')}}',
@@ -246,7 +246,7 @@ $( document ).ready(function() {
                             var opt = '<option value="'+ data[i].id_strata +'">'+ data[i].jenis_strata +'</option>';
                             $('#jenjangp').append(opt);
                         }
-                                        
+
                     }
                 });
             });
@@ -258,8 +258,8 @@ $( document ).ready(function() {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                });  
-                
+                });
+
             $.ajax({
                     type : "GET",
                     url:'{{route('get.kelas')}}',
@@ -274,7 +274,7 @@ $( document ).ready(function() {
                             var opt = '<option value="'+ data[i].id_kelas +'">'+ data[i].nama_kelas +'</option>';
                             $('#kelas').append(opt);
                         }
-                                        
+
                     }
                 });
         });
