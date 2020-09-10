@@ -206,8 +206,8 @@
                     return {
                         results:  $.map(data, function (jenjang_prodi) {
                             return {
-                                id: jenjang_prodi.id,
-                                text: jenjang_prodi.id_prodi+' - '+jenjang_prodi.strata           
+                                id: jenjang_prodi.id_strata,
+                                text: jenjang_prodi.id_prodi+' - '+jenjang_prodi.jenis_strata           
                             }
                         })
                     };

@@ -143,11 +143,11 @@ class FakultasController extends Controller
     public function get_data_jenjang_prodi(Request $request){
         if ($request->has('q')) {
             $cari = $request->q;
-            $data_jenjang_prodi = DB::table('pmb_jenjang_pendidikan')->select('id','id_prodi','strata')->where('id_prodi', 'LIKE', '%'.$cari.'%')->orWhere('strata', 'LIKE', '%'.$cari.'%')->get();
+            $data_jenjang_prodi = DB::table('strata')->select('id_strata','id_prodi','jenis_strata')->where('id_strata', 'LIKE', '%'.$cari.'%')->orWhere('jenis_strata', 'LIKE', '%'.$cari.'%')->get();
 
             return response()->json($data_jenjang_prodi);
         }
-        $data_jenjang_prodi= DB::table('pmb_jenjang_pendidikan')->select('id','id_prodi','strata')->get();
+        $data_jenjang_prodi= DB::table('strata')->select('id_strata','id_prodi','jenis_strata')->get();
 
         return response()->json($data_jenjang_prodi);
     }
