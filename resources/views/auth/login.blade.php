@@ -39,39 +39,6 @@
             <input type="submit" class="button" value="{{ __('Log in') }}">
         </form>
     </div>
-    {{-- <div class="container" style="margin-top: 151px;">
-        <div class="row">
-            <div class="col">
-                <div class="login-wrap">
-                    <div class="login-html">
-                        <form action="{{route('login')}}" method="POST" style="margin-top: 100px;">
-    {{ csrf_field() }}
-    <input type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
-        In</label>
-    <input type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
-    <div class="login-form">
-        <div class="sign-in-htm">
-            <div class="group">
-                <label for="email" class="label">Email</label>
-                <input class="input" id="email" name="email" type="email" class="form-control" placeholder="Email"
-                    required="" />
-            </div>
-            <div class="group">
-                <label for="pass" class="label">Password</label>
-                <input class="input" id="password" name="password" type="password" class="form-control"
-                    placeholder="Password" required="" />
-            </div>
-            <div class="group">
-                <input type="submit" class="button" value="{{ __('Log in') }}">
-            </div>
-        </div>
-    </div>
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div> --}}
 </body>
 
 </html>
