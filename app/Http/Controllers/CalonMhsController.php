@@ -10,14 +10,32 @@ class CalonMhsController extends Controller
     public function formulir(){
         $email = Auth::user()->email;
         $data_pendaftar = DB::table('pmb_pendaftar')
-                        ->join('pmb','pmb.id_pmb','=','pmb_pendaftar.id_pmb')
-                        ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
-                        ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
-                        // ->join('pmb_biaya_registrasi','pmb_biaya_registrasi.id_pmb','=','pmb_pendaftar.id_pmb')
-                        ->where('email', $email)
+                        ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                        ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
+                        ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+                        ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+                        ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+                        ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                        ->join('biodata','pmb_pendaftar.id_pendaftar','=','biodata.id_pendaftar')
+                        ->where('pmb_pendaftar.email', $email)
                         ->first();
         // dd($data_pendaftar);
         return view('calon_mahasiswa.formulir', compact('data_pendaftar'));
+    }
+
+    public function update_formulir(Request $request){
+        DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
+        ->update([
+            'no_telepon' => $request->no_telepon,
+            'jalur_masuk' => $request->jalur_masuk
+        ]);
+
+        DB::table('biodata')->where('id_pendaftar',$request->id_pendaftar)
+        ->update([
+            'no_telp_ortu' => $request->no_telp_ortu
+        ]);
+
+        return redirect('/calon-mahasiswa/formulir')->with('sukses','data berhasil di simpan');
     }
 
     public function form_biodata(Request $request){

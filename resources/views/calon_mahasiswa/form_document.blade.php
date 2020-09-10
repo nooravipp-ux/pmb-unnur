@@ -503,7 +503,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-$( document ).ready(function() {    
+$( document ).ready(function() {   
+    $("#d_gambar_ktp").hide();
+    $("#d_gambar_kk").hide();
+    $("#d_gambar_foto").hide();
+    $("#d_gambar_ijazah").hide();
+    $("#d_gambar_akta").hide();
+    $("#d_gambar_ket_sehat").hide(); 
             var email = $('#hidden_email').val();
             console.log(email);
             $.ajaxSetup({
@@ -519,12 +525,28 @@ $( document ).ready(function() {
             success:function(data){
                 console.log(data.id_pendaftar);
                 $("#id_pendaftar").val(data.id_pendaftar);
-                $("#myImgKTP").attr('src', 'data:image/png;base64,' + data.file_ktp);
-                $("#myImgKK").attr('src', 'data:image/png;base64,' + data.file_kk);
-                $("#myImgFOTO").attr('src', 'data:image/png;base64,' + data.file_foto);
-                $("#myImgIJAZAH").attr('src', 'data:image/png;base64,' + data.file_ijazah);
-                $("#myImgAKTA").attr('src', 'data:image/png;base64,' + data.file_akta);
-                $("#myImgKET_SEHAT").attr('src', 'data:image/png;base64,' + data.file_ket_sehat);
+                if(data.file_ktp == null && data.file_kk == null && data.file_foto == null && data.file_ijazah == null && data.file_akta == null && data.file_ket_sehat == null){
+                  $("#d_gambar_ktp").hide();
+                  $("#d_gambar_kk").hide();
+                  $("#d_gambar_foto").hide();
+                  $("#d_gambar_ijazah").hide();
+                  $("#d_gambar_akta").hide();
+                  $("#d_gambar_ket_sehat").hide();
+                }else{
+                  $("#myImgKTP").attr('src', 'data:image/png;base64,' + data.file_ktp);
+                  $("#myImgKK").attr('src', 'data:image/png;base64,' + data.file_kk);
+                  $("#myImgFOTO").attr('src', 'data:image/png;base64,' + data.file_foto);
+                  $("#myImgIJAZAH").attr('src', 'data:image/png;base64,' + data.file_ijazah);
+                  $("#myImgAKTA").attr('src', 'data:image/png;base64,' + data.file_akta);
+                  $("#myImgKET_SEHAT").attr('src', 'data:image/png;base64,' + data.file_ket_sehat);
+                  $("#d_gambar_ktp").show();
+                  $("#d_gambar_kk").show();
+                  $("#d_gambar_foto").show();
+                  $("#d_gambar_ijazah").show();
+                  $("#d_gambar_akta").show();
+                  $("#d_gambar_ket_sehat").show();
+                }
+
             }
             });
 
