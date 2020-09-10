@@ -125,12 +125,12 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                   <select name="agama" class="form-control ">
-                                      <option value="ISLAM"> - </option>
-                                      <option value="ISLAM">ISLAM</option>
-                                      <option value="KRISTEN">KRISTEN</option>
-                                      <option value="HINDU">HINDU</option>
-                                      <option value="BUDHA">BUDHA</option>
-                                      <option value="KONGUCHU">KONGUCHU</option>
+                                      <option value=""> - </option>
+                                      <option value="ISLAM" <?php if ($data_pendaftar->agama == 'ISLAM') echo "selected"; ?>>ISLAM</option>
+                                      <option value="KRISTEN" <?php if ($data_pendaftar->agama == 'KRISTEN') echo "selected"; ?>>KRISTEN</option>
+                                      <option value="HINDU" <?php if ($data_pendaftar->agama == 'HINDU') echo "selected"; ?>>HINDU</option>
+                                      <option value="BUDHA" <?php if ($data_pendaftar->agama == 'BUDHA') echo "selected"; ?>>BUDHA</option>
+                                      <option value="KONGUCHU" <?php if ($data_pendaftar->agama == 'KONGUCHU') echo "selected"; ?>>KONGUCHU</option>
                                       <option value="LAIN-LAIN">LAIN-LAIN</option>
                                   </select>
                                 </div>

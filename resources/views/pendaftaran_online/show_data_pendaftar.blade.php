@@ -128,7 +128,7 @@
                           </label>
                           <div class="col-md-6 col-sm-6 ">
                             <input type="text" name="no_pendaftaran" class="form-control" value="{{$detail_pendaftar->id_pendaftar}}" readonly>
-                          </div>
+                         </div>
                         </div>
                         <div class="item form-group">
                           <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK <span class="required">*</span>
@@ -161,6 +161,9 @@
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Fakultas</label>
                           <div class="col-md-6 col-sm-6 ">
                             <input name="jenjang" class="form-control" type="text" readonly value="{{$detail_pendaftar->nama_fakultas}}">
+                            <input name="id_prodi" class="form-control" type="hidden" value="{{$detail_pendaftar->id_prodi}}">
+                            <input name="tahun" class="form-control" type="hidden" value="{{$detail_pendaftar->tahun}}">
+                            <input name="gelombang" class="form-control" type="hidden" value="{{$detail_pendaftar->gelombang}}">
                           </div>
                         </div>
                         <div class="item form-group">

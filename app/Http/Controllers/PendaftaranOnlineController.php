@@ -41,12 +41,15 @@ class PendaftaranOnlineController extends Controller
                             ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
                             ->where('pmb_pendaftar.id_pendaftar', $id)
                             ->first();
+                            
         return view('pendaftaran_online.show_data_pendaftar', compact('detail_pendaftar'));
     }
 
     public function confirm_pembayaran_pmb(Request $request){
-        // dd($request->all());
+        // dd($request->tahun);
+        $id_test = $this->generate_id_test($request->tahun, $request->gelombang, $request->id_prodi);
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status_pembayaran_registrasi' => 'SUDAH DI KONFIRMASI']);
+        DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['id_test' => $id_test]);
 
         //  \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
         //     $message->to('noor.avipp11@gmail.com', 'sandi');
@@ -56,8 +59,32 @@ class PendaftaranOnlineController extends Controller
         return redirect('/operator/pendaftaran/aktivasi-mhs')->with('status', 'Data Customer Berhasil Di Update');
     }
 
+    public function generate_id_test($tahun, $gelombang, $prodi){
+        $no = 1;
+        $no_urut = "";
+        $tahun_masuk = substr($tahun, -2);
+    
+        $no_urut = DB::select("SELECT '$tahun_masuk' AS tahun_masuk, '$gelombang' AS gelombang, '$prodi' AS prodi,LPAD((RIGHT(COUNT(ID_TEST),4)+1),4,'0') AS no_urut_test FROM pmb_pendaftar WHERE LEFT(ID_TEST,2)= '$tahun_masuk' AND MID(ID_TEST, 4, 4) = '$prodi'");
+        foreach($no_urut as $id_test){
+            if($id_test->no_urut_test != NULL){
+                return $no_urut = $id_test->tahun_masuk.$id_test->gelombang.$id_test->prodi.$id_test->no_urut_test;
+            }else{
+                return $no_urut = $tahun.$gelombang.$prodi.sprintf("%04s", $no);
+            }
+        }
+    }
     public function info_registrasi(){
-        return view('pendaftaran_online.info_registrasi');
+        $prodi = Auth::user()->id_prodi;
+        $data_pendaftar = DB::table('pmb_pendaftar')
+                        ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                        ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
+                        ->where([
+                            ['pmb_pendaftar.id_prodi', $prodi],
+                            ['tahun', date("Y")]
+                        ])
+                        ->get();
+        
+        return view('pendaftaran_online.info_registrasi', compact('data_pendaftar'));
     }
 
     //pendaftaran awal
