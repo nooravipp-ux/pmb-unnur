@@ -32,6 +32,14 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function show_data_pendaftar($id){
+
+        $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where id_pendaftar='".$id."'");
+
+        $sorted = Arr::get($list_pmb_pendaftar,0);
+        $sortedd = Arr::flatten($sorted);
+        $id_fak = Arr::get($sortedd,0);
+
+
         $detail_pendaftar = DB::table('pmb_pendaftar')
                             ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
                             ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
@@ -39,8 +47,12 @@ class PendaftaranOnlineController extends Controller
                             ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
                             ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
                             ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
-                            ->where('pmb_pendaftar.id_pendaftar', $id)
+                            ->where([
+                                ['pmb_pendaftar.id_pendaftar', $id],
+                                ['fakultas.id_fakultas', $id_fak]
+                                ])
                             ->first();
+                            //dd($detail_pendaftar);
                             
         return view('pendaftaran_online.show_data_pendaftar', compact('detail_pendaftar'));
     }
