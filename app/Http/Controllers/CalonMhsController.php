@@ -169,7 +169,10 @@ class CalonMhsController extends Controller
 
     public function form_up_doc(){
 
-        return view('calon_mahasiswa.form_document');
+        $email = Auth::user()->email;
+        $status_pembayaran = $this->cek_status_pembayaran($email);
+
+        return view('calon_mahasiswa.form_document', compact('status_pembayaran'));
     }
 
     public function update_form_document(Request $request){

@@ -328,7 +328,13 @@
                       @csrf
                       <br>
                       
-
+                      @if($status_pembayaran == false)
+                      <div class="row">
+                          <div class="col-md-12 text-center">
+                              <span style="background-color: lightblue;"><h2>Silahkan lakukan pembayaran terlebih dahulu</h2></span>
+                          </div>
+                      </div>
+                      @else  
                     <div class="form-group row" id="d_file_ktp" >
                         <label for="metode" class="col-md-4 col-form-label text-md-right">Upload Foto KTP*</label>
                         <div class="col-md-6">
@@ -481,6 +487,7 @@
                         </div>
                       </div>
                     
+                    
 
                     <span class="section"></span>
 
@@ -492,6 +499,7 @@
                         </div>
                     </div>
                     </form>
+                    @endif  
                   </div>
                 </div>
               </div>

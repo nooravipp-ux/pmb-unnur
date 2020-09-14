@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>PMB-UNNUR</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+		
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+
+		<div class="wrapper">
+			<div class="inner">
+				<div class="image-holder">
+					<img src="images/nur.png" alt="">
+				</div>
+				<form action="">
+					<h3>Pendaftaran Calon Mahasiswa</h3>
+					<div class="form-row">
+						<input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="" required autocomplete="nik" placeholder="NIK"  autofocus>
+                                
+                                <!-- @error('nik')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+								@enderror -->
+								
+								<input id="nama" type="text" class="form-control  @error('nama') is-invalid @enderror" name="nama" value="" placeholder="Nama Lengkap" required  autofocus>
+                            
+                                <!-- @error('nama')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror -->
+					</div>
+					<div class="form-row">
+						<input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value="" placeholder="No Telephone"  required  autofocus>
+                            
+                                <!-- @error('telp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror -->
+								<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="" placeholder="Email" required autocomplete="email" autofocus>
+
+                                <!-- @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror -->
+					</div>
+					<div class="form-row">
+						<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="" placeholder="Password" required autocomplete="new-password">
+                                <!-- @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+								@enderror -->
+									<input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password " required autocomplete="new-password">
+										
+					</div>
+					<div class="form-row">
+						<div class="form-holder">
+							<select name="fakultas" id="fakultas" class="form-control">
+								<option value=""selected disabled>Pilih Fakultas</option>
+								<!-- @foreach($list_fakultas as $value)
+                                    <option value="{{$value->id_fakultas}}">{{$value->nama_fakultas}}</option>
+                                @endforeach -->
+							</select>
+							<i class="zmdi zmdi-chevron-down"></i>
+						</div>
+						<div class="form-holder">
+							<select name="prodi" id="prodi" class="form-control">
+								<option value=""selected disabled>Pilih Jurusan / Program Studi</option>
+							</select>
+							<i class="zmdi zmdi-chevron-down"></i>
+						</div>
+					</div>
+					
+					<div class="form-row">						
+						<div class="form-holder">
+							<select name="jenjangp" id="jenjangp" class="form-control">
+								<option value=""selected disabled>Pilih Jenjang Pendidikan</option>
+							</select>
+							<i class="zmdi zmdi-chevron-down"></i>
+						</div>
+						<div class="form-holder">
+							<select name="kelas" id="kelas" class="form-control">
+								<option value=""selected disabled>Pilih Kelas</option>
+							</select>
+							<i class="zmdi zmdi-chevron-down"></i>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<input id="tahun" type="text" class="form-control" name="tahun" value="" placeholder="Tahun Masuk" readonly>
+						<input id="biaya_regis" type="text" class="form-control" name="biaya_regis" value="" placeholder="Biaya Pendaftaran" readonly>
+					</div>
+					<button>Daftar
+						<i class="zmdi zmdi-long-arrow-right"></i>
+					</button>
+				</form>
+				
+			</div>
+		</div>
+
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/main.js"></script>
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
