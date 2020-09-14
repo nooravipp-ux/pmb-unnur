@@ -41,7 +41,7 @@ class PendaftaranOnlineController extends Controller
                             ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
                             ->where('pmb_pendaftar.id_pendaftar', $id)
                             ->first();
-                            
+
         return view('pendaftaran_online.show_data_pendaftar', compact('detail_pendaftar'));
     }
 
@@ -63,7 +63,7 @@ class PendaftaranOnlineController extends Controller
         $no = 1;
         $no_urut = "";
         $tahun_masuk = substr($tahun, -2);
-    
+
         $no_urut = DB::select("SELECT '$tahun_masuk' AS tahun_masuk, '$gelombang' AS gelombang, '$prodi' AS prodi,LPAD((RIGHT(COUNT(ID_TEST),4)+1),4,'0') AS no_urut_test FROM pmb_pendaftar WHERE LEFT(ID_TEST,2)= '$tahun_masuk' AND MID(ID_TEST, 4, 4) = '$prodi'");
         foreach($no_urut as $id_test){
             if($id_test->no_urut_test != NULL){
@@ -83,7 +83,7 @@ class PendaftaranOnlineController extends Controller
                             ['tahun', date("Y")]
                         ])
                         ->get();
-        
+
         return view('pendaftaran_online.info_registrasi', compact('data_pendaftar'));
     }
 

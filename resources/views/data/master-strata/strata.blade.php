@@ -3,15 +3,17 @@
 @section('tchild_data','current-page')
 @section('css')
 <link href="{{ asset('template/build/css/xedit.css') }}" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <style>
     #id_prodi{
-        border-radius: 25px;
+        border-radius: 7px;
+        width: 26em;
     }
     #jenis_strata{
-        border-radius: 25px;
+        border-radius: 7px;
     }
     #id_strata{
-        border-radius: 25px;
+        border-radius: 7px;
     }
 </style>
 @endsection
@@ -59,6 +61,7 @@
 @endsection
 @push('js')
     <script src="{{ asset('template/build/js/xedit.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.edit-strata').editable();
@@ -72,6 +75,26 @@
                     {value: 'S2', text: 'S2'}
                 ]
             });
+        });
+
+        $('#id_prodi').select2({
+    		placeholder: '- Pilih prodi -',
+            ajax: {
+                url:  '{{url('/fakultas/get-data-prodi')}}',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (prodi) {
+                            return {
+                                id: prodi.id_prodi,
+                                text: prodi.id_prodi+' - '+prodi.nama_prodi
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
         });
 
     </script>

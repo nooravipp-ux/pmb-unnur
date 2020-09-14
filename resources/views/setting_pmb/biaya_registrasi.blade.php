@@ -50,7 +50,7 @@
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenjang Prodi</label>
                           <div class="col-md-6 col-sm-6 ">
                                 <select name="jenjang_prodi" class="form-control" id="id_jenjang_prodi">
-                                    
+
                                 </select>
                           </div>
                         </div>
@@ -59,7 +59,7 @@
                           </label>
                           <div class="col-md-6 col-sm-6 ">
                                 <select name="kelas" class="form-control " id="id_kelas">
-                                    
+
                                 </select>
                           </div>
                         </div>
@@ -207,7 +207,7 @@
                         results:  $.map(data, function (jenjang_prodi) {
                             return {
                                 id: jenjang_prodi.id_strata,
-                                text: jenjang_prodi.id_prodi+' - '+jenjang_prodi.jenis_strata           
+                                text: jenjang_prodi.id_prodi+' - '+jenjang_prodi.jenis_strata
                             }
                         })
                     };
@@ -227,7 +227,7 @@
                         results:  $.map(data, function (kelas) {
                             return {
                                 id: kelas.id_kelas,
-                                text: kelas.id_kelas+' - '+kelas.nama_kelas            
+                                text: kelas.id_kelas+' - '+kelas.nama_kelas
                             }
                         })
                     };

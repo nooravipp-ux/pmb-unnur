@@ -12,14 +12,7 @@
                 <!-- fakultas Field -->
                 <div class="form-group col-sm-12">
                     <label for="">ID Strata</label><br>
-                    <select name="id_strata" id="id_strata" class="form-control {{ $errors->has('id_strata') ? 'is-invalid':'' }}" required>
-                        <option disabled selected>- Pilih ID Strata -</option>
-                        @foreach($strata as $strata)
-                            <option>
-                                {{ $strata }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <select name="id_strata" id="id_jenjang_prodi" class="form-control {{ $errors->has('id_strata') ? 'is-invalid':'' }}" required></select>
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="">ID Kelas</label><br>

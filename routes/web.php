@@ -33,6 +33,7 @@ Route::get('/fakultas/get-data-fakultas','FakultasController@get_data_fakultas')
 Route::get('/prodi/prodi','FakultasController@prodi')->name('prodi.prodi');
 Route::post('/prodi/store','FakultasController@prodi_store')->name('prodi.store');
 Route::get('/prodi/destroy/{prodi}','FakultasController@prodi_destroy')->name('prodi.destroy');
+Route::get('/fakultas/get-data-prodi','FakultasController@get_data_prodi');
 Route::get('/prodi/get_data_jenjang_prodi','FakultasController@get_data_jenjang_prodi');
 
 Route::get('/strata/strata','FakultasController@strata')->name('strata.strata');

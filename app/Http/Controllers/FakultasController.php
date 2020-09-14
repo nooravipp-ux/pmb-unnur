@@ -45,12 +45,12 @@ class FakultasController extends Controller
      * function prodi
      */
     public function prodi(){
-        $fakultas = fakultas::get()->pluck('id_fakultas','nama_fakultas');
         $prodi = prodi::all();
-        return view('data.master-prodi.prodi',compact('prodi','fakultas'));
+        return view('data.master-prodi.prodi',compact('prodi'));
     }
 
     public function prodi_store(Request $request){
+        dd($request->all());
         $this->validate($request,[
             'id_prodi' => 'required|unique:prodi',
             'id_fakultas' => 'required|string',
@@ -75,9 +75,8 @@ class FakultasController extends Controller
      * function kelas
      */
     public function kelas(){
-        $strata = strata::get()->pluck('id_strata');
         $kelas = kelas::all();
-        return view('data.master-kelas.kelas',compact('kelas','strata'));
+        return view('data.master-kelas.kelas',compact('kelas'));
     }
 
     public function kelas_store(Request $request){
@@ -105,9 +104,8 @@ class FakultasController extends Controller
      * function jenjang
      */
     public function strata(){
-        $prodi = prodi::get()->pluck('id_prodi');
         $strata = strata::all();
-        return view('data.master-strata.strata',compact('strata','prodi'));
+        return view('data.master-strata.strata',compact('strata'));
     }
     public function strata_store(Request $request){
         $this->validate($request,[
@@ -139,6 +137,17 @@ class FakultasController extends Controller
         $data_fakultas= DB::table('fakultas')->select('id_fakultas','nama_fakultas')->get();
 
         return response()->json($data_fakultas);
+    }
+    public function get_data_prodi(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data_prodi = DB::table('prodi')->select('id_prodi','nama_prodi')->where('id_prodi', 'LIKE', '%'.$cari.'%')->orWhere('nama_prodi', 'LIKE', '%'.$cari.'%')->get();
+
+            return response()->json($data_prodi);
+        }
+        $data_prodi= DB::table('prodi')->select('id_prodi','nama_prodi')->get();
+
+        return response()->json($data_prodi);
     }
     public function get_data_jenjang_prodi(Request $request){
         if ($request->has('q')) {

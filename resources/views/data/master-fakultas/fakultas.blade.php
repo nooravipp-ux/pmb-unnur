@@ -5,10 +5,10 @@
 <link href="{{ asset('template/build/css/xedit.css') }}" rel="stylesheet">
 <style>
     #id_fakultas{
-        border-radius: 25px;
+        border-radius: 7px;
     }
     #nama_fakultas{
-        border-radius: 25px;
+        border-radius: 7px;
     }
 </style>
 @endsection
