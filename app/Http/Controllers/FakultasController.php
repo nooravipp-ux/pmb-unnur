@@ -162,4 +162,16 @@ class FakultasController extends Controller
 
         return response()->json($data_kelas);
     }
+
+    public function get_data_prodi(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data_prodi = DB::table('prodi')->select('id_prodi','nama_prodi')->where('id_prodi', 'LIKE', '%'.$cari.'%')->orWhere('nama_prodi', 'LIKE', '%'.$cari.'%')->get();
+
+            return response()->json($data_prodi);
+        }
+        $data_prodi= DB::table('prodi')->select('id_prodi','nama_prodi')->get();
+
+        return response()->json($data_prodi);
+    }
 }

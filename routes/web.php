@@ -34,6 +34,7 @@ Route::get('/prodi/prodi','FakultasController@prodi')->name('prodi.prodi');
 Route::post('/prodi/store','FakultasController@prodi_store')->name('prodi.store');
 Route::get('/prodi/destroy/{prodi}','FakultasController@prodi_destroy')->name('prodi.destroy');
 Route::get('/prodi/get_data_jenjang_prodi','FakultasController@get_data_jenjang_prodi');
+Route::get('/prodi/get_data_prodi','FakultasController@get_data_prodi');
 
 Route::get('/strata/strata','FakultasController@strata')->name('strata.strata');
 Route::post('/strata/store','FakultasController@strata_store')->name('strata.store');
@@ -70,6 +71,13 @@ Route::get('operator/pendaftaran/aktivasi-mhs','PendaftaranOnlineController@akti
 Route::get('operator/pendaftaran/tampil-pendaftar/{id}','PendaftaranOnlineController@show_data_pendaftar')->name('pendaftar.tampil','{id}');
 Route::post('operator/pendaftaran/confirm-pembayaran-pmb','PendaftaranOnlineController@confirm_pembayaran_pmb');
 Route::get('operator/pendaftaran/info-registrasi','PendaftaranOnlineController@info_registrasi');
+//jadwal ujian PMB
+Route::get('/operator/jadwal-ujian','JadwalUjianController@jadwal_ujian');
+Route::post('/operator/jadwal-ujian/simpan','JadwalUjianController@simpan_jadwal_ujian');
+Route::get('/operator/entry-nilai-ujian','JadwalUjianController@entry_nilai_ujian');
+Route::get('/operator/entry-nilai-ujian/get-data-peserta-ujian','JadwalUjianController@get_data_peserta_ujian');
+Route::get('/operator/entry-nilai-ujian/load-data-peserta-ujian','JadwalUjianController@load_data_peserta_ujian');
+Route::post('/operator/entry-nilai-ujian/update-nilai-peserta-ujian','JadwalUjianController@update_nilai_ujian');
 
 Route::get('/daftar_awal','PendaftaranOnlineController@daftar_awal');
 Route::get('/get_prodi','PendaftaranOnlineController@get_prodi')->name('get.prodi');
@@ -91,3 +99,5 @@ Route::get('/calon-mahasiswa/form-upload','CalonMhsController@form_upload');
 Route::post('/calon-mahasiswa/form-upload/upload_bukti','CalonMhsController@update_bukti_pembayaran')->name('upload.bukti');
 Route::post('/calon-mahasiswa/form-document/upload_document','CalonMhsController@update_form_document')->name('upload.document');
 Route::get('/calon-mahasiswa/form-document/get_document','CalonMhsController@get_document')->name('get.document');
+
+
