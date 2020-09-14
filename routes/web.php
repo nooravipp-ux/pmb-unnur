@@ -72,6 +72,8 @@ Route::get('operator/pendaftaran/aktivasi-mhs','PendaftaranOnlineController@akti
 Route::get('operator/pendaftaran/tampil-pendaftar/{id}','PendaftaranOnlineController@show_data_pendaftar')->name('pendaftar.tampil','{id}');
 Route::post('operator/pendaftaran/confirm-pembayaran-pmb','PendaftaranOnlineController@confirm_pembayaran_pmb');
 Route::get('operator/pendaftaran/info-registrasi','PendaftaranOnlineController@info_registrasi');
+Route::get('/get-total-register','PendaftaranOnlineController@count_total_register');
+
 //jadwal ujian PMB
 Route::get('/operator/jadwal-ujian','JadwalUjianController@jadwal_ujian');
 Route::post('/operator/jadwal-ujian/simpan','JadwalUjianController@simpan_jadwal_ujian');

@@ -249,5 +249,15 @@ class PendaftaranOnlineController extends Controller
     }
     //pendaftaran awal end
 
+    public function count_total_register(){
+        $id_prodi = Auth::user()->id_prodi;
+        $total_pendaftar = DB::table('pmb_pendaftar')->where([['id_prodi', $id_prodi],['tahun', date('Y')]])->count();
+        return response()->json($total_pendaftar);
+    }
+
+    public function count_today_register(){
+        
+    }
+
 
 }
