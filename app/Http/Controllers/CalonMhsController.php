@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use DB;
 
 class CalonMhsController extends Controller
 {
     public function formulir(){
         $email = Auth::user()->email;
+
+        $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where email='".$email."'");
+
+        $sorted = Arr::get($list_pmb_pendaftar,0);
+        $sortedd = Arr::flatten($sorted);
+        $id_fak = Arr::get($sortedd,0);
+
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
                         ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
@@ -17,7 +25,10 @@ class CalonMhsController extends Controller
                         ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
                         ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
                         ->join('biodata','pmb_pendaftar.id_pendaftar','=','biodata.id_pendaftar')
-                        ->where('pmb_pendaftar.email', $email)
+                        ->where([
+                            ['pmb_pendaftar.email', $email],
+                            ['fakultas.id_fakultas', $id_fak]
+                            ])
                         ->first();
         // dd($data_pendaftar);
         return view('calon_mahasiswa.formulir', compact('data_pendaftar'));
@@ -100,6 +111,12 @@ class CalonMhsController extends Controller
         // INNER JOIN kelas ON strata.`id_strata` = kelas.`id_strata`
         // WHERE pmb_pendaftar.`id_pendaftar`='" + $request->id_pendaftar + "'");
 
+        $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where email='".$request->email."'");
+
+        $sorted = Arr::get($list_pmb_pendaftar,0);
+        $sortedd = Arr::flatten($sorted);
+        $id_fak = Arr::get($sortedd,0);
+
         $list_calonmhs = DB::table('pmb_pendaftar')
         ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
         ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
@@ -108,7 +125,10 @@ class CalonMhsController extends Controller
         ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
         ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
         ->join('users','pmb_pendaftar.email','=','users.email')
-        ->where('users.email', $request->email)
+        ->where([
+            ['pmb_pendaftar.email', $request->email],
+            ['fakultas.id_fakultas', $id_fak]
+            ])
         ->first();
 
         //$list_calonmhs = head($list_data);
@@ -149,7 +169,10 @@ class CalonMhsController extends Controller
 
     public function form_up_doc(){
 
-        return view('calon_mahasiswa.form_document');
+        $email = Auth::user()->email;
+        $status_pembayaran = $this->cek_status_pembayaran($email);
+
+        return view('calon_mahasiswa.form_document', compact('status_pembayaran'));
     }
 
     public function update_form_document(Request $request){
