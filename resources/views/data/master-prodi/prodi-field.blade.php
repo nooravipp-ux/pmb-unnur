@@ -12,14 +12,7 @@
                 <!-- fakultas Field -->
                 <div class="form-group col-sm-12">
                     <label for="">ID Fakultas</label><br>
-                    <select name="id_fakultas" id="id_fakultas" class="form-control {{ $errors->has('id_fakultas') ? 'is-invalid':'' }}" required>
-                        <option disabled selected>- Pilih ID Fakultas -</option>
-                        @foreach($fakultas as $item)
-                            <option>
-                                {{ $item}}
-                            </option>
-                        @endforeach
-                    </select>
+                    <select style name="id_fakultas" id="id_fakultas" class="form-control {{ $errors->has('id_fakultas') ? 'is-invalid':'' }}"></select>
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="">ID Prodi</label><br>
