@@ -20,7 +20,7 @@
             </div>
             
             <div class="clearfix"></div>
-            @if($status_pembayaran == false)
+            @if($status_pembayaran == false && $status_formulir == false)
             <div class="row">
               <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
@@ -151,6 +151,11 @@
                 </div>
               </div>
             </div>
+            @elseif($status_formulir == true)
+            <div class="row">
+              <div class="col-md-12 text-center">
+                  <span style="background-color: lightblue;"><h2>Data Formulir Belum Dilengkapi</h2></span>
+              </div>
             @else
             <div class="row">
               <div class="col-md-12 text-center">
