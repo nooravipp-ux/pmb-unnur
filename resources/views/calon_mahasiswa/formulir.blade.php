@@ -137,7 +137,27 @@
                                         @endif
                                     </select>
                                 </div>
-                            </div>             
+                            </div>
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3  label-align">Jenis Pendaftar<span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select name="jenis_pendaftar" id="jenis_pendaftar" class="form-control">
+                                        @if($data_pendaftar->jenis_pendaftar == "Reguler")
+                                            <option value=""disabled>Pilih Jenis Pendaftar</option>
+                                            <option value="Reguler" selected>Reguler</option>
+                                            <option value="Konversi">Konversi</option>
+                                        @elseif($data_pendaftar->jenis_pendaftar == "Konversi")
+                                            <option value=""disabled>Pilih Jenis Pendaftar</option>
+                                            <option value="Reguler">Reguler</option>
+                                            <option value="Konversi" selected>Konversi</option>
+                                        @else
+                                            <option value="" selected disabled>Pilih Jenis Pendaftar</option>
+                                            <option value="Reguler">Reguler</option>
+                                            <option value="Konversi">Konversi</option>
+                                        @endif    
+                                    </select>
+                                </div>
+                            </div>                 
                             <div class="ln_solid">
                                 <br>
                                 <div class="form-group">

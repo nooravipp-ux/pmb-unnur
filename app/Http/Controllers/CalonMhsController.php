@@ -38,7 +38,8 @@ class CalonMhsController extends Controller
         DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
         ->update([
             'no_telepon' => $request->no_telepon,
-            'jalur_masuk' => $request->jalur_masuk
+            'jalur_masuk' => $request->jalur_masuk,
+            'jenis_pendaftar' => $request->jenis_pendaftar,
         ]);
 
         DB::table('biodata')->where('id_pendaftar',$request->id_pendaftar)
@@ -99,7 +100,8 @@ class CalonMhsController extends Controller
     public function form_upload(){
         $email = Auth::user()->email;
         $status_pembayaran = $this->cek_status_pembayaran($email);
-        return view('calon_mahasiswa.form_upload', compact('status_pembayaran'));
+        $status_formulir = $this->cek_formulir($email);
+        return view('calon_mahasiswa.form_upload', ['status_pembayaran' => $status_pembayaran, 'status_formulir' => $status_formulir]);
     }
 
     public function get_data_calonmhs(Request $request){
@@ -230,6 +232,15 @@ class CalonMhsController extends Controller
         ->first();
         
         return response()->json($list_document);
+    }
+
+    public function cek_formulir($email){
+        $user_mhs = DB::table('pmb_pendaftar')->where('email', $email)->first();
+        if(empty($user_mhs->jalur_masuk) && empty($user_mhs->jenis_pendaftar)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function cek_status_pembayaran($email){

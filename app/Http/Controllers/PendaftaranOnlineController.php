@@ -162,68 +162,76 @@ class PendaftaranOnlineController extends Controller
         $sortedd = Arr::flatten($sorted);
         $id_pmb = Arr::get($sortedd,0);
 
-        //dd($sorteddd);
+        if(empty($id_pmb)){
 
-        DB::table('pmb_pendaftar')->insert([
-            ['id_pmb' => $id_pmb,
-            'nik' => $request->nik,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'tahun' => $request->tahun,
-            'id_jenjang_pend' => $request->jenjangp,
-            'no_telepon' => $request->telp,
-            'id_prodi' => $request->prodi,
-            'id_fakultas' => $request->fakultas]
-        ]);
+            return redirect('/login')->with('error','Registrasi Belum Dibuka');
 
-        $list_pendaftar = DB::select("SELECT id_pendaftar from pmb_pendaftar where nik='".$request->nik."'");
+        }else{
+            DB::table('pmb_pendaftar')->insert([
+                ['id_pmb' => $id_pmb,
+                'nik' => $request->nik,
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'tahun' => $request->tahun,
+                'id_jenjang_pend' => $request->jenjangp,
+                'no_telepon' => $request->telp,
+                'id_prodi' => $request->prodi,
+                'id_fakultas' => $request->fakultas,
+                'created_at' => $tgl]
+            ]);
+    
+            $list_pendaftar = DB::select("SELECT id_pendaftar from pmb_pendaftar where nik='".$request->nik."'");
+    
+            $convert = Arr::get($list_pendaftar,0);
+            $convertt = Arr::flatten($convert);
+            $id_pendaftar = Arr::get($convertt,0);
+    
+            DB::table('biodata')->insert([
+                'id_pendaftar' => $id_pendaftar
+            ]);
+    
+            $cari_id = DB::table('users')
+            ->select('id')
+            ->where('email', $request->email )->first();
+            //dd($cari_id);
+    
+            DB::table('users')->insert([
+                'name' => $request->nama,
+                'email' => $request->email,
+                'password' => Hash::make($request['password']),
+                'id_prodi' => $request->prodi,
+            ]);
+    
+            $cari_id = User::select('id')
+            ->where('email', $request->email )->get()->toArray();
+    
+            $id = Arr::get($cari_id,0);
+            $id_user = Arr::get($id,"id");
+    
+            //dd($tes);
+    
+            DB::table('role_user')->insert([
+                'role_id' => '4',
+                'user_id' => $id_user
+            ]);
+    
+            /**
+             * mailable
+             */
+            $get = DB::table('users')->where('id',$id_user)->select('users.*')->first();
+            $fak = DB::table('fakultas')->where('id_fakultas',$request->fakultas)->select('nama_fakultas')->first();
+            $pro = DB::table('prodi')->where('id_prodi',$request->prodi)->select('prodi.*')->first();
+            // dd($pro);
+    
+            \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro));
+            /**
+             * end mailable
+             */
+            return redirect('/login')->with('sukses','data berhasil di simpan');
+        }
 
-        $convert = Arr::get($list_pendaftar,0);
-        $convertt = Arr::flatten($convert);
-        $id_pendaftar = Arr::get($convertt,0);
 
-        DB::table('biodata')->insert([
-            'id_pendaftar' => $id_pendaftar
-        ]);
-
-        $cari_id = DB::table('users')
-        ->select('id')
-        ->where('email', $request->email )->first();
-        //dd($cari_id);
-
-        DB::table('users')->insert([
-            'name' => $request->nama,
-            'email' => $request->email,
-            'password' => Hash::make($request['password']),
-            'id_prodi' => $request->prodi,
-        ]);
-
-        $cari_id = User::select('id')
-        ->where('email', $request->email )->get()->toArray();
-
-        $id = Arr::get($cari_id,0);
-        $id_user = Arr::get($id,"id");
-
-        //dd($tes);
-
-        DB::table('role_user')->insert([
-            'role_id' => '4',
-            'user_id' => $id_user
-        ]);
-
-        /**
-         * mailable
-         */
-        $get = DB::table('users')->where('id',$id_user)->select('users.*')->first();
-        $fak = DB::table('fakultas')->where('id_fakultas',$request->fakultas)->select('nama_fakultas')->first();
-        $pro = DB::table('prodi')->where('id_prodi',$request->prodi)->select('prodi.*')->first();
-        // dd($pro);
-
-        \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro));
-        /**
-         * end mailable
-         */
-        return redirect('/home')->with('sukses','data berhasil di simpan');
+       
     }
 
     public function daftar_awal_upload(Request $request){
