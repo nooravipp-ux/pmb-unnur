@@ -95,7 +95,6 @@
                         class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li class="@yield('tchild_admin')"><a href="{{url('/operator/jadwal-ujian')}}">Jadwal Ujian</a></li>
-                    <li class="@yield('tchild_admin')"><a href="#">Pass in Grade & Kuota</a></li>
                 </ul>
             </li>
             @endcan

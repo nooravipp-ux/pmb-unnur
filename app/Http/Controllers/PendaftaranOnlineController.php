@@ -91,6 +91,7 @@ class PendaftaranOnlineController extends Controller
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
                         ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
+                        ->join('strata','strata.id_prodi','=','pmb_pendaftar.id_prodi')
                         ->where([
                             ['pmb_pendaftar.id_prodi', $prodi],
                             ['tahun', date("Y")]
@@ -256,8 +257,14 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function count_today_register(){
-        
+        $id_prodi = Auth::user()->id_prodi;
+        $total_pendaftar = DB::table('pmb_pendaftar')->where([['id_prodi', $id_prodi],['tahun', date('Y')],['created_at', date('Y-m-d')]])->count();
+        return response()->json($total_pendaftar);
     }
 
-
+    public function count_register_confirmed(){
+        $id_prodi = Auth::user()->id_prodi;
+        $total_pendaftar = DB::table('pmb_pendaftar')->where([['id_prodi', $id_prodi],['tahun', date('Y')],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI']])->count();
+        return response()->json($total_pendaftar);
+    }
 }

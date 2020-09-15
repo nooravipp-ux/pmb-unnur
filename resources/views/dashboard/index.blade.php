@@ -8,23 +8,26 @@
         <div class="tile_count">
             <div class="col-md-3 col-sm-5  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
-                <div class="count">2500</div>
+                <div class="count"><a id="total_register" href="">0</a></div>
                 <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-3 col-sm-5  tile_stats_count">
                 <span class="count_top"><i class="fa fa-clock-o"></i> Register Hari Ini</span>
-                <div class="count">123.50</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
-            </div>
-            <div class="col-md-3 col-sm-5  tile_stats_count">
-                <span class="count_top"><i class="fa fa-user"></i> Aktivasi</span>
-                <div class="count green">2,500</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                <div class="count"><a id="today_register" href="">0</a></div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last
+                    Week</span>
             </div>
             <div class="col-md-3 col-sm-5  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Bayar</span>
-                <div class="count">4,567</div>
-                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+                <div class="count"><a id="status_register" href="">0</a></div>
+                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last
+                    Week</span>
+            </div>
+            <div class="col-md-3 col-sm-5  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Aktivasi</span>
+                <div class="count green">0</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
+                    Week</span>
             </div>
         </div>
     </div>
@@ -712,4 +715,90 @@
     </div>
 </div>
 <!-- /page content -->
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function() {
+    loadData()
+    setInterval(function() {
+        loadData();
+    }, 10000);
+    $('table tbody td.status').map(function() {
+        if ($(this).text() == "SUDAH DI KONFIRMASI") {
+            $(this).css("background-color", "green");
+        } else {
+            $(this).css("background-color", "yellow");
+        }
+    });
+});
+
+function loadData() {
+    $.ajax({
+        url: '{{url('/count-total-register')}}',
+        type: 'get',
+        dataType: "json",
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+            if (data.error) {
+                alert(data.error)
+            } else {
+                console.log(data);
+                if (data.length == 0) {
+                    alert("Belum ada pendaftar !!!")
+                } else {
+                    $('#total_register').text(data);
+                }
+            }
+
+        }
+    });
+
+    $.ajax({
+        url: '{{url('/count-today-register')}}',
+        type: 'get',
+        dataType: "json",
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+            if (data.error) {
+                alert(data.error)
+            } else {
+                console.log(data);
+                if (data.length == 0) {
+                    alert("Belum ada pendaftar !!!")
+                } else {
+                    $('#today_register').text(data);
+                }
+            }
+
+        }
+    });
+
+    $.ajax({
+        url: '{{url('/count-register-confirmed')}}',
+        type: 'get',
+        dataType: "json",
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+            if (data.error) {
+                alert(data.error)
+            } else {
+                console.log(data);
+                if (data.length == 0) {
+                    alert("Belum ada pendaftar !!!")
+                } else {
+                    $('#status_register').text(data);
+                }
+            }
+
+        }
+    });
+}
+</script>
 @endsection
