@@ -167,7 +167,7 @@ function loadData() {
                             '<td>' + data[i].nama + '</td>' +
                             '<td>' + data[i].jalur_masuk + '</td>' +
                             '<td>' + data[i].nilai_ujian + '</td>' +
-                            '<td></td>' +
+                            '<td><button type="button" class="btn btn-primary btn-sm">Update Nilai</button></td>' +
                             '</tr>';
                         $('table tbody').append(tr);
                     }
