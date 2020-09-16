@@ -51,7 +51,7 @@ class JadwalUjianController extends Controller
 
     public function load_data_peserta_ujian(){
         $prodi = Auth::user()->id_prodi;
-        $data_peserta_ujian = DB::table('pmb_pendaftar')->where('id_prodi', $prodi)->get();
+        $data_peserta_ujian = DB::table('pmb_pendaftar')->where([['id_prodi', $prodi],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI']])->get();
         return response()->json($data_peserta_ujian);
     }
 }

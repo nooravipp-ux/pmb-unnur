@@ -8,7 +8,8 @@
         <div class="tile_count">
             <div class="col-md-3 col-sm-5  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
-                <div class="count"><a id="total_register" href="{{url('/operator/pendaftaran/info-registrasi')}}">0</a></div>
+                <div class="count"><a id="total_register" href="{{url('/operator/pendaftaran/info-registrasi')}}">0</a>
+                </div>
                 <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-3 col-sm-5  tile_stats_count">
@@ -50,58 +51,11 @@
                     </div>
                 </div>
 
-                <div class="col-md-9 col-sm-9 ">
-                    <div id="chart_plot_01" class="demo-placeholder"></div>
+                <div class="col-md-12 col-sm-9 ">
+                    <div id="cha" class="dem">
+                        <canvas id="myChart" style="width: 1300px; height: 500px;"></canvas>
+                    </div>
                 </div>
-                <div class="col-md-3 col-sm-3  bg-white">
-                    <div class="x_title">
-                        <h2>Top Campaign Performance</h2>
-                        <div class="clearfix"></div>
-                    </div>
-
-                    <div class="col-md-12 col-sm-12 ">
-                        <div>
-                            <p>Facebook Campaign</p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Twitter Campaign</p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12 ">
-                        <div>
-                            <p>Conventional Media</p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Bill boards</p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -745,7 +699,7 @@ function loadData() {
             if (data.error) {
                 alert(data.error)
             } else {
-                console.log(data);
+                // console.log(data);
                 if (data.length == 0) {
                     alert("Belum ada pendaftar !!!")
                 } else {
@@ -767,7 +721,7 @@ function loadData() {
             if (data.error) {
                 alert(data.error)
             } else {
-                console.log(data);
+                // console.log(data);
                 if (data.length == 0) {
                     alert("Belum ada pendaftar !!!")
                 } else {
@@ -789,7 +743,7 @@ function loadData() {
             if (data.error) {
                 alert(data.error)
             } else {
-                console.log(data);
+                // console.log(data);
                 if (data.length == 0) {
                     alert("Belum ada pendaftar !!!")
                 } else {
@@ -800,5 +754,74 @@ function loadData() {
         }
     });
 }
+</script>
+<script>
+// create initial empty chart
+var ctx_live = document.getElementById("myChart");
+var myChart = new Chart(ctx_live, {
+    type: 'bar',
+    data: {
+        labels: [],
+        datasets: [{
+            data: [],
+            borderWidth: 1,
+            borderColor: '#00c0ef',
+            label: 'liveCount',
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+        },
+        legend: {
+            display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 100,
+                    min: 10,
+                    stepSize: 5
+                }
+            }]
+        }
+    }
+});
+
+getData();
+
+// logic to get new data
+function getData() {
+    $.ajax({
+        url: '{{url('/get-data-pendaftar-per-tahun')}}',
+        success: function(data) {
+            // process your data to pull out what you plan to use to update the chart
+            // e.g. new label and a new data point
+
+            // add new label and data point to chart's underlying data structures
+            console.log(data.length);
+            for(var i = 0; i < data.length; i++){
+                myChart.data.labels.push(data[i].tahun);
+                myChart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(data[i].total_pendaftar);
+                });
+            }
+            // re-render the chart
+            myChart.update();
+        }
+    });
+};
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+// get new data every 3 seconds
+// setInterval(getData, 3000);
 </script>
 @endsection
