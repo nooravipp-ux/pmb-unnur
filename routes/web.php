@@ -66,7 +66,7 @@ Route::get('/pengaturan/pendaftaran-pmb/get-data-pmb','PmbController@get_data_pm
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //Pendaftaran Online

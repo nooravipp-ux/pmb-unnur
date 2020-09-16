@@ -759,7 +759,7 @@ function loadData() {
 // create initial empty chart
 var ctx_live = document.getElementById("myChart");
 var myChart = new Chart(ctx_live, {
-    type: 'bar',
+    type: 'line',
     data: {
         labels: [],
         datasets: [{
@@ -782,7 +782,7 @@ var myChart = new Chart(ctx_live, {
             yAxes: [{
                 ticks: {
                     max: 100,
-                    min: 10,
+                    min: 1,
                     stepSize: 5
                 }
             }]
