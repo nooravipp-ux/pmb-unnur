@@ -40,14 +40,14 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <h1><a href="index.html" class="scrollto">PMB | UNNUR</a></h1>
+        <h1><a href="{{ url('/') }}" class="scrollto">PMB | UNNUR</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt=""></a> -->
       </div>
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="index.html">Home</a></li>
+          <li class="menu-active"><a href="{{ url('/') }}">Home</a></li>
           <!-- <li><a href="#about">About Us</a></li> -->
           <li><a href="#features">Tentang</a></li>
           <li><a href="#pricing">Biaya Studi</a></li>
