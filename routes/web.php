@@ -72,6 +72,7 @@ Route::get('operator/pendaftaran/aktivasi-mhs','PendaftaranOnlineController@akti
 Route::get('operator/pendaftaran/tampil-pendaftar/{id}','PendaftaranOnlineController@show_data_pendaftar')->name('pendaftar.tampil','{id}');
 Route::post('operator/pendaftaran/confirm-pembayaran-pmb','PendaftaranOnlineController@confirm_pembayaran_pmb');
 Route::get('operator/pendaftaran/info-registrasi','PendaftaranOnlineController@info_registrasi');
+Route::get('operator/pendaftaran/detail-info-registrasi/{id}','PendaftaranOnlineController@detail_info_registrasi')->name('detail.register','{id}');
 Route::get('/count-total-register','PendaftaranOnlineController@count_total_register');
 Route::get('/count-today-register','PendaftaranOnlineController@count_today_register');
 Route::get('/count-register-confirmed','PendaftaranOnlineController@count_register_confirmed');

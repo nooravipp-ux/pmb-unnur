@@ -101,6 +101,16 @@ class PendaftaranOnlineController extends Controller
         return view('pendaftaran_online.info_registrasi', compact('data_pendaftar'));
     }
 
+    public function detail_info_registrasi($id){
+        $data_pendaftar = DB::table('pmb_pendaftar')
+                        ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
+                        ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                        ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
+                        ->join('strata','strata.id_prodi','=','pmb_pendaftar.id_prodi')
+                        ->where('pmb_pendaftar.id_pendaftar', $id)->first();
+        return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
+    }
+
     //pendaftaran awal
     public function daftar_awal(){
         //$list_fakultas = DB::select("SELECT * FROM pmb INNER JOIN pmb_biaya_registrasi ON pmb.id_pmb = pmb_biaya_registrasi.id_pmb

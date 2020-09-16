@@ -1,5 +1,8 @@
 @extends('frame.index')
-
+@section('style')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+@endsection
 @section('content')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -59,7 +62,7 @@
                                 <div class="card-box table-responsive">
                                     
 
-                                    <table id="datatable-responsive"
+                                    <table id="dataTable-registrasi"
                                         class="table table-striped jambo_table bulk_action" cellspacing="0"
                                         width="100%">
                                         <thead>
@@ -69,6 +72,7 @@
                                                 <th>NIK</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>E-mail</th>
+                                                <th>No Telp</th>
                                                 <th>Fakultas</th>
                                                 <th>Prodi</th>
                                                 <th>Jenjang Prodi</th>
@@ -85,12 +89,13 @@
                                                 <td>{{$data->nik}}</td>
                                                 <td>{{$data->nama}}</td>
                                                 <td>{{$data->email}}</td>
+                                                <td>{{$data->no_telepon}}</td>
                                                 <td>{{$data->nama_fakultas}}</td>
                                                 <td>{{$data->nama_prodi}}</td>
                                                 <td>{{$data->jenis_strata}}</td>
                                                 <td>{{$data->tahun}}</td>
                                                 <td class="status">{{$data->status_pembayaran_registrasi}}</td>
-                                                <td class="text-center"><a href="" data-toggle="tooltip"
+                                                <td class="text-center"><a href="{{route('detail.register', $data->id_pendaftar)}}" data-toggle="tooltip"
                                                         data-placement="top" title="View Detail"><i
                                                             class="fa fa-eye"></i></a></td>
                                             </tr>
@@ -110,8 +115,15 @@
 @endsection
 
 @section('script')
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
 <script>
 $(document).ready(function() {
+    $('#dataTable-registrasi').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel'
+        ]
+    });
     loadData()
     setInterval(function() {
         loadData();

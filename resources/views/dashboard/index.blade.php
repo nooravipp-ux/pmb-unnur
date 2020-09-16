@@ -8,7 +8,7 @@
         <div class="tile_count">
             <div class="col-md-3 col-sm-5  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
-                <div class="count"><a id="total_register" href="">0</a></div>
+                <div class="count"><a id="total_register" href="{{url('/operator/pendaftaran/info-registrasi')}}">0</a></div>
                 <span class="count_bottom"><i class="green">4% </i> From last Week</span>
             </div>
             <div class="col-md-3 col-sm-5  tile_stats_count">

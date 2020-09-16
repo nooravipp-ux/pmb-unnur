@@ -115,7 +115,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable-responsive" class="table table-striped table-bordered"
+                                    <table id="datatable-responsive" class="table table-striped jambo_table bulk_action"
                                         cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
