@@ -21,7 +21,7 @@ class SetEmailController extends Controller
 
     public function update($id){
         DB::table('set_email')->where('id',$id)->where('status',0)->update(['status'=>1]);
-        return redirect()->back()->with('sukses','data berhasil di rubah');
+        return redirect()->back();
     }
 
     public function destroy(set_email $set_email){
@@ -30,6 +30,7 @@ class SetEmailController extends Controller
     }
 
     public function sebar($id){
+        // \Mail::to('bbb@gmail.com')->send(new brodcast($get));
         $email_us = DB::table('users')->select('users.email')->get();
         $get = DB::table('set_email')->where('id',$id)->select('set_email.*')->first();
         foreach ($email_us as $email) {

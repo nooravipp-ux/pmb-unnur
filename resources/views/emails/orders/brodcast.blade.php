@@ -5,15 +5,15 @@
 @endcomponent
 @endslot
 
-<div>
-    <h2>{{strtoupper($get->header)}}</h2>
+<div style="color: rgb(44, 44, 44)">
+    <h1>{{strtoupper($get->header)}}</h1>
 </div>
 
 <div style="border:gray 2px solid;padding: inherit;border-radius: 15px">
     <div>
         <div>
-            <div>
-                {{$get->isi}}
+            <div style="color: rgb(44, 44, 44)">
+                <h4>{{$get->isi}}</h4>
             </div>
         </div>
     </div>
