@@ -39,7 +39,7 @@ Login
 
 @slot ('footer')
 @component('mail::footer')
-AKSFASKFLSANFLSAINFLSAINFLASNFLSANFLASNFLSANFLSANFALSIN
+Operator Admin Universitas Nurtanio Bandung
 @endcomponent
 @endslot
 @endcomponent

@@ -42,6 +42,7 @@
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Mail/SMTP</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pendaftaran</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Reset Password</a></li>
+                            <li class="@yield('tchild_admin')"><a href="{{route('set.email')}}">Konfigurasi Email</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pengumuman</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Keterangan</a></li>
                         </ul>
