@@ -22,6 +22,8 @@ Route::resource('/frame','FrameController')->middleware('auth');
 Route::resource('/users','UsersController')->middleware('can:manage-users');
 Route::resource('/dash','DashboardController')->middleware('auth');
 
+Route::get('/get-data-pendaftar-per-tahun','DashboardController@get_data_register_per_year');
+
 /**
  * Route data master
  */
