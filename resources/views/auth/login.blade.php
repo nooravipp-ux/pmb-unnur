@@ -19,20 +19,20 @@
     <div class="container">
 	<div class="row">
 		<div class="col-md-4 login-sec">
-		    <h2 class="text-center">PMB-UNNUR</h2>
+		    <h2 class="text-center"><a href="{{url('/')}}">PMB-UNNUR</a></h2>
 		    <form class="login-form" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="text-uppercase">Email</label>
                     <input id="email" name="email" type="email" class="form-control" placeholder="Email" required="">
-                    
+
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1" class="text-uppercase">Password</label>
                     <input id="password" name="password" type="password" class="form-control" placeholder="Password" required="">
                 </div>
-                
-                
+
+
                     <div class="form-check">
 
                     <button type="submit" class="btn btn-login float-right">Log in</button>
@@ -40,7 +40,7 @@
                     <small><a class="reset_pass" href="{{ route('password.request') }}">Lost your password?</a></small>
                     @endif
                 </div>
-  
+
             </form>
                 <div class="copy-text">Universitas Nurtanio Bandung</div>
                         </div>
@@ -50,8 +50,8 @@
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active">
                                 <img class="d-block img-fluid" src="{{ asset('logtem/img/unnur.jpg') }}" alt="First slide">
-                            </div>	   
-                            
+                            </div>
+
                         </div>
                     </div>
                 </div>

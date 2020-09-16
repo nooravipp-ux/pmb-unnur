@@ -64,11 +64,6 @@ class PendaftaranOnlineController extends Controller
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status_pembayaran_registrasi' => 'SUDAH DI KONFIRMASI']);
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['id_test' => $id_test]);
 
-        //  \Mail::raw('ANJAY,Kamu telah terpilih menjadi salah satu keluarga dari universitas nurtanio Bandung,Gera verivikasi meh bisa dapet NIM', function ($message){
-        //     $message->to('noor.avipp11@gmail.com', 'sandi');
-        //     $message->subject('Subject');
-        // });
-
         return redirect('/operator/pendaftaran/aktivasi-mhs')->with('status', 'Data Customer Berhasil Di Update');
     }
 
@@ -190,42 +185,42 @@ class PendaftaranOnlineController extends Controller
                 'id_fakultas' => $request->fakultas,
                 'created_at' => $tgl]
             ]);
-    
+
             $list_pendaftar = DB::select("SELECT id_pendaftar from pmb_pendaftar where nik='".$request->nik."'");
-    
+
             $convert = Arr::get($list_pendaftar,0);
             $convertt = Arr::flatten($convert);
             $id_pendaftar = Arr::get($convertt,0);
-    
+
             DB::table('biodata')->insert([
                 'id_pendaftar' => $id_pendaftar
             ]);
-    
+
             $cari_id = DB::table('users')
             ->select('id')
             ->where('email', $request->email )->first();
             //dd($cari_id);
-    
+
             DB::table('users')->insert([
                 'name' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request['password']),
                 'id_prodi' => $request->prodi,
             ]);
-    
+
             $cari_id = User::select('id')
             ->where('email', $request->email )->get()->toArray();
-    
+
             $id = Arr::get($cari_id,0);
             $id_user = Arr::get($id,"id");
-    
+
             //dd($tes);
-    
+
             DB::table('role_user')->insert([
                 'role_id' => '4',
                 'user_id' => $id_user
             ]);
-    
+
             /**
              * mailable
              */
@@ -233,7 +228,7 @@ class PendaftaranOnlineController extends Controller
             $fak = DB::table('fakultas')->where('id_fakultas',$request->fakultas)->select('nama_fakultas')->first();
             $pro = DB::table('prodi')->where('id_prodi',$request->prodi)->select('prodi.*')->first();
             // dd($pro);
-    
+
             \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro));
             /**
              * end mailable
@@ -242,7 +237,7 @@ class PendaftaranOnlineController extends Controller
         }
 
 
-       
+
     }
 
     public function daftar_awal_upload(Request $request){
