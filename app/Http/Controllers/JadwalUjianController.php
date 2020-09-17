@@ -32,8 +32,13 @@ class JadwalUjianController extends Controller
 
     public function update_nilai_ujian(Request $request){
         // dd($request->all());
-
-        DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test]);
+        $status_kelulusan = "";
+        if($request->nilai_test >= 70){
+            $status_kelulusan = "LULUS";
+        }else{
+            $status_kelulusan = "TIDAK LULUS";
+        }
+        DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test,'kelulusan' => $status_kelulusan]);
         return response()->json('data success updated');
     }
     public function get_data_peserta_ujian(Request $request){
@@ -53,5 +58,33 @@ class JadwalUjianController extends Controller
         $prodi = Auth::user()->id_prodi;
         $data_peserta_ujian = DB::table('pmb_pendaftar')->where([['id_prodi', $prodi],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI']])->get();
         return response()->json($data_peserta_ujian);
+    }
+
+    public function cek_passingrade(){
+        
+    }
+
+    public function count_peserta_ujian(){
+        $prodi = Auth::user()->id_prodi;
+        $total_peserta_ujian = DB::table('pmb_pendaftar')->where([['id_prodi', $prodi],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI']])
+                                ->whereNotNull('id_test')
+                                ->count();
+        return response()->json($total_peserta_ujian);
+    }
+
+    public function count_peserta_ujian_lulus(){
+        $prodi = Auth::user()->id_prodi;
+        $total_peserta_ujian_lulus = DB::table('pmb_pendaftar')->where([['id_prodi', $prodi],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI'],['kelulusan', 'LULUS']])
+                                ->whereNotNull('id_test')
+                                ->count();
+        return response()->json($total_peserta_ujian_lulus);
+    }
+
+    public function count_peserta_ujian_tidak_lulus(){
+        $prodi = Auth::user()->id_prodi;
+        $total_peserta_ujian_tidak_lulus = DB::table('pmb_pendaftar')->where([['id_prodi', $prodi],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI'],['kelulusan', 'TIDAK LULUS']])
+                                ->whereNotNull('id_test')
+                                ->count();
+        return response()->json($total_peserta_ujian_tidak_lulus);
     }
 }
