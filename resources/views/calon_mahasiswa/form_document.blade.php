@@ -541,12 +541,12 @@ $( document ).ready(function() {
                   $("#d_gambar_akta").hide();
                   $("#d_gambar_ket_sehat").hide();
                 }else{
-                  $("#myImgKTP").attr('src', 'data:image/png;base64,' + data.file_ktp);
-                  $("#myImgKK").attr('src', 'data:image/png;base64,' + data.file_kk);
-                  $("#myImgFOTO").attr('src', 'data:image/png;base64,' + data.file_foto);
-                  $("#myImgIJAZAH").attr('src', 'data:image/png;base64,' + data.file_ijazah);
-                  $("#myImgAKTA").attr('src', 'data:image/png;base64,' + data.file_akta);
-                  $("#myImgKET_SEHAT").attr('src', 'data:image/png;base64,' + data.file_ket_sehat);
+                  $("#myImgKTP").attr('src', data.file_ktp);
+                  $("#myImgKK").attr('src', data.file_kk);
+                  $("#myImgFOTO").attr('src', data.file_foto);
+                  $("#myImgIJAZAH").attr('src', data.file_ijazah);
+                  $("#myImgAKTA").attr('src', data.file_akta);
+                  $("#myImgKET_SEHAT").attr('src', data.file_ket_sehat);
                   $("#d_gambar_ktp").show();
                   $("#d_gambar_kk").show();
                   $("#d_gambar_foto").show();

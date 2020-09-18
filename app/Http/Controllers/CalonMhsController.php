@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use DB;
+use Image;
 
 class CalonMhsController extends Controller
 {
@@ -187,38 +188,44 @@ class CalonMhsController extends Controller
             'file_ket_sehat' => 'required|file|image|mimes:jpeg,png,jpg|max:1048',
         ]);
 
-                $path_ktp = $request->file('file_ktp')->getRealPath();
-                $ktp = file_get_contents($path_ktp);
-                $base64_ktp = base64_encode($ktp);
+                // $path_ktp = $request->file('file_ktp')->getRealPath();
+                // $ktp = file_get_contents($path_ktp);
+                // $base64_ktp = base64_encode($ktp);
 
-                $path_foto = $request->file('file_foto')->getRealPath();
-                $foto = file_get_contents($path_foto);
-                $base64_foto = base64_encode($foto);
+                // $path_foto = $request->file('file_foto')->getRealPath();
+                // $foto = file_get_contents($path_foto);
+                // $base64_foto = base64_encode($foto);
 
-                $path_kk = $request->file('file_kk')->getRealPath();
-                $kk = file_get_contents($path_kk);
-                $base64_kk = base64_encode($kk);
+                // $path_kk = $request->file('file_kk')->getRealPath();
+                // $kk = file_get_contents($path_kk);
+                // $base64_kk = base64_encode($kk);
 
-                $path_akta = $request->file('file_akta')->getRealPath();
-                $akta = file_get_contents($path_akta);
-                $base64_akta = base64_encode($akta);
+                // $path_akta = $request->file('file_akta')->getRealPath();
+                // $akta = file_get_contents($path_akta);
+                // $base64_akta = base64_encode($akta);
 
-                $path_ijazah = $request->file('file_ijazah')->getRealPath();
-                $ijazah = file_get_contents($path_ijazah);
-                $base64_ijazah = base64_encode($ijazah);
+                // $path_ijazah = $request->file('file_ijazah')->getRealPath();
+                // $ijazah = file_get_contents($path_ijazah);
+                // $base64_ijazah = base64_encode($ijazah);
 
-                $path_ket_sehat = $request->file('file_ket_sehat')->getRealPath();
-                $ket_sehat = file_get_contents($path_ket_sehat);
-                $base64_ket_sehat = base64_encode($ket_sehat);
+                // $path_ket_sehat = $request->file('file_ket_sehat')->getRealPath();
+                // $ket_sehat = file_get_contents($path_ket_sehat);
+                // $base64_ket_sehat = base64_encode($ket_sehat);
+                $ktp = Image::make($request->file_ktp)->fit(500)->encode('data-url');
+                $foto = Image::make($request->file_foto)->fit(500)->encode('data-url');
+                $kk = Image::make($request->file_kk)->fit(500)->encode('data-url');
+                $akta = Image::make($request->file_akta)->fit(500)->encode('data-url');
+                $ijazah = Image::make($request->file_ijazah)->fit(500)->encode('data-url');
+                $ket_sehat = Image::make($request->file_ket_sehat)->fit(500)->encode('data-url');
 
                 DB::table('biodata')->where('id_pendaftar',$request->id_pendaftar)
                 ->update([
-                    'file_ktp' => $base64_ktp,
-                    'file_foto' => $base64_foto,
-                    'file_kk' => $base64_kk,
-                    'file_akta' => $base64_akta,
-                    'file_ijazah' => $base64_ijazah,
-                    'file_ket_sehat' => $base64_ket_sehat,
+                    'file_ktp' => $ktp,
+                    'file_foto' => $foto,
+                    'file_kk' => $kk,
+                    'file_akta' => $akta,
+                    'file_ijazah' => $ijazah,
+                    'file_ket_sehat' => $ket_sehat,
                 ]);
 
                 return redirect('/calon-mahasiswa/form-document')->with('sukses','data berhasil di simpan');
