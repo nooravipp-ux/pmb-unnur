@@ -96,6 +96,9 @@ Route::get('/operator/entry-nilai-ujian','JadwalUjianController@entry_nilai_ujia
 Route::get('/operator/entry-nilai-ujian/get-data-peserta-ujian','JadwalUjianController@get_data_peserta_ujian');
 Route::get('/operator/entry-nilai-ujian/load-data-peserta-ujian','JadwalUjianController@load_data_peserta_ujian');
 Route::post('/operator/entry-nilai-ujian/update-nilai-peserta-ujian','JadwalUjianController@update_nilai_ujian');
+Route::get('/count-total-peserta-ujian','JadwalUjianController@count_peserta_ujian');
+Route::get('/count-total-peserta-lulus','JadwalUjianController@count_peserta_ujian_lulus');
+Route::get('/count-total-peserta-tidak-lulus','JadwalUjianController@count_peserta_ujian_tidak_lulus');
 
 Route::get('/operator/jadwal-ujian/notif/{id}','JadwalUjianController@notif')->name('notif.ujian');
 

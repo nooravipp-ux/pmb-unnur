@@ -1,5 +1,5 @@
 @extends('frame.index')
-@section('title','Portal PMB SistemInformasi Akademik')
+@section('title','Portal PMB Sistem Informasi Akademik')
 @section('content')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -53,7 +53,7 @@
 
                 <div class="col-md-12 col-sm-9 ">
                     <div id="cha" class="dem">
-                        <canvas id="myChart" style="width: 1300px; height: 500px;"></canvas>
+                        <canvas id="statistik_pmb" style="width: 1000px; height: 100px;"></canvas>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -757,9 +757,9 @@ function loadData() {
 </script>
 <script>
 // create initial empty chart
-var ctx_live = document.getElementById("myChart");
+var ctx_live = document.getElementById("statistik_pmb");
 var myChart = new Chart(ctx_live, {
-    type: 'line',
+    type: 'bar',
     data: {
         labels: [],
         datasets: [{
@@ -773,7 +773,7 @@ var myChart = new Chart(ctx_live, {
         responsive: true,
         title: {
             display: true,
-            text: "Chart.js - Dynamically Update Chart Via Ajax Requests",
+            text: "Statistik Pendaftaran Pertahun",
         },
         legend: {
             display: false
