@@ -15,7 +15,7 @@
             <div>
                 <h3>NAMA:&ensp;&ensp;{{strtoupper($get->name)}}</h3>
                 <h3>FAKULTAS:&ensp;&ensp;{{strtoupper($fak->nama_fakultas)}}</h3>
-                <h3>PRODI:&ensp;&ensp;{{strtoupper($pro->nama_prodi)}}</h3>
+                <h3>PRODI:&ensp;&ensp;{{strtoupper($pro->nama_prodi)}} - {{strtoupper($kel->nama_kelas)}}</h3>
             </div>
         </div>
     </div>

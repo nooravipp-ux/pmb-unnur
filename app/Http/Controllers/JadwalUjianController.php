@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use DB;
+use App\jadwal;
+use App\Mail\ujian;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class JadwalUjianController extends Controller
 {
     public function jadwal_ujian(){
@@ -22,6 +25,14 @@ class JadwalUjianController extends Controller
                             ->join('prodi','prodi.id_prodi','=','pmb_jadwal_ujian.id_prodi')
                             ->get();
         return view('ujian_pmb.jadwal_ujian_pmb', compact('data_jadwal_ujian'));
+    }
+
+    public function notif($id){
+        $test = jadwal::findOrFail($id);
+        $ing = DB::table('pmb')->join('pmb_pendaftar','pmb_pendaftar.id_pmb','=','pmb.id_pmb')->where('gelombang',$test->gelombang_ujian)->select('pmb_pendaftar.email')->get();
+        $ujian = DB::table('pmb_jadwal_ujian')->where('id_jadwal_ujian',$id)->select('pmb_jadwal_ujian.*')->first();
+        \Mail::to($ing)->send(new ujian($ujian));
+        return redirect()->back();
     }
 
     public function entry_nilai_ujian(){

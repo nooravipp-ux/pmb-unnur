@@ -14,7 +14,7 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = fakultas::findOrFail($id_fakultas);
+        $edit = fakultas::Find($id_fakultas);
         $edit->update([$name => $value]);
         // dd($edit);
     }
@@ -23,8 +23,8 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = fakultas::findOrFail($id_fakultas);
-        $edit->update([$name => $value]);
+        fakultas::Find($id_fakultas)->update([$name => $value]);
+        // $edit->update([$name => $value]);
         // dd($edit);
     }
 
@@ -32,7 +32,7 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = prodi::findOrFail($id_prodi);
+        $edit = prodi::Find($id_prodi);
         $edit->update([$name => $value]);
         // dd($_edit);
     }
@@ -41,7 +41,7 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = prodi::findOrFail($id_prodi);
+        $edit = prodi::Find($id_prodi);
         $edit->update([$name => $value]);
         // dd($edit);
     }
@@ -50,7 +50,7 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = strata::findOrFail($id_strata);
+        $edit = strata::Find($id_strata);
         $edit->update([$name => $value]);
         // dd($edit);
 
@@ -60,7 +60,7 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = strata::findOrFail($id_strata);
+        $edit = strata::Find($id_strata);
         $edit->update([$name => $value]);
         // dd($edit);
     }
@@ -69,7 +69,7 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = kelas::findOrFail($id_kelas);
+        $edit = kelas::Find($id_kelas);
         $edit->update([$name => $value]);
         // dd($edit);
     }
@@ -78,7 +78,7 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = kelas::findOrFail($id_kelas);
+        $edit = kelas::Find($id_kelas);
         $edit->update([$name => $value]);
         // dd($edit);
     }

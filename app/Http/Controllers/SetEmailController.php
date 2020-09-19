@@ -33,10 +33,7 @@ class SetEmailController extends Controller
         // \Mail::to('bbb@gmail.com')->send(new brodcast($get));
         $email_us = DB::table('users')->select('users.email')->get();
         $get = DB::table('set_email')->where('id',$id)->select('set_email.*')->first();
-        foreach ($email_us as $email) {
-            # code...
-            \Mail::to($email)->send(new brodcast($get));
-        }
+        \Mail::to($email_us)->send(new brodcast($get));
         DB::table('set_email')->where('id',$id)->where('status',1)->update(['status'=>0]);
        return redirect()->back();
     }

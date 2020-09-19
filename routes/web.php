@@ -76,6 +76,7 @@ Route::get('/pengaturan/pendaftaran-pmb/get-data-pmb','PmbController@get_data_pm
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //Pendaftaran Online
@@ -95,6 +96,8 @@ Route::get('/operator/entry-nilai-ujian','JadwalUjianController@entry_nilai_ujia
 Route::get('/operator/entry-nilai-ujian/get-data-peserta-ujian','JadwalUjianController@get_data_peserta_ujian');
 Route::get('/operator/entry-nilai-ujian/load-data-peserta-ujian','JadwalUjianController@load_data_peserta_ujian');
 Route::post('/operator/entry-nilai-ujian/update-nilai-peserta-ujian','JadwalUjianController@update_nilai_ujian');
+
+Route::get('/operator/jadwal-ujian/notif/{id}','JadwalUjianController@notif')->name('notif.ujian');
 
 Route::get('/daftar_awal','PendaftaranOnlineController@daftar_awal');
 Route::get('/get_prodi','PendaftaranOnlineController@get_prodi')->name('get.prodi');

@@ -7,6 +7,7 @@ use App\kelas;
 use App\prodi;
 use App\strata;
 use App\fakultas;
+use App\Mail\confirm;
 use App\Mail\Pendaftaran;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
@@ -59,11 +60,13 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function confirm_pembayaran_pmb(Request $request){
-        // dd($request->tahun);
+        // dd($request->all());
         $id_test = $this->generate_id_test($request->tahun, $request->gelombang, $request->id_prodi);
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status_pembayaran_registrasi' => 'SUDAH DI KONFIRMASI']);
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['id_test' => $id_test]);
 
+        $confirm = DB::table('pmb_pendaftar')->select('pmb_pendaftar.*')->get();
+        \Mail::to($request->email)->send(new confirm($confirm));
         return redirect('/operator/pendaftaran/aktivasi-mhs')->with('status', 'Data Customer Berhasil Di Update');
     }
 
@@ -153,6 +156,8 @@ class PendaftaranOnlineController extends Controller
 
     public function simpan_calonmhs(Request $request){
 
+        // dd($request->all());
+
         $this->validate($request, [
             'nik' =>['required','numeric','unique:pmb_pendaftar'],
             'telp' =>['required','numeric'],
@@ -225,11 +230,12 @@ class PendaftaranOnlineController extends Controller
              * mailable
              */
             $get = DB::table('users')->where('id',$id_user)->select('users.*')->first();
+            $kel = DB::table('kelas')->where('id_kelas',$request->kelas)->select('kelas.nama_kelas')->first();
             $fak = DB::table('fakultas')->where('id_fakultas',$request->fakultas)->select('nama_fakultas')->first();
             $pro = DB::table('prodi')->where('id_prodi',$request->prodi)->select('prodi.*')->first();
-            // dd($pro);
+            // dd($kel);
 
-            \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro));
+            \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro,$kel));
             /**
              * end mailable
              */

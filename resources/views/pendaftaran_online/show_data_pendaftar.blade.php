@@ -48,7 +48,7 @@
 }
 
 /* Add Animation */
-.modal-content, #caption {  
+.modal-content, #caption {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
@@ -56,12 +56,12 @@
 }
 
 @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
+    from {-webkit-transform:scale(0)}
     to {-webkit-transform:scale(1)}
 }
 
 @keyframes zoom {
-    from {transform:scale(0)} 
+    from {transform:scale(0)}
     to {transform:scale(1)}
 }
 
@@ -215,12 +215,14 @@
                           <div class="col-md-6 col-sm-6 offset-md-3">
                             <button class="btn btn-primary" type="button">Cancel</button>
                             <button class="btn btn-primary" type="reset">Reset</button>
-                            <button type="submit" class="btn btn-success">Confirm Pembayaran</button>
+                            @if ($detail_pendaftar->status_pembayaran_registrasi != 'SUDAH DI KONFIRMASI')
+                                <button type="submit" class="btn btn-success">Confirm Pembayaran</button>
+                            @endif
                           </div>
                         </div>
 
                       </form>
-								</div>
+					</div>
                 </div>
               </div>
             </div>
@@ -259,7 +261,7 @@
     var span = document.getElementsByClassName("close")[0];
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() { 
+    span.onclick = function() {
       modal.style.display = "none";
     }
 

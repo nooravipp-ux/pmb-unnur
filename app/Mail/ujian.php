@@ -7,26 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Pendaftaran extends Mailable
+class ujian extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $get;
-    public $fak;
-    public $pro;
-    public $kel;
+    public $ujian;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($get,$fak,$pro,$kel)
+    public function __construct($ujian)
     {
-        $this->get = $get;
-        $this->fak = $fak;
-        $this->pro = $pro;
-        $this->kel = $kel;
+        //
+        $this->ujian = $ujian;
     }
 
     /**
@@ -36,6 +30,6 @@ class Pendaftaran extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.orders.mhsbaru');
+        return $this->markdown('emails.orders.ujian');
     }
 }

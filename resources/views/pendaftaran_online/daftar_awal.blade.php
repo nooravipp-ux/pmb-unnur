@@ -7,7 +7,7 @@
 
 		<!-- MATERIAL DESIGN ICONIC FONT -->
 		<link rel="stylesheet" href="{{ asset('regtem/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css') }}">
-		
+
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="{{ asset('regtem/css/style.css') }}">
 	</head>
@@ -21,27 +21,27 @@
 				</div>
                 <form method="POST" action="{{ route('simpan.calonmhs') }}">
                     @csrf
-					<h3>Pendaftaran Calon Mahasiswa</h3>
+                    <h3>Pendaftaran Calon Mahasiswa</h3>
+                    <span>Data pribadi</span><hr>
 					<div class="form-row">
-						<input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="" required autocomplete="nik" placeholder="NIK"  autofocus>
-                                
-                                @error('nik')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-								@enderror
-								
-								<input id="nama" type="text" class="form-control  @error('nama') is-invalid @enderror" name="nama" value="" placeholder="Nama Lengkap" required  autofocus>
-                            
+                        <input id="nama" type="text" class="form-control  @error('nama') is-invalid @enderror" name="nama" value="" placeholder="Nama Lengkap" required  autofocus>
+
                                 @error('nama')
                                 <span class="invalid-feedback" role="alert">
                                     <small>{{ $message }}</small>
                                 </span>
                                 @enderror
+						<input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="" required autocomplete="nik" placeholder="NIK"  autofocus>
+
+                                @error('nik')
+                                <span class="invalid-feedback" role="alert">
+                                    <small>{{ $message }}</small>
+                                </span>
+								@enderror
 					</div>
 					<div class="form-row">
 						<input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value="" placeholder="No Telephone"  required  autofocus>
-                            
+
                                 @error('telp')
                                 <span class="invalid-feedback" role="alert">
                                     <small>{{ $message }}</small>
@@ -54,7 +54,8 @@
                                         <small>{{ $message }}</small>
                                     </span>
                                 @enderror
-					</div>
+                    </div>
+                    <span>Password</span><hr>
 					<div class="form-row">
 						<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="" placeholder="Password" required autocomplete="new-password">
                                 @error('password')
@@ -62,9 +63,13 @@
                                         <small>{{ $message }}</small>
                                     </span>
 								@enderror
-									<input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password " required autocomplete="new-password">
-										
-					</div>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password " required autocomplete="new-password">
+
+                                </div>
+                                        <div style="color: red">
+                                            <sup><sup>*<sup>harap perhatikan passwrod anda,karena password akan selalu di gunakan selama seleksi</sup></sup></sup>
+                                        </div>
+                    <span>Pilih Fakultas</span><hr>
 					<div class="form-row">
 						<div class="form-holder">
 							<select name="fakultas" id="fakultas" class="form-control">
@@ -82,8 +87,8 @@
 							<i class="zmdi zmdi-chevron-down"></i>
 						</div>
 					</div>
-					
-					<div class="form-row">						
+
+					<div class="form-row">
 						<div class="form-holder">
 							<select name="jenjangp" id="jenjangp" class="form-control">
 								<option value=""selected disabled>Pilih Jenjang Pendidikan</option>
@@ -106,7 +111,7 @@
 						<i class="zmdi zmdi-long-arrow-right"></i>
 					</button>
 				</form>
-				
+
 			</div>
 		</div>
 
@@ -119,7 +124,7 @@
                 // var d = new Date();
                 // var strDate = d.getFullYear().toString() + "-" + ( '0' + (d.getMonth()+1) ).slice(-2).toString() + "-" + ( '0' + d.getDate() ).slice(-2).toString();
                 $('#tahun').val(n);
-            
+
                 $('#fakultas').change(function(e){
                         console.log(e);
                         var id_fakultas = $(this).val();
@@ -128,8 +133,8 @@
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
-                        });  
-                        
+                        });
+
                     $.ajax({
                             type : "GET",
                             url:'{{route('get.prodi')}}',
@@ -138,10 +143,10 @@
                                 console.log(data);
                                 $('#prodi').empty();
                                     $('#prodi').append('<option value=""selected disabled>Pilih Jurusan / Program Studi</option>');
-            
+
                                     $('#jenjangp').empty();
                                     $('#jenjangp').append('<option value=""selected disabled>Pilih Jenjang Pendidikan</option>');
-            
+
                                     $('#kelas').empty();
                                     $('#kelas').append('<option value=""selected disabled>Pilih Kelas</option>');
                                     $('#biaya_regis').val("");
@@ -150,22 +155,22 @@
                                     var opt = '<option value="'+ data[i].id_prodi +'">'+ data[i].nama_prodi +'</option>';
                                     $('#prodi').append(opt);
                                 }
-                                                   
+
                             }
                         });
-            
+
                         });
-            
+
                         $('#prodi').on('change', function(e){
                         console.log(e);
                         var id_prodi = $(this).val();
-            
+
                             $.ajaxSetup({
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 }
-                            });  
-                            
+                            });
+
                         $.ajax({
                                 type : "GET",
                                 url:'{{route('get.strata')}}',
@@ -182,11 +187,11 @@
                                         var opt = '<option value="'+ data[i].id_strata +'">'+ data[i].jenis_strata +'</option>';
                                         $('#jenjangp').append(opt);
                                     }
-                                                    
+
                                 }
                             });
                         });
-            
+
                         $('#jenjangp').on('change', function(e){
                         console.log(e);
                         var id_strata = $(this).val();
@@ -194,8 +199,8 @@
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 }
-                            });  
-                            
+                            });
+
                         $.ajax({
                                 type : "GET",
                                 url:'{{route('get.kelas')}}',
@@ -210,16 +215,16 @@
                                         var opt = '<option value="'+ data[i].id_kelas +'">'+ data[i].nama_kelas +'</option>';
                                         $('#kelas').append(opt);
                                     }
-                                                    
+
                                 }
                             });
                     });
-            
+
                     $('#kelas').on('change', function(e){
                         var id_fakultas = $('#fakultas').val();
                         var id_strata = $('#jenjangp').val();
                         var id_kelas = $('#kelas').val();
-            
+
                         $.ajax({
                         method : "GET",
                         url:'{{route('get.biaya')}}',
@@ -227,18 +232,18 @@
                         success:function(data){
                             console.log("biaya");
                             console.log(data.biaya_registrasi);
-            
+
                             $('#biaya_regis').val(data.biaya_registrasi);
                             //$('#id_pmb').val(data.id_pmb);
-            
+
                         }
                         });
-            
+
                     });
-            
+
             });
-            
-            
+
+
             </script>
 	</body>
 </html>

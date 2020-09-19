@@ -127,7 +127,7 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="text-center">
                                             @foreach($data_jadwal_ujian as $data)
                                             <tr>
                                                 <td>{{$data->tanggal_ujian}}</td>
@@ -135,8 +135,8 @@
                                                 <td>{{$data->gelombang_ujian}}</td>
                                                 <td>{{$data->nama_prodi}}</td>
                                                 <td>{{$data->passingrade}}</td>
-                                                <td class="text-center">
-
+                                                <td>
+                                                    <a href="{{route('notif.ujian',$data->id_jadwal_ujian)}}" class="btn btn-sm btn-warning">Send notif</a>
                                                 </td>
                                             </tr>
                                             @endforeach

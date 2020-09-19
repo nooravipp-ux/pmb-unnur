@@ -39,7 +39,6 @@
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Portal PMB</a></li>
-                            <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Mail/SMTP</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pendaftaran</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Reset Password</a></li>
                             <li class="@yield('tchild_admin')"><a href="{{route('set.email')}}">Konfigurasi Email</a></li>

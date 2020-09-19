@@ -60,6 +60,5 @@
         $(document).ready(function () {
             $('.edit-fakultas').editable();
         });
-
     </script>
 @endpush

@@ -6,8 +6,8 @@
             @endphp
             <tr>
                 <th>NO</th>
-                <th>ID Kelas</th>
                 <th>ID Strata</th>
+                <th>ID Kelas</th>
                 <th>Nama Kelas</th>
                 <th></th>
             </tr>
