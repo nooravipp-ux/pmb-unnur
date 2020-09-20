@@ -47,14 +47,17 @@
                                         class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" name="tahun" class="form-control ">
+                                    <input type="text" name="tahun" class="form-control " value="{{date('Y')}}">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label for="middle-name"
                                     class="col-form-label col-md-3 col-sm-3 label-align">Gelombang</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" name="gelombang" class="form-control ">
+                                    
+                                    <select name="gelombang" class="form-control " id="gelombang_pmb">
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -115,7 +118,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable-responsive" class="table table-striped jambo_table bulk_action"
+                                    <table id="datatable-responsive" class="table table-striped jambo_table bulk_action text-center"
                                         cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -158,6 +161,31 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
+    setInterval(function() {
+    update_status_pmb();
+    console.log('status updated !!!');
+    }, 30000);
+
+    $('#gelombang_pmb').select2({
+        placeholder: '- Pilih Gelombang PMB -',
+        ajax: {
+            url: '{{url('/get-data-gelombnag-opened')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(pmb) {
+                        return {
+                            id: pmb.gelombang,
+                            text: pmb.id_pmb + ' - ' + pmb.gelombang
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
     $('#id_prodi').select2({
         placeholder: '- Pilih Podi -',
         ajax: {
@@ -178,6 +206,25 @@ $(document).ready(function() {
         }
     });
 });
+
+function update_status_pmb() {
+    $.ajax({
+        url: '{{url('/update-status-pmb')}}',
+        type: 'get',
+        dataType: "json",
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+            if (data.error) {
+                alert(data.error)
+            } else {
+                
+            }
+
+        }
+    });
+}
 
 </script>
 @endsection

@@ -89,13 +89,14 @@ class PendaftaranOnlineController extends Controller
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
                         ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
-                        ->join('strata','strata.id_prodi','=','pmb_pendaftar.id_prodi')
+                        ->join('strata','strata.id_strata','=','pmb_pendaftar.id_jenjang_pend')
                         ->where([
                             ['pmb_pendaftar.id_prodi', $prodi],
                             ['tahun', date("Y")]
                         ])
+                        ->distinct('pmb_pendaftar.id_pendaftar')
                         ->get();
-
+                        // dd($data_pendaftar);
         return view('pendaftaran_online.info_registrasi', compact('data_pendaftar'));
     }
 
@@ -106,6 +107,7 @@ class PendaftaranOnlineController extends Controller
                         ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
                         ->join('strata','strata.id_prodi','=','pmb_pendaftar.id_prodi')
                         ->where('pmb_pendaftar.id_pendaftar', $id)->first();
+                        
         return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
     }
 

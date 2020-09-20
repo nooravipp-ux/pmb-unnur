@@ -32,7 +32,8 @@ class PmbController extends Controller
     {
         $data_biaya_registrasi = DB::table('pmb_biaya_registrasi')
                                 ->join('fakultas','fakultas.id_fakultas','=','pmb_biaya_registrasi.id_fakultas')
-                                // ->join('kelas','kelas.id_kelas','=','pmb_biaya_registrasi.kelas')
+                                ->join('strata','pmb_biaya_registrasi.strata','=','strata.id_strata')
+                                ->join('kelas','pmb_biaya_registrasi.kelas','=','kelas.id_kelas')
                                 ->get();
         return view('setting_pmb.biaya_registrasi', compact('data_biaya_registrasi'));
     }
@@ -80,7 +81,7 @@ class PmbController extends Controller
         $id_pmb = $this->nomor_pmb($request->tahun_masuk, $request->gelombang);
         // dd($id_pmb);
         DB::table('pmb')->insert([
-            ['id_pmb' => $id_pmb,'tahun' => $request->tahun_masuk, 'gelombang' => $request->gelombang, 'start_date' => $request->start_date,'finish_date' => $request->finish_date]
+            ['id_pmb' => $id_pmb,'tahun' => $request->tahun_masuk, 'gelombang' => $request->gelombang, 'start_date' => $request->start_date,'finish_date' => $request->finish_date, 'status' => 'OPENED']
         ]);
 
         return redirect('pengaturan/pendaftaran-pmb')->with('sukses','data berhasil di simpan');
@@ -121,6 +122,18 @@ class PmbController extends Controller
             return response()->json($data_pmb);
         }
         $data_pmb = DB::table('pmb')->select('id_pmb')->get();
+
+        return response()->json($data_pmb);
+    }
+
+    public function get_data_gelombang_opened(Request $request){
+        $data_pmb = DB::table('pmb')->select('id_pmb', 'gelombang')->where([['tahun', date('Y')],['status','OPENED']])->get();
+
+        return response()->json($data_pmb);
+    }
+
+    public function update_status_pmb(Request $request){
+        $data_pmb = DB::table('pmb')->where('finish_date','<', date('Y-m-d'))->update(['status' => 'CLOSED']);
 
         return response()->json($data_pmb);
     }

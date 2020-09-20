@@ -34,7 +34,7 @@
                                   
                                 </p>
 					
-                                <table id="datatable-responsive" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <table id="datatable-responsive" class="table table-striped jambo_table bulk_action text-center" cellspacing="0" width="100%">
                                   <thead>
                                     <tr>
                                       <th>NIK</th>

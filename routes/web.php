@@ -64,6 +64,8 @@ Route::get('setting/email/destroy/{set_email}','SetEmailController@destroy')->na
 Route::get('/pmb/nim','PmbController@nim_index')->name('nim.pmb');
 Route::get('/pmb/nim/destroy/{nim}','PmbController@nim_destroy')->name('nim.destroy');
 Route::post('/pmb/jadwal/store','PmbController@nim_store')->name('nim.pmb.store');
+Route::get('/update-status-pmb','PmbController@update_status_pmb');
+Route::get('/get-data-gelombnag-opened','PmbController@get_data_gelombang_opened');
 // end nim
 Route::get('/pengaturan/pendaftaran-pmb','PmbController@pendaftaran_pmb');
 Route::post('/pengaturan/pendaftaran-pmb/simpan-data-pmb','PmbController@simpan_data_pmb');
@@ -101,6 +103,7 @@ Route::get('/count-total-peserta-lulus','JadwalUjianController@count_peserta_uji
 Route::get('/count-total-peserta-tidak-lulus','JadwalUjianController@count_peserta_ujian_tidak_lulus');
 
 Route::get('/operator/jadwal-ujian/notif/{id}','JadwalUjianController@notif')->name('notif.ujian');
+Route::get('/operator/laporan-kelulusan-ujian','JadwalUjianController@laporan_kelulusan');
 
 Route::get('/daftar_awal','PendaftaranOnlineController@daftar_awal');
 Route::get('/get_prodi','PendaftaranOnlineController@get_prodi')->name('get.prodi');

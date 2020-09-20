@@ -1,7 +1,6 @@
 @extends('frame.index')
 @section('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
 <!-- page content -->
@@ -11,19 +10,19 @@
         <div class="row" style="display: inline-block;">
             <div class="tile_count">
                 <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
-                    <div class="count"><a id="total_register" href="">0</a></div>
+                    <span class="count_top"><i class="fa fa-user"></i> Total Peserta Ujian</span>
+                    <div class="count"><a id="total_peserta_ujian" href="">0</a></div>
                     <span class="count_bottom"><i class="green">4% </i> From last Week</span>
                 </div>
                 <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-clock-o"></i> Register Hari Ini</span>
-                    <div class="count"><a id="today_register" href="">0</a></div>
+                    <span class="count_top"><i class="fa fa-clock-o"></i> Peserta Lulus</span>
+                    <div class="count"><a id="peserta_lulus" href="">0</a></div>
                     <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last
                         Week</span>
                 </div>
                 <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Bayar</span>
-                    <div class="count"><a id="status_register" href="">0</a></div>
+                    <span class="count_top"><i class="fa fa-user"></i> Peserta Tidak Lulus</span>
+                    <div class="count"><a id="peserta_tidak_lulus" href="">0</a></div>
                     <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last
                         Week</span>
                 </div>
@@ -39,7 +38,7 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Info Registrasi</h2>
+                        <h2>Laporan Kelulusan Ujian Online</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -60,48 +59,21 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    
-
-                                    <table id="dataTable-registrasi"
-                                        class="table table-striped jambo_table bulk_action text-center" cellspacing="0"
-                                        width="100%">
+                                    <table id="datatable-peserta-ujian" class="table table-striped jambo_table bulk_action"
+                                        cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>No Pendaftraan</th>
                                                 <th>ID PMB</th>
-                                                <th>NIK</th>
-                                                <th>Nama Lengkap</th>
-                                                <th>E-mail</th>
-                                                <th>No Telp</th>
-                                                <th>Fakultas</th>
-                                                <th>Prodi</th>
-                                                <th>Strata</th>
-                                                <th>Tahun </th>
-                                                
-                                                <th>Status Registrasi</th>
+                                                <th>ID Test</th>
+                                                <th>Nama</th>
+                                                <th>Jalur Masuk</th>
+                                                <th>Nilai Ujian</th>
+                                                <th>Status Kelulusan</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($data_pendaftar as $data)
-                                            <tr>
-                                                <td>{{$data->id_pendaftar}}</td>
-                                                <td>{{$data->id_pmb}}</td>
-                                                <td>{{$data->nik}}</td>
-                                                <td>{{$data->nama}}</td>
-                                                <td>{{$data->email}}</td>
-                                                <td>{{$data->no_telepon}}</td>
-                                                <td>{{$data->nama_fakultas}}</td>
-                                                <td>{{$data->nama_prodi}}</td>
-                                                <td>{{$data->jenis_strata}}</td>
-                                                
-                                                <td>{{$data->tahun}}</td>
-                                                <td class="status">{{$data->status_pembayaran_registrasi}}</td>
-                                                <td class="text-center"><a href="{{route('detail.register', $data->id_pendaftar)}}" data-toggle="tooltip"
-                                                        data-placement="top" title="View Detail"><i
-                                                            class="fa fa-eye"></i></a></td>
-                                            </tr>
-                                            @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -117,45 +89,120 @@
 @endsection
 
 @section('script')
-<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
+$.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $(document).ready(function() {
-    $('#dataTable-registrasi').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'csv', 'excel'
-        ]
-    });
-    loadData()
+    loadTotalPeserta();
     setInterval(function() {
-        loadData();
-    }, 10000); 
-    $('table tbody td.status').map(function() {
-        if($(this).text() == "SUDAH DI KONFIRMASI"){
-            $(this).css("background-color", "green");
-        }else{
-            $(this).css("background-color", "yellow");
-        }       
+        loadTotalPeserta();
+    }, 10000);
+    loadData();
+    $('#update').on('click', function() {
+        var id_test = $('#id_test').val();
+        var nilai_test = $('#nilai_test').val();
+        
+        $.ajax({
+            url: '{{url('/operator/entry-nilai-ujian/update-nilai-peserta-ujian')}}',
+            type: 'post',
+            data: {id_test:id_test, 
+                nilai_test:nilai_test
+                },
+            dataType: "json",
+            beforeSend: function() {
+                
+            },
+            success: function(data) {
+                if (data.error) {
+                    alert(data.error)
+                } else {
+                    loadData();
+                }
+
+            }
+        });
     });
+    $('#id_test').select2({
+        placeholder: '- Pilih Nama Peserta Ujian -',
+        ajax: {
+            url: '{{url('/operator/entry-nilai-ujian/get-data-peserta-ujian')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(data_peserta) {
+                        return {
+                            id: data_peserta.id_test,
+                            text: data_peserta.id_test + ' - ' + data_peserta.nama
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+
+
 });
 
 function loadData() {
     $.ajax({
-        url: '{{url('/count-total-register')}}',
+        url: '{{url('/operator/entry-nilai-ujian/load-data-peserta-ujian')}}',
         type: 'get',
         dataType: "json",
         beforeSend: function() {
-            
+            $(".row-data").remove();
         },
         success: function(data) {
             if (data.error) {
                 alert(data.error)
             } else {
                 console.log(data);
+                console.log(data.length);
+                if (data.length == 0) {
+                    alert("Data Pendaftar Kosong")
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        tr = '<tr class="row-data">' +
+                            '<td>' + data[i].id_pmb + '</td>' +
+                            '<td>' + data[i].id_test + '</td>' +
+                            '<td>' + data[i].nama + '</td>' +
+                            '<td>' + data[i].jalur_masuk + '</td>' +
+                            '<td>' + data[i].nilai_ujian + '</td>' +
+                            '<td>' + data[i].kelulusan + '</td>' +
+                            '<td><button type="button" class="btn btn-primary btn-sm">Update Nilai</button></td>' +
+                            '</tr>';
+                        $('table tbody').append(tr);
+                    }
+                }
+            }
+
+        }
+    });
+}
+
+function loadTotalPeserta() {
+    $.ajax({
+        url: '{{url('/count-total-peserta-ujian')}}',
+        type: 'get',
+        dataType: "json",
+        beforeSend: function() {
+
+        },
+        success: function(data) {
+            if (data.error) {
+                alert(data.error)
+            } else {
+                // console.log(data);
                 if (data.length == 0) {
                     alert("Belum ada pendaftar !!!")
                 } else {
-                    $('#total_register').text(data);
+                    $('#total_peserta_ujian').text(data);
                 }
             }
 
@@ -163,21 +210,21 @@ function loadData() {
     });
 
     $.ajax({
-        url: '{{url('/count-today-register')}}',
+        url: '{{url('/count-total-peserta-lulus')}}',
         type: 'get',
         dataType: "json",
         beforeSend: function() {
-            
+
         },
         success: function(data) {
             if (data.error) {
                 alert(data.error)
             } else {
-                console.log(data);
+                // console.log(data);
                 if (data.length == 0) {
                     alert("Belum ada pendaftar !!!")
                 } else {
-                    $('#today_register').text(data);
+                    $('#peserta_lulus').text(data);
                 }
             }
 
@@ -185,21 +232,21 @@ function loadData() {
     });
 
     $.ajax({
-        url: '{{url('/count-register-confirmed')}}',
+        url: '{{url('/count-total-peserta-tidak-lulus')}}',
         type: 'get',
         dataType: "json",
         beforeSend: function() {
-            
+
         },
         success: function(data) {
             if (data.error) {
                 alert(data.error)
             } else {
-                console.log(data);
+                // console.log(data);
                 if (data.length == 0) {
                     alert("Belum ada pendaftar !!!")
                 } else {
-                    $('#status_register').text(data);
+                    $('#peserta_tidak_lulus').text(data);
                 }
             }
 
@@ -207,4 +254,5 @@ function loadData() {
     });
 }
 </script>
+
 @endsection

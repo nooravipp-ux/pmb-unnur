@@ -781,7 +781,7 @@ var myChart = new Chart(ctx_live, {
         scales: {
             yAxes: [{
                 ticks: {
-                    max: 100,
+                    max: 50,
                     min: 1,
                     stepSize: 5
                 }

@@ -13,12 +13,8 @@
                     <li class="@yield('title_pmb')"><a><i class="fa fa-gear"></i> Pengaturan PMB <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li class="@yield('tchild_pmb')"><a
-                                    href="{{url('/pengaturan/pendaftaran-pmb')}}">Pendaftaran PMB</a></li>
-                            <li class="@yield('tchild_pmb')"><a href="#">Pengaturan ID PMB Otomatis</a></li>
-                            <li class="@yield('tchild_pmb')"><a href="{{url('/pmb/nim')}}">Pengaturan NIM Otomatis</a>
-                            </li>
-                            <li class="@yield('tchild_pmb')"><a href="#">Setting Jadwal PMB</a></li>
+                            <li class="@yield('tchild_pmb')"><a href="{{url('/pengaturan/pendaftaran-pmb')}}">Setting
+                                    Jadwal PMB</a></li>
                         </ul>
                     </li>
                     {{-- end pmb modul --}}
@@ -41,7 +37,8 @@
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Portal PMB</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pendaftaran</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Reset Password</a></li>
-                            <li class="@yield('tchild_admin')"><a href="{{route('set.email')}}">Konfigurasi Email</a></li>
+                            <li class="@yield('tchild_admin')"><a href="{{route('set.email')}}">Konfigurasi Email</a>
+                            </li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pengumuman</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Keterangan</a></li>
                         </ul>
@@ -60,7 +57,7 @@
                         class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li class="@yield('tchild_admin')"><a href="{{url('/dash')}}">Dashboard </a></li>
-                    <li class="@yield('tchild_admin')"><a href="#">Laporan Kelulusan Ujian Online</a></li>
+                    <li class="@yield('tchild_admin')"><a href="{{url('/operator/laporan-kelulusan-ujian')}}">Laporan Kelulusan Ujian Online</a></li>
                 </ul>
             </li>
             <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i>Pendaftaran Online<span
@@ -82,7 +79,8 @@
             <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i>Nilai Ujian<span
                         class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li class="@yield('tchild_admin')"><a href="{{url('/operator/entry-nilai-ujian')}}">Entry Nilai Ujian</a></li>
+                    <li class="@yield('tchild_admin')"><a href="{{url('/operator/entry-nilai-ujian')}}">Entry Nilai
+                            Ujian</a></li>
                 </ul>
             </li>
             <li class="@yield('title_admin')"><a><i class="fa fa-edit"></i>Registrasi<span

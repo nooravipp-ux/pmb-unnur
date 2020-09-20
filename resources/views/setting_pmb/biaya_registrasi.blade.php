@@ -109,7 +109,7 @@
                       <div class="row">
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
-                                <table id="datatable-responsive" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <table id="datatable-responsive" class="table table-striped jambo_table bulk_action text-center" cellspacing="0" width="100%">
                                   <thead>
                                     <tr>
                                       <th>ID PMB</th>
@@ -125,10 +125,10 @@
                                     <tr>
                                         <td>{{$data->id_pmb}}</td>
                                         <td>{{$data->nama_fakultas}}</td>
-                                        <td>{{$data->strata}}</td>
-                                        <td>{{$data->kelas}}</td>
+                                        <td>{{$data->jenis_strata}}</td>
+                                        <td>{{$data->nama_kelas}}</td>
                                         <td>{{$data->biaya_registrasi}}</td>
-                                        <td class="text-center">
+                                        <td class="text-center"><a href="" class="btn btn-primary btn-sm fa fa-edit"></a>
                                             <form method="POST" action="{{route('biaya.delete', $data->id_pmb_biaya_registrasi)}}">
                                                 {{ csrf_field() }}
                                                 <div class="form-group">
@@ -159,7 +159,7 @@
         $('#id_pmb').select2({
     		placeholder: '- Pilih ID PMB -',
             ajax: {
-                url:  '{{url('/pengaturan/pendaftaran-pmb/get-data-pmb')}}',
+                url:  '{{url('/get-data-gelombnag-opened')}}',
                 dataType: 'json',
                 delay: 250,
                 processResults: function (data) {
@@ -167,7 +167,7 @@
                         results:  $.map(data, function (pmb) {
                             return {
                                 id: pmb.id_pmb,
-                                text: pmb.id_pmb
+                                text: pmb.id_pmb+ ' - ' + pmb.gelombang
                             }
                         })
                     };
@@ -207,7 +207,7 @@
                         results:  $.map(data, function (jenjang_prodi) {
                             return {
                                 id: jenjang_prodi.id_strata,
-                                text: jenjang_prodi.id_prodi+' - '+jenjang_prodi.jenis_strata
+                                text: jenjang_prodi.jenis_strata
                             }
                         })
                     };

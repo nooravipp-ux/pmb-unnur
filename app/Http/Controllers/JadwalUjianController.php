@@ -21,10 +21,7 @@ class JadwalUjianController extends Controller
             ['tanggal_ujian' => $request->tanggal_ujian, 'tahun' => $request->tahun, 'gelombang_ujian' => $request->gelombang, 'id_prodi' => $request->prodi, 'passingrade' => $request->passingrade]
         );
 
-        $data_jadwal_ujian = DB::table('pmb_jadwal_ujian')
-                            ->join('prodi','prodi.id_prodi','=','pmb_jadwal_ujian.id_prodi')
-                            ->get();
-        return view('ujian_pmb.jadwal_ujian_pmb', compact('data_jadwal_ujian'));
+        return redirect('/operator/jadwal-ujian');
     }
 
     public function notif($id){
@@ -98,5 +95,9 @@ class JadwalUjianController extends Controller
                                 ->whereNotNull('id_test')
                                 ->count();
         return response()->json($total_peserta_ujian_tidak_lulus);
+    }
+
+    public function laporan_kelulusan(){
+        return view('ujian_pmb.laporan_kelulusan');
     }
 }
