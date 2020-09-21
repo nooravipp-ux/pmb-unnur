@@ -34,8 +34,6 @@
                     <li class="@yield('title_admin')"><a><i class="fa fa-wrench"></i>Konfigurasi<span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Portal PMB</a></li>
-                            <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pendaftaran</a></li>
                             <li class="@yield('tchild_admin')"><a href="{{route('set.email')}}">Konfigurasi Pengumuman</a>
                             </li>
                         </ul>
@@ -103,7 +101,7 @@
                         class="fa fa-credit-card"></i> Pembayaran Registrasi</a></li>
             <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-document')}}"><i
                         class="fa fa-cloud-upload"></i> Upload Document</a></li>
-            <li class="@yield('title_admin')"><a href="{{url('operator/pengunguman')}}"><i
+            <li class="@yield('title_admin')"><a href="{{url('pengaturan/pengumuman')}}"><i
                         class="fa fa-credit-card"></i> Pengunguman</a></li>
             
             @endcan
