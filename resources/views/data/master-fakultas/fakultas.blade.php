@@ -59,6 +59,7 @@
     <script>
         $(document).ready(function () {
             $('.edit-fakultas').editable();
+            $('.edit-id-fakultas').editable();
         });
     </script>
 @endpush

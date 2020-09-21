@@ -7,21 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class confirm extends Mailable
+class kelulusan extends Mailable
 {
     use Queueable, SerializesModels;
-    public $confirm;
-
+    public $din;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($confirm)
+    public function __construct($din)
     {
-        //
-        $this->confirm = $confirm;
+        $this->din = $din;
     }
 
     /**
@@ -31,6 +29,6 @@ class confirm extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.orders.confirm');
+        return $this->markdown('emails.orders.kelulusan');
     }
 }
