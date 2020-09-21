@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\jadwal;
 use App\Mail\ujian;
+use App\Mail\kelulusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,10 @@ class JadwalUjianController extends Controller
             $status_kelulusan = "TIDAK LULUS";
         }
         DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test,'kelulusan' => $status_kelulusan]);
+        $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
+        $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
+
+        \Mail::to($done)->send(new kelulusan($din));
         return response()->json('data success updated');
     }
     public function get_data_peserta_ujian(Request $request){
