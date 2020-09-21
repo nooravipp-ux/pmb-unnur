@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
+use PDF;
 use App\User;
 use App\kelas;
 use App\prodi;
@@ -68,6 +69,32 @@ class PendaftaranOnlineController extends Controller
         $confirm = DB::table('pmb_pendaftar')->select('pmb_pendaftar.*')->get();
         \Mail::to($request->email)->send(new confirm($confirm));
         return redirect('/operator/pendaftaran/aktivasi-mhs')->with('status', 'Data Customer Berhasil Di Update');
+    }
+
+    public function cetak_kwitansi_regis($id){
+        $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where id_pendaftar='".$id."'");
+
+        $sorted = Arr::get($list_pmb_pendaftar,0);
+        $sortedd = Arr::flatten($sorted);
+        $id_fak = Arr::get($sortedd,0);
+
+
+        $detail_pendaftar = DB::table('pmb_pendaftar')
+                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                            ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
+                            ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+                            ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+                            ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+                            ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                            ->where([
+                                ['pmb_pendaftar.id_pendaftar', $id],
+                                ['fakultas.id_fakultas', $id_fak]
+                                ])
+                            ->first();
+                            //dd($detail_pendaftar);
+        $pdf = PDF::loadview('pendaftaran_online.cetak_kwitansi_regis',['data_pendaftar'=>$detail_pendaftar])->setPaper('A5', 'landscape');
+        return $pdf->stream();
+        // return view('pendaftaran_online.cetak_kwitansi_regis');                            
     }
 
     public function generate_id_test($tahun, $gelombang, $prodi){

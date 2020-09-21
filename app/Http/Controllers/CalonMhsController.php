@@ -149,14 +149,15 @@ class CalonMhsController extends Controller
                     'atas_nama' => 'required|string'
                 ]);
 
-                $path = $request->file('file')->getRealPath();
-                $bukti = file_get_contents($path);
-                $base64 = base64_encode($bukti);
+                // $path = $request->file('file')->getRealPath();
+                // $bukti = file_get_contents($path);
+                // $base64 = base64_encode($bukti);
+                $bukti = Image::make($request->file)->fit(500)->encode('data-url');
                 DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
                 ->update([
                     'metode_pembayaran' => $request->metode,
                     'atas_nama' => $request->atas_nama,
-                    'bukti_pem' => $base64,
+                    'bukti_pem' => $bukti,
                 ]);
             }else if($request->metode == "cash"){
                 DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)

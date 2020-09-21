@@ -200,7 +200,7 @@
                         <div class="item form-group" id="d_gambar">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Bukti Pembayaran</label>
                           <div class="col-md-6 col-sm-6 ">
-                              <img class="img-fluid" id="myImg" alt="Bukti Pembayaran" src="data:image/png;base64, {{$detail_pendaftar->bukti_pem}}">
+                              <img class="img-fluid" id="myImg" alt="Bukti Pembayaran" src="{{$detail_pendaftar->bukti_pem}}">
                           </div>
                           <!-- The Modal -->
                           <div id="myModal" class="modal">
@@ -217,6 +217,8 @@
                             <button class="btn btn-primary" type="reset">Reset</button>
                             @if ($detail_pendaftar->status_pembayaran_registrasi != 'SUDAH DI KONFIRMASI')
                                 <button type="submit" class="btn btn-success">Confirm Pembayaran</button>
+                            @elseif ($detail_pendaftar->status_pembayaran_registrasi == 'SUDAH DI KONFIRMASI')
+                                <a href="{{route('cetak.kwitansi',$detail_pendaftar->id_pendaftar)}}" target="_blank"  class="btn btn-success">Cetak Kwitansi</a>
                             @endif
                           </div>
                         </div>
