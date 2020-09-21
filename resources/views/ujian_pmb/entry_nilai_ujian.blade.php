@@ -90,6 +90,7 @@
                                             <tr>
                                                 <th>ID PMB</th>
                                                 <th>ID Test</th>
+                                                <th>NIM</th>
                                                 <th>Nama</th>
                                                 <th>Jalur Masuk</th>
                                                 <th>Nilai Ujian</th>
@@ -151,6 +152,7 @@ $(document).ready(function() {
             }
         });
     });
+    
     $('#id_test').select2({
         placeholder: '- Pilih Nama Peserta Ujian -',
         ajax: {
@@ -196,11 +198,12 @@ function loadData() {
                         tr = '<tr class="row-data">' +
                             '<td>' + data[i].id_pmb + '</td>' +
                             '<td>' + data[i].id_test + '</td>' +
+                            '<td>' + data[i].nim + '</td>' +
                             '<td>' + data[i].nama + '</td>' +
                             '<td>' + data[i].jalur_masuk + '</td>' +
                             '<td>' + data[i].nilai_ujian + '</td>' +
                             '<td>' + data[i].kelulusan + '</td>' +
-                            '<td><button type="button" class="btn btn-primary btn-sm">Update Nilai</button></td>' +
+                            '<td><button type="button" class="btn btn-primary btn-sm">Confirmasi Kelulusan</button></td>' +
                             '</tr>';
                         $('table tbody').append(tr);
                     }

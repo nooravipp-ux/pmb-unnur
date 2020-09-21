@@ -68,6 +68,7 @@ class CalonMhsController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'warganegara' => $request->warganegara,
+            'jenis_kelamin' => $request->jenis_kelamin,
              'agama' => $request->agama, 
              'alamat' => $request->alamat,
              'kelurahan' => $request->kelurahan_desa,

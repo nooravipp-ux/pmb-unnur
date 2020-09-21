@@ -36,11 +36,8 @@
                         <ul class="nav child_menu">
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Portal PMB</a></li>
                             <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pendaftaran</a></li>
-                            <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Reset Password</a></li>
-                            <li class="@yield('tchild_admin')"><a href="{{route('set.email')}}">Konfigurasi Email</a>
+                            <li class="@yield('tchild_admin')"><a href="{{route('set.email')}}">Konfigurasi Pengumuman</a>
                             </li>
-                            <li class="@yield('tchild_admin')"><a href="#">Konfigurasi Pengumuman</a></li>
-                            <li class="@yield('tchild_admin')"><a href="#">Keterangan</a></li>
                         </ul>
                     </li>
             </li>
@@ -102,13 +99,13 @@
             <li class="@yield('title_admin')"><a><i class="fa fa-money"></i> Pembayaran</a></li>
             <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-biodata')}}"><i
                         class="fa fa-book"></i> Biodata</a></li>
-            <li class="@yield('title_admin')"><a><i class="fa fa-print"></i> Cetak Formulir</a></li>
             <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-upload')}}"><i
                         class="fa fa-credit-card"></i> Pembayaran Registrasi</a></li>
             <li class="@yield('title_admin')"><a href="{{url('/calon-mahasiswa/form-document')}}"><i
                         class="fa fa-cloud-upload"></i> Upload Document</a></li>
-            <li class="@yield('title_admin')"><a><i class="fa fa-bullhorn"></i> Pengumuman</a></li>
-            <li class="@yield('title_admin')"><a><i class="fa fa-home"></i> Bayar Registrasi Awal</a></li>
+            <li class="@yield('title_admin')"><a href="{{url('operator/pengunguman')}}"><i
+                        class="fa fa-credit-card"></i> Pengunguman</a></li>
+            
             @endcan
 
         </ul>

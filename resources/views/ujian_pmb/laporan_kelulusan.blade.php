@@ -1,6 +1,8 @@
 @extends('frame.index')
 @section('style')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
 @endsection
 @section('content')
 <!-- page content -->
@@ -38,7 +40,6 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Laporan Kelulusan Ujian Online</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -59,21 +60,31 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable-peserta-ujian" class="table table-striped jambo_table bulk_action"
+                                    <table id="dat" class="table table-striped jambo_table bulk_action text-center"
                                         cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>ID PMB</th>
+                                                <th>Gelombang</th>
                                                 <th>ID Test</th>
                                                 <th>Nama</th>
                                                 <th>Jalur Masuk</th>
                                                 <th>Nilai Ujian</th>
                                                 <th>Status Kelulusan</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            @foreach($data_peserta_lulus as $data)
+                                            <tr>
+                                                <td>{{$data->id_pmb}}</td>
+                                                <td>{{$data->gelombang}}</td>
+                                                <td>{{$data->id_test}}</td>
+                                                <td>{{$data->nama}}</td>
+                                                <td>{{$data->jalur_masuk}}</td>
+                                                <td>{{$data->nilai_ujian}}</td>
+                                                <td>{{$data->kelulusan}}</td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -90,6 +101,7 @@
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
 <script>
 $.ajaxSetup({
     headers: {
@@ -97,11 +109,16 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function() {
+    $('#dat').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel'
+        ]
+    });
     loadTotalPeserta();
     setInterval(function() {
         loadTotalPeserta();
     }, 10000);
-    loadData();
     $('#update').on('click', function() {
         var id_test = $('#id_test').val();
         var nilai_test = $('#nilai_test').val();
@@ -175,7 +192,6 @@ function loadData() {
                             '<td>' + data[i].jalur_masuk + '</td>' +
                             '<td>' + data[i].nilai_ujian + '</td>' +
                             '<td>' + data[i].kelulusan + '</td>' +
-                            '<td><button type="button" class="btn btn-primary btn-sm">Update Nilai</button></td>' +
                             '</tr>';
                         $('table tbody').append(tr);
                     }

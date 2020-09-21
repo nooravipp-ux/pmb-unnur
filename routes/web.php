@@ -57,6 +57,9 @@ Route::post('setting/email/store','SetEmailController@store')->name('set.email.s
 Route::post('setting/email/{id}/update','SetEmailController@update')->name('set.email.update');
 Route::get('setting/email/destroy/{set_email}','SetEmailController@destroy')->name('set.email.destroy');
 
+Route::get('operator/pengunguman','SetEmailController@mading_pengunguman');
+
+
 /**
  * Route PMB
  */
