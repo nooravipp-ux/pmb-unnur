@@ -1,6 +1,103 @@
 @extends('frame.index')
 @section('style')
 <style>
+/* Style the Image Used to Trigger the Modal */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {
+    opacity: 0.7;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content,
+#caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
 h2 {
     clear: both;
     font-size: 1.8em;
@@ -752,21 +849,19 @@ textarea.form-control {
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-
-
                                     <div class="container bootstrap snippets bootdeys">
                                         <div class="row" id="user-profile">
                                             <div class="col-lg-3 col-md-4 col-sm-4">
                                                 <div class="main-box clearfix">
                                                     <h2>{{$data_pendaftar->nama}}</h2>
-                                                    <img src="data:image/png;base64, {{$data_pendaftar->file_foto}} "
-                                                        alt="Foto Belum di Isi"
-                                                        class="profile-img img-responsive center-block" style="height: 300px;">
+                                                    <img src="{{$data_pendaftar->file_foto}} " alt="Foto Belum di Isi"
+                                                        class="profile-img img-responsive center-block"
+                                                        style="height: 300px;">
 
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-9 col-md-8 col-sm-8">
+                                            <div class="col-lg-4 col-md-3 col-sm-3">
                                                 <div class="main-box clearfix">
                                                     <div class="profile-header">
                                                         <h3><span>Informasi Pendaftar</span></h3>
@@ -775,348 +870,435 @@ textarea.form-control {
                                                     <div class="row profile-user-info">
                                                         <div class="col-sm-8">
                                                             <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    ID PMB
-                                                                </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->id_pmb}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    Tanggal Daftar
-                                                                </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->created_at}}
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 col-form-label">ID PMB
+                                                                    </label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" readonly
+                                                                            class="form-control-plaintext"
+                                                                            value="{{$data_pendaftar->id_pmb}}">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    NIK
-                                                                </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->nik}}
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 col-form-label">Tanggal
+                                                                        Daftar
+                                                                    </label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" readonly
+                                                                            class="form-control-plaintext"
+                                                                            value="{{$data_pendaftar->created_at}}">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    Nama Lengkap
-                                                                </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->nama}}
 
+                                                            <div class="profile-user-details clearfix">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 col-form-label">NIK
+                                                                    </label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" readonly
+                                                                            class="form-control-plaintext"
+                                                                            value="{{$data_pendaftar->nik}}">
+                                                                    </div>
                                                                 </div>
+
+                                                            </div>
+
+
+                                                            <div class="profile-user-details clearfix">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 col-form-label">Fakultas
+                                                                    </label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" readonly
+                                                                            class="form-control-plaintext"
+                                                                            value="{{$data_pendaftar->nama_fakultas}}">
+                                                                    </div>
+                                                                </div>
+
                                                             </div>
                                                             <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    Email
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 col-form-label">Prodi
+                                                                    </label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" readonly
+                                                                            class="form-control-plaintext"
+                                                                            value="{{$data_pendaftar->nama_prodi}}">
+                                                                    </div>
                                                                 </div>
-                                                                <div class="profile-user-details-value">
-                                                                    email@email.com
-                                                                </div>
+
                                                             </div>
                                                             <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    No Telepon
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 col-form-label">Jenjang Prodi
+                                                                    </label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" readonly
+                                                                            class="form-control-plaintext"
+                                                                            value="{{$data_pendaftar->jenis_strata}}">
+                                                                    </div>
                                                                 </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->no_telepon}}
-                                                                </div>
+
                                                             </div>
                                                             <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    Fakultas
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-4 col-form-label">Jalur Masuk
+                                                                    </label>
+                                                                    <div class="col-sm-8">
+                                                                        <input type="text" readonly
+                                                                            class="form-control-plaintext"
+                                                                            value="{{$data_pendaftar->jenis_pendaftar}}">
+                                                                    </div>
                                                                 </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->nama_fakultas}}
-                                                                </div>
+
                                                             </div>
-                                                            <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    Prodi
-                                                                </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->nama_prodi}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    Jenjang Prodi
-                                                                </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->jenis_strata}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="profile-user-details clearfix">
-                                                                <div class="profile-user-details-label">
-                                                                    Jalur Masuk
-                                                                </div>
-                                                                <div class="profile-user-details-value">
-                                                                    {{$data_pendaftar->jenis_pendaftar}}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4 profile-social">
-                                                            
+
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-3 col-sm-3">
+                                                <div class="tabs-wrapper profile-tabs">
+                                                    <ul class="nav nav-tabs">
+                                                        <li><a href="#tab-chat" data-toggle="tab">Data Diri</a></li>
+                                                        <li class="active"><a href="#tab-activity"
+                                                                data-toggle="tab">Data Orang Tua (Ayah)</a></li>
+                                                        <li><a href="#tab-friends" data-toggle="tab">Data Orang Tua
+                                                                (Ibu)</a>
+                                                        </li>
 
-                                                    <div class="tabs-wrapper profile-tabs">
-                                                        <ul class="nav nav-tabs">
-                                                            <li><a href="#tab-chat" data-toggle="tab">Data Diri</a></li>
-                                                            <li class="active"><a href="#tab-activity"
-                                                                    data-toggle="tab">Data Orang Tua (Ayah)</a></li>
-                                                            <li><a href="#tab-friends" data-toggle="tab">Data Orang Tua
-                                                                    (Ibu)</a>
-                                                            </li>
+                                                    </ul>
 
-                                                        </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane fade in active" id="tab-activity">
 
-                                                        <div class="tab-content">
-                                                            <div class="tab-pane fade in active" id="tab-activity">
 
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Nik
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->nik_ayah}}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Nama
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->nama_ayah}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Tanggal Lahir
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->tgl_lahir_ayah}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Pendidikan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->pendidikan_ayah}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Pekerjaan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->pekerjaan_ayah}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Penghasilan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->penghasilan_ayah}}
-                                                                                </td>
-
-                                                                            </tr>
-
-                                                                        </tbody>
-                                                                    </table>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">NIK Ayah
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->nik_ayah}}">
                                                                 </div>
-
                                                             </div>
-
-                                                            <div class="tab-pane fade" id="tab-friends">
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Nik
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->nik_ibu}}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Nama
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->nama_ibu}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Tanggal Lahir
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->tgl_lahir_ibu}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Pendidikan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->pendidikan_ibu}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Pekerjaan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->pekerjaan_ibu}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Penghasilan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->penghasilan_ayah}}
-                                                                                </td>
-
-                                                                            </tr>
-
-                                                                        </tbody>
-                                                                    </table>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Nama Ayah
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->nama_ayah}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Tanggal Lahir
+                                                                    Ayah
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->tgl_lahir_ayah}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Pendidikan
+                                                                    Ayah
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->pendidikan_ayah}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Pekerjaan Ayah
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->pekerjaan_ayah}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Penghasilan
+                                                                    Ayah
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->penghasilan_ayah}}">
                                                                 </div>
                                                             </div>
 
-                                                            <div class="tab-pane fade" id="tab-chat">
-                                                                <div class="table-responsive">
-                                                                    <table class="table">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Tempat Lahir
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->tempat_lahir}}
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    tanggal Lahir
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->tgl_lahir}}
-                                                                                </td>
 
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Jenis Kelamin
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->jenis_kelamin}}
-                                                                                </td>
+                                                        </div>
 
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Agama
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->agama}}
-                                                                                </td>
+                                                        <div class="tab-pane fade" id="tab-friends">
 
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Kewarganegaraan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->alamat}}
-                                                                                </td>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">NIK Ibu
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->nik_ibu}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Nama Ibu
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->nama_ibu}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Tanggal Lahir Ibu
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->tgl_lahir_ibu}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Pendidikan Ibu
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->pendidikan_ibu}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Pekerjaan Ibu
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->pekerjaan_ibu}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Penghasilan Ibu
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->penghasilan_ibu}}">
+                                                                </div>
+                                                            </div>
 
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Alamat
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->alamat}}
-                                                                                </td>
+                                                        </div>
 
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Kelurahan / Desa
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->kelurahan}}
-                                                                                </td>
+                                                        <div class="tab-pane fade" id="tab-chat">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Tempat Lahir
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->tempat_lahir}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Tanggal Lahir
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->tgl_lahir}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Jenis Kelamin
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->jenis_kelamin}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Agama
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->agama}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Alamat
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->alamat}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Kelurahan
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->kelurahan}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Kecamatan
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->kecamatan}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Kode Pos
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->kode_pos}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Kota/Kabupaten
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->kota_kab}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">Provinsi
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->provinsi}}">
+                                                                </div>
+                                                            </div>
 
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Kode Pos
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->kode_pos}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Kecamatan
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->kecamatan}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Kota
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->kota_kab}}
-                                                                                </td>
-
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td class="text-center">
-                                                                                    Provinsi
-                                                                                </td>
-                                                                                <td>
-                                                                                    {{$data_pendaftar->provinsi}}
-                                                                                </td>
-
-                                                                            </tr>
-
-                                                                        </tbody>
-                                                                    </table>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-4 col-form-label">No Telehone
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" readonly
+                                                                        class="form-control-plaintext"
+                                                                        value="{{$data_pendaftar->no_telephone}}">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row kelengkapan-document">
+                                            <div class="col-md">
+                                                <img id="myImg" src="{{$data_pendaftar->file_foto}}" alt="File Foto"
+                                                style="width:100%;max-width:300px">
+                                            </div>
+                                            <div class="col-md">
+                                                <img id="myImg" src="{{$data_pendaftar->file_ktp}}" alt="file Ktp"
+                                                style="width:100%;max-width:300px">
+                                            </div>
+                                            <div class="col-md">
+                                                <img id="myImg2" src="{{$data_pendaftar->file_kk}}" alt="File Kartu Keluarga"
+                                                style="width:100%;max-width:300px">
+                                            </div>
+                                            <div class="col-md">
+                                                <img id="myImg3" src="{{$data_pendaftar->file_ijazah}}" alt="File Ijazah"
+                                                style="width:100%;max-width:300px">
+                                            </div>
+                                            <div class="col-md">
+                                                <img id="myImg4" src="{{$data_pendaftar->file_akta}}" alt="File Akta Kelahiran"
+                                                style="width:100%;max-width:300px">
+                                            </div>
+                                            <div class="col-md">
+                                                <img id="myImg5" src="{{$data_pendaftar->file_ket_sehat}}" alt="File Ket Sehat"
+                                                style="width:100%;max-width:300px">
+                                            </div>
+
+                                            <!-- The Modal -->
+                                            <div id="myModal" class="modal">
+
+                                                <!-- The Close Button -->
+                                                <span class="close">&times;</span>
+
+                                                <!-- Modal Content (The Image) -->
+                                                <img class="modal-content" id="img01">
+
+                                                <!-- Modal Caption (Image Text) -->
+                                                <div id="caption"></div>
+                                            </div>
+                                            <div id="myModal" class="modal">
+
+                                                <!-- The Close Button -->
+                                                <span class="close">&times;</span>
+
+                                                <!-- Modal Content (The Image) -->
+                                                <img class="modal-content" id="img02">
+
+                                                <!-- Modal Caption (Image Text) -->
+                                                <div id="caption"></div>
+                                            </div>
+                                            <div id="myModal" class="modal">
+
+                                                <!-- The Close Button -->
+                                                <span class="close">&times;</span>
+
+                                                <!-- Modal Content (The Image) -->
+                                                <img class="modal-content" id="img03">
+
+                                                <!-- Modal Caption (Image Text) -->
+                                                <div id="caption"></div>
+                                            </div>
+                                            <div id="myModal" class="modal">
+
+                                                <!-- The Close Button -->
+                                                <span class="close">&times;</span>
+
+                                                <!-- Modal Content (The Image) -->
+                                                <img class="modal-content" id="img04">
+
+                                                <!-- Modal Caption (Image Text) -->
+                                                <div id="caption"></div>
+                                            </div>
+                                            <div id="myModal" class="modal">
+
+                                                <!-- The Close Button -->
+                                                <span class="close">&times;</span>
+
+                                                <!-- Modal Content (The Image) -->
+                                                <img class="modal-content" id="img05">
+
+                                                <!-- Modal Caption (Image Text) -->
+                                                <div id="caption"></div>
+                                            </div>
+                                            <div id="myModal" class="modal">
+
+                                                <!-- The Close Button -->
+                                                <span class="close">&times;</span>
+
+                                                <!-- Modal Content (The Image) -->
+                                                <img class="modal-content" id="img06">
+
+                                                <!-- Modal Caption (Image Text) -->
+                                                <div id="caption"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!--/row-->
                                 </div>
+                                <!--/row-->
                             </div>
                         </div>
                     </div>
@@ -1125,13 +1307,31 @@ textarea.form-control {
         </div>
     </div>
 </div>
+</div>
 <!-- /page content -->
 @endsection
 
 @section('script')
 <script>
+// Get the modal
+var modal = document.getElementById("myModal");
 
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function() {
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
 
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
 </script>
 @endsection

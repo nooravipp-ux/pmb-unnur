@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\jadwal;
 use App\Mail\ujian;
+use App\Mail\kelulusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,10 @@ class JadwalUjianController extends Controller
             $status_kelulusan = "TIDAK LULUS";
         }
         DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test,'kelulusan' => $status_kelulusan]);
+        $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
+        $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
+
+        \Mail::to($done)->send(new kelulusan($din));
         return response()->json('data success updated');
     }
     public function get_data_peserta_ujian(Request $request){
@@ -98,6 +103,11 @@ class JadwalUjianController extends Controller
     }
 
     public function laporan_kelulusan(){
-        return view('ujian_pmb.laporan_kelulusan');
+        $data_peserta_lulus = DB::table('pmb_pendaftar')
+                            ->join('pmb','pmb.id_pmb','=','pmb_pendaftar.id_pmb')
+                            ->where([['pmb_pendaftar.tahun', '2020'],['pmb_pendaftar.kelulusan', 'LULUS']])
+                            ->get();
+        
+        return view('ujian_pmb.laporan_kelulusan', compact('data_peserta_lulus'));
     }
 }

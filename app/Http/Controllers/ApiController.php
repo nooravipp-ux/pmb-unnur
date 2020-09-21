@@ -7,6 +7,7 @@ use App\prodi;
 use App\strata;
 use App\fakultas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -14,16 +15,18 @@ class ApiController extends Controller
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        $edit = fakultas::Find($id_fakultas);
-        $edit->update([$name => $value]);
+        DB::table('fakultas')->where('id_fakultas',$id_fakultas)->update([$name => $value]);
+        // $edit->update([$name => $value]);
         // dd($edit);
     }
 
     public function editidfakultas(Request $req,$id_fakultas){
+        // dd($req->all());
         $id = request()->get('pk');
         $name = request()->get('name');
         $value = request()->get('value');
-        fakultas::Find($id_fakultas)->update([$name => $value]);
+        DB::table('fakultas')->where('id_fakultas',$id_fakultas)->update([$name => $value]);
+        // fakultas::Find($id_fakultas)->update([$name => $value]);
         // $edit->update([$name => $value]);
         // dd($edit);
     }

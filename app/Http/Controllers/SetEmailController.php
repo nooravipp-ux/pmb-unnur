@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class SetEmailController extends Controller
 {
+    public function mading_pengunguman(){
+        $pengunguman = DB::table('set_email')->where('status', 1)->get();
+        return view('pengunguman.pengunguman_kelulusan', compact('pengunguman'));
+    }
     public function index(){
         $email = set_email::all();
         return view('emails.index',compact('email'));
@@ -30,11 +34,11 @@ class SetEmailController extends Controller
     }
 
     public function sebar($id){
-        // \Mail::to('bbb@gmail.com')->send(new brodcast($get));
-        $email_us = DB::table('users')->select('users.email')->get();
-        $get = DB::table('set_email')->where('id',$id)->select('set_email.*')->first();
-        \Mail::to($email_us)->send(new brodcast($get));
-        DB::table('set_email')->where('id',$id)->where('status',1)->update(['status'=>0]);
+        // // \Mail::to('bbb@gmail.com')->send(new brodcast($get));
+        // $email_us = DB::table('users')->select('users.email')->get();
+        // $get = DB::table('set_email')->where('id',$id)->select('set_email.*')->first();
+        // \Mail::to($email_us)->send(new brodcast($get));
+        // DB::table('set_email')->where('id',$id)->where('status',1)->update(['status'=>0]);
        return redirect()->back();
     }
 }
