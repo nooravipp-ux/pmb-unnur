@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class set_email extends Model
+class Pengumuman extends Model
 {
     protected $guarded = [];
-    protected $table = 'set_email';
+    protected $table = 'pmb_pengumuman';
     public $timestamps = false;
 }

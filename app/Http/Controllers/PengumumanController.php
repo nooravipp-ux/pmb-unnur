@@ -3,33 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Mail\brodcast;
-use App\set_email;
+use App\Pengumuman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
-class SetEmailController extends Controller
+class PengumumanController extends Controller
 {
     public function mading_pengunguman(){
-        $pengunguman = DB::table('set_email')->where('status', 1)->get();
+        $nama_user = Auth::user()->name;
+        $pengunguman = DB::table('pmb_pengumuman')
+                    ->join('pmb', 'pmb.id_pmb','pmb_pengumuman.id_pmb')
+                    ->join('pmb_pendaftar', 'pmb_pendaftar.id_pmb','pmb.id_pmb')
+                    ->where([['pmb_pendaftar.nama', $nama_user],['pmb_pendaftar.kelulusan', 'LULUS'],['pmb_pengumuman.status', 1]])
+                    ->get();
         return view('pengunguman.pengunguman_kelulusan', compact('pengunguman'));
     }
     public function index(){
-        $email = set_email::all();
+        $email = Pengumuman::all();
         return view('emails.index',compact('email'));
     }
 
     public function store(Request $req){
-        set_email::create($req->all());
+        Pengumuman::create($req->all());
         return redirect()->back()->with('sukses','data berhasil di tambah');
     }
 
     public function update($id){
-        DB::table('set_email')->where('id',$id)->where('status',0)->update(['status'=>1]);
+        DB::table('pmb_pengunguman')->where('id',$id)->where('status',0)->update(['status'=>1]);
         return redirect()->back();
     }
 
-    public function destroy(set_email $set_email){
-        $set_email->delete($set_email);
+    public function destroy(Pengumuman $pengumuman){
+        $pengumuman->delete($pengumuman);
         return redirect()->back()->with('sukses','data berhasil di hapus');
     }
 

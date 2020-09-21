@@ -51,13 +51,13 @@ Route::get('/kelas/get-data-kelas','FakultasController@get_data_kelas');
 /**
  * set Email
  */
-Route::get('setting/email','SetEmailController@index')->name('set.email');
-Route::get('setting/email/sebar/{id}','SetEmailController@sebar')->name('set.email.sebar');
-Route::post('setting/email/store','SetEmailController@store')->name('set.email.store');
-Route::post('setting/email/{id}/update','SetEmailController@update')->name('set.email.update');
-Route::get('setting/email/destroy/{set_email}','SetEmailController@destroy')->name('set.email.destroy');
+Route::get('setting/email','PengumumanController@index')->name('set.email');
+Route::get('setting/email/sebar/{id}','PengumumanController@sebar')->name('set.email.sebar');
+Route::post('setting/email/store','PengumumanController@store')->name('set.email.store');
+Route::post('setting/email/{id}/update','PengumumanController@update')->name('set.email.update');
+Route::get('setting/email/destroy/{set_email}','PengumumanController@destroy')->name('set.email.destroy');
 
-Route::get('operator/pengunguman','SetEmailController@mading_pengunguman');
+Route::get('pengaturan/pengumuman','PengumumanController@mading_pengunguman');
 
 
 /**

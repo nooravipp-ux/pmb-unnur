@@ -30,9 +30,9 @@
                     <div class="x_content">
                         @foreach($pengunguman as $content)
                         <div class="row">
-                            <div class="col-sm-12 shadow p-3 mb-5 bg-white rounded">
-                            <h1>{{$content->header}}</h1>
-                            <h3>{{$content->isi}}</h3>
+                            <div class="col-sm-12 shadow p-3 mb-5 bg-white rounded text-center">
+                            <h2>{{$content->header}}</h2>
+                            <strong><p>{{$content->isi}}</p></strong>
                             </div>
                         </div>
                         @endforeach
