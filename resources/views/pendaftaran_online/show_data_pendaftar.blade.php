@@ -218,7 +218,7 @@
                             @if ($detail_pendaftar->status_pembayaran_registrasi != 'SUDAH DI KONFIRMASI')
                                 <button type="submit" class="btn btn-success">Confirm Pembayaran</button>
                             @elseif ($detail_pendaftar->status_pembayaran_registrasi == 'SUDAH DI KONFIRMASI')
-                                <a href="{{route('cetak.kwitansi',$detail_pendaftar->id_pendaftar)}}" target="_blank"  class="btn btn-success">Cetak Kwitansi</a>
+                                <a href="{{route('cetak.kwitansi',$detail_pendaftar->id_pendaftar)}}" target="_blank"  class="btn btn-success">Cetak Bukti Pembayaran</a>
                             @endif
                           </div>
                         </div>

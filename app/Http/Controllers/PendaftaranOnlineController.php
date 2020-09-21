@@ -74,6 +74,8 @@ class PendaftaranOnlineController extends Controller
     public function cetak_kwitansi_regis($id){
         $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where id_pendaftar='".$id."'");
 
+        $nama_op = Auth::user()->name;
+
         $sorted = Arr::get($list_pmb_pendaftar,0);
         $sortedd = Arr::flatten($sorted);
         $id_fak = Arr::get($sortedd,0);
@@ -92,7 +94,7 @@ class PendaftaranOnlineController extends Controller
                                 ])
                             ->first();
                             //dd($detail_pendaftar);
-        $pdf = PDF::loadview('pendaftaran_online.cetak_kwitansi_regis',['data_pendaftar'=>$detail_pendaftar])->setPaper('A5', 'landscape');
+        $pdf = PDF::loadview('pendaftaran_online.cetak_kwitansi_regis',['data_pendaftar'=>$detail_pendaftar, 'nama_op' => $nama_op])->setPaper('A5', 'landscape');
         return $pdf->stream();
         // return view('pendaftaran_online.cetak_kwitansi_regis');                            
     }
