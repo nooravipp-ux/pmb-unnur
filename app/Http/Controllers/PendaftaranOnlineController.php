@@ -68,7 +68,7 @@ class PendaftaranOnlineController extends Controller
 
         $confirm = DB::table('pmb_pendaftar')->select('pmb_pendaftar.*')->get();
         \Mail::to($request->email)->send(new confirm($confirm));
-        return redirect('/operator/pendaftaran/aktivasi-mhs')->with('status', 'Data Customer Berhasil Di Update');
+        return redirect()->back()->with('sukses', 'Data Pendaftar Berhasil Di Update');
     }
 
     public function cetak_kwitansi_regis($id){
