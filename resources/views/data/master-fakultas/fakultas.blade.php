@@ -58,8 +58,26 @@
     <script src="{{ asset('template/build/js/xedit.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('.edit-fakultas').editable();
-            $('.edit-id-fakultas').editable();
+            $('.edit-fakultas').editable({
+                model: 'popup',
+                type: 'POST',
+                dataType: 'JSON',
+                params: function(params) {
+                    params._token = '{{ csrf_token() }}';
+                    params.id_fakultas = $(this).editable().data('id_fakultas');
+                    return params;
+                }
+            });
+            $('.edit-id-fakultas').editable({
+                model: 'popup',
+                type: 'POST',
+                dataType: 'JSON',
+                params: function(params) {
+                    params._token = '{{ csrf_token() }}';
+                    params.nama_fakultas = $(this).editable().data('nama_fakultas');
+                    return params;
+                }
+            });
         });
     </script>
 @endpush
