@@ -66,6 +66,9 @@
                     params._token = '{{ csrf_token() }}';
                     params.id_fakultas = $(this).editable().data('id_fakultas');
                     return params;
+                },
+                success: function(response) {
+                   location.reload(); //update backbone model
                 }
             });
             $('.edit-id-fakultas').editable({
@@ -76,6 +79,9 @@
                     params._token = '{{ csrf_token() }}';
                     params.nama_fakultas = $(this).editable().data('nama_fakultas');
                     return params;
+                },
+                success: function(response) {
+                   location.reload();
                 }
             });
         });

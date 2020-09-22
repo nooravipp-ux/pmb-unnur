@@ -64,7 +64,19 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.edit-strata').editable();
+            $('.edit-strata').editable({
+                model: 'popup',
+                type: 'POST',
+                dataType: 'JSON',
+                params: function(params) {
+                    params._token = '{{ csrf_token() }}';
+                    params.id_strata = $(this).editable().data('id_strata');
+                    return params;
+                },
+                success: function(response) {
+                   location.reload();
+                }
+            });
         });
 
         $(document).ready(function(){
@@ -73,7 +85,10 @@
                     {value: 'D3', text: 'D3'},
                     {value: 'S1', text: 'S1'},
                     {value: 'S2', text: 'S2'}
-                ]
+                ],
+                 success: function(response) {
+                   location.reload();
+                }
             });
         });
 

@@ -16,7 +16,7 @@ class ApiController extends Controller
             $id = request()->get('pk');
             $name = request()->get('name');
             $value = request()->get('value');
-            DB::table('fakultas')->where('id_fakultas',$id_fakultas)->update([$name => $value]);
+            fakultas::findOrFail($id_fakultas)->update([$name => $value]);
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage(), 400]);
         }
@@ -31,68 +31,93 @@ class ApiController extends Controller
             $id = request()->get('pk');
             $name = request()->get('name');
             $value = request()->get('value');
-            DB::table('fakultas')->where('id_fakultas',$id)->update([$name => $value]);
+            fakultas::findOrFail($id_fakultas)->update([$name => $value]);
         }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage(), 400]);
         }
         return response()->json(['message' => 'Berhasil', 200]);
-        // fakultas::Find($id_fakultas)->update([$name => $value]);
-        // $edit->update([$name => $value]);
-        // dd($edit);
     }
 
     public function editnamaprodi(Request $req,$id_prodi){
-        $id = request()->get('pk');
-        $name = request()->get('name');
-        $value = request()->get('value');
-        $edit = prodi::Find($id_prodi);
-        $edit->update([$name => $value]);
+        try{
+            $id = request()->get('pk');
+            $name = request()->get('name');
+            $value = request()->get('value');
+            prodi::findOrFail($id_prodi)->update([$name => $value]);
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 400]);
+        }
+        return response()->json(['message' => 'Berhasil', 200]);
         // dd($_edit);
     }
 
     public function editidprodi(Request $req,$id_prodi){
-        $id = request()->get('pk');
-        $name = request()->get('name');
-        $value = request()->get('value');
-        $edit = prodi::Find($id_prodi);
-        $edit->update([$name => $value]);
+        try{
+            $id = request()->get('pk');
+            $name = request()->get('name');
+            $value = request()->get('value');
+            prodi::findOrFail($id_prodi)->update([$name => $value]);
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 400]);
+        }
+        return response()->json(['message' => 'Berhasil', 200]);
         // dd($edit);
     }
 
     public function editidstrata(Request $req,$id_strata){
-        $id = request()->get('pk');
-        $name = request()->get('name');
-        $value = request()->get('value');
-        $edit = strata::Find($id_strata);
-        $edit->update([$name => $value]);
+        try{
+            $id = request()->get('pk');
+            $name = request()->get('name');
+            $value = request()->get('value');
+            strata::findOrFail($id_strata)->update([$name => $value]);
+
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 400]);
+        }
+        return response()->json(['message' => 'Berhasil', 200]);
         // dd($edit);
 
     }
 
     public function editjenisstrata(Request $req,$id_strata){
-        $id = request()->get('pk');
-        $name = request()->get('name');
-        $value = request()->get('value');
-        $edit = strata::Find($id_strata);
-        $edit->update([$name => $value]);
+        try{
+            $id = request()->get('pk');
+            $name = request()->get('name');
+            $value = request()->get('value');
+            strata::findOrFail($id_strata)->update([$name => $value]);
+
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 400]);
+        }
+        return response()->json(['message' => 'Berhasil', 200]);
         // dd($edit);
     }
 
     public function editidkelas(Request $req,$id_kelas){
-        $id = request()->get('pk');
-        $name = request()->get('name');
-        $value = request()->get('value');
-        $edit = kelas::Find($id_kelas);
-        $edit->update([$name => $value]);
+        try{
+            $id = request()->get('pk');
+            $name = request()->get('name');
+            $value = request()->get('value');
+            kelas::findOrFail($id_kelas)->update([$name => $value]);
+
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 400]);
+        }
+        return response()->json(['message' => 'Berhasil', 200]);
         // dd($edit);
     }
 
     public function editjeniskelas(Request $req,$id_kelas){
-        $id = request()->get('pk');
-        $name = request()->get('name');
-        $value = request()->get('value');
-        $edit = kelas::Find($id_kelas);
-        $edit->update([$name => $value]);
+        try{
+            $id = request()->get('pk');
+            $name = request()->get('name');
+            $value = request()->get('value');
+            kelas::findOrFail($id_kelas)->update([$name => $value]);
+
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 400]);
+        }
+        return response()->json(['message' => 'Berhasil', 200]);
         // dd($edit);
     }
 

@@ -92,7 +92,32 @@
                 }
             });
 
-            $('.edit-prodi').editable();
+            $('.edit-id-prodi').editable({
+                model: 'popup',
+                type: 'POST',
+                dataType: 'JSON',
+                params: function(params) {
+                    params._token = '{{ csrf_token() }}';
+                    params.id_prodi = $(this).editable().data('id_prodi');
+                    return params;
+                },
+                success: function(response) {
+                   location.reload();
+                }
+            });
+            $('.edit-prodi').editable({
+                model: 'popup',
+                type: 'POST',
+                dataType: 'JSON',
+                params: function(params) {
+                    params._token = '{{ csrf_token() }}';
+                    params.nama_prodi = $(this).editable().data('nama_prodi');
+                    return params;
+                },
+                success: function(response) {
+                   location.reload();
+                }
+            });
         });
 
     </script>
