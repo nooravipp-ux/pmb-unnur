@@ -200,15 +200,18 @@ class PendaftaranOnlineController extends Controller
         $tgl = date("Y-m-d");
         $list_pmb = DB::select("SELECT id_pmb FROM pmb WHERE start_date <= CAST('".$tgl."' AS DATE) AND finish_date >= CAST('".$tgl."' AS DATE)");
 
-        $sorted = Arr::get($list_pmb,0);
-        $sortedd = Arr::flatten($sorted);
-        $id_pmb = Arr::get($sortedd,0);
 
-        if(empty($id_pmb)){
 
-            return redirect('/login')->with('error','Registrasi Belum Dibuka');
+        if(empty($list_pmb)){
+
+            return redirect('/daftar_awal')->with('error','Registrasi Belum Dibuka');
 
         }else{
+
+            $sorted = Arr::get($list_pmb,0);
+            $sortedd = Arr::flatten($sorted);
+            $id_pmb = Arr::get($sortedd,0);
+
             DB::table('pmb_pendaftar')->insert([
                 ['id_pmb' => $id_pmb,
                 'nik' => $request->nik,
