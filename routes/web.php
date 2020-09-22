@@ -23,6 +23,7 @@ Route::resource('/users','UsersController')->middleware('can:manage-users');
 Route::resource('/dash','DashboardController')->middleware('auth');
 
 Route::get('/get-data-pendaftar-per-tahun','DashboardController@get_data_register_per_year');
+Route::get('/get-data-pendaftar-per-gelombang','DashboardController@get_data_register_per_gelombang');
 
 /**
  * Route data master

@@ -51,11 +51,17 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-9 ">
+                <div class="col-md-6 col-sm-12 ">
                     <div id="cha" class="dem">
-                        <canvas id="statistik_pmb" style="width: 1000px; height: 100px;"></canvas>
+                        <canvas id="statistik_pmb"></canvas>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div>
+                        <canvas id="statistik_pmb_pergelombang"></canvas>
+                    </div>
+                </div>
+                
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -757,6 +763,40 @@ function loadData() {
 </script>
 <script>
 // create initial empty chart
+var chart_per_gelombang = document.getElementById("statistik_pmb_pergelombang");
+var myChart2 = new Chart(chart_per_gelombang, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            data: [],
+            borderWidth: 1,
+            borderColor: '#00c0ef',
+            label: 'Total Pendaftar',
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: "Statistik Pendaftaran Pergelombang",
+        },
+        legend: {
+            display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    max: 50,
+                    min: 1,
+                    stepSize: 5
+                }
+            }]
+        }
+    }
+});
+
+
 var ctx_live = document.getElementById("statistik_pmb");
 var myChart = new Chart(ctx_live, {
     type: 'bar',
@@ -766,7 +806,7 @@ var myChart = new Chart(ctx_live, {
             data: [],
             borderWidth: 1,
             borderColor: '#00c0ef',
-            label: 'liveCount',
+            label: 'Total Pendaftar',
         }]
     },
     options: {
@@ -791,16 +831,12 @@ var myChart = new Chart(ctx_live, {
 });
 
 getData();
-
+getDataPerGelombang();
 // logic to get new data
 function getData() {
     $.ajax({
         url: '{{url('/get-data-pendaftar-per-tahun')}}',
         success: function(data) {
-            // process your data to pull out what you plan to use to update the chart
-            // e.g. new label and a new data point
-
-            // add new label and data point to chart's underlying data structures
             console.log(data.length);
             for(var i = 0; i < data.length; i++){
                 myChart.data.labels.push(data[i].tahun);
@@ -821,6 +857,32 @@ function addData(chart, label, data) {
     });
     chart.update();
 }
+
+function getDataPerGelombang() {
+    $.ajax({
+        url: '{{url('/get-data-pendaftar-per-gelombang')}}',
+        success: function(data) {
+            console.log(data.length);
+            for(var i = 0; i < data.length; i++){
+                myChart2.data.labels.push(data[i].gelombang);
+                myChart2.data.datasets.forEach((dataset) => {
+                    dataset.data.push(data[i].jumlah_pendaftar);
+                });
+            }
+            // re-render the chart
+            myChart2.update();
+        }
+    });
+};
+
+function addDataPergelombang(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+
 // get new data every 3 seconds
 // setInterval(getData, 3000);
 </script>

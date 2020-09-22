@@ -70,7 +70,8 @@
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Nilai Test</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="nilai_test" id="nilai_test" required>
+                                        <input type="number" class="form-control" name="nilai_test" id="nilai_test"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -84,8 +85,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                    <table id="datatable-peserta-ujian" class="table table-striped jambo_table bulk_action"
-                                        cellspacing="0" width="100%">
+                                    <table id="datatable-peserta-ujian"
+                                        class="table table-striped jambo_table bulk_action" cellspacing="0"
+                                        width="100%">
                                         <thead>
                                             <tr>
                                                 <th>ID PMB</th>
@@ -119,7 +121,7 @@
 <script>
 $.ajaxSetup({
     headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 $(document).ready(function() {
@@ -133,14 +135,15 @@ $(document).ready(function() {
         var nilai_test = $('#nilai_test').val();
 
         $.ajax({
-            url: '{{url('/operator/entry-nilai-ujian/update-nilai-peserta-ujian')}}',
+            url: '{{url('/operator/entry-nilai-ujian/updat-nilai-peserta-ujian')}}',
             type: 'post',
-            data: {id_test:id_test, 
-                nilai_test:nilai_test
-                },
+            data: {
+                id_test: id_test,
+                nilai_test: nilai_test
+            },
             dataType: "json",
             beforeSend: function() {
-                
+
             },
             success: function(data) {
                 if (data.error) {
@@ -152,7 +155,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $('#id_test').select2({
         placeholder: '- Pilih Nama Peserta Ujian -',
         ajax: {
@@ -171,6 +174,40 @@ $(document).ready(function() {
             },
             cache: true
         }
+    });
+
+    $('#datatable-peserta-ujian').on('click', '.btn_confirm_kelulusan', function() {
+        var currentRow = $(this).closest('tr');
+
+        var id_prodi = currentRow.find('.id_prodi').val();
+        var jenis_pendaftar = currentRow.find('.jenis_pendaftar').val();
+        var id_test = currentRow.find('.id_test').text();
+        console.log(id_prodi);
+        console.log(jenis_pendaftar);
+        console.log(id_test);
+
+        $.ajax({
+            url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
+            type: 'post',
+            data: {
+                id_prodi: id_prodi,
+                jenis_pendaftar: jenis_pendaftar,
+                id_test: id_test
+            },
+            dataType: "json",
+            beforeSend: function() {
+
+            },
+            success: function(data) {
+                if (data.error) {
+                    alert(data.error)
+                } else {
+                    $('.row-data').remove();
+                    loadData();
+                }
+
+            }
+        });
     });
 
 
@@ -196,8 +233,12 @@ function loadData() {
                 } else {
                     for (var i = 0; i < data.length; i++) {
                         tr = '<tr class="row-data">' +
-                            '<td>' + data[i].id_pmb + '<input type="hidden" type="text" class="id_prodi" value="'+data[i].id_prodi+'"></td>' +
-                            '<td class="id_test">' + data[i].id_test + '<input type="hidden" type="text" class="jenis_pendaftar" value="'+data[i].jenis_pendaftar+'"></td>' +
+                            '<td>' + data[i].id_pmb +
+                            '<input type="hidden" type="text" class="id_prodi" value="' + data[i].id_prodi +
+                            '"></td>' +
+                            '<td class="id_test">' + data[i].id_test +
+                            '<input type="hidden" type="text" class="jenis_pendaftar" value="' + data[i]
+                            .jenis_pendaftar + '"></td>' +
                             '<td>' + data[i].nim + '</td>' +
                             '<td>' + data[i].nama + '</td>' +
                             '<td>' + data[i].jalur_masuk + '</td>' +
@@ -207,39 +248,6 @@ function loadData() {
                             '</tr>';
                         $('table tbody').append(tr);
                     }
-
-                    $('#datatable-peserta-ujian').on('click','.btn_confirm_kelulusan', function(){
-                        var currentRow = $(this).closest('tr');
-
-                        var id_prodi = currentRow.find('.id_prodi').val();
-                        var jenis_pendaftar = currentRow.find('.jenis_pendaftar').val(); 
-                        var id_test = currentRow.find('.id_test').text();
-                        console.log(id_prodi);
-                        console.log(jenis_pendaftar);
-                        console.log(id_test);
-
-                        $.ajax({
-                            url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
-                            type: 'post',
-                            data: {id_prodi:id_prodi, 
-                                jenis_pendaftar:jenis_pendaftar,
-                                id_test:id_test
-                                },
-                            dataType: "json",
-                            beforeSend: function() {
-                                
-                            },
-                            success: function(data) {
-                                if (data.error) {
-                                    alert(data.error)
-                                } else {
-                                    $('#row-data').remove();
-                                    loadData();
-                                }
-
-                            }
-                        });
-                    });
                 }
             }
 
