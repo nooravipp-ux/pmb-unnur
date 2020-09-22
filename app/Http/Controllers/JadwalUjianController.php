@@ -48,21 +48,35 @@ class JadwalUjianController extends Controller
             $status_kelulusan = "TIDAK LULUS";
         }
         DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test,'kelulusan' => $status_kelulusan]);
-        $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
-        $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
+        // $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
+        // $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
 
-        \Mail::to($done)->send(new kelulusan($din));
+        // \Mail::to($done)->send(new kelulusan($din));
+        return response()->json('data success updated');
+    }
+    public function confirmasi_kelulusan(Request $request){
+        // dd($request->all());
+        $jenis_pendaftar = "";
+        $tahun = date('Y');
+        
+        if($request->jenis_pendaftar == "Reguler"){
+            $jenis_pendaftar = "1";
+        }else{
+            $jenis_pendaftar = "2";
+        }
+        $set_nim = $this->generate_nim($request->id_prodi, $tahun, $jenis_pendaftar);
+        DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nim'=> $set_nim]);
         return response()->json('data success updated');
     }
     public function get_data_peserta_ujian(Request $request){
         $prodi = Auth::user()->id_prodi;
         if ($request->has('q')) {
             $cari = $request->q;
-            $data_peserta = DB::table('pmb_pendaftar')->select('id_test','nama')->where([['id_prodi', $prodi],['nama', 'LIKE', '%'.$cari.'%']])->get();
+            $data_peserta = DB::table('pmb_pendaftar')->select('id_test','nama')->where([['id_prodi', $prodi],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI'],['nama', 'LIKE', '%'.$cari.'%']])->get();
 
             return response()->json($data_peserta);
         }
-        $data_peserta= DB::table('pmb_pendaftar')->where('id_prodi', $prodi)->select('id_test','nama')->get();
+        $data_peserta= DB::table('pmb_pendaftar')->where([['id_prodi', $prodi],['status_pembayaran_registrasi', 'SUDAH DI KONFIRMASI']])->select('id_test','nama')->get();
 
         return response()->json($data_peserta);
     }
@@ -109,5 +123,20 @@ class JadwalUjianController extends Controller
                             ->get();
         
         return view('ujian_pmb.laporan_kelulusan', compact('data_peserta_lulus'));
+    }
+
+    public function generate_nim($kode_prodi, $tahun, $jenis_daftar){
+        $no = 1;
+        $no_urut = "";
+        $tahun_masuk = substr($tahun, -2);
+
+        $no_urut = DB::select("SELECT '$kode_prodi' AS kode_prodi, '$jenis_daftar' AS jenis_daftar, '$tahun_masuk' AS tahun_angkatan, LPAD((RIGHT(MAX(NIM),3)+1),3,'0') AS no_urut FROM pmb_pendaftar WHERE LEFT(NIM,5) = '$kode_prodi' AND MID(NIM, 7, 2) = '$tahun_masuk'");
+        foreach($no_urut as $nim){
+            if($nim->no_urut != NULL){
+                return $no_urut = $nim->kode_prodi.$nim->jenis_daftar.$nim->tahun_angkatan.$nim->no_urut;
+            }else{
+                return $no_urut = $kode_prodi.$jenis_daftar.$tahun_masuk.sprintf("%03s", $no);
+            }
+        }
     }
 }

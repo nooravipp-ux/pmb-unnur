@@ -63,25 +63,11 @@
                             Registrasi</a></li>
                 </ul>
             </li>
-            <li class="@yield('title_admin')"><a><i class="fa fa-users"></i>Data Calon Mahasiswa<span
-                        class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li class="@yield('tchild_admin')"><a href="{{url('operator/calon-mhs')}}">Cari Calon Mahasiswa</a>
-                    </li>
-                    <li class="@yield('tchild_admin')"><a href="#">Impor Photo</a></li>
-                </ul>
-            </li>
             <li class="@yield('title_admin')"><a><i class="fa fa-file-text"></i>Nilai Ujian<span
                         class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li class="@yield('tchild_admin')"><a href="{{url('/operator/entry-nilai-ujian')}}">Entry Nilai
                             Ujian</a></li>
-                </ul>
-            </li>
-            <li class="@yield('title_admin')"><a><i class="fa fa-edit"></i>Registrasi<span
-                        class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li class="@yield('tchild_admin')"><a href="#">Registrasi Mahasiswa Baru</a></li>
                 </ul>
             </li>
             <li class="@yield('title_admin')"><a><i class="fa fa-cogs"></i>Pengaturan<span

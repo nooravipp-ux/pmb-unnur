@@ -105,6 +105,7 @@ Route::post('/operator/entry-nilai-ujian/update-nilai-peserta-ujian','JadwalUjia
 Route::get('/count-total-peserta-ujian','JadwalUjianController@count_peserta_ujian');
 Route::get('/count-total-peserta-lulus','JadwalUjianController@count_peserta_ujian_lulus');
 Route::get('/count-total-peserta-tidak-lulus','JadwalUjianController@count_peserta_ujian_tidak_lulus');
+Route::post('/operator/entry-nilai-ujian/confirmasi-kelulusan','JadwalUjianController@confirmasi_kelulusan');
 
 Route::get('/operator/jadwal-ujian/notif/{id}','JadwalUjianController@notif')->name('notif.ujian');
 Route::get('/operator/laporan-kelulusan-ujian','JadwalUjianController@laporan_kelulusan');
