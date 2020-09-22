@@ -25,7 +25,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        $prodi = prodi::get()->pluck('id_prodi');
+        $prodi = prodi::all();
         return view('users.index',compact('prodi'))->with('users', $users );
     }
 

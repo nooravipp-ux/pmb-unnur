@@ -17,9 +17,7 @@
                         required>
                         <option disabled selected>- Pilih ID Prodi -</option>
                         @foreach($prodi as $item)
-                            <option>
-                                {{ $item }}
-                            </option>
+                            <option value="{{$item->id_prodi}}">{{$item->id_prodi}} - {{$item->nama_prodi}}</option>
                         @endforeach
                     </select>
                 </div>
