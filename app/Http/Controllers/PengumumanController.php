@@ -40,11 +40,9 @@ class PengumumanController extends Controller
     }
 
     public function sebar($id){
-        // // \Mail::to('bbb@gmail.com')->send(new brodcast($get));
-        // $email_us = DB::table('users')->select('users.email')->get();
-        // $get = DB::table('set_email')->where('id',$id)->select('set_email.*')->first();
-        // \Mail::to($email_us)->send(new brodcast($get));
-        // DB::table('set_email')->where('id',$id)->where('status',1)->update(['status'=>0]);
+        $email_us = DB::table('users')->select('users.email')->get();
+        $get = DB::table('set_email')->where('id',$id)->select('set_email.*')->first();
+        DB::table('set_email')->where('id',$id)->where('status',1)->update(['status'=>0]);
        return redirect()->back();
     }
 }

@@ -48,10 +48,10 @@ class JadwalUjianController extends Controller
             $status_kelulusan = "TIDAK LULUS";
         }
         DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test,'kelulusan' => $status_kelulusan]);
-        // $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
-        // $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
+        $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
+        $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
 
-        // \Mail::to($done)->send(new kelulusan($din));
+        \Mail::to($done)->send(new kelulusan($din));
         return response()->json('data success updated');
     }
     public function confirmasi_kelulusan(Request $request){
