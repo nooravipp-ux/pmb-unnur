@@ -150,8 +150,14 @@ class PendaftaranOnlineController extends Controller
                                 ['fakultas.id_fakultas', $id_fak]
                                 ])
                             ->first();
+
+        if(empty($data_pendaftar->file_foto) && empty($data_pendaftar->file_kk) && empty($data_pendaftar->file_ktp) && empty($data_pendaftar->file_akta) && empty($data_pendaftar->file_ijazah) && empty($data_pendaftar->file_ket_sehat)){
+            return redirect('/operator/pendaftaran/info-registrasi')->with('error','Pendaftar Belum Melengkapi Data-Data');
+        }else{
+            return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
+        }                    
                         
-        return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
+        
     }
 
     //pendaftaran awal
