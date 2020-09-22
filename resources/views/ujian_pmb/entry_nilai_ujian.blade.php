@@ -233,6 +233,7 @@ function loadData() {
                                 if (data.error) {
                                     alert(data.error)
                                 } else {
+                                    $('#row-data').remove();
                                     loadData();
                                 }
 

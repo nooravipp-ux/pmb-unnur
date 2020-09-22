@@ -30,7 +30,7 @@ class PengumumanController extends Controller
     }
 
     public function update($id){
-        DB::table('pmb_pengunguman')->where('id',$id)->where('status',0)->update(['status'=>1]);
+        DB::table('pmb_pengumuman')->where('id',$id)->where('status',0)->update(['status'=>1]);
         return redirect()->back();
     }
 
