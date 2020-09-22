@@ -130,12 +130,27 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function detail_info_registrasi($id){
+
+        $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where id_pendaftar='".$id."'");
+
+        $nama_op = Auth::user()->name;
+
+        $sorted = Arr::get($list_pmb_pendaftar,0);
+        $sortedd = Arr::flatten($sorted);
+        $id_fak = Arr::get($sortedd,0);
+
         $data_pendaftar = DB::table('pmb_pendaftar')
-                        ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
-                        ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
-                        ->join('prodi','prodi.id_prodi','=','pmb_pendaftar.id_prodi')
-                        ->join('strata','strata.id_prodi','=','pmb_pendaftar.id_prodi')
-                        ->where('pmb_pendaftar.id_pendaftar', $id)->first();
+                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                            ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
+                            ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+                            ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+                            ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+                            ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                            ->where([
+                                ['pmb_pendaftar.id_pendaftar', $id],
+                                ['fakultas.id_fakultas', $id_fak]
+                                ])
+                            ->first();
                         
         return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
     }
