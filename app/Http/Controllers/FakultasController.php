@@ -50,9 +50,9 @@ class FakultasController extends Controller
     }
 
     public function prodi_store(Request $request){
-        dd($request->all());
+        // dd($request->all());
         $this->validate($request,[
-            'id_prodi' => 'required|unique:prodi',
+            'id_prodi' => 'required|unique:prodi|min:5|max:5',
             'id_fakultas' => 'required|string',
             'nama_prodi' => 'required|string'
         ]);
@@ -80,11 +80,11 @@ class FakultasController extends Controller
     }
 
     public function kelas_store(Request $request){
-        // $this->validate($request,[
-        //     'id_kelas' => 'required|unique:kelas',
-        //     'id_strata' => 'required|string',
-        //     'nama_kelas' => 'required|string'
-        // ]);
+        $this->validate($request,[
+            'id_kelas' => 'required|unique:kelas',
+            'id_strata' => 'required|string',
+            'nama_kelas' => 'required|string'
+        ]);
         try{
             kelas::create($request->all());
             return redirect()->back()->with('sukses','Berhasil menambahkan data prodi '.$request->id_kelas.' '.$request->nama_kelas);
