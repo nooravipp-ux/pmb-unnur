@@ -1,11 +1,7 @@
 <div class="card-box table-responsive">
     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
         <thead>
-            @php
-                $no = 1;
-            @endphp
             <tr>
-                <th>NO</th>
                 <th>ID Prodi</th>
                 <th>ID Strata</th>
                 <th>Jenis Strata</th>
@@ -15,7 +11,6 @@
         <tbody>
             @foreach($strata as $strata)
                 <tr>
-                    <td>{{ $no++ }}</td>
                     <td>{{ $strata->id_prodi }}</td>
                     <td><a href="#" class="edit-strata" data-type="text" data-name="id_strata" data-pk="{{ $strata->id_strata }}" data-url="{{route('strata.id',$strata->id_strata)}}" data-title="Edit ID strata">{{ $strata->id_strata }}</a></td>
                     <td><a href="#" class="edit-strata-select" data-type="select" data-name="jenis_strata" data-pk="{{ $strata->id_strata }}" data-url="{{route('strata.jenis',$strata->id_strata)}}" data-title="Edit jenis strata">{{ $strata->jenis_strata }}</a></td>

@@ -68,7 +68,19 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.edit-kelas').editable();
+            $('.edit-kelas').editable({
+                model: 'popup',
+                type: 'POST',
+                dataType: 'JSON',
+                params: function(params) {
+                    params._token = '{{ csrf_token() }}';
+                    params.id_kelas = $(this).editable().data('id_kelas');
+                    return params;
+                },
+                success: function(response) {
+                   location.reload();
+                }
+            });
         });
 
         $(document).ready(function () {
@@ -85,7 +97,10 @@
                         value: 'Week End',
                         text: 'Week End'
                     }
-                ]
+                ],
+                success: function(response) {
+                   location.reload();
+                }
             });
         });
 
