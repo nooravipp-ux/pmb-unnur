@@ -130,6 +130,12 @@ $(document).ready(function() {
         loadTotalPeserta();
     }, 10000);
     loadData();
+    // $('table tbody td.nim').map(function() {
+    //                     if($(this).text() === null){
+    //                         console.log($(this).text());
+    //                         $(this).closest('button').disabled = true;
+    //                     }      
+    //                 });
     $('#update').on('click', function() {
         var id_test = $('#id_test').val();
         var nilai_test = $('#nilai_test').val();
@@ -204,6 +210,7 @@ $(document).ready(function() {
                 } else {
                     $('.row-data').remove();
                     loadData();
+                    
                 }
 
             }
@@ -237,9 +244,8 @@ function loadData() {
                             '<input type="hidden" type="text" class="id_prodi" value="' + data[i].id_prodi +
                             '"></td>' +
                             '<td class="id_test">' + data[i].id_test +
-                            '<input type="hidden" type="text" class="jenis_pendaftar" value="' + data[i]
-                            .jenis_pendaftar + '"></td>' +
-                            '<td>' + data[i].nim + '</td>' +
+                            '<input type="hidden" type="text" class="jenis_pendaftar" value="' + data[i].jenis_pendaftar + '"></td>' +
+                            '<td class="nim">' + data[i].nim + '</td>' +
                             '<td>' + data[i].nama + '</td>' +
                             '<td>' + data[i].jalur_masuk + '</td>' +
                             '<td class="nilai_ujian">' + data[i].nilai_ujian + '</td>' +
