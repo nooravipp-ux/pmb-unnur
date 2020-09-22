@@ -4,8 +4,8 @@
 #myImgKTP {
     border-radius: 5px;
     cursor: pointer;
-    width: 200px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
     transition: 0.3s;
 }
 
@@ -14,8 +14,8 @@
 #myImgFOTO {
     border-radius: 5px;
     cursor: pointer;
-    width: 200px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
     transition: 0.3s;
 }
 
@@ -24,8 +24,8 @@
 #myImgKK {
     border-radius: 5px;
     cursor: pointer;
-    width: 200px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
     transition: 0.3s;
 }
 
@@ -34,8 +34,8 @@
 #myImgAKTA {
     border-radius: 5px;
     cursor: pointer;
-    width: 200px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
     transition: 0.3s;
 }
 
@@ -44,8 +44,8 @@
 #myImgIJAZAH {
     border-radius: 5px;
     cursor: pointer;
-    width: 200px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
     transition: 0.3s;
 }
 
@@ -54,8 +54,8 @@
 #myImgKET_SEHAT {
     border-radius: 5px;
     cursor: pointer;
-    width: 200px;
-    height: 300px;
+    width: 220px;
+    height: 220px;
     transition: 0.3s;
 }
 
