@@ -30,10 +30,11 @@ class PmbController extends Controller
      */
     public function biaya_registrasi()
     {
-        $data_biaya_registrasi = DB::table('pmb_biaya_registrasi')
-                                ->join('fakultas','fakultas.id_fakultas','=','pmb_biaya_registrasi.id_fakultas')
-                                ->join('strata','pmb_biaya_registrasi.strata','=','strata.id_strata')
-                                ->join('kelas','pmb_biaya_registrasi.kelas','=','kelas.id_kelas')
+        $data_biaya_registrasi = DB::table('prodi')
+                                ->join('strata','prodi.id_prodi','=','strata.id_prodi')
+                                ->join('kelas','strata.id_strata','=','kelas.id_strata')
+                                ->join('pmb_biaya_registrasi','kelas.id_kelas','=','pmb_biaya_registrasi.kelas')
+                                ->join('fakultas','pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
                                 ->get();
         return view('setting_pmb.biaya_registrasi', compact('data_biaya_registrasi'));
     }

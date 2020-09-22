@@ -114,6 +114,7 @@
                                     <tr>
                                       <th>ID PMB</th>
                                       <th>Fakultas</th>
+                                      <th>Prodi</th>
                                       <th>Jenjang Prodi</th>
                                       <th>Kelas</th>
                                       <th>Biaya Registrasi</th>
@@ -125,6 +126,7 @@
                                     <tr>
                                         <td>{{$data->id_pmb}}</td>
                                         <td>{{$data->nama_fakultas}}</td>
+                                        <td>{{$data->nama_prodi}}</td>
                                         <td>{{$data->jenis_strata}}</td>
                                         <td>{{$data->nama_kelas}}</td>
                                         <td>{{$data->biaya_registrasi}}</td>
