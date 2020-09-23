@@ -1,6 +1,33 @@
 @extends('frame.index')
 @section('style')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+<style>
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  z-index: 99999;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
 @endsection
 @section('content')
 <!-- page content -->
@@ -85,6 +112,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
+                                <div class="loader"></div>
                                     <table id="datatable-peserta-ujian"
                                         class="table table-striped jambo_table bulk_action" cellspacing="0"
                                         width="100%">
@@ -130,18 +158,12 @@ $(document).ready(function() {
         loadTotalPeserta();
     }, 10000);
     loadData();
-    // $('table tbody td.nim').map(function() {
-    //                     if($(this).text() === null){
-    //                         console.log($(this).text());
-    //                         $(this).closest('button').disabled = true;
-    //                     }      
-    //                 });
     $('#update').on('click', function() {
         var id_test = $('#id_test').val();
         var nilai_test = $('#nilai_test').val();
-
+    
         $.ajax({
-            url: '{{url('/operator/entry-nilai-ujian/updat-nilai-peserta-ujian')}}',
+            url: '{{url('/operator/entry-nilai-ujian/update-nilai-peserta-ujian')}}',
             type: 'post',
             data: {
                 id_test: id_test,
@@ -149,7 +171,7 @@ $(document).ready(function() {
             },
             dataType: "json",
             beforeSend: function() {
-
+                $('.loader').show();
             },
             success: function(data) {
                 if (data.error) {
@@ -188,10 +210,6 @@ $(document).ready(function() {
         var id_prodi = currentRow.find('.id_prodi').val();
         var jenis_pendaftar = currentRow.find('.jenis_pendaftar').val();
         var id_test = currentRow.find('.id_test').text();
-        console.log(id_prodi);
-        console.log(jenis_pendaftar);
-        console.log(id_test);
-
         $.ajax({
             url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
             type: 'post',
@@ -202,7 +220,7 @@ $(document).ready(function() {
             },
             dataType: "json",
             beforeSend: function() {
-
+                $('.loader').show();
             },
             success: function(data) {
                 if (data.error) {
@@ -228,6 +246,7 @@ function loadData() {
         dataType: "json",
         beforeSend: function() {
             $(".row-data").remove();
+            $('.loader').show();
         },
         success: function(data) {
             if (data.error) {
@@ -253,7 +272,19 @@ function loadData() {
                             '<td><button type="button" class="btn btn-primary btn-sm btn_confirm_kelulusan">Konfirmasi Kelulusan</button></td>' +
                             '</tr>';
                         $('table tbody').append(tr);
+                        
                     }
+                    $('table tr td.nim').map(function () {
+                            
+                            if ($(this).text() === null) {
+                                // $(this).closest('button').prop('disabled', true);
+                                // $(this).css("background-color", "green");
+                            }
+                            else {
+                                $(this).find('.btn_confirm_kelulusan').prop('disabled', false);
+                            }
+                    });
+                    $('.loader').hide();
                 }
             }
 

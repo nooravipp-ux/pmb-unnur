@@ -40,9 +40,10 @@ class JadwalUjianController extends Controller
     }
 
     public function update_nilai_ujian(Request $request){
-        // dd($request->all());
+        $id_prodi = Auth::user()->id_prodi;
+        $passingrade = $this->cek_passingrade($request->id_test, $request->nilai_test, $id_prodi);
         $status_kelulusan = "";
-        if($request->nilai_test >= 70){
+        if($passingrade){
             $status_kelulusan = "LULUS";
         }else{
             $status_kelulusan = "TIDAK LULUS";
@@ -88,8 +89,19 @@ class JadwalUjianController extends Controller
     }
 
 
-    public function cek_passingrade(){
-
+    public function cek_passingrade($id_test, $nilai_ujian, $id_prodi){
+        $data_pmb = DB::table('pmb_pendaftar')
+                    ->join('pmb', 'pmb.id_pmb','pmb_pendaftar.id_pmb')
+                    ->where('pmb_pendaftar.id_test', $id_test)
+                    ->first();
+        $gelombang_ujian = $data_pmb->gelombang;
+        $data = DB::table('pmb_jadwal_ujian')->select('passingrade')->where([['tahun', date('Y')],['gelombang_ujian', $gelombang_ujian],['id_prodi', $id_prodi]])->first();
+        $pass = $data->passingrade;
+        if($nilai_ujian >= $pass){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function count_peserta_ujian(){
