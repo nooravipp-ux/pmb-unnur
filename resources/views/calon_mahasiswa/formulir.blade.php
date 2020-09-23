@@ -10,18 +10,10 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>FORMULIR</small></h2>
+                        <h2>Form | Formulir</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Settings 1</a>
-                                    <a class="dropdown-item" href="#">Settings 2</a>
-                                </div>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -54,13 +46,23 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">No HP<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" id="no_telepon" name="no_telepon" value="{{$data_pendaftar->no_telepon}}" autofocus required>
+                                    <input class="form-control  @error('no_telepon') is-invalid @enderror" type="text" id="no_telepon" name="no_telepon" value="{{$data_pendaftar->no_telepon}}" autofocus required>
+                                    @error('no_telepon')
+                                    <span class="invalid-feedback" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">No HP Orang Tua<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input class="form-control" type="text" name="no_telp_ortu" id="no_telp_ortu" value="{{$data_pendaftar->no_telp_ortu}}" autofocus required>
+                                    <input class="form-control @error('no_telp_ortu') is-invalid @enderror" type="text" name="no_telp_ortu" id="no_telp_ortu" value="{{$data_pendaftar->no_telp_ortu}}" autofocus required>
+                                    @error('no_telp_ortu')
+                                    <span class="invalid-feedback" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                                         
@@ -103,7 +105,7 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Jalur Masuk<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <select name="jalur_masuk" id="jalur_masuk" class="form-control">
+                                    <select name="jalur_masuk" id="jalur_masuk" class="form-control @error('jalur_masuk') is-invalid @enderror">
                                         @if($data_pendaftar->jalur_masuk == "Reguler")
                                             <option value=""disabled>Pilih Jalur Masuk</option>
                                             <option value="Reguler" selected>Reguler</option>
@@ -136,12 +138,17 @@
                                             <option value="Bidikmisi" >Bidikmisi</option>
                                         @endif
                                     </select>
+                                    @error('jalur_masuk')
+                                    <span class="invalid-feedback" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Jenis Pendaftar<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <select name="jenis_pendaftar" id="jenis_pendaftar" class="form-control">
+                                    <select name="jenis_pendaftar" id="jenis_pendaftar" class="form-control @error('jenis_pendaftar') is-invalid @enderror">
                                         @if($data_pendaftar->jenis_pendaftar == "Reguler")
                                             <option value=""disabled>Pilih Jenis Pendaftar</option>
                                             <option value="Reguler" selected>Reguler</option>
@@ -156,6 +163,11 @@
                                             <option value="Konversi">Konversi</option>
                                         @endif    
                                     </select>
+                                    @error('jenis_pendaftar')
+                                    <span class="invalid-feedback" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>                 
                             <div class="ln_solid">
@@ -163,7 +175,6 @@
                                 <div class="form-group">
                                     <div class="col-md-6 offset-md-3">
                                         <button type='submit' class="btn btn-primary">Submit</button>
-                                        <button type='reset' class="btn btn-success">Reset</button>
                                     </div>
                                 </div>
                             </div>

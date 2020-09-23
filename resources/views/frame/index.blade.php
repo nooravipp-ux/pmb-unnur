@@ -10,7 +10,7 @@
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
 
-    <title>@yield('title')</title>
+    <title>PMB | UNNUR</title>
 
     <!-- Bootstrap -->
     <link href="{{ asset('template/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -48,7 +48,7 @@
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ route('dash.index') }}" class="site_title"><i class="fa fa-mortar-board"></i> <span>PMB-UNNUR</span></a>
+              <a href="{{ route('dash.index') }}" class="site_title"><i class="fa fa-mortar-board"></i> <span>PMB | UNNUR</span></a>
             </div>
 
             <div class="clearfix"></div>

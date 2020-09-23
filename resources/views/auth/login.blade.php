@@ -24,12 +24,21 @@
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-                    <input id="email" name="email" type="email" class="form-control" placeholder="Email" required="">
-
+                    <input id="email" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" required="">
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" required="">
+                    <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required="">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
 
 

@@ -36,6 +36,14 @@ class CalonMhsController extends Controller
     }
 
     public function update_formulir(Request $request){
+
+        $this->validate($request, [
+            'no_telepon' => 'required|string',
+            'no_telp_ortu' => 'required|string',
+            'jalur_masuk' => 'required|string',
+            'jenis_pendaftar' => 'required|string',
+        ]);
+
         DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
         ->update([
             'no_telepon' => $request->no_telepon,
