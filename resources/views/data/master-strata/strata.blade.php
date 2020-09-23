@@ -103,7 +103,7 @@
                         results:  $.map(data, function (prodi) {
                             return {
                                 id: prodi.id_prodi,
-                                text: prodi.id_prodi+' - '+prodi.nama_prodi
+                                text: prodi.nama_fakultas+' - '+prodi.nama_prodi
                             }
                         })
                     };

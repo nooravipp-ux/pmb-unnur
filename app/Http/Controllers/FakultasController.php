@@ -74,19 +74,47 @@ class FakultasController extends Controller
     /**
      * function kelas
      */
+    public function generate_id_kelas(){
+        $no_urut_so = "";
+        $no = 1;
+        $no_urut = DB::select("select max(id_kelas) as kode from kelas");
+
+        foreach($no_urut as $so){
+            $kode = substr($so->kode,3,3);
+            $tambah = $kode + 1;
+            if($tambah < 10){
+                return $no_urut_so = "KEL00".$tambah;
+            }else if($so->kode == NULL){
+                return $no_urut_so = sprintf("KEL001");
+            }else{
+                return $no_urut_so = "KEL".$tambah;
+            }
+        } 
+    }
+
     public function kelas(){
-        $kelas = kelas::all();
+        // $kelas = kelas::all();
+        $kelas = DB::table('strata')
+                    ->join('kelas','strata.id_strata','=','kelas.id_strata')
+                    ->get();
         return view('data.master-kelas.kelas',compact('kelas'));
     }
 
     public function kelas_store(Request $request){
         $this->validate($request,[
-            'id_kelas' => 'required|unique:kelas',
             'id_strata' => 'required|string',
             'nama_kelas' => 'required|string'
         ]);
+
+        $autoidkelas = $this->generate_id_kelas();
+
         try{
-            kelas::create($request->all());
+            // kelas::create($request->all());
+            DB::table('kelas')->insert([
+                ['id_strata' => $request->id_strata,
+                'nama_kelas' => $request->nama_kelas,
+                'id_kelas' => $autoidkelas,]
+            ]);
             return redirect()->back()->with('sukses','Berhasil menambahkan data prodi '.$request->id_kelas.' '.$request->nama_kelas);
         }catch(\Exceton $e){
             return redirect()->back()->with(['error'=>$e->getMessage()]);
@@ -103,18 +131,47 @@ class FakultasController extends Controller
     /**
      * function jenjang
      */
+
+    public function generate_id_strata(){
+        $no_urut_so = "";
+        $no = 1;
+        $no_urut = DB::select("select max(id_strata) as kode from strata");
+
+        foreach($no_urut as $so){
+            $kode = substr($so->kode,5,3);
+            $tambah = $kode + 1;
+            if($tambah < 10){
+                return $no_urut_so = "STRAT00".$tambah;
+            }else if($so->kode == NULL){
+                return $no_urut_so = sprintf("STRAT001");
+            }else{
+                return $no_urut_so = "STRAT".$tambah;
+            }
+        } 
+    }
+
     public function strata(){
-        $strata = strata::all();
+        // $strata = strata::all();
+        $strata = DB::table('prodi')
+                    ->join('strata' ,'prodi.id_prodi' ,'=' ,'strata.id_prodi')
+                    ->get();
         return view('data.master-strata.strata',compact('strata'));
     }
     public function strata_store(Request $request){
         $this->validate($request,[
             'id_prodi' => 'required|string',
             'jenis_strata' => 'required|string',
-            'id_strata' => 'required|unique:strata'
         ]);
+
+        $autoidstrata = $this->generate_id_strata();
+
         try{
-            strata::create($request->all());
+            // strata::create($request->all());
+            DB::table('strata')->insert([
+                ['id_prodi' => $request->id_prodi,
+                'jenis_strata' => $request->jenis_strata,
+                'id_strata' => $autoidstrata,]
+            ]);
             return redirect()->back()->with('sukses','Data Jenjang Pendidikan '.$request->jenis_strata.' berhasil di tambahkan');
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>$e->getMessage()]);
@@ -141,11 +198,18 @@ class FakultasController extends Controller
     public function get_data_jenjang_prodi(Request $request){
         if ($request->has('q')) {
             $cari = $request->q;
-            $data_jenjang_prodi = DB::table('strata')->select('id_strata','id_prodi','jenis_strata')->where('id_strata', 'LIKE', '%'.$cari.'%')->orWhere('jenis_strata', 'LIKE', '%'.$cari.'%')->get();
+            // $data_jenjang_prodi = DB::table('strata')->select('id_strata','id_prodi','jenis_strata')->where('id_strata', 'LIKE', '%'.$cari.'%')->orWhere('jenis_strata', 'LIKE', '%'.$cari.'%')->get();
+            $data_jenjang_prodi = DB::table('prodi')
+            ->join('strata' ,'prodi.id_prodi' ,'=' ,'strata.id_prodi')
+            ->where('id_strata', 'LIKE', '%'.$cari.'%')
+            ->orWhere('jenis_strata', 'LIKE', '%'.$cari.'%')
+            ->get();
 
             return response()->json($data_jenjang_prodi);
         }
-        $data_jenjang_prodi= DB::table('strata')->select('id_strata','id_prodi','jenis_strata')->get();
+        $data_jenjang_prodi = DB::table('prodi')
+        ->join('strata' ,'prodi.id_prodi' ,'=' ,'strata.id_prodi')
+        ->get();
 
         return response()->json($data_jenjang_prodi);
     }
@@ -164,11 +228,18 @@ class FakultasController extends Controller
     public function get_data_prodi(Request $request){
         if ($request->has('q')) {
             $cari = $request->q;
-            $data_prodi = DB::table('prodi')->select('id_prodi','nama_prodi')->where('id_prodi', 'LIKE', '%'.$cari.'%')->orWhere('nama_prodi', 'LIKE', '%'.$cari.'%')->get();
-
+            // $data_prodi = DB::table('prodi')->select('id_prodi','nama_prodi')->where('id_prodi', 'LIKE', '%'.$cari.'%')->orWhere('nama_prodi', 'LIKE', '%'.$cari.'%')->get();
+            $data_prodi = DB::table('fakultas')
+            ->join('prodi','fakultas.id_fakultas','=','prodi.id_fakultas')
+            ->where('id_prodi', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nama_prodi', 'LIKE', '%'.$cari.'%')
+            ->get();
             return response()->json($data_prodi);
         }
-        $data_prodi= DB::table('prodi')->select('id_prodi','nama_prodi')->get();
+        // $data_prodi= DB::table('prodi')->select('id_prodi','nama_prodi')->get();
+        $data_prodi = DB::table('fakultas')
+        ->join('prodi','fakultas.id_fakultas','=','prodi.id_fakultas')
+        ->get();
 
         return response()->json($data_prodi);
     }

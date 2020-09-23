@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>ID Strata</th>
-                <th>ID Kelas</th>
+                <th>Jenjang Pendidikan</th>
                 <th>Nama Kelas</th>
                 <th></th>
             </tr>
@@ -11,8 +11,8 @@
         <tbody>
             @foreach($kelas as $kelas)
                 <tr>
-                    <td>{{ $kelas->id_strata }}</td>
                     <td><a href="#" class="edit-kelas" data-type="text" data-name="id_kelas" data-pk="{{ $kelas->id_kelas }}" data-url="{{route('kelas.id',$kelas->id_kelas)}}" data-title="Edit ID kelas">{{ $kelas->id_kelas }}</a></td>
+                    <td>{{ $kelas->jenis_strata }}</td>
                     <td><a href="#" class="edit-kelas-select" data-type="select" data-name="nama_kelas" data-pk="{{ $kelas->id_kelas }}" data-url="{{route('kelas.jenis',$kelas->id_kelas)}}" data-title="Edit jenis kelas">{{ $kelas->nama_kelas }}</a></td>
                     <td>
                         <a href="{{route('kelas.destroy',$kelas->id_kelas)}}" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> delete</a>

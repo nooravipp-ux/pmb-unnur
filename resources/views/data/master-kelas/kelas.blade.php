@@ -105,7 +105,7 @@
         });
 
         $('#id_jenjang_prodi').select2({
-            placeholder: '- Pilih Jenjang Podi -',
+            placeholder: '- Pilih Jenjang Pendidikan -',
             ajax: {
                 url: '{{ url('/prodi/get_data_jenjang_prodi') }}',
                 dataType: 'json',
@@ -113,9 +113,10 @@
                 processResults: function (data) {
                     return {
                         results: $.map(data, function (jenjang_prodi) {
+                            console.log(jenjang_prodi.nama_prodi);
                             return {
                                 id: jenjang_prodi.id_strata,
-                                text: jenjang_prodi.id_prodi + ' - ' + jenjang_prodi.jenis_strata
+                                text: jenjang_prodi.nama_prodi + ' - ' + jenjang_prodi.jenis_strata
                             }
                         })
                     };
