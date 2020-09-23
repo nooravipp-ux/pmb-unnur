@@ -4,7 +4,7 @@
             <tr>
                 <th>ID Strata</th>
                 <th>Prodi</th>
-                <th>Jenis Strata</th>
+                <th>Jenjang Pendidikan</th>
                 <th></th>
             </tr>
         </thead>
