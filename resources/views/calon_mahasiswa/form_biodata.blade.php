@@ -10,28 +10,26 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <strong>
-                            <h2>NO PENDFTARAN : {{$data_pendaftar->id_pendaftar}}</h2>
+                            <h2>FORM | BIODATA, NO PENDAFTARAN : {{$data_pendaftar->id_pendaftar}}</h2>
                         </strong>
                         <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                    aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Settings 1</a>
-                                    </li>
-                                    <li><a href="#">Settings 2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <!-- Smart Wizard -->
+                        @if($status_pembayaran == false)
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <span style="background-color: lightblue;">
+                                    <h2>Silahkan lakukan pembayaran terlebih dahulu</h2>
+                                </span>
+                            </div>
+                        </div>
+                        @else
                         <div id="wizard" class="form_wizard wizard_horizontal">
                             <ul class="wizard_steps">
                                 <li>
@@ -71,15 +69,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            @if($status_pembayaran == false)
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <span style="background-color: lightblue;">
-                                        <h2>Silahkan lakukan pembayaran terlebih dahulu</h2>
-                                    </span>
-                                </div>
-                            </div>
-                            @else
+
                             <form id="form-biodata" class="form-horizontal form-label-left" method="POST"
                                 action="{{url('/calon-mahasiswa/form-biodata/simpan-data-biodata')}}">
                                 @csrf
@@ -127,14 +117,26 @@
                                             Kelamin</label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <div class="form-check form-check-inline">
+                                                @if($data_pendaftar->jenis_kelamin == "laki-laki")
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                                    id="inlineRadio1" value="laki-laki">
+                                                    id="inlineRadio1" value="laki-laki" checked>
                                                 <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
+                                                @else
+                                                <input class="form-check-input" type="radio" name="jenis_kelamin"
+                                                id="inlineRadio1" value="laki-laki">
+                                                <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
+                                                @endif
                                             </div>
                                             <div class="form-check form-check-inline">
+                                                @if($data_pendaftar->jenis_kelamin == "perempuan")
+                                                <input class="form-check-input" type="radio" name="jenis_kelamin"
+                                                    id="inlineRadio2" value="perempuan" checked>
+                                                <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                                @else
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
                                                     id="inlineRadio2" value="perempuan">
-                                                <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                                 <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
