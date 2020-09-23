@@ -11,15 +11,10 @@
             <div class="modal-body">
                 <!-- fakultas Field -->
                 <div class="form-group col-sm-12">
-                    <label for="">ID Strata</label><br>
+                    <label for="">Jenjang Pendidikan</label><br>
                     <select name="id_strata" id="id_jenjang_prodi" class="form-control {{ $errors->has('id_strata') ? 'is-invalid':'' }}" required></select>
                 </div>
-                <div class="form-group col-sm-6">
-                    <label for="">ID Kelas</label><br>
-                    <input type="text" name="id_kelas" id="id_kelas" class="form-control {{ $errors->has('id_kelas') ? 'is-invalid':'' }}"
-                        placeholder="Tentukan Id kelas" required>
-                </div>
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-12">
                     <label for="">Nama Kelas</label><br>
                     <select name="nama_kelas" id="nama_kelas" class="form-control {{ $errors->has('nama_kelas') ? 'is-invalid':'' }}" required>
                         <option disabled selected>- Pilih Kelas -</option>
