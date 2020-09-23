@@ -96,6 +96,9 @@ Route::get('/count-total-register','PendaftaranOnlineController@count_total_regi
 Route::get('/count-today-register','PendaftaranOnlineController@count_today_register');
 Route::get('/count-register-confirmed','PendaftaranOnlineController@count_register_confirmed');
 
+Route::get('/operator/pendaftaran/mahasiswa-lolos-seleksi','PendaftaranOnlineController@mhs_lolos_seleksi');
+
+
 //jadwal ujian PMB
 Route::get('/operator/jadwal-ujian','JadwalUjianController@jadwal_ujian');
 Route::post('/operator/jadwal-ujian/simpan','JadwalUjianController@simpan_jadwal_ujian');

@@ -28,8 +28,8 @@
                         Week</span>
                 </div>
                 <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Lulus Seleksi</span>
-                    <a href="{{url('')}}"><div class="count green">0</div></a>
+                    <span class="count_top"><i class="fa fa-user"></i> Aktivasi</span>
+                    <div class="count green">0</div>
                     <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
                         Week</span>
                 </div>
@@ -47,7 +47,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-expanded="false"><i class="fa fa-wrench"></i></a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Mahasiswa Terdaftar</a>
+                                    <a class="dropdown-item" href="#">Settings 1</a>
                                     <a class="dropdown-item" href="#">Settings 2</a>
                                 </div>
                             </li>
@@ -67,8 +67,7 @@
                                         width="100%">
                                         <thead>
                                             <tr>
-                                                <th>No Pendaftraan</th>
-                                                <th>ID PMB</th>
+                                                <th>nim</th>
                                                 <th>NIK</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>E-mail</th>
@@ -83,10 +82,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($data_pendaftar as $data)
+                                            @foreach($data_mhs as $data)
                                             <tr>
-                                                <td>{{$data->id_pendaftar}}</td>
-                                                <td>{{$data->id_pmb}}</td>
+                                                <td>{{$data->nim}}</td>
                                                 <td>{{$data->nik}}</td>
                                                 <td>{{$data->nama}}</td>
                                                 <td>{{$data->email}}</td>
