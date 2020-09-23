@@ -216,11 +216,21 @@ class FakultasController extends Controller
     public function get_data_kelas(Request $request){
         if ($request->has('q')) {
             $cari = $request->q;
-            $data_kelas = DB::table('kelas')->select('id_kelas','nama_kelas')->where('id_kelas', 'LIKE', '%'.$cari.'%')->orWhere('nama_kelas', 'LIKE', '%'.$cari.'%')->get();
+            // $data_kelas = DB::table('kelas')->select('id_kelas','nama_kelas')->where('id_kelas', 'LIKE', '%'.$cari.'%')->orWhere('nama_kelas', 'LIKE', '%'.$cari.'%')->get();
+            $data_kelas = DB::table('prodi')
+            ->join('strata' ,'prodi.id_prodi' ,'=','strata.id_prodi')
+            ->join('kelas','strata.id_strata','=','kelas.id_strata')
+            ->where('id_kelas', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nama_kelas', 'LIKE', '%'.$cari.'%')
+            ->get();
 
             return response()->json($data_kelas);
         }
-        $data_kelas= DB::table('kelas')->select('id_kelas','nama_kelas')->get();
+        // $data_kelas= DB::table('kelas')->select('id_kelas','nama_kelas')->get();
+        $data_kelas = DB::table('prodi')
+        ->join('strata' ,'prodi.id_prodi' ,'=','strata.id_prodi')
+        ->join('kelas','strata.id_strata','=','kelas.id_strata')
+        ->get();
 
         return response()->json($data_kelas);
     }
