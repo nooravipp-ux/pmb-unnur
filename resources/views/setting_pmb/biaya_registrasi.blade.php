@@ -169,7 +169,7 @@
                         results:  $.map(data, function (pmb) {
                             return {
                                 id: pmb.id_pmb,
-                                text: pmb.id_pmb+ ' - ' + pmb.gelombang
+                                text: pmb.id_pmb+ ' - ' + 'Gelombang ' + pmb.gelombang
                             }
                         })
                     };
@@ -179,6 +179,7 @@
         });
 
         $('#id_fakultas').select2({
+          
     		placeholder: '- Pilih Fakultas -',
             ajax: {
                 url:  '{{url('/fakultas/get-data-fakultas')}}',
@@ -209,7 +210,7 @@
                         results:  $.map(data, function (jenjang_prodi) {
                             return {
                                 id: jenjang_prodi.id_strata,
-                                text: jenjang_prodi.jenis_strata
+                                text: jenjang_prodi.nama_prodi+' - '+jenjang_prodi.jenis_strata
                             }
                         })
                     };
@@ -229,7 +230,7 @@
                         results:  $.map(data, function (kelas) {
                             return {
                                 id: kelas.id_kelas,
-                                text: kelas.id_kelas+' - '+kelas.nama_kelas
+                                text:kelas.nama_prodi +' - '+ kelas.jenis_strata+' - '+kelas.nama_kelas
                             }
                         })
                     };
