@@ -35,7 +35,9 @@ class PendaftaranOnlineController extends Controller
     public function mhs_lolos_seleksi(){
         $prodi = Auth::user()->id_prodi;
         $data_mhs = DB::table('pmb_pendaftar')
-                    ->where([['pmb_pendaftar.tahun', date('Y')],['pmb_pendaftar.lulus_seleksi', 1],['pmb_pendaftar.id_prodi', $prodi]])->get();
+                    ->join('biodata','biodata.id_pendaftar','pmb_pendaftar.id_pendaftar')
+                    ->where([['pmb_pendaftar.tahun', date('Y')],['pmb_pendaftar.lulus_seleksi', 1],['pmb_pendaftar.id_prodi', $prodi]])
+                    ->get();
 
         return view('pendaftaran_online.mhs_terdaftar', compact('data_mhs'));
     }

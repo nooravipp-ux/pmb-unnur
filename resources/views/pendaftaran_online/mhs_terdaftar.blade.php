@@ -72,11 +72,7 @@
                                                 <th>Nama Lengkap</th>
                                                 <th>E-mail</th>
                                                 <th>No Telp</th>
-                                                <th>Fakultas</th>
-                                                <th>Prodi</th>
-                                                <th>Strata</th>
                                                 <th>Tahun </th>
-                                                
                                                 <th>Status Registrasi</th>
                                                 <th>Action</th>
                                             </tr>
@@ -88,11 +84,7 @@
                                                 <td>{{$data->nik}}</td>
                                                 <td>{{$data->nama}}</td>
                                                 <td>{{$data->email}}</td>
-                                                <td>{{$data->no_telepon}}</td>
-                                                <td>{{$data->nama_fakultas}}</td>
-                                                <td>{{$data->nama_prodi}}</td>
-                                                <td>{{$data->jenis_strata}}</td>
-                                                
+                                                <td>{{$data->no_telepon}}</td>                    
                                                 <td>{{$data->tahun}}</td>
                                                 <td class="status">{{$data->status_pembayaran_registrasi}}</td>
                                                 <td class="text-center"><a href="{{route('detail.register', $data->id_pendaftar)}}" data-toggle="tooltip"
