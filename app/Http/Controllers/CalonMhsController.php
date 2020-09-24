@@ -117,6 +117,7 @@ class CalonMhsController extends Controller
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
                         ->where('.pmb_pendaftar.email', $email)->first();
+        $db_sistemik = DB::connection('mysql2');
         $data_provinsi = $db_sistemik
                         ->table('v_wilayah')
                         ->select('id_prov','provinsi')
@@ -176,7 +177,7 @@ class CalonMhsController extends Controller
                 // $path = $request->file('file')->getRealPath();
                 // $bukti = file_get_contents($path);
                 // $base64 = base64_encode($bukti);
-                $bukti = Image::make($request->file)->fit(500)->encode('data-url');
+                $bukti = Image::make($request->file)->fit(400)->encode('data-url');
                 DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
                 ->update([
                     'metode_pembayaran' => $request->metode,
@@ -237,12 +238,12 @@ class CalonMhsController extends Controller
                 // $path_ket_sehat = $request->file('file_ket_sehat')->getRealPath();
                 // $ket_sehat = file_get_contents($path_ket_sehat);
                 // $base64_ket_sehat = base64_encode($ket_sehat);
-                $ktp = Image::make($request->file_ktp)->fit(500)->encode('data-url');
-                $foto = Image::make($request->file_foto)->fit(500)->encode('data-url');
-                $kk = Image::make($request->file_kk)->fit(500)->encode('data-url');
-                $akta = Image::make($request->file_akta)->fit(500)->encode('data-url');
-                $ijazah = Image::make($request->file_ijazah)->fit(500)->encode('data-url');
-                $ket_sehat = Image::make($request->file_ket_sehat)->fit(500)->encode('data-url');
+                $ktp = Image::make($request->file_ktp)->fit(400)->encode('data-url');
+                $foto = Image::make($request->file_foto)->fit(400)->encode('data-url');
+                $kk = Image::make($request->file_kk)->fit(400)->encode('data-url');
+                $akta = Image::make($request->file_akta)->fit(400)->encode('data-url');
+                $ijazah = Image::make($request->file_ijazah)->fit(400)->encode('data-url');
+                $ket_sehat = Image::make($request->file_ket_sehat)->fit(400)->encode('data-url');
 
                 DB::table('biodata')->where('id_pendaftar',$request->id_pendaftar)
                 ->update([

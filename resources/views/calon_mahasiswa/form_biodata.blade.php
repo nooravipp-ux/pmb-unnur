@@ -174,7 +174,7 @@
                                             for="last-name">RW<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="rw" class="form-control " value="{{$data_pendaftar->rw}">
+                                            <input type="text" name="rw" class="form-control " value="{{$data_pendaftar->rw}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -215,7 +215,7 @@
                                             for="last-name">Kelurahan / Desa<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="ds_kel" class="form-control " value="">
+                                            <input type="text" name="ds_kel" class="form-control " value="{{$data_pendaftar->ds_kel}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -358,9 +358,9 @@
                                     </div>
                                     <br>
                                 </div>
-                                <div id="step-4" class="text-center">
-                                    <button type="submit" form="form-biodata" class="btn btn-primary">Update</button>
-
+                                <hr>
+                                <div id="step-4" class="col-md-8 offset-md-3">
+                                    <button type="submit" form="form-biodata" class="btn btn-success">Simpan</button>
                                 </div>
                             </form>
                             @endif

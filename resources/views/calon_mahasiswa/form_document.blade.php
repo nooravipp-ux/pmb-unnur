@@ -468,9 +468,9 @@
                     <span class="section"></span>
 
                     <div class="form-group row mb-0" id="btn-submit" >
-                        <div class="col-md-8 offset-md-4">
-                            <button id="btn-submit" type="submit" class="btn btn-primary">
-                                Submit
+                        <div class="col-md-8 offset-md-3">
+                            <button id="btn-submit" type="submit" class="btn btn-success">
+                                Simpan
                             </button>
                         </div>
                     </div>
