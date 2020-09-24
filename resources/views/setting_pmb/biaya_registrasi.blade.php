@@ -1,5 +1,6 @@
 @extends('frame.index')
 @section('style')
+<link href="{{ asset('template/build/css/xedit.css') }}" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
@@ -12,18 +13,9 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Biaya Registrasi PMB</h2>
+                    <h2>Form | Biaya Registrasi PMB</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -88,18 +80,9 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Biaya Registrasi PMB</h2>
+                    <h2>Form | Data Biaya Registrasi PMB</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -129,8 +112,8 @@
                                         <td>{{$data->nama_prodi}}</td>
                                         <td>{{$data->jenis_strata}}</td>
                                         <td>{{$data->nama_kelas}}</td>
-                                        <td>{{$data->biaya_registrasi}}</td>
-                                        <td class="text-center"><a href="" class="btn btn-primary btn-sm fa fa-edit"></a>
+                                        <td>Rp. <a href="#" class="edit-biaya-regis" data-type="text" data-name="biaya_registrasi" data-pk="{{$data->id_pmb_biaya_registrasi}} " data-url="{{route('biaya.edit',$data->id_pmb_biaya_registrasi)}}" data-title="Edit biaya regis">{{ number_format($data->biaya_registrasi,0) }}</a>-</td>
+                                        <td class="text-center">
                                             <form method="POST" action="{{route('biaya.delete', $data->id_pmb_biaya_registrasi)}}">
                                                 {{ csrf_field() }}
                                                 <div class="form-group">
@@ -155,9 +138,25 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('template/build/js/xedit.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
+
+        $('.edit-biaya-regis').editable({
+              model: 'popup',
+              type: 'POST',
+              dataType: 'JSON',
+              params: function(params) {
+                params._token = '{{ csrf_token() }}';
+                params.biaya_registrasi = $(this).editable().data('biaya_registrasi');
+                return params;
+              },
+              success: function(response) {
+                 location.reload();
+            }
+        });
+
         $('#id_pmb').select2({
     		placeholder: '- Pilih ID PMB -',
             ajax: {
@@ -179,7 +178,7 @@
         });
 
         $('#id_fakultas').select2({
-          
+
     		placeholder: '- Pilih Fakultas -',
             ajax: {
                 url:  '{{url('/fakultas/get-data-fakultas')}}',
@@ -200,7 +199,7 @@
         });
 
         $('#id_jenjang_prodi').select2({
-    		placeholder: '- Pilih Jenjang Podi -',
+    		placeholder: '- Pilih Jenjang Prodi -',
             ajax: {
                 url:  '{{url('/prodi/get_data_jenjang_prodi')}}',
                 dataType: 'json',

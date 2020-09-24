@@ -255,6 +255,7 @@ class PendaftaranOnlineController extends Controller
                 'no_telepon' => $request->telp,
                 'id_prodi' => $request->prodi,
                 'id_fakultas' => $request->fakultas,
+                'id_kelas' => $request->kelas,
                 'created_at' => $tgl]
             ]);
 
