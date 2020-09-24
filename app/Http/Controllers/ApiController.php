@@ -121,5 +121,17 @@ class ApiController extends Controller
         // dd($edit);
     }
 
+    public function editbiayaregis(Request $req,$id_pmb_biaya_registrasi){
+        try{
+            $id = request()->get('pk');
+            $name = request()->get('name');
+            $value = request()->get('value');
+            DB::table('pmb_biaya_registrasi')->where('id_pmb_biaya_registrasi',$id_pmb_biaya_registrasi)->update([$name => $value]);
+        }catch(\Exception $e){
+            return response()->json(['message' => $e->getMessage(), 400]);
+        }
+        return response()->json(['message' => 'Berhasil', 200]);
+        // dd($edit);
+    }
 
 }
