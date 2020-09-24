@@ -158,7 +158,7 @@
                                             for="last-name">Jalan<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="last-name" name="jalan" class="form-control ">
+                                            <input type="text" id="last-name" name="jalan" class="form-control " value="{{$data_pendaftar->jln}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -166,7 +166,7 @@
                                             for="last-name">RT<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="last-name" name="rt" class="form-control ">
+                                            <input type="text" id="last-name" name="rt" class="form-control " value="{{$data_pendaftar->rt}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -174,7 +174,7 @@
                                             for="last-name">RW<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="rw" class="form-control " value="">
+                                            <input type="text" name="rw" class="form-control " value="{{$data_pendaftar->rw}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
