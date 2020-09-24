@@ -67,6 +67,11 @@ class JadwalUjianController extends Controller
         }
         $set_nim = $this->generate_nim($request->id_prodi, $tahun, $jenis_pendaftar);
         DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nim'=> $set_nim]);
+
+        $db_sistemik = DB::connection('mysql2');
+        $db_sistemik->table('mhs')->insert(
+            ['nm_pd' => 'john@example.com', 'votes' => 0]
+        );
         return response()->json('data success updated');
     }
     public function get_data_peserta_ujian(Request $request){

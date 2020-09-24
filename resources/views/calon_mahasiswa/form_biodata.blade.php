@@ -421,8 +421,8 @@ $(document).ready(function(){
                 return {
                     results: $.map(data, function(jenj_pend) {
                         return {
-                            id: jenj_pend.id_jen_didik,
-                            text: jenj_pend.nm_jen_didik
+                            id: jenj_pend.id_jenj_didik,
+                            text: jenj_pend.nm_jenj_didik
                         }
                     })
                 };
