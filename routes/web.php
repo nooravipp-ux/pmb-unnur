@@ -150,3 +150,12 @@ Route::get('/calon-mahasiswa/get-data-penghasilan','CalonMhsController@get_data_
 Route::get('/calon-mahasiswa/get-data-jenis_tinggal','CalonMhsController@get_data_jenis_tinggal');
 
 Route::get('/calon-mahasiswa/get-data-kewarganegaraan','CalonMhsController@get_data_kewarganegaraan');
+
+Route::get('/agama_get','PendaftaranOnlineController@agama_get')->name('agama.get');
+Route::get('/provinsi_get','PendaftaranOnlineController@provinsi_get')->name('provinsi.get');
+Route::get('/kota_get','PendaftaranOnlineController@kota_get')->name('kota.get');
+Route::get('/kecamatan_get','PendaftaranOnlineController@kecamatan_get')->name('kecamatan.get');
+Route::get('/pendidikan_get','PendaftaranOnlineController@pendidikan_get')->name('pendidikan.get');
+Route::get('/pekerjaan_get','PendaftaranOnlineController@pekerjaan_get')->name('pekerjaan.get');
+Route::get('/penghasilan_get','PendaftaranOnlineController@penghasilan_get')->name('penghasilan.get');
+Route::get('/warganegara_get','PendaftaranOnlineController@warganegara_get')->name('warganegara.get');

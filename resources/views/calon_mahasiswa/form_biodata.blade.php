@@ -179,6 +179,16 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="last-name">Kewarganegaraan<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select name="warganegara" class="form-control " id="warganegara">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
                                             for="last-name">Provinsi<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
@@ -563,6 +573,26 @@ $(document).ready(function(){
                         return {
                             id: jns_tinggal.id_jns_tinggal,
                             text: jns_tinggal.nm_jns_tinggal
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+    
+    $('#warganegara').select2({
+        placeholder: '- Pilih Kewarganegaraan -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-kewarganegaraan')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(negara) {
+                        return {
+                            id: negara.kewarganegaraan,
+                            text: negara.nm_wil
                         }
                     })
                 };

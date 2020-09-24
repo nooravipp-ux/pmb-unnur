@@ -168,8 +168,93 @@ class PendaftaranOnlineController extends Controller
         }else{
             return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
         }                    
-                        
-        
+    }
+
+    public function agama_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_agama = $db_sistemik
+                ->table('agama')
+                ->where('id_agama', $request->id)
+                ->first();
+
+        return response()->json($data_agama);
+    }
+
+    public function provinsi_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_provinsi = $db_sistemik
+                ->table('v_wilayah')
+                ->select('id_prov','provinsi')
+                ->where('id_prov', $request->id)
+                ->first();
+
+        return response()->json($data_provinsi);
+    }
+
+    public function kota_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_kota = $db_sistemik
+                ->table('v_wilayah')
+                ->select('id_kota','kota')
+                ->where('id_kota', $request->id)
+                ->first();
+
+        return response()->json($data_kota);
+    }
+
+    public function kecamatan_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_kecamatan = $db_sistemik
+                ->table('v_wilayah')
+                ->select('id_kec','kecamatan')
+                ->where('id_kec', $request->id)
+                ->first();
+
+        return response()->json($data_kecamatan);
+    }
+
+    public function pendidikan_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_pendidikan = $db_sistemik
+                ->table('jenjang_pendidikan')
+                ->select('id_jenj_didik','nm_jenj_didik')
+                ->where('id_jenj_didik', $request->id)
+                ->first();
+
+        return response()->json($data_pendidikan);
+    }
+
+    public function pekerjaan_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_pekerjaan = $db_sistemik
+                ->table('pekerjaan')
+                ->select('id_pekerjaan','nm_pekerjaan')
+                ->where('id_pekerjaan', $request->id)
+                ->first();
+
+        return response()->json($data_pekerjaan);
+    }
+
+    public function penghasilan_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_penghasilan = $db_sistemik
+                ->table('penghasilan')
+                ->select('id_penghasilan','nm_penghasilan')
+                ->where('id_penghasilan', $request->id)
+                ->first();
+
+        return response()->json($data_penghasilan);
+    }
+
+    public function warganegara_get(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_warganegara = $db_sistemik
+                ->table('kewarganegaraan')
+                ->select('kewarganegaraan','nm_wil')
+                ->where('kewarganegaraan', $request->id)
+                ->first();
+
+        return response()->json($data_warganegara);
     }
 
     //pendaftaran awal

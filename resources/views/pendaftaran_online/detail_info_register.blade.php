@@ -296,15 +296,6 @@
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Settings 1</a>
-                      <a class="dropdown-item" href="#">Settings 2</a>
-                    </div>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
               </ul>
               <div class="clearfix"></div>
             </div>
@@ -320,7 +311,7 @@
 
                 <ul class="list-unstyled user_data">
                   <li>
-                      <i class="fa fa-map-marker user-profile-icon"></i> {{ $data_pendaftar->alamat }}
+                      <i class="fa fa-map-marker user-profile-icon"></i> {{ $data_pendaftar->tempat_lahir }}
                   </li>
                 </ul>
 
@@ -367,25 +358,25 @@
                       <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->tempat_lahir }}</label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Agama</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->agama }}</label>
+                      <label for="agama" id="agama" class="col-form-label"></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Alamat</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->alamat }}</label>
+                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->jln }} RT{{ $data_pendaftar->rt }}/{{ $data_pendaftar->rw }}</label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Kewarganegaraan</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->warganegara }}</label>
+                      <label for="warganegara" id="warganegara" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Provinsi</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->provinsi }}</label>
+                      <label for="provinsi" id="provinsi" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Kota</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->kota_kab }}</label>
+                      <label for="kota" id="kota" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Kecamatan</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->kecamatan }}</label>
+                      <label for="kecamatan" id="kecamatan" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Kelurahan / Desa</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->kelurahan }}</label>
+                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->ds_kel }}</label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Kode Pos</label>
                       <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->kode_pos }}</label>
@@ -408,13 +399,13 @@
                       <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->tgl_lahir_ayah }}</label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Pendidikan</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->pendidikan_ayah }}</label>
+                      <label for="pendidikan_a" id="pendidikan_a" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Pekerjaan</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->pekerjaan_ayah }}</label>
+                      <label for="pekerjaan_a" id="pekerjaan_a" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Penghasilan Ayah</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->penghasilan_ayah }}</label>
+                      <label for="penghasilan_a" id="penghasilan_a" class="col-form-label "></label>
                       <hr>
                       <!-- end user projects -->
 
@@ -431,13 +422,13 @@
                       <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->tgl_lahir_ibu }}</label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Pendidikan</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->pendidikan_ibu }}</label>
+                      <label for="pendidikan_i" id="pendidikan_i" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Pekerjaan</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->pekerjaan_ibu }}</label>
+                      <label for="pekerjaan_i" id="pekerjaan_i" class="col-form-label "></label>
                       <br>
                       <label for="" class="col-md-2 col-form-label text-md-left">Penghasilan Ayah</label>
-                      <label for="nik" id="nik" class="col-form-label ">: {{ $data_pendaftar->penghasilan_ibu }}</label>
+                      <label for="penghasilan_i" id="penghasilan_i" class="col-form-label "></label>
                       <hr>
                       <!-- end user projects -->
                     </div>
@@ -505,6 +496,124 @@
   <!-- /page content -->
 @endsection
 @section('script')
+<script>
+  $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }); 
+        $.ajax({
+				type : "GET",
+				url:'{{route('agama.get')}}',
+				data:{'id':'{{ $data_pendaftar->agama }}'},
+				success:function(data){
+          console.log(data.nm_agama);
+          $('#agama').text(': '+data.nm_agama);
+				}
+			});
+
+      $.ajax({
+				type : "GET",
+				url:'{{route('provinsi.get')}}',
+				data:{'id':'{{ $data_pendaftar->id_prov }}'},
+				success:function(data){
+          console.log(data);
+          $('#provinsi').text(': '+data.provinsi);
+				}
+			});
+      
+      $.ajax({
+				type : "GET",
+				url:'{{route('kota.get')}}',
+				data:{'id':'{{ $data_pendaftar->id_kota }}'},
+				success:function(data){
+          console.log(data);
+          $('#kota').text(': '+data.kota);
+				}
+			});
+     
+      $.ajax({
+				type : "GET",
+				url:'{{route('kecamatan.get')}}',
+				data:{'id':'{{ $data_pendaftar->id_wil }}'},
+				success:function(data){
+          console.log(data);
+          $('#kecamatan').text(': '+data.kecamatan);
+				}
+			});
+      
+      $.ajax({
+				type : "GET",
+				url:'{{route('pendidikan.get')}}',
+				data:{'id':'{{ $data_pendaftar->pendidikan_ayah }}'},
+				success:function(data){
+          console.log(data);
+          $('#pendidikan_a').text(': '+data.nm_jenj_didik);
+				}
+			});
+      
+      $.ajax({
+				type : "GET",
+				url:'{{route('pekerjaan.get')}}',
+				data:{'id':'{{ $data_pendaftar->pekerjaan_ayah }}'},
+				success:function(data){
+          console.log(data);
+          $('#pekerjaan_a').text(': '+data.nm_pekerjaan);
+				}
+			});
+      
+      $.ajax({
+				type : "GET",
+				url:'{{route('penghasilan.get')}}',
+				data:{'id':'{{ $data_pendaftar->penghasilan_ayah }}'},
+				success:function(data){
+          console.log(data);
+          $('#penghasilan_a').text(': '+data.nm_penghasilan);
+				}
+			});
+
+      $.ajax({
+				type : "GET",
+				url:'{{route('pendidikan.get')}}',
+				data:{'id':'{{ $data_pendaftar->pendidikan_ibu }}'},
+				success:function(data){
+          console.log(data);
+          $('#pendidikan_i').text(': '+data.nm_jenj_didik);
+				}
+			});
+      
+      $.ajax({
+				type : "GET",
+				url:'{{route('pekerjaan.get')}}',
+				data:{'id':'{{ $data_pendaftar->pekerjaan_ibu }}'},
+				success:function(data){
+          console.log(data);
+          $('#pekerjaan_i').text(': '+data.nm_pekerjaan);
+				}
+			});
+      
+      $.ajax({
+				type : "GET",
+				url:'{{route('penghasilan.get')}}',
+				data:{'id':'{{ $data_pendaftar->penghasilan_ibu }}'},
+				success:function(data){
+          console.log(data);
+          $('#penghasilan_i').text(': '+data.nm_penghasilan);
+				}
+			});
+      
+      $.ajax({
+				type : "GET",
+				url:'{{route('warganegara.get')}}',
+				data:{'id':'{{ $data_pendaftar->warganegara }}'},
+				success:function(data){
+          console.log(data);
+          $('#warganegara').text(': '+data.nm_wil);
+				}
+			});
+  });
+</script>
 <script>
     // Get the modal
     var modal_ktp = document.getElementById("myModalKTP");
