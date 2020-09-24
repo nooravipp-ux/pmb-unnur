@@ -54,7 +54,7 @@
           <!-- <li><a href="#team">Team</a></li> -->
           <li><a href="#gallery">Galeri</a></li>
           <li><a href="#contact">Kontak</a></li>
-          <li><a href="{{ url('/daftar_awal') }}">DAFTAR</a></li>
+          <li><a href="{{ url('/daftar_awal') }}"><b>DAFTAR</b></a></li>
           <li><a href="{{ url('/login') }}#">Masuk</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
@@ -69,7 +69,7 @@
       <p></p>
       <br>
       <br>
-      <a href="#faq" class="btn-get-started scrollto">Prosedur Pendaftaran</a>
+      {{-- <a href="#faq" class="btn-get-started scrollto">Prosedur Pendaftaran</a> --}}
     </div>
 
     <div class="product-screens">
