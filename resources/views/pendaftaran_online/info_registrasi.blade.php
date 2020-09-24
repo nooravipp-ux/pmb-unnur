@@ -77,8 +77,7 @@
                                                 <th>Prodi</th>
                                                 <th>Strata</th>
                                                 <th>Tahun </th>
-                                                
-                                                <th>Status Registrasi</th>
+                                                <th>Status Pendaftar</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -94,9 +93,12 @@
                                                 <td>{{$data->nama_fakultas}}</td>
                                                 <td>{{$data->nama_prodi}}</td>
                                                 <td>{{$data->jenis_strata}}</td>
-                                                
                                                 <td>{{$data->tahun}}</td>
-                                                <td class="status">{{$data->status_pembayaran_registrasi}}</td>
+                                                @if($data->status_pembayaran_registrasi == "SUDAH DI KONFIRMASI")
+                                                    <td class="status" style="color: green;">{{$data->status_pembayaran_registrasi}}</td>
+                                                @else
+                                                    <td class="status" style="color: red;">{{$data->status_pembayaran_registrasi}}</td>
+                                                @endif
                                                 <td class="text-center"><a href="{{route('detail.register', $data->id_pendaftar)}}" data-toggle="tooltip"
                                                         data-placement="top" title="View Detail"><i
                                                             class="fa fa-eye"></i></a></td>
@@ -130,13 +132,13 @@ $(document).ready(function() {
     setInterval(function() {
         loadData();
     }, 10000); 
-    $('table tbody td.status').map(function() {
-        if($(this).text() == "SUDAH DI KONFIRMASI"){
-            $(this).css("background-color", "green");
-        }else{
-            $(this).css("background-color", "yellow");
-        }       
-    });
+    // $('table tbody td.status').map(function() {
+    //     if($(this).text() == "SUDAH DI KONFIRMASI"){
+    //         $(this).css("background-color", "green");
+    //     }else{
+    //         $(this).css("background-color", "yellow");
+    //     }       
+    // });
 });
 
 function loadData() {

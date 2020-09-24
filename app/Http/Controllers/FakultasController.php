@@ -45,7 +45,10 @@ class FakultasController extends Controller
      * function prodi
      */
     public function prodi(){
-        $prodi = prodi::all();
+        //$prodi = prodi::all();
+        $prodi = DB::table('fakultas')
+                ->join('prodi','fakultas.id_fakultas','=','prodi.id_fakultas')
+                ->get();
         return view('data.master-prodi.prodi',compact('prodi'));
     }
 
@@ -94,9 +97,10 @@ class FakultasController extends Controller
 
     public function kelas(){
         // $kelas = kelas::all();
-        $kelas = DB::table('strata')
-                    ->join('kelas','strata.id_strata','=','kelas.id_strata')
-                    ->get();
+        $kelas = DB::table('prodi')
+                ->join('strata' ,'prodi.id_prodi' ,'=','strata.id_prodi')
+                ->join('kelas','strata.id_strata','=','kelas.id_strata')
+                ->get();
         return view('data.master-kelas.kelas',compact('kelas'));
     }
 

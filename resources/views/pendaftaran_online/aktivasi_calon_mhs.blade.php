@@ -61,7 +61,11 @@
                                       @else
                                       <td style="color: red">Belum Melakukan Aktivasi Pembayaran</td>
                                       @endif
-                                      <td class="status">{{$dt->status_pembayaran_registrasi}}</td>
+                                      @if($dt->status_pembayaran_registrasi == "SUDAH DI KONFIRMASI")
+                                          <td class="status" style="color: green;">{{$dt->status_pembayaran_registrasi}}</td>
+                                      @else
+                                          <td class="status" style="color: red;">{{$dt->status_pembayaran_registrasi}}</td>
+                                      @endif
                                       <td class="text-center"><a href="{{route('pendaftar.tampil',$dt->id_pendaftar)}}" data-toggle="tooltip" data-placement="top" title="View Detail"><i class="glyphicon glyphicon-zoom-in"></i></a></td>
                                     </tr>
                                     @endforeach
