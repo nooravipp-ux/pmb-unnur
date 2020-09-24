@@ -108,6 +108,9 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                        <br>
+                                        &nbsp;
+                                        <input type="checkbox" onclick="showPW()"> Show Password
                                     </div>
                                     <div class="form-group col-md-6">
                                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Konfirmasi Password">
@@ -170,6 +173,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+
+function showPW() {
+        var x = document.getElementById("password");
+        var y = document.getElementById("password-confirm");
+        if (x.type === "password") {
+            x.type = "text";
+            y.type = "text";
+        } else {
+            x.type = "password";
+            y.type = "password";
+        }
+    }
+
 $( document ).ready(function() {
     var d = new Date();
     var n = d.getFullYear();

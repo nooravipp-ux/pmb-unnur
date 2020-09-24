@@ -34,20 +34,22 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1" class="text-uppercase">Password</label>
                     <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required="">
+                    &nbsp;
+                    <input type="checkbox" onclick="showPW()"> Show Password,
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
-                </div>
-
-
-                    <div class="form-check">
-
-                    <button type="submit" class="btn btn-login float-right">Log in</button>
+                    &nbsp;
                     @if (Route::has('password.request'))
                     <small><a class="reset_pass" href="{{ route('password.request') }}">Lost your password?</a></small>
                     @endif
+                </div>
+
+
+                <div class="form-check">
+                    <button type="submit" class="btn btn-login float-right">Log in</button>
                 </div>
 
             </form>
@@ -65,6 +67,16 @@
                     </div>
                 </div>
 </section>
+<script>
+    function showPW() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 </body>
 
 </html>
