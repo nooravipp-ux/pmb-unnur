@@ -81,7 +81,7 @@ class JadwalUjianController extends Controller
             'id_jenjang_pendidikan_ayah' => $confirm_mhs_lulus->pendidikan_ayah, 'id_kebutuhan_khusus_ayah' => 1,'id_kebutuhan_khusus_ibu' => 1, 'id_pekerjaan_ayah' => $confirm_mhs_lulus->pekerjaan_ayah,
             'id_penghasilan_ayah' => $confirm_mhs_lulus->penghasilan_ayah, 'nik_ibu' => $confirm_mhs_lulus->nik_ibu,'nm_ibu_kandung' => $confirm_mhs_lulus->nama_ibu, 'tgl_lahir_ibu' => $confirm_mhs_lulus->tgl_lahir_ibu,
             'id_jenjang_pendidikan_ibu' => $confirm_mhs_lulus->pendidikan_ibu, 'id_penghasilan_ibu' => $confirm_mhs_lulus->penghasilan_ibu,'id_pekerjaan_ibu' => $confirm_mhs_lulus->pekerjaan_ibu, 'kewarganegaraan' => '',
-            'kode_jurusan' => '', 'stat_pd' => '0','a_terima_kps' => '0','tgl_masuk_sp' => date('Y-m-d'),'mulai_smt' => '','status_error' => 1,'keterangan' => 1,'id_kurikulum' => 1,'nipd' => '','id_jalur_masuk' => ''
+            'kode_jurusan' => $confirm_mhs_lulus->id_prodi, 'stat_pd' => '0','a_terima_kps' => '0','tgl_masuk_sp' => date('Y-m-d'),'mulai_smt' => '','status_error' => 1,'keterangan' => 1,'id_kurikulum' => $confirm_mhs_lulus->id_prodi,'nipd' => '','id_jalur_masuk' => ''
             ]
         );
         return response()->json('data success updated');
