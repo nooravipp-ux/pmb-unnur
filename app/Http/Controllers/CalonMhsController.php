@@ -113,7 +113,11 @@ class CalonMhsController extends Controller
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
                         ->where('.pmb_pendaftar.email', $email)->first();
-        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar'));
+        $data_provinsi = $db_sistemik
+                        ->table('v_wilayah')
+                        ->select('id_prov','provinsi')
+                        ->get()->unique('id_prov');                
+        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar','data_provinsi'));
     }
     public function form_upload(){
         $email = Auth::user()->email;
