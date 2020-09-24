@@ -26,3 +26,5 @@ Route::post('/strata/id/edit/{id_strata}','ApiController@editidstrata')->name('s
 Route::post('/strata/jenis/edit/{id_strata}','ApiController@editjenisstrata')->name('strata.jenis');
 Route::post('/kelas/id/edit/{id_kelas}','ApiController@editidkelas')->name('kelas.id');
 Route::post('/kelas/jenis/edit/{id_kelas}','ApiController@editjeniskelas')->name('kelas.jenis');
+
+Route::post('/operator/biaya/edit/{id_pmb_biaya_registrasi}','ApiController@editbiayaregis')->name('biaya.edit');
