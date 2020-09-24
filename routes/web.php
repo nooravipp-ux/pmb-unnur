@@ -119,6 +119,10 @@ Route::get('/get_prodi','PendaftaranOnlineController@get_prodi')->name('get.prod
 Route::get('/get_strata','PendaftaranOnlineController@get_strata')->name('get.strata');
 Route::get('/get_kelas','PendaftaranOnlineController@get_kelas')->name('get.kelas');
 Route::get('/get_biaya','PendaftaranOnlineController@get_biaya')->name('get.biaya');
+
+Route::get('/get_kota','CalonMhsController@get_kota')->name('get.kota');
+Route::get('/get_kecamatan','CalonMhsController@get_kecamatan')->name('get.kecamatan');
+
 Route::post('/daftar_awal/simpan_calonmhs','PendaftaranOnlineController@simpan_calonmhs')->name('simpan.calonmhs');
 Route::get('/daftar_awal/upload','PendaftaranOnlineController@daftar_awal_upload');
 //Route::get('/daftar_awal/upload/get_data','PendaftaranOnlineController@get_data_calonmhs')->name('get.datacalonmhs');

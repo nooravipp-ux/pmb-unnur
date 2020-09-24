@@ -66,8 +66,16 @@ class CalonMhsController extends Controller
                         ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
                         ->where('.pmb_pendaftar.email', $email)->first();
         // dd($data_pendaftar);
+
+        $db_sistemik = DB::connection('mysql2');
+        $data_provinsi = $db_sistemik
+                        ->table('v_wilayah')
+                        ->select('id_prov','provinsi')
+                        ->get()->unique('id_prov');
+
+        //dd($data_provinsi);                
         
-        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar'));
+        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar','data_provinsi'));
     }
 
     public function update_form_biodata(Request $request){
@@ -80,6 +88,8 @@ class CalonMhsController extends Controller
              'agama' => $request->agama, 
              'jln' => $request->alamat,
              'ds_kel' => $request->kelurahan_desa,
+             'id_prov' => $request->prov,
+             'id_kota' => $request->kota,
              'id_wil' => $request->kecamatan, 
              'kode_pos' => $request->kode_pos,
              'email' => $request->email,
@@ -324,4 +334,27 @@ class CalonMhsController extends Controller
 
         return response()->json($data_wilayah);
     }
+
+    public function get_kota(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_kota = $db_sistemik
+                ->table('v_wilayah')
+                ->select('id_kota','kota')
+                ->where('id_prov', $request->id_prov)
+                ->get()->pluck('id_kota','kota');
+
+        return response()->json($data_kota);
+    }
+
+    public function get_kecamatan(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_kota = $db_sistemik
+                ->table('v_wilayah')
+                ->select('id_kec','kecamatan')
+                ->where('id_kota', $request->id_kota)
+                ->get()->pluck('id_kec','kecamatan');
+
+        return response()->json($data_kota);
+    }
+
 }

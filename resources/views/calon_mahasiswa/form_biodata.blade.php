@@ -179,10 +179,25 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align"
-                                            for="last-name">Kelurahan / Desa<span class="required">*</span>
+                                            for="last-name">Provinsi<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="ds_kel" class="form-control " value="">
+                                            <select name="prov" class="form-control " id="prov">
+                                                <option value="" selected disabled>- Pilih Provinsi -</option>
+                                                @foreach($data_provinsi as $value)
+                                                <option value="{{$value->id_prov}}">{{$value->provinsi}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="last-name">Kota<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select id="kota" name="kota" class="form-control" >
+                                                <option value="" selected disabled>- Pilih Kota -</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -190,7 +205,17 @@
                                             for="last-name">Kecamatan<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select name="kecamatan" class="form-control " id="kecamatan"></select>
+                                            <select name="kecamatan" class="form-control " id="kecamatan">
+                                                <option value="" selected disabled>- Pilih Kecamatan -</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="last-name">Kelurahan / Desa<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" name="ds_kel" class="form-control " value="">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -351,7 +376,62 @@
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
+    $(document).ready(function(){
+        $('#prov').change(function(e){
+            console.log(e);
+            console.log('PROVINSI');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });  
+            
+        $.ajax({
+				type : "GET",
+				url:'{{route('get.kota')}}',
+				data:{'id_prov':$(this).val()},
+				success:function(data){
+                    console.log(data);
+                        $('#kota').empty();
+                        $('#kota').append('<option value=""selected disabled>- Pilih Kota -</option>');
+
+                        $('#kecamatan').empty();
+                        $('#kecamatan').append('<option value=""selected disabled>- Pilih Kecamatan -</option>');
+
+                     $.each(data, function (id_kota, kota) {
+                            $('#kota').append(new Option(id_kota, kota))
+                        })                                        
+				}
+			});
+
+			});
+
+            $('#kota').change(function(e){
+            console.log(e);
+          
+            
+            $.ajax({
+                    type : "GET",
+                    url:'{{route('get.kecamatan')}}',
+                    data:{'id_kota':$(this).val()},
+                    success:function(data){
+                        console.log(data);
+                            $('#kecamatan').empty();
+                            $('#kecamatan').append('<option value=""selected disabled>- Pilih Kecamatan -</option>');
+
+                        $.each(data, function (id_kec, kecamatan) {
+                                $('#kecamatan').append(new Option(id_kec, kecamatan))
+                            })                                        
+                    }
+                });
+                });       
+    });
+</script>
+<script>
 $(document).ready(function(){
+
+
+
     $('#agama').select2({
         placeholder: '- Pilih Agama -',
         ajax: {
@@ -391,25 +471,25 @@ $(document).ready(function(){
         }
     });
 
-    $('#kecamatan').select2({
-        placeholder: '- Pilih Kode Wilayah -',
-        ajax: {
-            url: '{{url('/calon-mahasiswa/get-data-wilayah')}}',
-            dataType: 'json',
-            delay: 250,
-            processResults: function(data) {
-                return {
-                    results: $.map(data, function(kd_wilayah) {
-                        return {
-                            id: kd_wilayah.id_kec,
-                            text: kd_wilayah.kecamatan
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
+    // $('#kecamatan').select2({
+    //     placeholder: '- Pilih Kode Wilayah -',
+    //     ajax: {
+    //         url: '{{url('/calon-mahasiswa/get-data-wilayah')}}',
+    //         dataType: 'json',
+    //         delay: 250,
+    //         processResults: function(data) {
+    //             return {
+    //                 results: $.map(data, function(kd_wilayah) {
+    //                     return {
+    //                         id: kd_wilayah.id_kec,
+    //                         text: kd_wilayah.kecamatan
+    //                     }
+    //                 })
+    //             };
+    //         },
+    //         cache: true
+    //     }
+    // });
 
     $('.latar_pendidikan').select2({
         placeholder: '- Latar Belakang Pendidikan -',
