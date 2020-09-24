@@ -133,7 +133,7 @@
                                         <tbody class="text-center">
                                             @foreach($data_jadwal_ujian as $data)
                                             <tr>
-                                                <td>{{$data->tanggal_ujian}}</td>
+                                                <td>{{\Carbon\Carbon::parse($data->tanggal_ujian)->translatedFormat('l,d F Y, H:i A')}}</td>
                                                 <td>{{$data->tahun}}</td>
                                                 <td>{{$data->gelombang_ujian}}</td>
                                                 <td>{{$data->nama_prodi}}</td>

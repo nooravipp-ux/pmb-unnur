@@ -123,9 +123,13 @@
                                                 <td>{{$data->id_pmb}}</td>
                                                 <td>{{$data->tahun}}</td>
                                                 <td>{{$data->gelombang}}</td>
-                                                <td>{{date('d M Y', strtotime($data->start_date))}}</td>
-                                                <td>{{date('d M Y', strtotime($data->finish_date))}}</td>
-                                                <td class="status"><strong>{{$data->status}}</strong></td>
+                                                <td>{{\Carbon\Carbon::parse($data->start_date)->translatedFormat('l,d F Y')}}</td>
+                                                <td>{{\Carbon\Carbon::parse($data->finish_date)->translatedFormat('l,d F Y')}}</td>
+                                                @if ($data->status == 'OPENED')
+                                                    <td style="color:green;"><strong>{{$data->status}}</strong></td>
+                                                @else
+                                                    <td style="color:red;"><strong>{{$data->status}}</strong></td>
+                                                @endif
                                                 <td class="text-center"><a href="" class="btn btn-primary btn-sm fa fa-edit"></a>
                                                     <form method="POST" action="{{route('pmb.delete', $data->id_pmb)}}">
                                                         {{ csrf_field() }}
