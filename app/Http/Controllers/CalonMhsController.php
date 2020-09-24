@@ -79,7 +79,7 @@ class CalonMhsController extends Controller
     }
 
     public function update_form_biodata(Request $request){
-        dd($request->all());
+        // dd($request->all());
         DB::table('biodata')->where('id_pendaftar', $request->id_pendaftar)->update([
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
