@@ -1,4 +1,7 @@
 @extends('frame.index')
+@section('style')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('content')
 <div class="right_col" role="main">
     <div class="">
@@ -123,7 +126,7 @@
                                                 <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
                                                 @else
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                                id="inlineRadio1" value="laki-laki">
+                                                    id="inlineRadio1" value="laki-laki">
                                                 <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
                                                 @endif
                                             </div>
@@ -135,7 +138,7 @@
                                                 @else
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
                                                     id="inlineRadio2" value="perempuan">
-                                                 <label class="form-check-label" for="inlineRadio2">Perempuan</label>
+                                                <label class="form-check-label" for="inlineRadio2">Perempuan</label>
                                                 @endif
                                             </div>
                                         </div>
@@ -145,43 +148,33 @@
                                             for="last-name">Agama<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select name="agama" class="form-control ">
-                                                <option value=""> - </option>
-                                                <option value="ISLAM"
-                                                    <?php if ($data_pendaftar->agama == 'ISLAM') echo "selected"; ?>>
-                                                    ISLAM</option>
-                                                <option value="KRISTEN"
-                                                    <?php if ($data_pendaftar->agama == 'KRISTEN') echo "selected"; ?>>
-                                                    KRISTEN</option>
-                                                <option value="HINDU"
-                                                    <?php if ($data_pendaftar->agama == 'HINDU') echo "selected"; ?>>
-                                                    HINDU</option>
-                                                <option value="BUDHA"
-                                                    <?php if ($data_pendaftar->agama == 'BUDHA') echo "selected"; ?>>
-                                                    BUDHA</option>
-                                                <option value="KONGUCHU"
-                                                    <?php if ($data_pendaftar->agama == 'KONGUCHU') echo "selected"; ?>>
-                                                    KONGUCHU</option>
-                                                <option value="LAIN-LAIN">LAIN-LAIN</option>
+                                            <select name="agama" class="form-control " id="agama">
+
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align"
-                                            for="last-name">Kewargnegaraan<span class="required">*</span>
+                                            for="last-name">Jalan<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="last-name" name="warganegara" class="form-control "
-                                                value="{{$data_pendaftar->warganegara}}">
+                                            <input type="text" id="last-name" name="jalan" class="form-control ">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align"
-                                            for="last-name">Alamat<span class="required">*</span>
+                                            for="last-name">RT<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="alamat" class="form-control "
-                                                value="{{$data_pendaftar->alamat}}">
+                                            <input type="text" id="last-name" name="rt" class="form-control ">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="last-name">RW<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" name="rw" class="form-control " value="">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -189,8 +182,15 @@
                                             for="last-name">Kelurahan / Desa<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="kelurahan_desa" class="form-control "
-                                                value="{{$data_pendaftar->kelurahan}}">
+                                            <input type="text" name="ds_kel" class="form-control " value="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="last-name">Kecamatan<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select name="kecamatan" class="form-control " id="kecamatan"></select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -204,30 +204,20 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align"
-                                            for="last-name">Kecamatan<span class="required">*</span>
+                                            for="last-name">Jenis Tinggal<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="kecamatan" class="form-control "
-                                                value="{{$data_pendaftar->kecamatan}}">
+                                            <select name="jns_tinggal" class="form-control " id="jns_tinggal"></select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="middle-name"
-                                            class="col-form-label col-md-3 col-sm-3 label-align">Kota</label>
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="last-name">Alat Transportasi<span class="required">*</span>
+                                        </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input class="form-control col" type="text" name="kota"
-                                                value="{{$data_pendaftar->kota_kab}}">
+                                            <select name="id_alat_transportasi" class="form-control " id="id_alat_transportasi"></select>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="middle-name"
-                                            class="col-form-label col-md-3 col-sm-3 label-align">Provinsi</label>
-                                        <div class="col-md-6 col-sm-6 ">
-                                            <input class="form-control col" type="text" name="provinsi"
-                                                value="{{$data_pendaftar->provinsi}}">
-                                        </div>
-                                    </div>
-
+                                    </div>                
                                     <div class="form-group row">
                                         <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">No
                                             Telepon</label>
@@ -268,8 +258,7 @@
                                         <label class="col-form-label col-md-3 col-sm-3 label-align">Pendidikan Ayah
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input class="date-picker form-control" type="text" name="pendidikan_ayah"
-                                                value="{{$data_pendaftar->pendidikan_ayah}}">
+                                            <select name="pendidikan_ayah" class="form-control latar_pendidikan"></select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -277,8 +266,7 @@
                                             for="last-name">Pekerjaan Ayah
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="pekerjaan_ayah" class="form-control "
-                                                value="{{$data_pendaftar->pekerjaan_ayah}}">
+                                            <select name="pekerjaan_ayah" class="form-control pekerjaan"></select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -286,8 +274,7 @@
                                             for="last-name">Penghasilan Ayah
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="penghasilan_ayah" class="form-control "
-                                                value="{{$data_pendaftar->penghasilan_ayah}}">
+                                            <select name="penghasilan_ayah" class="form-control penghasilan"></select>
                                         </div>
                                     </div>
                                     <br>
@@ -325,8 +312,7 @@
                                                 class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input class="date-picker form-control" name="pendidikan_ibu" type="text"
-                                                value="{{$data_pendaftar->pendidikan_ibu}}">
+                                            <select name="pendidikan_ibu" class="form-control latar_pendidikan"></select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -334,8 +320,7 @@
                                             for="last-name">Pekerjaan Ibu <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="pekerjaan_ibu" class="form-control "
-                                                value="{{$data_pendaftar->pekerjaan_ibu}}">
+                                            <select name="pekerjaan_ibu" class="form-control pekerjaan"></select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -343,16 +328,13 @@
                                             for="last-name">Penghasilan Ibu <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="penghasilan_ibu" class="form-control "
-                                                value="{{$data_pendaftar->penghasilan_ibu}}">
+                                            <select name="penghasilan_ibu" class="form-control penghasilan"></select>
                                         </div>
                                     </div>
                                     <br>
                                 </div>
                                 <div id="step-4" class="text-center">
-                                    <p>Dengan mengisi biodata, anda sudah menjadi bagian dari keluarga besar kita in .,
-                                    </p>
-                                    <button type="submit" form="form-biodata" class="btn btn-primary">Simpan</button>
+                                    <button type="submit" form="form-biodata" class="btn btn-primary">Update</button>
 
                                 </div>
                             </form>
@@ -367,5 +349,148 @@
 </div>
 @endsection
 @section('script')
-<script src="{{ asset('template/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#agama').select2({
+        placeholder: '- Pilih Agama -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-agama')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(agama) {
+                        return {
+                            id: agama.id_agama,
+                            text: agama.nm_agama
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+    $('#id_alat_transportasi').select2({
+        placeholder: '- Pilih Alat Transportasi -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-alat-transportasi')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(transport) {
+                        return {
+                            id: transport.id_alat_transport,
+                            text: transport.nm_alat_transport
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    $('#kecamatan').select2({
+        placeholder: '- Pilih Kode Wilayah -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-wilayah')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(kd_wilayah) {
+                        return {
+                            id: kd_wilayah.id_kec,
+                            text: kd_wilayah.kecamatan
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    $('.latar_pendidikan').select2({
+        placeholder: '- Latar Belakang Pendidikan -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-jenjang-pendidikan')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(jenj_pend) {
+                        return {
+                            id: jenj_pend.id_jen_didik,
+                            text: jenj_pend.nm_jen_didik
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    $('.pekerjaan').select2({
+        placeholder: '- Pekerjaan -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-pekerjaan')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(pekerjaan) {
+                        return {
+                            id: pekerjaan.id_pekerjaan,
+                            text: pekerjaan.nm_pekerjaan
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    $('.penghasilan').select2({
+        placeholder: '- Penghasilan Per Bulan -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-penghasilan')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(penghasilan) {
+                        return {
+                            id: penghasilan.id_penghasilan,
+                            text: penghasilan.nm_penghasilan
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    $('#jns_tinggal').select2({
+        placeholder: '- Pilih Jenis Tinggal -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-jenis_tinggal')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(jns_tinggal) {
+                        return {
+                            id: jns_tinggal.id_jns_tinggal,
+                            text: jns_tinggal.nm_jns_tinggal
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+});
+
+</script>
 @endsection

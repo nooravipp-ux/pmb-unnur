@@ -71,19 +71,17 @@ class CalonMhsController extends Controller
     }
 
     public function update_form_biodata(Request $request){
-        // dd($request->all());
+        dd($request->all());
         DB::table('biodata')->where('id_pendaftar', $request->id_pendaftar)->update([
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'warganegara' => $request->warganegara,
             'jenis_kelamin' => $request->jenis_kelamin,
              'agama' => $request->agama, 
-             'alamat' => $request->alamat,
-             'kelurahan' => $request->kelurahan_desa,
+             'jln' => $request->alamat,
+             'ds_kel' => $request->kelurahan_desa,
+             'id_wil' => $request->kecamatan, 
              'kode_pos' => $request->kode_pos,
-             'kecamatan' => $request->kecamatan, 
-             'kota_kab' => $request->kota,
-             'provinsi' => $request->provinsi,
              'email' => $request->email,
              'no_telephone' => $request->no_telepon,
              'nik_ayah' => $request->nik_ayah,
@@ -267,5 +265,63 @@ class CalonMhsController extends Controller
         }else{
             return false;
         }
+    }
+
+    public function get_data_agama(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_agama = $db_sistemik->table('agama')->get();
+
+        return response()->json($data_agama);
+    }
+
+    public function get_data_alat_transportasi(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_transportasi = $db_sistemik->table('data_transportasi')->get();
+
+        return response()->json($data_transportasi);
+    }
+    public function get_data_jenjang_pendidikan(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $jenjang_pendidikan = $db_sistemik->table('jenjang_pendidikan')->get();
+
+        return response()->json($jenjang_pendidikan);
+    }
+    public function get_data_pekerjaan(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_pekerjaan= $db_sistemik->table('pekerjaan')->get();
+
+        return response()->json($data_pekerjaan);
+    }
+    public function get_data_penghasilan(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_penghasilan = $db_sistemik->table('penghasilan')->select('id_penghasilan','nm_penghasilan')->get();
+
+        return response()->json($data_penghasilan);
+    }
+
+    public function get_data_kewarganegaraan(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_kewarganegaraan = $db_sistemik->table('kewarganegaraan')->get();
+
+        return response()->json($data_kewarganegaraan);
+    }
+    public function get_data_jenis_tinggal(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        $data_jenis_tinggal = $db_sistemik->table('jenis_tinggal')->get();
+
+        return response()->json($data_jenis_tinggal);
+    }
+
+    public function get_data_wilayah(Request $request){
+        $db_sistemik = DB::connection('mysql2');
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data_wilayah = $db_sistemik->select("SELECT id_kec, kecamatan FROM v_wilayah WHERE kecamatan LIKE %'$cari'%");
+
+            return response()->json($data_wilayah);
+        }
+        $data_wilayah = $db_sistemik->select("SELECT kecamatan FROM v_wilayah");
+
+        return response()->json($data_wilayah);
     }
 }

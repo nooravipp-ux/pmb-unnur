@@ -123,9 +123,9 @@ class PendaftaranOnlineController extends Controller
         }
     }
     public function info_registrasi(){
-        // $db_sistemik = DB::connection('mysql2');
-        // $data = $db_sistemik->table('mhs')->get();
-        // dd($data);
+        $db_sistemik = DB::connection('mysql2');
+        $data = $db_sistemik->table('agama')->get();
+        dd($data);
 
         $prodi = Auth::user()->id_prodi;
         $data_pendaftar = DB::table('pmb_pendaftar')

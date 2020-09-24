@@ -135,4 +135,14 @@ Route::post('/calon-mahasiswa/form-upload/upload_bukti','CalonMhsController@upda
 Route::post('/calon-mahasiswa/form-document/upload_document','CalonMhsController@update_form_document')->name('upload.document');
 Route::get('/calon-mahasiswa/form-document/get_document','CalonMhsController@get_document')->name('get.document');
 
+//get data json from DB sistemik
+Route::get('/calon-mahasiswa/get-data-agama','CalonMhsController@get_data_agama');
+Route::get('/calon-mahasiswa/get-data-wilayah','CalonMhsController@get_data_wilayah');
+Route::get('/calon-mahasiswa/get-data-alat-transportasi','CalonMhsController@get_data_alat_transportasi');
 
+Route::get('/calon-mahasiswa/get-data-jenjang-pendidikan','CalonMhsController@get_data_jenjang_pendidikan');
+Route::get('/calon-mahasiswa/get-data-pekerjaan','CalonMhsController@get_data_pekerjaan');
+Route::get('/calon-mahasiswa/get-data-penghasilan','CalonMhsController@get_data_penghasilan');
+Route::get('/calon-mahasiswa/get-data-jenis_tinggal','CalonMhsController@get_data_jenis_tinggal');
+
+Route::get('/calon-mahasiswa/get-data-kewarganegaraan','CalonMhsController@get_data_kewarganegaraan');
