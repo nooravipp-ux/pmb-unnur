@@ -118,7 +118,7 @@ class PendaftaranOnlineController extends Controller
             if($id_test->no_urut_test != NULL){
                 return $no_urut = $id_test->tahun_masuk.$id_test->gelombang.$id_test->prodi.$id_test->no_urut_test;
             }else{
-                return $no_urut = $tahun.$gelombang.$prodi.sprintf("%04s", $no);
+                return $no_urut = $tahun_masuk.$gelombang.$prodi.sprintf("%04s", $no);
             }
         }
     }

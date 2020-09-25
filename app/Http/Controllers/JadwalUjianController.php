@@ -66,6 +66,7 @@ class JadwalUjianController extends Controller
             $jenis_pendaftar = "2";
         }
         $set_nim = $this->generate_nim($request->id_prodi, $tahun, $jenis_pendaftar);
+        // dd($set_nim);
         DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nim'=> $set_nim, 'lulus_seleksi' => 1]);
         $confirm_mhs_lulus = DB::table('pmb_pendaftar')
                             ->join('biodata','biodata.id_pendaftar','pmb_pendaftar.id_pendaftar')
@@ -73,7 +74,7 @@ class JadwalUjianController extends Controller
         // dd($confirm_mhs_lulus);
         $db_sistemik = DB::connection('mysql2');
         $db_sistemik->table('mhs')->insert(
-            ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $confirm_mhs_lulus->nim, 'nik' => $confirm_mhs_lulus->nik,
+            ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $set_nim, 'nik' => $confirm_mhs_lulus->nik,
             'tmpt_lahir' => $confirm_mhs_lulus->tempat_lahir, 'id_agama' => $confirm_mhs_lulus->agama,'jln' => $confirm_mhs_lulus->jln, 'rt' => $confirm_mhs_lulus->rt,
             'rw' => $confirm_mhs_lulus->rw, 'nm_dsn' => '','ds_kel' => $confirm_mhs_lulus->ds_kel, 'id_wil' => $confirm_mhs_lulus->id_wil,
             'kode_pos' => $confirm_mhs_lulus->kode_pos, 'id_jns_tinggal' => $confirm_mhs_lulus->jenis_tinggal,'id_alat_transport' => $confirm_mhs_lulus->alat_transportasi, 'no_hp' => $confirm_mhs_lulus->no_telephone,
@@ -155,11 +156,12 @@ class JadwalUjianController extends Controller
     }
 
     public function generate_nim($kode_prodi, $tahun, $jenis_daftar){
+        $db_sistemik = DB::connection('mysql2');
         $no = 1;
         $no_urut = "";
         $tahun_masuk = substr($tahun, -2);
 
-        $no_urut = DB::select("SELECT '$kode_prodi' AS kode_prodi, '$jenis_daftar' AS jenis_daftar, '$tahun_masuk' AS tahun_angkatan, LPAD((RIGHT(MAX(NIM),3)+1),3,'0') AS no_urut FROM pmb_pendaftar WHERE LEFT(NIM,5) = '$kode_prodi' AND MID(NIM, 7, 2) = '$tahun_masuk'");
+        $no_urut = $db_sistemik->select("SELECT '$kode_prodi' AS kode_prodi, '$jenis_daftar' AS jenis_daftar, '$tahun_masuk' AS tahun_angkatan, LPAD((RIGHT(MAX(NIPD),3)+1),3,'0') AS no_urut FROM mhs WHERE LEFT(NIPD,5) = '$kode_prodi' AND MID(NIPD, 7, 2) = '$tahun_masuk'");
         foreach($no_urut as $nim){
             if($nim->no_urut != NULL){
                 return $no_urut = $nim->kode_prodi.$nim->jenis_daftar.$nim->tahun_angkatan.$nim->no_urut;
