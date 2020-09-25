@@ -73,7 +73,7 @@ class JadwalUjianController extends Controller
         // dd($confirm_mhs_lulus);
         $db_sistemik = DB::connection('mysql2');
         $db_sistemik->table('mhs')->insert(
-            ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nisn' => $confirm_mhs_lulus->nim, 'nik' => $confirm_mhs_lulus->nik,
+            ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $confirm_mhs_lulus->nim, 'nik' => $confirm_mhs_lulus->nik,
             'tmpt_lahir' => $confirm_mhs_lulus->tempat_lahir, 'id_agama' => $confirm_mhs_lulus->agama,'jln' => $confirm_mhs_lulus->jln, 'rt' => $confirm_mhs_lulus->rt,
             'rw' => $confirm_mhs_lulus->rw, 'nm_dsn' => '','ds_kel' => $confirm_mhs_lulus->ds_kel, 'id_wil' => $confirm_mhs_lulus->id_wil,
             'kode_pos' => $confirm_mhs_lulus->kode_pos, 'id_jns_tinggal' => $confirm_mhs_lulus->jenis_tinggal,'id_alat_transport' => $confirm_mhs_lulus->alat_transportasi, 'no_hp' => $confirm_mhs_lulus->no_telephone,
