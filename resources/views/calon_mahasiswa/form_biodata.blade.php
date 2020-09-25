@@ -174,7 +174,17 @@
                                             for="last-name">RW<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="rw" class="form-control " value="{{$data_pendaftar->rw}">
+                                            <input type="text" name="rw" class="form-control " value="{{$data_pendaftar->rw}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="last-name">Kewarganegaraan<span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select name="warganegara" class="form-control " id="warganegara">
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -215,7 +225,7 @@
                                             for="last-name">Kelurahan / Desa<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="ds_kel" class="form-control " value="">
+                                            <input type="text" name="ds_kel" class="form-control " value="{{$data_pendaftar->ds_kel}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -358,9 +368,9 @@
                                     </div>
                                     <br>
                                 </div>
-                                <div id="step-4" class="text-center">
-                                    <button type="submit" form="form-biodata" class="btn btn-primary">Update</button>
-
+                                <hr>
+                                <div id="step-4" class="col-md-8 offset-md-3">
+                                    <button type="submit" form="form-biodata" class="btn btn-success">Simpan</button>
                                 </div>
                             </form>
                             @endif
@@ -563,6 +573,26 @@ $(document).ready(function(){
                         return {
                             id: jns_tinggal.id_jns_tinggal,
                             text: jns_tinggal.nm_jns_tinggal
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+    
+    $('#warganegara').select2({
+        placeholder: '- Pilih Kewarganegaraan -',
+        ajax: {
+            url: '{{url('/calon-mahasiswa/get-data-kewarganegaraan')}}',
+            dataType: 'json',
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(negara) {
+                        return {
+                            id: negara.kewarganegaraan,
+                            text: negara.nm_wil
                         }
                     })
                 };

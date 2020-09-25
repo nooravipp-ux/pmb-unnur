@@ -5,8 +5,8 @@
             
             <div class="clearfix"></div>
             
-            <div class="row">
-              <div class="col-md-12 col-sm-12  ">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-sm-10">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Form | Pembayaran Registrasi</h2>
@@ -118,8 +118,8 @@
 
                     <div class="form-group row mb-0" id="btn-submit" >
                         <div class="col-md-8 offset-md-4">
-                            <button id="btn-submit" type="submit" class="btn btn-primary">
-                                Submit
+                            <button id="btn-submit" type="submit" class="btn btn-success">
+                                Simpan
                             </button>
                         </div>
                     </div>

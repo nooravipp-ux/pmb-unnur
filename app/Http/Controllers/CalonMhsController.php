@@ -90,6 +90,7 @@ class CalonMhsController extends Controller
              'rt' => $request->rt, 
              'rw' => $request->rw,
              'ds_kel' => $request->ds_kel,
+             'warganegara' => $request->warganegara,
              'id_prov' => $request->prov,
              'id_kota' => $request->kota,
              'id_wil' => $request->kecamatan, 
@@ -117,7 +118,12 @@ class CalonMhsController extends Controller
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('biodata','biodata.id_pendaftar','=','pmb_pendaftar.id_pendaftar')
                         ->where('.pmb_pendaftar.email', $email)->first();
-        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar'));
+        $db_sistemik = DB::connection('mysql2');
+        $data_provinsi = $db_sistemik
+                        ->table('v_wilayah')
+                        ->select('id_prov','provinsi')
+                        ->get()->unique('id_prov');                
+        return view('calon_mahasiswa.form_biodata', compact('status_pembayaran','data_pendaftar','data_provinsi'));
     }
     public function form_upload(){
         $email = Auth::user()->email;
@@ -172,7 +178,7 @@ class CalonMhsController extends Controller
                 // $path = $request->file('file')->getRealPath();
                 // $bukti = file_get_contents($path);
                 // $base64 = base64_encode($bukti);
-                $bukti = Image::make($request->file)->fit(500)->encode('data-url');
+                $bukti = Image::make($request->file)->fit(400)->encode('data-url');
                 DB::table('pmb_pendaftar')->where('id_pendaftar',$request->id_pendaftar)
                 ->update([
                     'metode_pembayaran' => $request->metode,
@@ -233,12 +239,12 @@ class CalonMhsController extends Controller
                 // $path_ket_sehat = $request->file('file_ket_sehat')->getRealPath();
                 // $ket_sehat = file_get_contents($path_ket_sehat);
                 // $base64_ket_sehat = base64_encode($ket_sehat);
-                $ktp = Image::make($request->file_ktp)->fit(500)->encode('data-url');
-                $foto = Image::make($request->file_foto)->fit(500)->encode('data-url');
-                $kk = Image::make($request->file_kk)->fit(500)->encode('data-url');
-                $akta = Image::make($request->file_akta)->fit(500)->encode('data-url');
-                $ijazah = Image::make($request->file_ijazah)->fit(500)->encode('data-url');
-                $ket_sehat = Image::make($request->file_ket_sehat)->fit(500)->encode('data-url');
+                $ktp = Image::make($request->file_ktp)->fit(400)->encode('data-url');
+                $foto = Image::make($request->file_foto)->fit(400)->encode('data-url');
+                $kk = Image::make($request->file_kk)->fit(400)->encode('data-url');
+                $akta = Image::make($request->file_akta)->fit(400)->encode('data-url');
+                $ijazah = Image::make($request->file_ijazah)->fit(400)->encode('data-url');
+                $ket_sehat = Image::make($request->file_ket_sehat)->fit(400)->encode('data-url');
 
                 DB::table('biodata')->where('id_pendaftar',$request->id_pendaftar)
                 ->update([
@@ -282,6 +288,17 @@ class CalonMhsController extends Controller
     }
 
     public function get_data_agama(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $data_agama = $db_sistemik->table('agama')
+            ->where('id_agama', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_agama', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($data_agama);
+        }
+
         $db_sistemik = DB::connection('mysql2');
         $data_agama = $db_sistemik->table('agama')->get();
 
@@ -289,24 +306,68 @@ class CalonMhsController extends Controller
     }
 
     public function get_data_alat_transportasi(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $data_transportasi = $db_sistemik->table('data_transportasi')
+            ->where('id_alat_transport', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_alat_transport', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($data_transportasi);
+        }
+
         $db_sistemik = DB::connection('mysql2');
         $data_transportasi = $db_sistemik->table('data_transportasi')->get();
 
         return response()->json($data_transportasi);
     }
     public function get_data_jenjang_pendidikan(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $jenjang_pendidikan = $db_sistemik->table('jenjang_pendidikan')
+            ->where('id_jenj_didik', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_jenj_didik', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($jenjang_pendidikan);
+        }
+
         $db_sistemik = DB::connection('mysql2');
         $jenjang_pendidikan = $db_sistemik->table('jenjang_pendidikan')->get();
 
         return response()->json($jenjang_pendidikan);
     }
     public function get_data_pekerjaan(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $pekerjaan = $db_sistemik->table('pekerjaan')
+            ->where('id_pekerjaan', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_pekerjaan', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($pekerjaan);
+        }
+
         $db_sistemik = DB::connection('mysql2');
         $data_pekerjaan= $db_sistemik->table('pekerjaan')->get();
 
         return response()->json($data_pekerjaan);
     }
     public function get_data_penghasilan(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $data_penghasilan = $db_sistemik->table('penghasilan')
+            ->where('id_penghasilan', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_penghasilan', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($data_penghasilan);
+        }
+
         $db_sistemik = DB::connection('mysql2');
         $data_penghasilan = $db_sistemik->table('penghasilan')->select('id_penghasilan','nm_penghasilan')->get();
 
@@ -314,12 +375,33 @@ class CalonMhsController extends Controller
     }
 
     public function get_data_kewarganegaraan(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $data_kewarganegaraan = $db_sistemik->table('kewarganegaraan')
+            ->where('kewarganegaraan', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_wil', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($data_kewarganegaraan);
+        }
         $db_sistemik = DB::connection('mysql2');
         $data_kewarganegaraan = $db_sistemik->table('kewarganegaraan')->get();
 
         return response()->json($data_kewarganegaraan);
     }
     public function get_data_jenis_tinggal(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $data_jenis_tinggal = $db_sistemik->table('jenis_tinggal')
+            ->where('id_jns_tinggal', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_jns_tinggal', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($data_jenis_tinggal);
+        }
+
         $db_sistemik = DB::connection('mysql2');
         $data_jenis_tinggal = $db_sistemik->table('jenis_tinggal')->get();
 
