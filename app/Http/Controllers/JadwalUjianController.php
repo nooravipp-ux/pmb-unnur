@@ -41,19 +41,18 @@ class JadwalUjianController extends Controller
 
     public function update_nilai_ujian(Request $request){
         $id_prodi = Auth::user()->id_prodi;
-        $passingrade = $this->cek_passingrade($request->id_test, $request->nilai_test, $id_prodi);
-        $status_kelulusan = "";
-        if($passingrade){
-            $status_kelulusan = "LULUS";
-        }else{
-            $status_kelulusan = "TIDAK LULUS";
-        }
-        DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test,'kelulusan' => $status_kelulusan]);
-        $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
-        $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
+        $status = $this->cek_passingrade($request->id_test, $request->nilai_test, $id_prodi);
+        if($status == "LULUS" || $status == "TIDAK LULUS"){
+            DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nilai_ujian'=> $request->nilai_test,'kelulusan' => $status]);
+            $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
+            $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
 
-        \Mail::to($done)->send(new kelulusan($din));
-        return response()->json('data success updated');
+            \Mail::to($done)->send(new kelulusan($din));
+            return response()->json('data success updated');
+        }
+
+        return response()->json($status);
+        
     }
     public function confirmasi_kelulusan(Request $request){
         // dd($request->all());
@@ -108,17 +107,27 @@ class JadwalUjianController extends Controller
 
 
     public function cek_passingrade($id_test, $nilai_ujian, $id_prodi){
+        $status = "";
         $data_pmb = DB::table('pmb_pendaftar')
                     ->join('pmb', 'pmb.id_pmb','pmb_pendaftar.id_pmb')
                     ->where('pmb_pendaftar.id_test', $id_test)
                     ->first();
         $gelombang_ujian = $data_pmb->gelombang;
         $data = DB::table('pmb_jadwal_ujian')->select('passingrade')->where([['tahun', date('Y')],['gelombang_ujian', $gelombang_ujian],['id_prodi', $id_prodi]])->first();
-        $pass = $data->passingrade;
-        if($nilai_ujian >= $pass){
-            return true;
+        // dd($data);
+        if($data != NULL){
+            $pass = $data->passingrade;
+            if($nilai_ujian >= $pass){
+                $status = "LULUS";
+                return $status;
+            }else{
+                $status = "TIDAK LULUS";
+                return $status;
+            }
+            
         }else{
-            return false;
+            $status = "Data gagal di Update ,Passingrade blum disetting !!!";
+            return $status;
         }
     }
 

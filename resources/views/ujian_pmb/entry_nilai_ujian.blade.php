@@ -185,9 +185,12 @@ $(document).ready(function() {
                 $('.loader').show();
             },
             success: function(data) {
-                if (data.error) {
-                    alert(data.error)
+                console.log(data);
+                if (data) {
+                    alert(data);
+                    loadData();
                 } else {
+                    alert('Data gagal di update !!!');
                     loadData();
                 }
 
