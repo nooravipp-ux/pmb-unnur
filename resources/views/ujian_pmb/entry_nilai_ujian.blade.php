@@ -221,30 +221,30 @@ $(document).ready(function() {
         var id_prodi = currentRow.find('.id_prodi').val();
         var jenis_pendaftar = currentRow.find('.jenis_pendaftar').val();
         var id_test = currentRow.find('.id_test').text();
-        var btn = $(this).prop('disabled', true);
-        // $.ajax({
-        //     url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
-        //     type: 'post',
-        //     data: {
-        //         id_prodi: id_prodi,
-        //         jenis_pendaftar: jenis_pendaftar,
-        //         id_test: id_test
-        //     },
-        //     dataType: "json",
-        //     beforeSend: function() {
-        //         $('.loader').show();
-        //     },
-        //     success: function(data) {
-        //         if (data.error) {
-        //             alert(data.error)
-        //         } else {
-        //             $('.row-data').remove();
-        //             loadData();
+        
+        $.ajax({
+            url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
+            type: 'post',
+            data: {
+                id_prodi: id_prodi,
+                jenis_pendaftar: jenis_pendaftar,
+                id_test: id_test
+            },
+            dataType: "json",
+            beforeSend: function() {
+                $('.loader').show();
+            },
+            success: function(data) {
+                if (data.error) {
+                    alert(data.error)
+                } else {
+                    $('.row-data').remove();
+                    loadData();
 
-        //         }
+                }
 
-        //     }
-        // });
+            }
+        });
     });
 
 
