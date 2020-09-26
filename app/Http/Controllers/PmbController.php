@@ -106,7 +106,7 @@ class PmbController extends Controller
         $no_urut = "";
         $tahun_masuk = substr($tahun, -2);
         // dd($tahun_masuk);
-        $no_urut = DB::select("SELECT '$tahun_masuk' AS tahun_masuk, '$gelombang' AS gelombang, LPAD((RIGHT(COUNT(ID_PMB),4)+1),4,'0') AS no_urut_pmb FROM pmb WHERE LEFT(ID_PMB,2)= '$tahun_masuk'");
+        $no_urut = DB::select("SELECT '$tahun_masuk' AS tahun_masuk, '$gelombang' AS gelombang, LPAD((MAX(RIGHT(ID_PMB,4))+1),4,'0') AS no_urut_pmb FROM pmb WHERE LEFT(ID_PMB,2)= '$tahun_masuk'");
         foreach($no_urut as $pmb){
             if($pmb->no_urut_pmb != NULL){
                 return $no_urut = $pmb->tahun_masuk.$pmb->gelombang.$pmb->no_urut_pmb;
