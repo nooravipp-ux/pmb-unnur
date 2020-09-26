@@ -262,6 +262,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                                 <div id="step-2">
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK
@@ -314,6 +315,7 @@
                                     </div>
                                     <br>
                                 </div>
+                                <hr>
                                 <div id="step-3">
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">NIK

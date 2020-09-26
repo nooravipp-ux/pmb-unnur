@@ -3,6 +3,7 @@
 @section('tchild_admin','current-page')
 @section('style')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection
 @section('css')
 <style>
@@ -43,7 +44,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Isi
                                     Pengumuman:</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <textarea class="form-control input" name="isi" id="isi" cols="30"
+                                    <textarea class="form-control input" name="isi" id="editor" cols="30"
                                         rows="10"></textarea>
                                 </div>
                             </div>
@@ -97,7 +98,7 @@
                                             @foreach ($email as $mail)
                                             <tr>
                                                 <td>{{$mail->header}}</td>
-                                                <td>{{$mail->isi}}</td>
+                                                <td>{!!$mail->isi!!}</td>
                                                 <td>{{$mail->id_pmb}}</td>
                                                 @if ($mail->status != 1)
                                                 <td>
@@ -142,6 +143,7 @@
 @endsection
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <script>
 $('#id_pmb').select2({
     placeholder: '- Pilih ID PMB -',
@@ -161,6 +163,9 @@ $('#id_pmb').select2({
         },
         cache: true
     }
+});
+$(document).ready(function() {
+  $('#editor').summernote();
 });
 </script>
 @endsection

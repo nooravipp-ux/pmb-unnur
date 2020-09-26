@@ -14,9 +14,9 @@ class PengumumanController extends Controller
         $nama_user = Auth::user()->name;
         $pengunguman = DB::table('pmb_pengumuman')
                     ->join('pmb', 'pmb.id_pmb','pmb_pengumuman.id_pmb')
-                    ->join('pmb_pendaftar', 'pmb_pendaftar.id_pmb','pmb.id_pmb')
-                    ->where([['pmb_pendaftar.nama', $nama_user],['pmb_pendaftar.kelulusan', 'LULUS'],['pmb_pengumuman.status', 1]])
+                    ->where('pmb_pengumuman.status', 1)
                     ->get();
+                    // dd($pengunguman);
         return view('pengunguman.pengunguman_kelulusan', compact('pengunguman'));
     }
     public function index(){
@@ -25,6 +25,7 @@ class PengumumanController extends Controller
     }
 
     public function store(Request $req){
+        // dd($req->all());
         Pengumuman::create($req->all());
         return redirect()->back()->with('sukses','data berhasil di tambah');
     }
