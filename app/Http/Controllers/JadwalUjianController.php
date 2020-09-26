@@ -71,7 +71,7 @@ class JadwalUjianController extends Controller
         $confirm_mhs_lulus = DB::table('pmb_pendaftar')
                             ->join('biodata','biodata.id_pendaftar','pmb_pendaftar.id_pendaftar')
                             ->where('id_test', $request->id_test)->first();
-        // dd($confirm_mhs_lulus);
+        dd($confirm_mhs_lulus);
         $db_sistemik = DB::connection('mysql2');
         $db_sistemik->table('mhs')->insert(
             ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $set_nim, 'nik' => $confirm_mhs_lulus->nik,

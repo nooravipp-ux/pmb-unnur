@@ -4,28 +4,39 @@
 
 <style>
 .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-  position: absolute;
-  left: 50%;
-  top: 0px;
-  z-index: 99999;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    z-index: 99999;
 }
 
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>
 @endsection
@@ -84,11 +95,11 @@
                     </div>
                     <div class="x_content">
                         <div class="row shadow p-4 mb-4 bg-white border rounded mt-lg-2 mb-lg-5">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama
                                         Mahasiswa</label>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         <select class="form-control" name="id_test" id="id_test">
 
                                         </select>
@@ -96,7 +107,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-sm-2 col-form-label">Nilai Test</label>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         <input type="number" class="form-control" name="nilai_test" id="nilai_test"
                                             required>
                                     </div>
@@ -112,7 +123,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box table-responsive">
-                                <div class="loader"></div>
+                                    <div class="loader"></div>
                                     <table id="datatable-peserta-ujian"
                                         class="table table-striped jambo_table bulk_action" cellspacing="0"
                                         width="100%">
@@ -161,7 +172,7 @@ $(document).ready(function() {
     $('#update').on('click', function() {
         var id_test = $('#id_test').val();
         var nilai_test = $('#nilai_test').val();
-    
+
         $.ajax({
             url: '{{url('/operator/entry-nilai-ujian/update-nilai-peserta-ujian')}}',
             type: 'post',
@@ -210,29 +221,30 @@ $(document).ready(function() {
         var id_prodi = currentRow.find('.id_prodi').val();
         var jenis_pendaftar = currentRow.find('.jenis_pendaftar').val();
         var id_test = currentRow.find('.id_test').text();
-        $.ajax({
-            url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
-            type: 'post',
-            data: {
-                id_prodi: id_prodi,
-                jenis_pendaftar: jenis_pendaftar,
-                id_test: id_test
-            },
-            dataType: "json",
-            beforeSend: function() {
-                $('.loader').show();
-            },
-            success: function(data) {
-                if (data.error) {
-                    alert(data.error)
-                } else {
-                    $('.row-data').remove();
-                    loadData();
-                    
-                }
+        var btn = $(this).prop('disabled', true);
+        // $.ajax({
+        //     url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
+        //     type: 'post',
+        //     data: {
+        //         id_prodi: id_prodi,
+        //         jenis_pendaftar: jenis_pendaftar,
+        //         id_test: id_test
+        //     },
+        //     dataType: "json",
+        //     beforeSend: function() {
+        //         $('.loader').show();
+        //     },
+        //     success: function(data) {
+        //         if (data.error) {
+        //             alert(data.error)
+        //         } else {
+        //             $('.row-data').remove();
+        //             loadData();
 
-            }
-        });
+        //         }
+
+        //     }
+        // });
     });
 
 
@@ -263,7 +275,8 @@ function loadData() {
                             '<input type="hidden" type="text" class="id_prodi" value="' + data[i].id_prodi +
                             '"></td>' +
                             '<td class="id_test">' + data[i].id_test +
-                            '<input type="hidden" type="text" class="jenis_pendaftar" value="' + data[i].jenis_pendaftar + '"></td>' +
+                            '<input type="hidden" type="text" class="jenis_pendaftar" value="' + data[i]
+                            .jenis_pendaftar + '"></td>' +
                             '<td class="nim">' + data[i].nim + '</td>' +
                             '<td>' + data[i].nama + '</td>' +
                             '<td>' + data[i].jalur_masuk + '</td>' +
@@ -272,20 +285,20 @@ function loadData() {
                             '<td><button type="button" class="btn btn-primary btn-sm btn_confirm_kelulusan">Konfirmasi Kelulusan</button></td>' +
                             '</tr>';
                         $('table tbody').append(tr);
-                        
+
                     }
-                    $('table tr td.nim').map(function () {
-                            
-                            if ($(this).text() === null) {
-                                // $(this).closest('button').prop('disabled', true);
-                                // $(this).css("background-color", "green");
-                            }
-                            else {
-                                $(this).find('.btn_confirm_kelulusan').prop('disabled', false);
-                            }
-                    });
                     $('.loader').hide();
                 }
+                $('table tr.row-data').map(function() {
+                    var nim = $(this).find('.nim').html();
+                    if (nim != '0') {
+                        $(this).find('button').prop('disabled', true);
+                        $(this).find('button').html('sudah di konfirmasi');
+                        $(this).find('button').css("background-color", "red");
+                    } else {
+                        console.log('nim tidak ada !!')
+                    }
+                });
             }
 
         }
