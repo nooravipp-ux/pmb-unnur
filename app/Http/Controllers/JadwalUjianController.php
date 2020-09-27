@@ -72,6 +72,8 @@ class JadwalUjianController extends Controller
                             ->where('id_test', $request->id_test)->first();
         // dd($set_nim);
         $db_sistemik = DB::connection('mysql2');
+        
+
         $db_sistemik->table('mhs')->insert(
             ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $set_nim, 'nik' => $confirm_mhs_lulus->nik,
             'tmpt_lahir' => $confirm_mhs_lulus->tempat_lahir, 'id_agama' => $confirm_mhs_lulus->agama,'jln' => $confirm_mhs_lulus->jln, 'rt' => $confirm_mhs_lulus->rt,

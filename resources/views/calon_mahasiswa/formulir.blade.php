@@ -162,7 +162,7 @@
                                   <label for="">Kode Voucher</label>
                                   <input class="form-control" type="text" name="Kode Voucher" placeholder="Kode Voucher (Kosongkan jika tidak ada)" />
                                 </div>
-                            </div>           
+                            </div>        
                             <div class="ln_solid">
                                 <br>
                                 <div class="form-group">
