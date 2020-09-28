@@ -29,7 +29,7 @@
         min-height: 100vh;
         /* Full height */
         height: 100%;
-        width: 100%; 
+        width: 100%;
         background-position: center;
         background-size: cover;
         }
@@ -57,8 +57,8 @@
                                 <hr>
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input id="nama" type="text" class="form-control  @error('nama') is-invalid @enderror" name="nama" value="" required  autofocus placeholder="Nama Lengkap">
-                                    
+                                        <input id="nama" type="text" class="form-control  @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required  autofocus placeholder="Nama Lengkap">
+
                                         @error('nama')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -69,8 +69,8 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="" required autocomplete="nik"  autofocus placeholder="NIK">
-                                        
+                                        <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" value="{{ old('nik') }}" required autocomplete="nik"  autofocus placeholder="NIK">
+
                                         @error('nik')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -78,8 +78,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value=""  required  autofocus placeholder="No Telephone">
-                                    
+                                        <input id="telp" type="number" class="form-control @error('telp') is-invalid @enderror" name="telp" value="{{ old('telp') }}"  required  autofocus placeholder="No Telephone">
+
                                         @error('telp')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -167,7 +167,7 @@
         </main>
         </div>
     </div>
-</div>    
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -201,8 +201,8 @@ $( document ).ready(function() {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });  
-            
+            });
+
         $.ajax({
 				type : "GET",
 				url:'{{route('get.prodi')}}',
@@ -223,7 +223,7 @@ $( document ).ready(function() {
                         var opt = '<option value="'+ data[i].id_prodi +'">'+ data[i].nama_prodi +'</option>';
                         $('#prodi').append(opt);
                     }
-                                       
+
 				}
 			});
 
@@ -237,8 +237,8 @@ $( document ).ready(function() {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                });  
-                
+                });
+
             $.ajax({
                     type : "GET",
                     url:'{{route('get.strata')}}',
@@ -255,7 +255,7 @@ $( document ).ready(function() {
                             var opt = '<option value="'+ data[i].id_strata +'">'+ data[i].jenis_strata +'</option>';
                             $('#jenjangp').append(opt);
                         }
-                                        
+
                     }
                 });
             });
@@ -267,8 +267,8 @@ $( document ).ready(function() {
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                });  
-                
+                });
+
             $.ajax({
                     type : "GET",
                     url:'{{route('get.kelas')}}',
@@ -283,7 +283,7 @@ $( document ).ready(function() {
                             var opt = '<option value="'+ data[i].id_kelas +'">'+ data[i].nama_kelas +'</option>';
                             $('#kelas').append(opt);
                         }
-                                        
+
                     }
                 });
         });

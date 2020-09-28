@@ -146,7 +146,7 @@ class PendaftaranOnlineController extends Controller
                             //dd($detail_pendaftar);
         $pdf = PDF::loadview('pendaftaran_online.cetak_kwitansi_regis',['data_pendaftar'=>$detail_pendaftar, 'nama_op' => $nama_op])->setPaper('A5', 'landscape');
         return $pdf->stream();
-        // return view('pendaftaran_online.cetak_kwitansi_regis');                            
+        // return view('pendaftaran_online.cetak_kwitansi_regis');
     }
 
     public function generate_id_test($tahun, $gelombang, $prodi){
@@ -166,7 +166,7 @@ class PendaftaranOnlineController extends Controller
     public function info_registrasi(){
         $db_sistemik = DB::connection('mysql2');
         $data = $db_sistemik->table('agama')->get();
-        
+
         $prodi = Auth::user()->id_prodi;
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
@@ -208,7 +208,7 @@ class PendaftaranOnlineController extends Controller
             return redirect('/operator/pendaftaran/info-registrasi')->with('error','Pendaftar Belum Melengkapi Data-Data');
         }else{
             return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
-        }                    
+        }
     }
 
     public function agama_get(Request $request){
@@ -391,8 +391,7 @@ class PendaftaranOnlineController extends Controller
             $id_pendaftar = Arr::get($convertt,0);
 
             DB::table('biodata')->insert([
-                'id_pendaftar' => $id_pendaftar,
-                'email' => $request->email,
+                'id_pendaftar' => $id_pendaftar
             ]);
 
             $cari_id = DB::table('users')
