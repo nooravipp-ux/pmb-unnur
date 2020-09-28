@@ -35,11 +35,13 @@
                             method="POST" action="{{url('/operator/jadwal-ujian/simpan')}}">
                             {{csrf_field()}}
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tanggal
-                                    Ujian<span class="required">*</span>
-                                </label>
+                                <label for="middle-name"
+                                    class="col-form-label col-md-3 col-sm-3 label-align">Gelombang</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="datetime-local" name="tanggal_ujian" class="form-control ">
+                                    
+                                    <select name="gelombang" class="form-control " id="gelombang_pmb">
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -51,13 +53,11 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label for="middle-name"
-                                    class="col-form-label col-md-3 col-sm-3 label-align">Gelombang</label>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tanggal
+                                    Ujian<span class="required">*</span>
+                                </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    
-                                    <select name="gelombang" class="form-control " id="gelombang_pmb">
-
-                                    </select>
+                                    <input type="datetime-local" name="tanggal_ujian" class="form-control ">
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -177,7 +177,7 @@ $(document).ready(function() {
                     results: $.map(data, function(pmb) {
                         return {
                             id: pmb.gelombang,
-                            text: pmb.id_pmb + ' - ' + pmb.gelombang
+                            text: pmb.id_pmb + ' - ' + pmb.gelombang + ' - ( ' + pmb.start_date + ' - ' +pmb.finish_date + ' ) '
                         }
                     })
                 };

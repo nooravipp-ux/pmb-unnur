@@ -111,7 +111,7 @@ class PmbController extends Controller
             if($pmb->no_urut_pmb != NULL){
                 return $no_urut = $pmb->tahun_masuk.$pmb->gelombang.$pmb->no_urut_pmb;
             }else{
-                return $no_urut = $tahun.$gelombang.sprintf("%04s", $no);
+                return $no_urut = $tahun_masuk.$gelombang.sprintf("%04s", $no);
             }
         }
     }
@@ -128,7 +128,7 @@ class PmbController extends Controller
     }
 
     public function get_data_gelombang_opened(Request $request){
-        $data_pmb = DB::table('pmb')->select('id_pmb', 'gelombang')->where([['tahun', date('Y')],['status','OPENED']])->get();
+        $data_pmb = DB::table('pmb')->select('id_pmb', 'gelombang','start_date','finish_date')->where([['tahun', date('Y')],['status','OPENED']])->get();
 
         return response()->json($data_pmb);
     }

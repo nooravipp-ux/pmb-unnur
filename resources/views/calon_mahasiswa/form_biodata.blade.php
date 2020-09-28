@@ -122,22 +122,22 @@
                                             <div class="form-check form-check-inline">
                                                 @if($data_pendaftar->jenis_kelamin == "laki-laki")
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                                    id="inlineRadio1" value="laki-laki" checked>
+                                                    id="inlineRadio1" value="L" checked>
                                                 <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
                                                 @else
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                                    id="inlineRadio1" value="laki-laki">
+                                                    id="inlineRadio1" value="L">
                                                 <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
                                                 @endif
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 @if($data_pendaftar->jenis_kelamin == "perempuan")
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                                    id="inlineRadio2" value="perempuan" checked>
+                                                    id="inlineRadio2" value="P" checked>
                                                 <label class="form-check-label" for="inlineRadio2">Perempuan</label>
                                                 @else
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
-                                                    id="inlineRadio2" value="perempuan">
+                                                    id="inlineRadio2" value="P">
                                                 <label class="form-check-label" for="inlineRadio2">Perempuan</label>
                                                 @endif
                                             </div>
