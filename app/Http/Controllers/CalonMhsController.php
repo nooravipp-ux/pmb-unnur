@@ -18,19 +18,41 @@ class CalonMhsController extends Controller
         $sortedd = Arr::flatten($sorted);
         $id_fak = Arr::get($sortedd,0);
 
-        $data_pendaftar = DB::table('pmb_pendaftar')
-                        ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
-                        ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
-                        ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
-                        ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
-                        ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
-                        ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
-                        ->join('biodata','pmb_pendaftar.id_pendaftar','=','biodata.id_pendaftar')
-                        ->where([
-                            ['pmb_pendaftar.email', $email],
-                            ['fakultas.id_fakultas', $id_fak]
-                            ])
-                        ->first();
+        $list_prodi = DB::select("select id_prodi from pmb_pendaftar where email='".$email."'");
+
+        $ap = Arr::get($list_prodi,0);
+        $bp = Arr::flatten($ap);
+        $id_prod = Arr::get($bp,0);
+
+        $list_kelas = DB::select("select id_kelas from pmb_pendaftar where email='".$email."'");
+
+        $ak = Arr::get($list_kelas,0);
+        $bk = Arr::flatten($ak);
+        $id_kel = Arr::get($bk,0);
+
+        $list_pmb = DB::select("select id_pmb from pmb_pendaftar where email='".$email."'");
+
+        $ab = Arr::get($list_pmb,0);
+        $bb = Arr::flatten($ab);
+        $id_b = Arr::get($bb,0);
+
+
+        $data_pendaftar = DB::table('fakultas')
+                            ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+                            ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+                            ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                            ->join('pmb_pendaftar','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                            ->join('biodata','pmb_pendaftar.id_pendaftar','=','biodata.id_pendaftar')
+                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                            ->join('pmb_biaya_registrasi', 'kelas.id_kelas','=','pmb_biaya_registrasi.kelas')
+                            ->where([
+                                ['pmb_pendaftar.email', $email],
+                                ['fakultas.id_fakultas', $id_fak],
+                                ['prodi.id_prodi', $id_prod],
+                                ['kelas.id_kelas', $id_kel],
+                                ['pmb_biaya_registrasi.id_pmb', $id_b]
+                                ])
+                            ->first();
         // dd($data_pendaftar);
         return view('calon_mahasiswa.formulir', compact('data_pendaftar'));
     }
@@ -132,13 +154,29 @@ class CalonMhsController extends Controller
     }
 
     public function get_data_calonmhs(Request $request){
-        // $list_data = DB::select("SELECT * FROM pmb_pendaftar  INNER JOIN pmb ON pmb_pendaftar.`id_pmb` = pmb.`id_pmb`
-        // INNER JOIN pmb_biaya_registrasi ON pmb.`id_pmb` = pmb_biaya_registrasi.`id_pmb`
-        // INNER JOIN fakultas ON pmb_biaya_registrasi.`id_fakultas` = fakultas.`id_fakultas`
-        // INNER JOIN prodi ON fakultas.`id_fakultas` = prodi.`id_fakultas`
-        // INNER JOIN strata ON prodi.`id_prodi` = strata.`id_prodi`
-        // INNER JOIN kelas ON strata.`id_strata` = kelas.`id_strata`
-        // WHERE pmb_pendaftar.`id_pendaftar`='" + $request->id_pendaftar + "'");
+
+
+        // $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where email='".$request->email."'");
+
+        // $sorted = Arr::get($list_pmb_pendaftar,0);
+        // $sortedd = Arr::flatten($sorted);
+        // $id_fak = Arr::get($sortedd,0);
+
+        // $list_calonmhs = DB::table('pmb_pendaftar')
+        // ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+        // ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
+        // ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+        // ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+        // ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+        // ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+        // ->join('users','pmb_pendaftar.email','=','users.email')
+        // ->where([
+        //     ['pmb_pendaftar.email', $request->email],
+        //     ['fakultas.id_fakultas', $id_fak]
+        //     ])
+        // ->first();
+
+        //$list_calonmhs = head($list_data);
 
         $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where email='".$request->email."'");
 
@@ -146,21 +184,40 @@ class CalonMhsController extends Controller
         $sortedd = Arr::flatten($sorted);
         $id_fak = Arr::get($sortedd,0);
 
-        $list_calonmhs = DB::table('pmb_pendaftar')
-        ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
-        ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
-        ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
-        ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
-        ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
-        ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
-        ->join('users','pmb_pendaftar.email','=','users.email')
-        ->where([
-            ['pmb_pendaftar.email', $request->email],
-            ['fakultas.id_fakultas', $id_fak]
-            ])
-        ->first();
+        $list_prodi = DB::select("select id_prodi from pmb_pendaftar where email='".$request->email."'");
 
-        //$list_calonmhs = head($list_data);
+        $ap = Arr::get($list_prodi,0);
+        $bp = Arr::flatten($ap);
+        $id_prod = Arr::get($bp,0);
+
+        $list_kelas = DB::select("select id_kelas from pmb_pendaftar where email='".$request->email."'");
+
+        $ak = Arr::get($list_kelas,0);
+        $bk = Arr::flatten($ak);
+        $id_kel = Arr::get($bk,0);
+
+        $list_pmb = DB::select("select id_pmb from pmb_pendaftar where email='".$request->email."'");
+
+        $ab = Arr::get($list_pmb,0);
+        $bb = Arr::flatten($ab);
+        $id_b = Arr::get($bb,0);
+
+
+        $list_calonmhs = DB::table('fakultas')
+                            ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
+                            ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
+                            ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                            ->join('pmb_pendaftar','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                            ->join('pmb_biaya_registrasi', 'kelas.id_kelas','=','pmb_biaya_registrasi.kelas')
+                            ->where([
+                                ['pmb_pendaftar.email', $request->email],
+                                ['fakultas.id_fakultas', $id_fak],
+                                ['prodi.id_prodi', $id_prod],
+                                ['kelas.id_kelas', $id_kel],
+                                ['pmb_biaya_registrasi.id_pmb', $id_b]
+                                ])
+                            ->first();
 
         return response()->json($list_calonmhs);
     }

@@ -12,7 +12,15 @@ class DashboardController extends Controller
         $email = Auth::user()->email;
         $user = $this->cek_user($email);
 
-        return view('dashboard.index', compact('user'));
+        $list_pendaftar = DB::table('fakultas')
+                        ->join('pmb_pendaftar','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                        ->get();
+        
+        $total = DB::table('pmb_pendaftar')->count();
+        $belum = DB::table('pmb_pendaftar')->where('status_pembayaran_registrasi','BELUM DI KONFIRMASI')->count();
+        $sudah = DB::table('pmb_pendaftar')->where('status_pembayaran_registrasi','SUDAH DI KONFIRMASI')->count();                 
+
+        return view('dashboard.index', compact('user','list_pendaftar','total','belum','sudah'));
     }
 
     public function cek_user($email){

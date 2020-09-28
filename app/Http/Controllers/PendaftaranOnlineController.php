@@ -19,12 +19,11 @@ use Illuminate\Support\Facades\Validator;
 class PendaftaranOnlineController extends Controller
 {
     public function aktivasi_calon_mhs(){
-        $data_pendaftar = DB::table('pmb_pendaftar')
-                        ->join('fakultas', 'pmb_pendaftar.id_fakultas','=','fakultas.id_fakultas')
+        $data_pendaftar = DB::table('fakultas')
                         ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
                         ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
                         ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
-                        ->select('pmb_pendaftar.*','fakultas.*','prodi.*','strata.*','kelas.*')
+                        ->join('pmb_pendaftar','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
                         ->get();
                         $data_pendaftar = $data_pendaftar->unique('nik');
                         $data_pendaftar = $data_pendaftar->values()->all();
@@ -50,17 +49,38 @@ class PendaftaranOnlineController extends Controller
         $sortedd = Arr::flatten($sorted);
         $id_fak = Arr::get($sortedd,0);
 
+        $list_prodi = DB::select("select id_prodi from pmb_pendaftar where id_pendaftar='".$id."'");
 
-        $detail_pendaftar = DB::table('pmb_pendaftar')
-                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
-                            ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
-                            ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+        $ap = Arr::get($list_prodi,0);
+        $bp = Arr::flatten($ap);
+        $id_prod = Arr::get($bp,0);
+
+        $list_kelas = DB::select("select id_kelas from pmb_pendaftar where id_pendaftar='".$id."'");
+
+        $ak = Arr::get($list_kelas,0);
+        $bk = Arr::flatten($ak);
+        $id_kel = Arr::get($bk,0);
+
+        $list_pmb = DB::select("select id_pmb from pmb_pendaftar where id_pendaftar='".$id."'");
+
+        $ab = Arr::get($list_pmb,0);
+        $bb = Arr::flatten($ab);
+        $id_b = Arr::get($bb,0);
+
+
+        $detail_pendaftar = DB::table('fakultas')
                             ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
                             ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
                             ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                            ->join('pmb_pendaftar','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                            ->join('pmb_biaya_registrasi', 'kelas.id_kelas','=','pmb_biaya_registrasi.kelas')
                             ->where([
                                 ['pmb_pendaftar.id_pendaftar', $id],
-                                ['fakultas.id_fakultas', $id_fak]
+                                ['fakultas.id_fakultas', $id_fak],
+                                ['prodi.id_prodi', $id_prod],
+                                ['kelas.id_kelas', $id_kel],
+                                ['pmb_biaya_registrasi.id_pmb', $id_b]
                                 ])
                             ->first();
 
@@ -81,31 +101,52 @@ class PendaftaranOnlineController extends Controller
     }
 
     public function cetak_kwitansi_regis($id){
-        $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where id_pendaftar='".$id."'");
-
         $nama_op = Auth::user()->name;
+
+        $list_pmb_pendaftar = DB::select("select id_fakultas from pmb_pendaftar where id_pendaftar='".$id."'");
 
         $sorted = Arr::get($list_pmb_pendaftar,0);
         $sortedd = Arr::flatten($sorted);
         $id_fak = Arr::get($sortedd,0);
 
+        $list_prodi = DB::select("select id_prodi from pmb_pendaftar where id_pendaftar='".$id."'");
 
-        $detail_pendaftar = DB::table('pmb_pendaftar')
-                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
-                            ->join('pmb_biaya_registrasi', 'pmb.id_pmb','=','pmb_biaya_registrasi.id_pmb')
-                            ->join('fakultas', 'pmb_biaya_registrasi.id_fakultas','=','fakultas.id_fakultas')
+        $ap = Arr::get($list_prodi,0);
+        $bp = Arr::flatten($ap);
+        $id_prod = Arr::get($bp,0);
+
+        $list_kelas = DB::select("select id_kelas from pmb_pendaftar where id_pendaftar='".$id."'");
+
+        $ak = Arr::get($list_kelas,0);
+        $bk = Arr::flatten($ak);
+        $id_kel = Arr::get($bk,0);
+
+        $list_pmb = DB::select("select id_pmb from pmb_pendaftar where id_pendaftar='".$id."'");
+
+        $ab = Arr::get($list_pmb,0);
+        $bb = Arr::flatten($ab);
+        $id_b = Arr::get($bb,0);
+
+
+        $detail_pendaftar = DB::table('fakultas')
                             ->join('prodi', 'fakultas.id_fakultas','=','prodi.id_fakultas')
                             ->join('strata', 'prodi.id_prodi','=','strata.id_prodi')
                             ->join('kelas', 'strata.id_strata','=','kelas.id_strata')
+                            ->join('pmb_pendaftar','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
+                            ->join('pmb', 'pmb_pendaftar.id_pmb','=','pmb.id_pmb')
+                            ->join('pmb_biaya_registrasi', 'kelas.id_kelas','=','pmb_biaya_registrasi.kelas')
                             ->where([
                                 ['pmb_pendaftar.id_pendaftar', $id],
-                                ['fakultas.id_fakultas', $id_fak]
+                                ['fakultas.id_fakultas', $id_fak],
+                                ['prodi.id_prodi', $id_prod],
+                                ['kelas.id_kelas', $id_kel],
+                                ['pmb_biaya_registrasi.id_pmb', $id_b]
                                 ])
                             ->first();
                             //dd($detail_pendaftar);
         $pdf = PDF::loadview('pendaftaran_online.cetak_kwitansi_regis',['data_pendaftar'=>$detail_pendaftar, 'nama_op' => $nama_op])->setPaper('A5', 'landscape');
         return $pdf->stream();
-        // return view('pendaftaran_online.cetak_kwitansi_regis');                            
+        // return view('pendaftaran_online.cetak_kwitansi_regis');
     }
 
     public function generate_id_test($tahun, $gelombang, $prodi){
@@ -125,7 +166,7 @@ class PendaftaranOnlineController extends Controller
     public function info_registrasi(){
         $db_sistemik = DB::connection('mysql2');
         $data = $db_sistemik->table('agama')->get();
-        
+
         $prodi = Auth::user()->id_prodi;
         $data_pendaftar = DB::table('pmb_pendaftar')
                         ->join('fakultas','fakultas.id_fakultas','=','pmb_pendaftar.id_fakultas')
@@ -167,7 +208,7 @@ class PendaftaranOnlineController extends Controller
             return redirect('/operator/pendaftaran/info-registrasi')->with('error','Pendaftar Belum Melengkapi Data-Data');
         }else{
             return view('pendaftaran_online.detail_info_register', compact('data_pendaftar'));
-        }                    
+        }
     }
 
     public function agama_get(Request $request){
@@ -350,8 +391,7 @@ class PendaftaranOnlineController extends Controller
             $id_pendaftar = Arr::get($convertt,0);
 
             DB::table('biodata')->insert([
-                'id_pendaftar' => $id_pendaftar,
-                'email' => $request->email,
+                'id_pendaftar' => $id_pendaftar
             ]);
 
             $cari_id = DB::table('users')

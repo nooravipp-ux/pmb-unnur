@@ -12,27 +12,19 @@
         <div class="row" style="display: inline-block;">
             <div class="tile_count">
                 <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Total Peserta Ujian</span>
+                    <span class="count_top"><i class="fa fa-user"></i> Peserta Ujian</span>
                     <div class="count"><a id="total_peserta_ujian" href="">0</a></div>
-                    <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+                    <span class="count_bottom">Total Pendaftar</span>
                 </div>
                 <div class="col-md-3 col-sm-5  tile_stats_count">
                     <span class="count_top"><i class="fa fa-clock-o"></i> Peserta Lulus</span>
                     <div class="count"><a id="peserta_lulus" href="">0</a></div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last
-                        Week</span>
+                    <span class="count_bottom">Total Pendaftar</span>
                 </div>
                 <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Peserta Tidak Lulus</span>
+                    <span class="count_top"><i class="fa fa-user"></i> Tidak Lulus</span>
                     <div class="count"><a id="peserta_tidak_lulus" href="">0</a></div>
-                    <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last
-                        Week</span>
-                </div>
-                <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Aktivasi</span>
-                    <div class="count green">0</div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
-                        Week</span>
+                    <span class="count_bottom">Total Pendaftar rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</span>
                 </div>
             </div>
         </div>

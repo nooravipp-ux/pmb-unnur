@@ -172,9 +172,14 @@ class JadwalUjianController extends Controller
     }
 
     public function laporan_kelulusan(){
+        $prodi = Auth::user()->id_prodi;
         $data_peserta_lulus = DB::table('pmb_pendaftar')
                             ->join('pmb','pmb.id_pmb','=','pmb_pendaftar.id_pmb')
-                            ->where([['pmb_pendaftar.tahun', '2020'],['pmb_pendaftar.status_pembayaran_registrasi','SUDAH DI KONFIRMASI']])
+                            ->where([
+                                ['pmb_pendaftar.tahun', '2020'],
+                                ['pmb_pendaftar.status_pembayaran_registrasi','SUDAH DI KONFIRMASI'],
+                                ['pmb_pendaftar.id_prodi',$prodi]
+                                ])
                             ->get();
         
         return view('ujian_pmb.laporan_kelulusan', compact('data_peserta_lulus'));
