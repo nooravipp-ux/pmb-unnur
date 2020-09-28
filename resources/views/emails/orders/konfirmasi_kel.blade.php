@@ -21,7 +21,7 @@
     @endif
 </div>
 @if ($din->kelulusan == 'LULUS')
-    @component('mail::button', ['url' => 'www.google.com'])
+    @component('mail::button', ['url' => 'https://fikiunnur.omahawan.com/admina/login.php'])
     Login
     @endcomponent
 @endif
