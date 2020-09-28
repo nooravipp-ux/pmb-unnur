@@ -32,7 +32,6 @@
                                       <th>Nama Lengkap</th>
                                       <th>Tahun Daftar</th>
                                       <th>Fakultas</th>
-                                      <th>Kelas (Pagi/Sore)</th>
                                       <th>Metode Pembayaran</th>
                                       <th>Bukti Pembayaran</th>
                                       <th>Status Pendaftar</th>
@@ -46,7 +45,6 @@
                                       <td>{{$dt->nama}}</td>
                                       <td>{{$dt->tahun}}</td>
                                       <td>{{$dt->nama_fakultas}}</td>
-                                      <td>{{$dt->nama_kelas}}</td>
                                       <td>{{$dt->metode_pembayaran}}</td>
                                       @if( is_null($dt->bukti_pem) && $dt->metode_pembayaran == "transfer" && $dt->status_pembayaran_registrasi == "BELUM DI KONFIRMASI	")
                                       <td style="color: yellow">Bukti Belum Di Upload</td>
