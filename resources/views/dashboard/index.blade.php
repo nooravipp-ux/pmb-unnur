@@ -3,6 +3,14 @@
 @section('content')
 <!-- page content -->
 <div class="right_col" role="main">
+    @if($user->name == "calon-mhs")
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">SELAMAT DATANG CALON MAHASISWA</h5>
+          <p class="card-text">Silahkan Lengkapi Data Yang sudah disediakan di menu dashboard.</p>
+        </div>
+      </div>
+    @else
     <!-- top tiles -->
     <div class="row" style="display: inline-block;">
         <div class="tile_count">
@@ -673,6 +681,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 <!-- /page content -->
 @endsection

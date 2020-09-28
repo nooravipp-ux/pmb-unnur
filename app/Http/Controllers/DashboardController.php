@@ -9,8 +9,23 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard.index');
+        $email = Auth::user()->email;
+        $user = $this->cek_user($email);
+
+        return view('dashboard.index', compact('user'));
     }
+
+    public function cek_user($email){
+        $email = Auth::user()->email;
+        $data_user = DB::table('roles')
+                    ->select('roles.name')
+                    ->join('role_user','roles.id','=','role_user.role_id')
+                    ->join('users','role_user.user_id','=','users.id')
+                    ->where('users.email',$email)
+                    ->first();
+                    
+        return $data_user;            
+    } 
 
     public function get_data_register_per_year(){
         $id_prodi = Auth::user()->id_prodi;
