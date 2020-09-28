@@ -216,7 +216,7 @@ $(document).ready(function() {
         var id_prodi = currentRow.find('.id_prodi').val();
         var jenis_pendaftar = currentRow.find('.jenis_pendaftar').val();
         var id_test = currentRow.find('.id_test').text();
-        
+
         $.ajax({
             url: '{{url('/operator/entry-nilai-ujian/confirmasi-kelulusan')}}',
             type: 'post',
@@ -290,6 +290,14 @@ function loadData() {
                         $(this).find('button.btn_confirm_kelulusan').prop('disabled', true);
                         $(this).find('button.btn_confirm_kelulusan').html('sudah di konfirmasi');
                         $(this).find('button.btn_confirm_kelulusan').css("background-color", "red");
+                    } else {
+                        console.log('nim tidak ada !!')
+                    }
+                    var nim = $(this).find('.nim').html();
+                    if (nim != '0') {
+                        $(this).find('button').prop('disabled', true);
+                        $(this).find('button').html('sudah di konfirmasi');
+                        $(this).find('button').css("background-color", "red");
                     } else {
                         console.log('nim tidak ada !!')
                     }

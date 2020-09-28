@@ -427,8 +427,11 @@ class PendaftaranOnlineController extends Controller
             $fak = DB::table('fakultas')->where('id_fakultas',$request->fakultas)->select('nama_fakultas')->first();
             $pro = DB::table('prodi')->where('id_prodi',$request->prodi)->select('prodi.*')->first();
             // dd($kel);
-
-            \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro,$kel));
+            try{
+                \Mail::to($request->email)->send(new Pendaftaran($get,$fak,$pro,$kel));
+            }catch(\Exception $e){
+                return redirect('/login')->with('sukses','data berhasil di simpan');
+            }
             /**
              * end mailable
              */

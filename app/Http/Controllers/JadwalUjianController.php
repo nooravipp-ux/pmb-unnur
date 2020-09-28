@@ -5,6 +5,7 @@ use DB;
 use App\jadwal;
 use App\Mail\ujian;
 use App\Mail\kelulusan;
+use App\Mail\konfirmasi_kel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -53,14 +54,14 @@ class JadwalUjianController extends Controller
         }
 
         return response()->json($status);
-        
+
     }
     public function confirmasi_kelulusan(Request $request){
         // dd($request->all());
         $prodi = Auth::user()->id_prodi;
         $jenis_pendaftar = "";
         $tahun = date('Y');
-        
+
         if($request->jenis_pendaftar == "Reguler"){
             $jenis_pendaftar = "1";
         }else{
@@ -72,6 +73,8 @@ class JadwalUjianController extends Controller
                             ->join('biodata','biodata.id_pendaftar','pmb_pendaftar.id_pendaftar')
                             ->where('id_test', $request->id_test)->first();
         $db_sistemik = DB::connection('mysql2');
+
+
         $db_sistemik->table('mhs')->insert(
             ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $set_nim, 'nik' => $confirm_mhs_lulus->nik,
             'tmpt_lahir' => $confirm_mhs_lulus->tempat_lahir,'tgl_lahir' => $confirm_mhs_lulus->tgl_lahir, 'id_agama' => $confirm_mhs_lulus->agama,'jln' => $confirm_mhs_lulus->jln, 'rt' => $confirm_mhs_lulus->rt,
@@ -100,6 +103,10 @@ class JadwalUjianController extends Controller
             ]
         );
 
+        $done = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.email')->first();
+        $din = DB::table('pmb_pendaftar')->where('id_test',$request->id_test)->select('pmb_pendaftar.*')->first();
+
+        \Mail::to($done)->send(new konfirmasi_kel($din));
         return response()->json('data success updated');
     }
     public function get_data_peserta_ujian(Request $request){
@@ -140,7 +147,7 @@ class JadwalUjianController extends Controller
                 $status = "TIDAK LULUS";
                 return $status;
             }
-            
+
         }else{
             $status = "Data gagal di Update ,Passingrade blum disetting !!!";
             return $status;
@@ -181,7 +188,7 @@ class JadwalUjianController extends Controller
                                 ['pmb_pendaftar.id_prodi',$prodi]
                                 ])
                             ->get();
-        
+
         return view('ujian_pmb.laporan_kelulusan', compact('data_peserta_lulus'));
     }
 
