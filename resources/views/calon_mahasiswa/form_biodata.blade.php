@@ -120,7 +120,7 @@
                                             Kelamin</label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <div class="form-check form-check-inline">
-                                                @if($data_pendaftar->jenis_kelamin == "laki-laki")
+                                                @if($data_pendaftar->jenis_kelamin == "L")
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
                                                     id="inlineRadio1" value="L" checked>
                                                 <label class="form-check-label" for="inlineRadio1">Laki - Laki</label>
@@ -131,7 +131,7 @@
                                                 @endif
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                @if($data_pendaftar->jenis_kelamin == "perempuan")
+                                                @if($data_pendaftar->jenis_kelamin == "P")
                                                 <input class="form-check-input" type="radio" name="jenis_kelamin"
                                                     id="inlineRadio2" value="P" checked>
                                                 <label class="form-check-label" for="inlineRadio2">Perempuan</label>
@@ -149,7 +149,7 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <select name="agama" class="form-control " id="agama">
-
+                                                
                                             </select>
                                         </div>
                                     </div>

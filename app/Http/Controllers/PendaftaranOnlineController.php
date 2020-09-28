@@ -350,7 +350,8 @@ class PendaftaranOnlineController extends Controller
             $id_pendaftar = Arr::get($convertt,0);
 
             DB::table('biodata')->insert([
-                'id_pendaftar' => $id_pendaftar
+                'id_pendaftar' => $id_pendaftar,
+                'email' => $request->email,
             ]);
 
             $cari_id = DB::table('users')
