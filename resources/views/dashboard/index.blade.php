@@ -15,6 +15,73 @@
           <p>4.Upload Document Kelengkapan</p>
         </div>
       </div>
+    @elseif($user->name == "keuangan" || $user->name == "admin")
+          <!-- top tiles -->
+            <div class="row" style="display: inline-block;">
+                <div class="tile_count">
+                    <div class="col-md-3 col-sm-5  tile_stats_count">
+                        <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
+                        <div class="count">{{ $total }}
+                        </div>
+                        <span class="count_bottom"> Total Pendaftar</span>
+                    </div>
+                    <div class="col-md-3 col-sm-5  tile_stats_count">
+                        <span class="count_top"><i class="fa fa-clock-o"></i> Belum Aktivasi</span>
+                        <div class="count">{{ $belum }}</div>
+                        <span class="count_bottom"> Total Pendaftar</span>
+                    </div>
+                    <div class="col-md-3 col-sm-5  tile_stats_count">
+                        <span class="count_top"><i class="fa fa-user"></i> Sudah Bayar</span>
+                        <div class="count">{{ $sudah }}</div>
+                        <span class="count_bottom"> Total Pendaftar rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 ">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>List Pendaftar</h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                              <div class="card-box table-responsive">
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>No Telp</th>
+                            <th>Fakultas</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @foreach($list_pendaftar as $value)  
+                          <tr>
+                            <td>{{ $value->nik }}</td>
+                            <td>{{ $value->nama }}</td>
+                            <td>{{ $value->email }}</td>
+                            <td>{{ $value->no_telepon }}</td>
+                            <td>{{ $value->nama_fakultas }}</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                </div>
+              </div>
+                  </div>
+                </div>
+            <!-- /top tiles -->
     @else
     <!-- top tiles -->
     <div class="row" style="display: inline-block;">
@@ -23,25 +90,17 @@
                 <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
                 <div class="count"><a id="total_register" href="{{url('/operator/pendaftaran/info-registrasi')}}">0</a>
                 </div>
-                <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+                <span class="count_bottom"> Total Pendaftar</span>
             </div>
             <div class="col-md-3 col-sm-5  tile_stats_count">
                 <span class="count_top"><i class="fa fa-clock-o"></i> Register Hari Ini</span>
-                <div class="count"><a id="today_register" href="">0</a></div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last
-                    Week</span>
+                <div class="count"><a id="today_register" href="#">0</a></div>
+                <span class="count_bottom"> Total Pendaftar</span>
             </div>
             <div class="col-md-3 col-sm-5  tile_stats_count">
                 <span class="count_top"><i class="fa fa-user"></i> Bayar</span>
-                <div class="count"><a id="status_register" href="">0</a></div>
-                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last
-                    Week</span>
-            </div>
-            <div class="col-md-3 col-sm-5  tile_stats_count">
-                <span class="count_top"><i class="fa fa-user"></i> Aktivasi</span>
-                <div class="count green">0</div>
-                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
-                    Week</span>
+                <div class="count"><a id="status_register" href="#">0</a></div>
+                <span class="count_bottom"> Total Pendaftar rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</span>
             </div>
         </div>
     </div>

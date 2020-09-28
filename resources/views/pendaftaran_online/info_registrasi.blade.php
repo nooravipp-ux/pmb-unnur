@@ -13,26 +13,19 @@
                 <div class="col-md-3 col-sm-5  tile_stats_count">
                     <span class="count_top"><i class="fa fa-user"></i> Total Register</span>
                     <div class="count"><a id="total_register" href="">0</a></div>
-                    <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+                    <span class="count_bottom"> Total Pendaftar</span>
                 </div>
                 <div class="col-md-3 col-sm-5  tile_stats_count">
                     <span class="count_top"><i class="fa fa-clock-o"></i> Register Hari Ini</span>
                     <div class="count"><a id="today_register" href="">0</a></div>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last
-                        Week</span>
+                    <span class="count_bottom"> Total Pendaftar</span>
                 </div>
                 <div class="col-md-3 col-sm-5  tile_stats_count">
                     <span class="count_top"><i class="fa fa-user"></i> Bayar</span>
                     <div class="count"><a id="status_register" href="">0</a></div>
-                    <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last
-                        Week</span>
+                    <span class="count_bottom"> Total Pendaftar rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</span>
                 </div>
-                <div class="col-md-3 col-sm-5  tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Lulus Seleksi</span>
-                    <a href="{{url('')}}"><div class="count green">0</div></a>
-                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
-                        Week</span>
-                </div>
+
             </div>
         </div>
         <div class="row">
