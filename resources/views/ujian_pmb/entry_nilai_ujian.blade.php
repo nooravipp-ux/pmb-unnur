@@ -277,7 +277,7 @@ function loadData() {
                             '<td>' + data[i].jalur_masuk + '</td>' +
                             '<td class="nilai_ujian">' + data[i].nilai_ujian + '</td>' +
                             '<td>' + data[i].kelulusan + '</td>' +
-                            '<td><button type="button" class="btn btn-primary btn-sm btn_confirm_kelulusan">Konfirmasi Kelulusan</button><button type="button" class="btn btn-primary btn-sm btn-edit">Edit Kelulusan</button></td>' +
+                            '<td><button type="button" class="btn btn-primary btn-sm btn_confirm_kelulusan">Konfirmasi Kelulusan</button></td>' +
                             '</tr>';
                         $('table tbody').append(tr);
 

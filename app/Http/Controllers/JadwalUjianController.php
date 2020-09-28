@@ -74,7 +74,9 @@ class JadwalUjianController extends Controller
                             ->where('id_test', $request->id_test)->first();
         $db_sistemik = DB::connection('mysql2');
 
-
+        $id_kurikulum = $db_sistemik->select("SELECT id FROM kurikulum WHERE kode_jurusan = '55201' AND mulai_berlaku = (SELECT MAX(mulai_berlaku) FROM kurikulum WHERE kode_jurusan = '55201')");
+        $kurikulum = collect($id_kurikulum);
+        
         $db_sistemik->table('mhs')->insert(
             ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $set_nim, 'nik' => $confirm_mhs_lulus->nik,
             'tmpt_lahir' => $confirm_mhs_lulus->tempat_lahir,'tgl_lahir' => $confirm_mhs_lulus->tgl_lahir, 'id_agama' => $confirm_mhs_lulus->agama,'jln' => $confirm_mhs_lulus->jln, 'rt' => $confirm_mhs_lulus->rt,
@@ -84,7 +86,7 @@ class JadwalUjianController extends Controller
             'id_jenjang_pendidikan_ayah' => $confirm_mhs_lulus->pendidikan_ayah, 'id_kebutuhan_khusus_ayah' => 1,'id_kebutuhan_khusus_ibu' => 1, 'id_pekerjaan_ayah' => $confirm_mhs_lulus->pekerjaan_ayah,
             'id_penghasilan_ayah' => $confirm_mhs_lulus->penghasilan_ayah, 'nik_ibu' => $confirm_mhs_lulus->nik_ibu,'nm_ibu_kandung' => $confirm_mhs_lulus->nama_ibu, 'tgl_lahir_ibu' => $confirm_mhs_lulus->tgl_lahir_ibu,
             'id_jenjang_pendidikan_ibu' => $confirm_mhs_lulus->pendidikan_ibu, 'id_penghasilan_ibu' => $confirm_mhs_lulus->penghasilan_ibu,'id_pekerjaan_ibu' => $confirm_mhs_lulus->pekerjaan_ibu, 'kewarganegaraan' => '',
-            'kode_jurusan' => $confirm_mhs_lulus->id_prodi, 'stat_pd' => '0','a_terima_kps' => '0','tgl_masuk_sp' => date('Y-m-d'),'mulai_smt' => date('Y').'1','status_error' => 0,'keterangan' => 1,'id_kurikulum' => 0,'id_jalur_masuk' => ''
+            'kode_jurusan' => $confirm_mhs_lulus->id_prodi, 'stat_pd' => '0','a_terima_kps' => '0','tgl_masuk_sp' => date('Y-m-d'),'mulai_smt' => date('Y').'1','status_error' => 0,'keterangan' => 1,'id_kurikulum' => $kurikulum[0]->id,'id_jalur_masuk' => ''
             ]
         );
 
