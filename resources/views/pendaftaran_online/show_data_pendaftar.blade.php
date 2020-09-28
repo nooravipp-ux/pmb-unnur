@@ -158,6 +158,12 @@
                           </div>
                         </div>
                         <div class="item form-group">
+                          <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Program Studi</label>
+                          <div class="col-md-6 col-sm-6 ">
+                            <input name="prodi" class="form-control" type="text" readonly value="{{$detail_pendaftar->nama_prodi}}">
+                          </div>
+                        </div>
+                        <div class="item form-group">
                           <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Jenjang Pendidikan</label>
                           <div class="col-md-6 col-sm-6 ">
                             <input name="jenjang" class="form-control" type="text" readonly value="{{$detail_pendaftar->jenis_strata}}">
