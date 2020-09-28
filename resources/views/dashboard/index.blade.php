@@ -8,6 +8,11 @@
         <div class="card-body">
           <h5 class="card-title">SELAMAT DATANG CALON MAHASISWA</h5>
           <p class="card-text">Silahkan Lengkapi Data Yang sudah disediakan di menu dashboard.</p>
+          <p>Berikut prosedur untuk melengkapi data :</p>
+          <p>1.Formulir</p>
+          <p>2.Pembayaran Registrasi</p>
+          <p>3.Biodata</p>
+          <p>4.Upload Document Kelengkapan</p>
         </div>
       </div>
     @else
