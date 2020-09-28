@@ -23,9 +23,9 @@
 		    <form class="login-form" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-                    <input id="email" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" required="">
-                    @error('email')
+                    <label for="exampleInputEmail1" class="text-uppercase">Username</label>
+                    <input id="name" name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Username" required="">
+                    @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

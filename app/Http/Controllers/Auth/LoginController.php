@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Auth;
 
 
@@ -39,6 +40,24 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         
+    }
+    public function login(Request $request)
+    {   
+        $input = $request->all();
+  
+        $this->validate($request, [
+            'name' => 'required',
+            'password' => 'required',
+        ]);
+  
+        $fieldType = filter_var($request->name, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        if(auth()->attempt(array($fieldType => $input['name'], 'password' => $input['password'])))
+        {
+            return redirect('/dash');
+        }else{
+            return redirect()->route('login')
+                ->with('error','Username And Password Are Wrong.');
+        }
     }
 
     public function logout(){
