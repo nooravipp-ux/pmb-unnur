@@ -95,7 +95,6 @@ class CalonMhsController extends Controller
              'id_kota' => $request->kota,
              'id_wil' => $request->kecamatan, 
              'kode_pos' => $request->kode_pos,
-             'email' => $request->email,
              'jenis_tinggal' => $request->jns_tinggal,
              'alat_transportasi' => $request->id_alat_transportasi,
              'no_telephone' => $request->no_telepon,

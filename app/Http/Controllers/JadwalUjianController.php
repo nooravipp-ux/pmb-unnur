@@ -7,6 +7,7 @@ use App\Mail\ujian;
 use App\Mail\kelulusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class JadwalUjianController extends Controller
 {
@@ -56,6 +57,7 @@ class JadwalUjianController extends Controller
     }
     public function confirmasi_kelulusan(Request $request){
         // dd($request->all());
+        $prodi = Auth::user()->id_prodi;
         $jenis_pendaftar = "";
         $tahun = date('Y');
         
@@ -65,27 +67,39 @@ class JadwalUjianController extends Controller
             $jenis_pendaftar = "2";
         }
         $set_nim = $this->generate_nim($request->id_prodi, $tahun, $jenis_pendaftar);
-        // dd($set_nim);
         DB::table('pmb_pendaftar')->where('id_test', $request->id_test)->update(['nim'=> $set_nim, 'lulus_seleksi' => 1]);
         $confirm_mhs_lulus = DB::table('pmb_pendaftar')
                             ->join('biodata','biodata.id_pendaftar','pmb_pendaftar.id_pendaftar')
                             ->where('id_test', $request->id_test)->first();
-        // dd($set_nim);
         $db_sistemik = DB::connection('mysql2');
-        
-
         $db_sistemik->table('mhs')->insert(
             ['nm_pd' => $confirm_mhs_lulus->nama, 'jk' => $confirm_mhs_lulus->jenis_kelamin,'nipd' => $set_nim, 'nik' => $confirm_mhs_lulus->nik,
-            'tmpt_lahir' => $confirm_mhs_lulus->tempat_lahir, 'id_agama' => $confirm_mhs_lulus->agama,'jln' => $confirm_mhs_lulus->jln, 'rt' => $confirm_mhs_lulus->rt,
+            'tmpt_lahir' => $confirm_mhs_lulus->tempat_lahir,'tgl_lahir' => $confirm_mhs_lulus->tgl_lahir, 'id_agama' => $confirm_mhs_lulus->agama,'jln' => $confirm_mhs_lulus->jln, 'rt' => $confirm_mhs_lulus->rt,
             'rw' => $confirm_mhs_lulus->rw, 'nm_dsn' => '','ds_kel' => $confirm_mhs_lulus->ds_kel, 'id_wil' => $confirm_mhs_lulus->id_wil,
             'kode_pos' => $confirm_mhs_lulus->kode_pos, 'id_jns_tinggal' => $confirm_mhs_lulus->jenis_tinggal,'id_alat_transport' => $confirm_mhs_lulus->alat_transportasi, 'no_hp' => $confirm_mhs_lulus->no_telephone,
             'email' => $confirm_mhs_lulus->email, 'nik_ayah' => $confirm_mhs_lulus->nik_ayah,'nm_ayah' => $confirm_mhs_lulus->nama_ayah, 'tgl_lahir_ayah' => $confirm_mhs_lulus->tgl_lahir_ayah,
             'id_jenjang_pendidikan_ayah' => $confirm_mhs_lulus->pendidikan_ayah, 'id_kebutuhan_khusus_ayah' => 1,'id_kebutuhan_khusus_ibu' => 1, 'id_pekerjaan_ayah' => $confirm_mhs_lulus->pekerjaan_ayah,
             'id_penghasilan_ayah' => $confirm_mhs_lulus->penghasilan_ayah, 'nik_ibu' => $confirm_mhs_lulus->nik_ibu,'nm_ibu_kandung' => $confirm_mhs_lulus->nama_ibu, 'tgl_lahir_ibu' => $confirm_mhs_lulus->tgl_lahir_ibu,
             'id_jenjang_pendidikan_ibu' => $confirm_mhs_lulus->pendidikan_ibu, 'id_penghasilan_ibu' => $confirm_mhs_lulus->penghasilan_ibu,'id_pekerjaan_ibu' => $confirm_mhs_lulus->pekerjaan_ibu, 'kewarganegaraan' => '',
-            'kode_jurusan' => $confirm_mhs_lulus->id_prodi, 'stat_pd' => '0','a_terima_kps' => '0','tgl_masuk_sp' => date('Y-m-d'),'mulai_smt' => date('Y').'1','status_error' => 1,'keterangan' => 1,'id_kurikulum' => $confirm_mhs_lulus->id_prodi,'id_jalur_masuk' => ''
+            'kode_jurusan' => $confirm_mhs_lulus->id_prodi, 'stat_pd' => '0','a_terima_kps' => '0','tgl_masuk_sp' => date('Y-m-d'),'mulai_smt' => date('Y').'1','status_error' => 0,'keterangan' => 1,'id_kurikulum' => 0,'id_jalur_masuk' => ''
             ]
         );
+
+        $db_sistemik->table('sys_users')->insert(
+            [
+                'first_name' => $confirm_mhs_lulus->nama,
+                'last_name' => $confirm_mhs_lulus->nama,
+                'username' => $set_nim,
+                'password' => md5($set_nim),
+                'email' => $confirm_mhs_lulus->email,
+                'date_created'=> date('Y-m-d'),
+                'foto_user' => '',
+                'id_group' => 11,
+                'kode_jurusan' => $prodi,
+                'aktif' => 'Y'
+            ]
+        );
+
         return response()->json('data success updated');
     }
     public function get_data_peserta_ujian(Request $request){

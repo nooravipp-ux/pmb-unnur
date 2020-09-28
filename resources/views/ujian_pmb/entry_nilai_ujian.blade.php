@@ -285,7 +285,7 @@ function loadData() {
                             '<td>' + data[i].jalur_masuk + '</td>' +
                             '<td class="nilai_ujian">' + data[i].nilai_ujian + '</td>' +
                             '<td>' + data[i].kelulusan + '</td>' +
-                            '<td><button type="button" class="btn btn-primary btn-sm btn_confirm_kelulusan">Konfirmasi Kelulusan</button></td>' +
+                            '<td><button type="button" class="btn btn-primary btn-sm btn_confirm_kelulusan">Konfirmasi Kelulusan</button><button type="button" class="btn btn-primary btn-sm btn-edit">Edit Kelulusan</button></td>' +
                             '</tr>';
                         $('table tbody').append(tr);
 
@@ -295,9 +295,9 @@ function loadData() {
                 $('table tr.row-data').map(function() {
                     var nim = $(this).find('.nim').html();
                     if (nim != '0') {
-                        $(this).find('button').prop('disabled', true);
-                        $(this).find('button').html('sudah di konfirmasi');
-                        $(this).find('button').css("background-color", "red");
+                        $(this).find('button.btn_confirm_kelulusan').prop('disabled', true);
+                        $(this).find('button.btn_confirm_kelulusan').html('sudah di konfirmasi');
+                        $(this).find('button.btn_confirm_kelulusan').css("background-color", "red");
                     } else {
                         console.log('nim tidak ada !!')
                     }
