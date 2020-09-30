@@ -21,6 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/build/css/toastr.css') }}" rel="stylesheet">
     <style>
         body{
             min-height: 100vh;
@@ -174,6 +175,16 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="{{ asset('template/build/js/toastr.js') }}"></script>
+    <script>
+        @if (Session::has('sukses'))
+            toastr.success("{{Session::get('sukses')}}","sukses")
+        @endif
+        @if (Session::has('error'))
+            toastr.error("{{Session::get('error')}}","Gagal !")
+        @endif
+    </script>
 
 <script type="text/javascript">
 

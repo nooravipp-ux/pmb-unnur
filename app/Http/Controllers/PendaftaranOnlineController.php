@@ -362,7 +362,7 @@ class PendaftaranOnlineController extends Controller
 
         if(empty($list_pmb)){
 
-            return redirect('/daftar_awal')->with('error','Registrasi Belum Dibuka');
+            return redirect('/daftar_awal')->with('error','Pendaftaran Belum Dibuka');
 
         }else{
 

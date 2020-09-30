@@ -249,8 +249,7 @@ class CalonMhsController extends Controller
             }else{
                 return redirect('/calon-mahasiswa/form-upload')->with('error','Data tidak lengkap'); 
             }
-
-
+            
             return redirect('/calon-mahasiswa/form-upload')->with('sukses','data berhasil di simpan');    
     }
 
@@ -475,6 +474,42 @@ class CalonMhsController extends Controller
         $data_wilayah = $db_sistemik->select("SELECT kecamatan FROM v_wilayah");
 
         return response()->json($data_wilayah);
+    }
+
+    public function get_jenis_pendaftar(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $data_jenis_daftar = $db_sistemik->table('jenis_pendaftaran')
+            ->where('id_jns_daftar', 'LIKE', '%'.$cari.'%')
+            ->orWhere('nm_jns_daftar', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($data_jenis_daftar);
+        }
+
+        $db_sistemik = DB::connection('mysql2');
+        $data_jenis_daftar = $db_sistemik->table('jenis_pendaftaran')->get();
+
+        return response()->json($data_jenis_daftar);
+    }
+
+    public function get_jalur_masuk(Request $request){
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $db_sistemik = DB::connection('mysql2');
+            $data_jalur_masuk = $db_sistemik->table('jalur_masuk')
+            ->where('id', 'LIKE', '%'.$cari.'%')
+            ->orWhere('jalur', 'LIKE', '%'.$cari.'%')
+            ->get();
+    
+            return response()->json($data_jalur_masuk);
+        }
+
+        $db_sistemik = DB::connection('mysql2');
+        $data_jalur_masuk = $db_sistemik->table('jalur_masuk')->get();
+
+        return response()->json($data_jalur_masuk);
     }
 
     public function get_kota(Request $request){

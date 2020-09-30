@@ -1,5 +1,7 @@
 @extends('frame.index')
-
+@section('style')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('content')
 <!-- page content -->
 <div class="right_col" role="main">
@@ -10,7 +12,7 @@
             <div class="col-md-8 col-sm-8">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form | Formulir</small></h2>
+                        <h2>Form | Formulir Pendaftaran</small></h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li>
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -95,38 +97,9 @@
                                 <div class="form-group col-md-6">
                                   <label for="">Jalur Masuk</label>
                                   <select name="jalur_masuk" id="jalur_masuk" class="form-control @error('jalur_masuk') is-invalid @enderror">
-                                    @if($data_pendaftar->jalur_masuk == "Reguler")
-                                        <option value=""disabled>Pilih Jalur Masuk</option>
-                                        <option value="Reguler" selected>Reguler</option>
-                                        <option value="Beasiswa">Beasiswa</option>
-                                        <option value="KIP" >KIP</option>
-                                        <option value="Bidikmisi" >Bidikmisi</option>
-                                    @elseif($data_pendaftar->jalur_masuk == "Beasiswa")
-                                        <option value=""disabled>Pilih Jalur Masuk</option>
-                                        <option value="Reguler">Reguler</option>
-                                        <option value="Beasiswa" selected>Beasiswa</option>
-                                        <option value="KIP" >KIP</option>
-                                        <option value="Bidikmisi" >Bidikmisi</option>
-                                    @elseif($data_pendaftar->jalur_masuk == "KIP")
-                                        <option value=""disabled>Pilih Jalur Masuk</option>
-                                        <option value="Reguler">Reguler</option>
-                                        <option value="Beasiswa">Beasiswa</option>
-                                        <option value="KIP" selected>KIP</option>
-                                        <option value="Bidikmisi" >Bidikmisi</option>
-                                    @elseif($data_pendaftar->jalur_masuk == "Bidikmisi")
-                                        <option value=""disabled>Pilih Jalur Masuk</option>
-                                        <option value="Reguler">Reguler</option>
-                                        <option value="Beasiswa">Beasiswa</option>
-                                        <option value="KIP" >KIP</option>
-                                        <option value="Bidikmisi" selected>Bidikmisi</option>
-                                    @else
-                                        <option value="" selected disabled>Pilih Jalur Masuk</option>
-                                        <option value="Reguler" >Reguler</option>
-                                        <option value="Beasiswa" >Beasiswa</option>
-                                        <option value="KIP" >KIP</option>
-                                        <option value="Bidikmisi" >Bidikmisi</option>
-                                    @endif
-                                </select>
+                                  </select>
+                                  <input type="hidden" name="hidden_jm" id="hidden_jm" value="{{ $data_pendaftar->jalur_masuk }}">
+
                                 @error('jalur_masuk')
                                 <span class="invalid-feedback" role="alert">
                                     <small>{{ $message }}</small>
@@ -135,21 +108,9 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                   <label for="">Jenis Pendaftar</label>
-                                  <select name="jenis_pendaftar" id="jenis_pendaftar" class="form-control @error('jenis_pendaftar') is-invalid @enderror">
-                                    @if($data_pendaftar->jenis_pendaftar == "Reguler")
-                                        <option value=""disabled>Pilih Jenis Pendaftar</option>
-                                        <option value="Reguler" selected>Reguler</option>
-                                        <option value="Konversi">Konversi</option>
-                                    @elseif($data_pendaftar->jenis_pendaftar == "Konversi")
-                                        <option value=""disabled>Pilih Jenis Pendaftar</option>
-                                        <option value="Reguler">Reguler</option>
-                                        <option value="Konversi" selected>Konversi</option>
-                                    @else
-                                        <option value="" selected disabled>Pilih Jenis Pendaftar</option>
-                                        <option value="Reguler">Reguler</option>
-                                        <option value="Konversi">Konversi</option>
-                                    @endif    
-                                </select>
+                                  <select name="jenis_pendaftar" id="jenis_pendaftar" class="form-control @error('jenis_pendaftar') is-invalid @enderror"></select>
+                                  <input type="hidden" name="hidden_jp" id="hidden_jp" value="{{ $data_pendaftar->jenis_pendaftar }}">  
+                                
                                 @error('jenis_pendaftar')
                                 <span class="invalid-feedback" role="alert">
                                     <small>{{ $message }}</small>
@@ -179,4 +140,62 @@
     </div>
 </div>
         <!-- /page content -->
+@endsection
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+     $(document).ready(function(){
+        // var data_jm = $('#hidden_jm').val();
+        // var data_jp = $('#hidden_jp').val();
+
+        // $('#jalur_masuk').val(data_jm);
+        // $('#jalur_masuk').select2().trigger('change');
+
+        // $('#jenis_pendaftar').val(data_jp);
+        // $('#jenis_pendaftar').select2().trigger('change');
+        
+        // $('#jalur_masuk').select2();
+        $('#jalur_masuk').select2({
+                placeholder: '- Pilih Jalur Masuk -',
+                ajax: {
+                    url: '{{route('get.jalur_masuk')}}',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(jalur_m) {
+                                return {
+                                    id: jalur_m.id,
+                                    text: jalur_m.jalur
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+
+
+                $('#jenis_pendaftar').select2({
+                placeholder: '- Pilih Jenis Pendaftar -',
+                ajax: {
+                    url: '{{route('get.jenis_pendaftar')}}',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(jenis_p) {
+                                return {
+                                    id: jenis_p.id_jns_daftar,
+                                    text: jenis_p.nm_jns_daftar
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+     });
+</script>
 @endsection

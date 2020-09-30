@@ -159,3 +159,5 @@ Route::get('/pendidikan_get','PendaftaranOnlineController@pendidikan_get')->name
 Route::get('/pekerjaan_get','PendaftaranOnlineController@pekerjaan_get')->name('pekerjaan.get');
 Route::get('/penghasilan_get','PendaftaranOnlineController@penghasilan_get')->name('penghasilan.get');
 Route::get('/warganegara_get','PendaftaranOnlineController@warganegara_get')->name('warganegara.get');
+Route::get('/jenis_pendaftar_get','CalonMhsController@get_jenis_pendaftar')->name('get.jenis_pendaftar');
+Route::get('/jalur_masuk_get','CalonMhsController@get_jalur_masuk')->name('get.jalur_masuk');
