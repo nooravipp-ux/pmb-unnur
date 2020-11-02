@@ -95,6 +95,25 @@ class PendaftaranOnlineController extends Controller
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['status_pembayaran_registrasi' => 'SUDAH DI KONFIRMASI']);
         DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->update(['id_test' => $id_test]);
 
+        $data_calon = DB::table('pmb_pendaftar')->where('id_pendaftar', $request->no_pendaftaran)->first();
+
+        $db_ujian = DB::connection('mysql3');
+        $data = $db_ujian->table('users')->insert([
+            'username' => $id_test,
+            'email' => $data_calon->email,
+            'name' => $data_calon->nama,
+            'password' => md5($id_test),
+            'id_prodi' => $request->id_prodi,
+            'status' => 'calon'
+        ]);
+
+        $get_id = $db_ujian->table('users')->select('id')->where('username', $id_test)->first();    
+
+        $data_role = $db_ujian->table('role_user')->insert([
+            'role_id' => '3',
+            'user_id' => $get_id->id
+        ]);
+
         $confirm = DB::table('pmb_pendaftar')->select('pmb_pendaftar.*')->get();
         \Mail::to($request->email)->send(new confirm($confirm));
         return redirect()->back()->with('sukses', 'Data Pendaftar Berhasil Di Update');
